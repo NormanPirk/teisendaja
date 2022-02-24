@@ -9,7 +9,7 @@ const messages = {
         startConversions: "Alusta teisendamist",
         conversions: "Teisendussammud",
         deleteLast: "Kustuta viimane teisendussamm",
-        downloadTeX: "Laadi alla TEX",
+        downloadTeX: "Laadi alla TeX",
         conversionGuide: "Aktiveeri hiire abil teisendatav osavalem ning vajuta vastavale nupule"
     }
 };
