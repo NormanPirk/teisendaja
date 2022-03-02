@@ -1,15 +1,13 @@
 <template>
-  <div class="shadow conv">
-    <div class="intro">
-      <strong>{{ $t("conversionGuide") }}</strong>
-    </div>
-    <hr>
-    <CButton f1='\neg \neg F \equiv F' f2='F \equiv \neg \neg F'></CButton>
-  </div>
+<div>
+  <ConvButton f1='(\mathcal{F}) \equiv \mathcal{F}'></ConvButton>
+  <ConvButton f1='\mathcal{F} \land \mathcal{F} \equiv \mathcal{F}'></ConvButton>
+  <ConvButton f1='\mathcal{F} \lor \mathcal{F} \equiv \mathcal{F}'></ConvButton>
+</div>  
 </template>
 
 <script>
-import CButton from "./CButton.vue";
+import ConvButton from "./ConvButton.vue";
 
 export default {
   name: "ConversionButtons",
@@ -17,15 +15,11 @@ export default {
     return {};
   },
   components: {
-      CButton
+      ConvButton
   },
   methods: {
     addFormula: function () {
       this.$store.commit("addFormula");
-      let el = document.getElementById("selectable");
-      console.log(
-        el.value.toString().substring(el.selectionStart, el.selectionEnd)
-      );
     },
   },
 };
@@ -35,4 +29,5 @@ export default {
 .conv {
     margin: 2em;
 }
+
 </style>

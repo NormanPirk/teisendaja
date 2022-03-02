@@ -9,8 +9,22 @@ const messages = {
         startConversions: "Alusta teisendamist",
         conversions: "Teisendussammud",
         deleteLast: "Kustuta viimane teisendussamm",
+        deleteAll: "Kustuta kõik teisendussammud",
         downloadTeX: "Laadi alla TeX",
-        conversionGuide: "Aktiveeri hiire abil teisendatav osavalem ning vajuta vastavale nupule"
+        insertFormulaGuide: "Sisesta valem TeX kujul. Loogikasümboleid saab sisestada nii sisendlahtri kohal olevate nuppude abil kui ka käsitsi kirjutades. Kui kirjutate käsitsi, lisage loogikasümbolite järele ka tühik.",
+        pressStartButtonGuide: "Vajuta nupule 'Alusta teisendamist'.",
+        conversionGuide: "Aktiveeri kursori abil sisendlahtris teisendatav osavalem ning vajuta vastavale nupule. Iga nupuga saab teisendusi teha mõlemat pidi.",
+        resultGuide: "Teisendussammud kuvatakse paremal.",
+        showHelp: "Kuva abi",
+        hideHelp: "Peida abi",
+        noInput: "Valem on sisestamata!",
+        faultyInput: "Valem ei ole korrektsel kujul!",
+        enteringFormulas: "Valemite sisestamine",
+        symbols: "Sümbolid",
+        ind: "Indiviidmuutujad",
+        const: "Konstantsümbolid",
+        funct: "Funktsionaalsümbolid",
+        pred: "Predikaatsümbolid"
     }
 };
 

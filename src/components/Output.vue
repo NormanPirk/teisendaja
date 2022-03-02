@@ -3,7 +3,6 @@
     <div>
       <div class="intro">
         <strong>{{ $t("conversions") }}</strong>
-        <button @click="removeLast">{{ $t("deleteLast") }}</button>
       </div>
       <hr />
     </div>
@@ -13,10 +12,12 @@
         <math-jax :latex="formula"></math-jax>
       </p>
     </div>
+    <hr>
+    <div id="action-buttons">
+      <button @click="downloadTEX">{{ $t("downloadTeX") }}</button>
+    </div>
   </div>
-  <div>
-    <button @click="downloadTEX">{{ $t("downloadTeX") }}</button>
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -35,9 +36,6 @@ export default {
     },
   },
   methods: {
-    removeLast: function () {
-      this.$store.commit("removeLast");
-    },
     downloadTEX() {
       let content =
         "\\documentclass{article}\n\\usepackage[utf8]{inputenc}\n\\begin{document}\n";
@@ -45,7 +43,6 @@ export default {
         content += "$$" + formula + "$$\n";
       });
       content += "\\end{document}";
-      console.log(content);
       let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "sample.tex");
     },
@@ -56,5 +53,10 @@ export default {
 <style scoped>
 #pdf {
   min-height: 2em;
+}
+
+#action-buttons {
+  display: flex;
+  justify-content: left;
 }
 </style>

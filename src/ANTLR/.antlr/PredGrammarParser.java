@@ -1,4 +1,4 @@
-// Generated from /Users/norman/Documents/UTInformaatika/bakatöö/teisendaja/src/grammar/PredGrammar.g4 by ANTLR 4.8
+// Generated from /Users/norman/Documents/UTInformaatika/bakatöö/teisendaja/src/ANTLR/PredGrammar.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -29,7 +29,7 @@ public class PredGrammarParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, "','", "'('", "')'", "'\\neg '", "'\\& '", 
+			null, null, null, null, null, "','", "'('", "')'", "'\\neg '", "'\\land '", 
 			"'\\lor '", "'\\Rightarrow '", "'\\Leftrightarrow '", "'\\forall '", 
 			"'\\exists '"
 		};

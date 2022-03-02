@@ -1,10 +1,15 @@
 import { createStore } from "vuex";
 import insertTextAtCursor from "insert-text-at-cursor";
+import convert from "../ANTLR/Converter.js";
+import getConversionType from "../ANTLR/ConversionType.js";
 
 export default createStore({
   state: {
     formula: "",
     formulas: [],
+    converted: false,
+    noInput: false,
+    faultyInput: false
   },
   getters: {
     formula: (state) => {
@@ -13,8 +18,20 @@ export default createStore({
     formulas: (state) => {
       return state.formulas;
     },
+    converted: (state) => {
+      return state.converted;
+    },
+    noInput: (state) => {
+      return state.noInput;
+    },
+    faultyInput: (state) => {
+      return state.faultyInput;
+    }
   },
   mutations: {
+    finishConversion: (state) => {
+      state.converted = false;
+    },
     updateFormula: (state, value) => {
       state.formula = value;
     },
@@ -31,6 +48,16 @@ export default createStore({
         state.formulas.push(f);
       }
     },
+    showNoInput: (state) => {
+      state.noInput = true;
+    },
+    showFaultyInput: (state) => {
+      state.faultyInput = true;
+    },
+    clearErrors: (state) => {
+      state.noInput = false;
+      state.faultyInput = false;
+    },
     removeLast: (state) => {
       if (state.formulas.length > 0) {
         state.formulas.pop();
@@ -41,18 +68,26 @@ export default createStore({
         state.formula = "";
       }
     },
+    removeAll: (state) => {
+      state.formula = "";
+      state.formulas = [];
+      state.converted = false;
+    },
     convert: (state, conversion) => {
       const el = document.getElementById("selectable");
       let subFormula = el.value.toString().substring(el.selectionStart, el.selectionEnd);
       if (subFormula) {
-        if (conversion === 'F \\equiv \\neg \\neg F') {
-          subFormula = '\\neg \\neg ' + subFormula;
-        } else if (conversion === '\\neg \\neg F \\equiv F') {
-          subFormula = subFormula.substring(10, subFormula.length);
+        try {
+          const conversionType = getConversionType(conversion);
+          const result = convert(subFormula, conversionType);
+          if (result) {
+            insertTextAtCursor(el, result);
+            state.converted = true;
+          }
+        } catch (err) {
+          console.log(err);
         }
-        insertTextAtCursor(el, subFormula);
       }
-
     }
   },
   actions: {},

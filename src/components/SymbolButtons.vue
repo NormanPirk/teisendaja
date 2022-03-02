@@ -40,11 +40,13 @@ export default {
 
 <style scoped>
 div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
   margin-top: 0;
   height: 2em;
 }
 button {
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  width: 2em;
 }
 </style>

@@ -35,7 +35,7 @@ RPAREN: ')';
 
 NEG: '\\neg ';
 
-AND: '\\& ';
+AND: '\\land ';
 
 OR: '\\lor ';
 

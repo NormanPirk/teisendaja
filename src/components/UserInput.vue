@@ -1,21 +1,41 @@
 <template>
   <div id="editor">
     <div id="editor-left">
-      <SymbolButtons></SymbolButtons>
       <div class="shadow">
         <div class="intro">
           <strong>{{ $t("input") }}</strong>
-          <button @click="start" v-show="showStartButton()">{{ $t("startConversions") }}</button>
+          <strong v-show="noInput" class="error">{{ $t("noInput") }}</strong>
+          <strong v-show="faultyInput" class="error">{{ $t("faultyInput") }}</strong>
         </div>
+        <hr />
+        <div id="buttons">
+          <SymbolButtons></SymbolButtons>
+          <button @click="start" v-show="showStartButton()">
+            {{ $t("startConversions") }}
+          </button>
+        </div>
+        <textarea
+          id="selectable"
+          v-model="formula"
+          :placeholder="$t('inputDescription')"
+          @input="clearErrors"
+        ></textarea>
+        <p id="rendered">
+          <math-jax
+            :latex="'\\displaylines{' + formula + '}'"
+            .block="true"
+            :class="{ faulty: !isFaulty() }"
+          ></math-jax>
+        </p>
+        <ConversionButtons></ConversionButtons>
+        <DeleteButtons></DeleteButtons>
         <hr>
-        <textarea id="selectable" v-model="formula" :placeholder="$t('inputDescription')"></textarea>
-        <p><math-jax :latex="formula"></math-jax></p>
+        <Help></Help>
       </div>
-      <Output></Output>
     </div>
 
     <div id="editor-right">
-      <ConversionButtons></ConversionButtons>
+      <Output></Output>
     </div>
   </div>
 </template>
@@ -23,17 +43,22 @@
 <script>
 import ConversionButtons from "./ConversionButtons.vue";
 import SymbolButtons from "./SymbolButtons.vue";
+import DeleteButtons from "./DeleteButtons.vue";
 import Output from "./Output.vue";
+import Help from "./Help.vue";
+import validateInput from "../ANTLR/InputValidator.js";
 
 export default {
-  name: "Input",
+  name: "UserInput",
   data() {
     return {};
   },
   components: {
     SymbolButtons,
     ConversionButtons,
+    DeleteButtons,
     Output,
+    Help,
   },
   computed: {
     formula: {
@@ -49,18 +74,41 @@ export default {
         return this.$store.getters.formulas;
       },
     },
-  },
-  methods: {
-    start: function () {
-      if (this.formulas.length === 0) {
-        this.$store.commit("addFormula");
+    noInput: {
+      get() {
+        return this.$store.getters.noInput;
       }
     },
-    showStartButton: function () {
-      console.log(this.formulas.length);
+    faultyInput: {
+      get() {
+        return this.$store.getters.faultyInput;
+      }
+    }
+  },
+  methods: {
+    start() {
+      if (this.formula.length !== 0) {
+        if (this.formulas.length === 0) {
+          if (validateInput(this.formula)) {
+            this.$store.commit("addFormula");
+          } else {
+            this.$store.commit("showFaultyInput");
+          }          
+        }
+      } else {
+        this.$store.commit("showNoInput");
+      }
+    },
+    showStartButton() {
       return this.formulas.length === 0;
     },
-  }
+    isFaulty() {
+      return this.formula.length === 0 ? true : validateInput(this.formula);
+    },
+    clearErrors() {
+      this.$store.commit("clearErrors");
+    }
+  },
 };
 </script>
 
@@ -69,12 +117,12 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 80%;
+  width: 90%;
   margin: auto;
   border: none !important;
 }
 #editor div {
-  min-height: 2em;
+  min-height: 1em;
 }
 
 textarea {
@@ -83,18 +131,36 @@ textarea {
   outline: none;
   resize: vertical;
   text-align: left !important;
+  vertical-align: middle !important;
+  margin-top: 1em;
 }
 
 #editor-left {
-  width: 60%;
+  width: 55%;
+  margin-right: 0.5em;
 }
 #editor-right {
-  width: 40%;
+  width: 45%;
+  margin-left: 0.5em;
 }
 
 #guide {
   font-size: smaller;
   opacity: 0.75;
 }
+
+.faulty {
+  background-color: rgba(252, 74, 74, 0.288);
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error {
+  color: rgb(252, 74, 74);
+}
+
 
 </style>
