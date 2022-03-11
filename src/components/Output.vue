@@ -6,15 +6,17 @@
       </div>
       <hr />
     </div>
-
-    <div id="pdf">
-      <p v-for="formula in formulas" :key="formula">
-        <math-jax :latex="formula"></math-jax>
-      </p>
-    </div>
-    <hr>
     <div id="action-buttons">
-      <button @click="downloadTEX">{{ $t("downloadTeX") }}</button>
+      <!-- <button @click="downloadTEX">{{ $t("downloadTeX") }}</button> -->
+    </div>
+    <div>
+      <div id="last">
+        <p>{{ formulas[formulas.length - 1]?.replace("≡", "") }}</p>
+      </div>
+      <hr />
+      <div id="pdf">
+        <p v-for="formula in formulas" :key="formula">{{ formula }}</p>
+      </div>
     </div>
   </div>
   <div></div>
@@ -52,11 +54,33 @@ export default {
 
 <style scoped>
 #pdf {
-  min-height: 2em;
+  min-height: 4em;
+  overflow-x: scroll;
+  overflow: overlay;
+  max-height: 30em;
+}
+
+#last {
+  overflow-x: scroll;
+  overflow: overlay;
 }
 
 #action-buttons {
   display: flex;
-  justify-content: left;
+  justify-content: right;
+}
+
+p {
+  font-size: 1.2em;
+  font-family: "Computer Modern Sans", sans-serif;
+  padding: 0.2em;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(204, 204, 204);
 }
 </style>

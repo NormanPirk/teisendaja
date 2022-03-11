@@ -2,16 +2,25 @@ grammar PredGrammar;
 
 start: formula EOF;
 
-formula: predicate                          #pred
+formula
+    : predicate                             #pred
     | NEG formula                           #neg
     | left=formula op=AND right=formula     #and
 	| left=formula op=OR right=formula      #or
 	| left=formula op=IMPL right=formula    #impl
 	| left=formula op=EQ right=formula      #eq
 	| LPAREN formula RPAREN                 #paren
-    | FORALL IND formula                    #forall
-    | EXISTS IND formula                    #exists
+    | quantifier                            #quant
+    | T                                     #true
+    | F                                     #false
     ;
+
+quantifier 
+    : FORALL IND afterQuantifier    #forall
+    | EXISTS IND afterQuantifier    #exists
+    ;
+
+afterQuantifier: predicate | LPAREN formula RPAREN | quantifier;   
 
 predicate: PRED (LPAREN term (SEP term)* RPAREN)?;
 
@@ -33,18 +42,22 @@ LPAREN: '(';
 
 RPAREN: ')';
 
-NEG: '\\neg ';
+NEG: '¬';
 
-AND: '\\land ';
+AND: '∧';
 
-OR: '\\lor ';
+OR: '∨';
 
-IMPL: '\\Rightarrow ';
+IMPL: '⇒';
 
-EQ: '\\Leftrightarrow ';
+EQ: '⇔';
 
-FORALL: '\\forall ';
+FORALL: '∀';
 
-EXISTS: '\\exists ';
+EXISTS: '∃';
+
+T: '1';
+
+F: '0';
 
 WS: [ \t\r\n] -> skip;

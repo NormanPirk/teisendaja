@@ -53,6 +53,7 @@ hr {
 
 button {
   margin: 0.2em;
+  font-size: medium;
 }
 
 </style>

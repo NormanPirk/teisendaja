@@ -1,52 +1,33 @@
 <template>
-  <div id="editor">
-    <div id="editor-left">
-      <div class="shadow">
-        <div class="intro">
-          <strong>{{ $t("input") }}</strong>
-          <strong v-show="noInput" class="error">{{ $t("noInput") }}</strong>
-          <strong v-show="faultyInput" class="error">{{ $t("faultyInput") }}</strong>
-        </div>
-        <hr />
-        <div id="buttons">
-          <SymbolButtons></SymbolButtons>
-          <button @click="start" v-show="showStartButton()">
-            {{ $t("startConversions") }}
-          </button>
-        </div>
-        <textarea
-          id="selectable"
-          v-model="formula"
-          :placeholder="$t('inputDescription')"
-          @input="clearErrors"
-        ></textarea>
-        <p id="rendered">
-          <math-jax
-            :latex="'\\displaylines{' + formula + '}'"
-            .block="true"
-            :class="{ faulty: !isFaulty() }"
-          ></math-jax>
-        </p>
-        <ConversionButtons></ConversionButtons>
-        <DeleteButtons></DeleteButtons>
-        <hr>
-        <Help></Help>
-      </div>
-    </div>
-
-    <div id="editor-right">
-      <Output></Output>
-    </div>
+  <div class="intro">
+    <strong>{{ $t("input") }}</strong>
+    <ErrorMessages></ErrorMessages>
   </div>
+  <hr />
+  <div id="buttons">
+    <SymbolButtons target="formula"></SymbolButtons>
+    <button @click="start" v-show="showStartButton()">
+      {{ $t("startConversions") }}
+    </button>
+  </div>
+  <textarea
+    id="selectable"
+    v-model="formula"
+    :placeholder="$t('inputDescription')"
+    :class="{ faulty: !isFaulty(), error: errorExists() }"
+    @input="
+      renderMathSymbols();
+      clearErrors();
+    "
+    @click="clearErrors()"
+  ></textarea>
 </template>
 
 <script>
-import ConversionButtons from "./ConversionButtons.vue";
 import SymbolButtons from "./SymbolButtons.vue";
-import DeleteButtons from "./DeleteButtons.vue";
-import Output from "./Output.vue";
-import Help from "./Help.vue";
-import validateInput from "../ANTLR/InputValidator.js";
+import ErrorMessages from "./ErrorMessages.vue";
+import validateInput from "../js/InputValidator.js";
+import getNewPosition from "../js/CursorPosition.js";
 
 export default {
   name: "UserInput",
@@ -54,11 +35,8 @@ export default {
     return {};
   },
   components: {
-    SymbolButtons,
-    ConversionButtons,
-    DeleteButtons,
-    Output,
-    Help,
+      ErrorMessages,
+      SymbolButtons
   },
   computed: {
     formula: {
@@ -74,14 +52,9 @@ export default {
         return this.$store.getters.formulas;
       },
     },
-    noInput: {
+    errorWithConversion: {
       get() {
-        return this.$store.getters.noInput;
-      }
-    },
-    faultyInput: {
-      get() {
-        return this.$store.getters.faultyInput;
+        return this.$store.getters.errorWithConversion;
       }
     }
   },
@@ -92,11 +65,11 @@ export default {
           if (validateInput(this.formula)) {
             this.$store.commit("addFormula");
           } else {
-            this.$store.commit("showFaultyInput");
+            this.$store.commit("showFaultyInputError");
           }          
         }
       } else {
-        this.$store.commit("showNoInput");
+        this.$store.commit("showNoInputError");
       }
     },
     showStartButton() {
@@ -105,26 +78,40 @@ export default {
     isFaulty() {
       return this.formula.length === 0 ? true : validateInput(this.formula);
     },
+    errorExists() {
+      if (this.errorWithConversion) {
+        const el = document.getElementById("selectable");
+        el.setSelectionRange(el.selectionStart, el.selectionEnd);
+        el.focus();
+        return true;
+      }
+      return false;
+    },
+    renderMathSymbols() {
+      let el = document.getElementById("selectable");
+      let position = el.selectionStart;
+      let formulaBeginning = el.value.substring(0, position);
+      let newPosition = getNewPosition(formulaBeginning, position);
+      this.formula = this.formula.replaceAll("\\neg", "¬")
+          .replaceAll("\\land", "∧")
+          .replaceAll("\\lor", "∨")
+          .replaceAll("\\Rightarrow", "⇒")
+          .replaceAll("\\Leftrightarrow", "⇔")
+          .replaceAll("\\forall", "∀")
+          .replaceAll("\\exists", "∃")
+          .replaceAll(" ", "");
+      this.$nextTick(() => {
+        el.selectionEnd = newPosition;
+      });
+    },
     clearErrors() {
       this.$store.commit("clearErrors");
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-#editor {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 90%;
-  margin: auto;
-  border: none !important;
-}
-#editor div {
-  min-height: 1em;
-}
-
 textarea {
   width: 100%;
   border: none;
@@ -133,15 +120,8 @@ textarea {
   text-align: left !important;
   vertical-align: middle !important;
   margin-top: 1em;
-}
-
-#editor-left {
-  width: 55%;
-  margin-right: 0.5em;
-}
-#editor-right {
-  width: 45%;
-  margin-left: 0.5em;
+  font-size: 1.2em;
+  font-family: "Computer Modern Sans", sans-serif;
 }
 
 #guide {
@@ -150,7 +130,7 @@ textarea {
 }
 
 .faulty {
-  background-color: rgba(252, 74, 74, 0.288);
+  color: rgb(252, 74, 74);
 }
 
 #buttons {
@@ -158,9 +138,12 @@ textarea {
   justify-content: space-between;
 }
 
-.error {
-  color: rgb(252, 74, 74);
+textarea::selection {
+  background-color: #7ff389;
 }
 
-
+.error::selection {
+  color: rgb(252, 74, 74);
+  background-color: transparent;
+}
 </style>

@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <UserInput></UserInput>
+    <Main></Main>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import UserInput from "@/components/UserInput.vue";
+import Main from "@/components/Main.vue";
 
 export default {
   name: "Home",
   title: "Loogikavalemite teisendaja",
   components: {
-    UserInput,
+    Main,
   }
 };
 </script>

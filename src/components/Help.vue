@@ -1,7 +1,7 @@
 <template>
-  <div id="help-button-div">
+  <div class="help-button-div">
     <button @click="toggleHelp()">
-        <strong v-if="showHelp">{{ $t("hideHelp") }}</strong>
+        <div v-if="showHelp">{{ $t("hideHelp") }}</div>
         <strong v-else>{{ $t("showHelp") }}</strong>
     </button>
   </div>
@@ -9,17 +9,59 @@
   <div id="help" v-show="showHelp">
       <strong>{{ $t("enteringFormulas") }}</strong>
       <ol>
-          <li>{{ $t("insertFormulaGuide") }}</li>
+          <li>
+            {{ $t("insertFormulaGuide") }}
+            <div class="help-button-div">
+              <button @click="toggleTexSymbols()" id="symbols">
+              <div v-if="showTexSymbols">{{ $t("hideTexSymbols") }}</div>
+              <div v-else>{{ $t("showTexSymbols") }}</div>
+            </button>
+            </div>
+          </li>
+          <div v-show="showTexSymbols" id="symbol-table">
+            <table>
+            <tr>
+              <td>¬</td>
+              <td>\neg</td>
+            </tr>
+             <tr>
+              <td>∧</td>
+              <td>\land</td>
+            </tr>
+             <tr>
+              <td>∨</td>
+              <td>\lor</td>
+            </tr>
+             <tr>
+              <td>⇒</td>
+              <td>\Rightarrow</td>
+            </tr>
+             <tr>
+              <td>⇔</td>
+              <td>\Leftrightarrow</td>
+            </tr>
+             <tr>
+              <td>∃</td>
+              <td>\exists</td>
+            </tr>
+            <tr>
+              <td>∀</td>
+              <td>\forall</td>
+            </tr>
+          </table>
+          </div>
           <li>{{ $t("pressStartButtonGuide") }}</li>
           <li>{{ $t("conversionGuide") }}</li>
           <li>{{ $t("resultGuide") }}</li>
+          <li>{{ $t("associativityGuide") }}</li>
       </ol>
       <strong>{{ $t("symbols") }}</strong>
       <ol>
-          <li>{{ $t("ind") }}: <math-jax :latex="'p, q, r, s, t, u, v, w, x, y, z'"></math-jax>.</li>
-          <li>{{ $t("const") }}: <math-jax :latex="'a, b, c, d, e'"></math-jax>.</li>
-          <li>{{ $t("funct") }}: <math-jax :latex="'f, g, h, i, j, k, l, m, n, o'"></math-jax>.</li>
-          <li>{{ $t("pred") }}: <math-jax :latex="'A, B, ..., Y, Z'"></math-jax>.</li>
+          <li>{{ $t("pred") }}: A, B, ..., Y, Z.</li>
+          <li>{{ $t("ind") }}: p, q, r, s, t, u, v, w, x, y, z.</li>
+          <li>{{ $t("const") }}: a, b, c, d, e.</li>
+          <li>{{ $t("funct") }}: f, g, h, i, j, k, l, m, n, o.</li>
+          <li>{{ $t("truthValues") }}: 1, 0</li>
       </ol>
       
   </div>
@@ -31,18 +73,22 @@ export default {
   data() {
     return {
       showHelp: false,
+      showTexSymbols: true
     };
   },
   methods: {
       toggleHelp() {
           this.showHelp = !this.showHelp;
-      } 
+      },
+      toggleTexSymbols() {
+        this.showTexSymbols = !this.showTexSymbols;
+      }
   }
 };
 </script>
 
 <style scoped>
-#help-button-div {
+.help-button-div {
     display: flex;
     justify-content: right;
 }
@@ -63,6 +109,25 @@ li {
   flex-direction: column;
   justify-content: left;
   text-align: left;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#symbols {
+  display: flex;
+  justify-content: center;
+}
+
+#symbol-table {
+  display: flex;
+  justify-content: center;
+}
+
+td {
+  text-align: left;
+  padding-left: 1em;
 }
 
 </style>
