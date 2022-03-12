@@ -40,13 +40,13 @@
               <td>⇔</td>
               <td>\Leftrightarrow</td>
             </tr>
-             <tr>
-              <td>∃</td>
-              <td>\exists</td>
-            </tr>
             <tr>
               <td>∀</td>
               <td>\forall</td>
+            </tr>
+            <tr>
+              <td>∃</td>
+              <td>\exists</td>
             </tr>
           </table>
           </div>

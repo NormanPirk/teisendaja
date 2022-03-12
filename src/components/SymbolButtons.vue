@@ -15,11 +15,11 @@
     <button @click="addSymbol('\\Leftrightarrow')">
       <math-jax :latex="'\\Leftrightarrow'"></math-jax>
     </button>
-    <button @click="addSymbol('\\exists')">
-      <math-jax :latex="'\\exists'"></math-jax>
-    </button>
     <button @click="addSymbol('\\forall')">
       <math-jax :latex="'\\forall'"></math-jax>
+    </button>
+    <button @click="addSymbol('\\exists')">
+      <math-jax :latex="'\\exists'"></math-jax>
     </button>
   </div>
 </template>
