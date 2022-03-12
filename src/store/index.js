@@ -4,7 +4,7 @@ import convert from "../js/Converter.js";
 import matchInput from "../js/InputMatcher.js";
 import conversionAllowed from "../js/ConversionValidator.js";
 import addParentheses from "../js/Parentheses.js";
-import addParensToNewFormula from "../js/ParensNewFormula.js";
+import handleNewFormula from "../js/NewFormulaHandler.js";
 
 export default createStore({
   state: {
@@ -153,18 +153,11 @@ export default createStore({
             if (conversionAllowed(replacable, conversionType)) {
               let result = convert(subFormula, conversionType);
               if (result) {
-                if (conversionType === "LS7_2" || conversionType === "LS8_2") {
-                  let newForm = state.newFormula;
-                  result += addParensToNewFormula(conversionType, newForm);
-                  state.newFormula = "";
-                } else if (conversionType === "LS20_2" || conversionType === "LS21_2") {
-                  let newForm = state.newFormula;
-                  newForm = addParensToNewFormula(conversionType, newForm);
-                  result = newForm + result;
+                if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+                  result = handleNewFormula(conversionType, state.newFormula, result);
                   state.newFormula = "";
                 }
                 result = addParentheses(replacable, result);
-                
                 insertTextAtCursor(el, result);
                 state.converted = true;
               } else {

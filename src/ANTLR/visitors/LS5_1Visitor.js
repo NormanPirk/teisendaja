@@ -28,9 +28,7 @@ export default class LS5_1Visitor extends antlr4.tree.ParseTreeVisitor {
                     return leftLeft + "∧(" + leftRight + "∧" + right + ")";
                 }
             }
-			
 		}
-        throw "Incompatible input"; 
-		
+        throw "Incompatible input"; 	
 	}
 }

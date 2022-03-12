@@ -1,6 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
+import { addParensAnd } from '../../js/Parentheses';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 
@@ -30,12 +31,8 @@ export default class LS10_2Visitor extends antlr4.tree.ParseTreeVisitor {
                     const rightLeft = rightChild.left.getText();
                     let rightRight = rightChild.right.getText();
                     if (leftLeft === rightLeft) {
-                        if (leftChild.right.constructor.name === "OrContext") {
-                            leftRight = "(" + leftRight + ")";
-                        }
-                        if (rightChild.right.constructor.name === "OrContext") {
-                            rightRight = "(" + rightRight + ")";
-                        }
+                        leftRight = addParensAnd(leftChild.right.constructor.name, leftRight);
+                        rightRight = addParensAnd(rightChild.right.constructor.name, rightRight);
                         return leftLeft + "∨" + leftRight + "∧" + rightRight;
                     }
                 }
