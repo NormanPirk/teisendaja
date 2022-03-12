@@ -11,6 +11,7 @@
         v-model="newFormula"
         :class="{ faulty: !isFaulty() }"
         @input="renderMathSymbols(); clearNewFormulaError()"
+        @click="clearNewFormulaError()"
         :placeholder="$t('inputDescription')"
       ></textarea>
       <div id="confirm-btns">
@@ -101,7 +102,7 @@ export default {
   align-items: left;
   text-align: left;
   height: 9em;
-  width: 60%;
+  width: 40%;
   margin-top: 10%;
   padding: 2em;
   background-color: #ffffff;
@@ -111,7 +112,7 @@ export default {
 #confirm-btns {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: left;
 }
 
 textarea {

@@ -11,11 +11,11 @@
     </div>
     <div>
       <div id="last">
-        <p>{{ formulas[formulas.length - 1]?.replace("≡", "") }}</p>
+        <p>{{ formulas[formulas.length - 1] }}</p>
       </div>
       <hr />
       <div id="pdf">
-        <p v-for="formula in formulas" :key="formula">{{ formula }}</p>
+        <p v-for="(formula, index) in formulas" :key="formula">{{ (index === 0)? formula : "≡  " + formula }}</p>
       </div>
     </div>
   </div>

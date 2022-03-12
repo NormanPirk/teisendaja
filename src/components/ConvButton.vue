@@ -31,23 +31,25 @@ export default {
       }
     },
     async startConversion() {
-      const conversionType = getConversionType(this.buttonText);
+        const conversionType = getConversionType(this.buttonText);
       if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
         this.$store.commit("setAskNewFormulaTrue");
-        const newFormula = await new Promise((resolve) => {
+        await new Promise((resolve) => {
           document.getElementById("add-new-formula").onclick = () => {
-            resolve(this.$store.getters.newFormula);
+            let f = this.$store.getters.newFormula;
+            if (validateInput(f)) {
+              resolve(f);
+            } else {
+              this.$store.commit("showNewFormulaError");
+            }
           };
         });
-        if (newFormula && validateInput(newFormula)) {
-          this.$store.commit("newFormulaAdded");
-          this.convert(conversionType);
-        } else {
-          this.$store.commit("showNewFormulaError");
-        }
+        this.$store.commit("newFormulaAdded");
+        this.convert(conversionType);
       } else {
         this.convert(conversionType);
       }
+      
     },
     convert(conversionType) {
       this.$store.commit("convert", conversionType);

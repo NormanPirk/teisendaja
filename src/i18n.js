@@ -5,15 +5,15 @@ const messages = {
         title: "Loogikavalemite teisendaja",
         input: "Töödeldav valem",
         inputGuide: "Enne teisendamist sisesta valem ja vajuta nupule 'Alusta teisendamist'",
-        inputDescription: "Sisesta valem TeX kujul",
+        inputDescription: "Sisesta valem",
         startConversions: "Alusta teisendamist",
         conversions: "Teisendussammud",
         deleteLast: "Kustuta viimane teisendussamm",
         deleteAll: "Kustuta kõik teisendussammud",
         downloadTeX: "Laadi alla TeX",
-        insertFormulaGuide: "Sisesta valem TeX kujul. Loogikasümboleid saab sisestada nii sisendlahtri kohal olevate nuppude abil kui ka käsitsi kirjutades. TeX kujul sisestatu asendatakse automaatselt vastavate sümbolitega.",
+        insertFormulaGuide: "Sisesta valem. Loogikasümboleid saab sisestada nii sisendlahtri kohal olevate nuppude abil kui ka käsitsi TeX kujul. Viimasel juhul asendatakse sisestatu automaatselt vastavate sümbolitega.",
         pressStartButtonGuide: "Vajuta nupule 'Alusta teisendamist'.",
-        conversionGuide: "Aktiveeri kursori abil sisendlahtris teisendatav osavalem ning vajuta vastavale nupule. Et teisendust teha vastassuunas, vajuta teisendusnupul olevale nooltega ikoonile.",
+        conversionGuide: "Vali hiirega sisendlahtris teisendatav osavalem ning vajuta vastavale nupule. Et teisendust teha vastassuunas, vajuta teisendusnupul olevale nooltega ikoonile.",
         resultGuide: "Teisendussammud kuvatakse paremal. Viimane teisendussamm kuvatakse lisaks ka kõige ülemisena.",
         showHelp: "Näita abi",
         hideHelp: "Peida abi",
@@ -25,13 +25,13 @@ const messages = {
         notSubformula: "Valitud ei ole põhivalemi osavalemit!",
         noSubformula: "Osavalem on valimata!",
         conversionNotAllowed: "Valitud teisendus ei ole lubatud!",
-        enteringFormulas: "Valemite sisestamine",
+        enteringFormulas: "Valemite sisestamine ja teisenduste tegemine",
         symbols: "Sümbolid",
         ind: "Indiviidmuutujad",
         const: "Konstantsümbolid",
         funct: "Funktsionaalsümbolid",
         pred: "Predikaatsümbolid",
-        insertNew: "Sisesta uus valem",
+        insertNew: "Sisesta uus osavalem",
         newIsIncorrect: "Valem on sisestamata või ei ole korrektne!",
         ready: "Valmis",
         cancel: "Katkesta",
@@ -39,7 +39,7 @@ const messages = {
         show: "Näita",
         hide: "Peida",
         truthValues: "Tõeväärtused",
-        associativityGuide: "Kui kõrvuti on sisestatud ilma sulgudeta kaks või enam sama prioriteediga tehet, siis peatehteks jääb kõige parempoolsem tehe. Näiteks valemi A∧B∧C korral on konjunktsiooni vasakuks pooleks konjukntsioon A∧B ja paremaks pooleks valem C."
+        associativityGuide: "Kui kõrvuti on sisestatud ilma sulgudeta kaks või enam sama prioriteediga tehet, siis peatehteks jääb kõige parempoolsem tehe. Näiteks valemi A∧B∧C korral on konjunktsiooni vasakuks pooleks konjunktsioon A∧B ja paremaks pooleks valem C."
     }
 };
 

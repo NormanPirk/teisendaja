@@ -11,44 +11,21 @@
       <ol>
           <li>
             {{ $t("insertFormulaGuide") }}
-            <div class="help-button-div">
-              <button @click="toggleTexSymbols()" id="symbols">
-              <div v-if="showTexSymbols">{{ $t("hideTexSymbols") }}</div>
-              <div v-else>{{ $t("showTexSymbols") }}</div>
-            </button>
-            </div>
           </li>
-          <div v-show="showTexSymbols" id="symbol-table">
-            <table>
-            <tr>
-              <td>¬</td>
-              <td>\neg</td>
-            </tr>
-             <tr>
-              <td>∧</td>
-              <td>\land</td>
-            </tr>
-             <tr>
-              <td>∨</td>
-              <td>\lor</td>
-            </tr>
-             <tr>
-              <td>⇒</td>
-              <td>\Rightarrow</td>
-            </tr>
-             <tr>
-              <td>⇔</td>
-              <td>\Leftrightarrow</td>
-            </tr>
-            <tr>
-              <td>∀</td>
-              <td>\forall</td>
-            </tr>
-            <tr>
-              <td>∃</td>
-              <td>\exists</td>
-            </tr>
-          </table>
+          <div id="symbol-div">
+            <ul>
+              <li>\neg ¬</li>
+              <li>\land ∧</li>
+              <li>\lor ∨</li>
+            </ul>
+            <ul>
+              <li>\Rightarrow ⇒</li>
+              <li>\Leftrightarrow ⇔</li>
+            </ul>
+            <ul>
+              <li>\forall ∀</li>
+              <li>\exists ∃</li>
+            </ul>
           </div>
           <li>{{ $t("pressStartButtonGuide") }}</li>
           <li>{{ $t("conversionGuide") }}</li>
@@ -120,9 +97,11 @@ ul {
   justify-content: center;
 }
 
-#symbol-table {
+#symbol-div {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin: 1em 0;
+  width: 80%;
 }
 
 td {

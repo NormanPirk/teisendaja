@@ -89,11 +89,7 @@ export default createStore({
     },
     addFormula: (state) => {
       if (state.formula.length > 0) {
-        let f =
-          state.formulas.length === 0
-            ? state.formula
-            : "≡" + state.formula;
-        state.formulas.push(f);
+        state.formulas.push(state.formula);
       }
     },
     showNoInputError: (state) => {
@@ -133,7 +129,7 @@ export default createStore({
         state.formulas.pop();
       }
       if (state.formulas.length > 0) {
-        state.formula = state.formulas[state.formulas.length - 1].replace('≡', '');
+        state.formula = state.formulas[state.formulas.length - 1];
       } else {
         state.formula = "";
       }
