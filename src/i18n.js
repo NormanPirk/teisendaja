@@ -13,7 +13,7 @@ const messages = {
         downloadTeX: "Laadi alla TeX",
         insertFormulaGuide: "Sisesta valem. Loogikasümboleid saab sisestada nii sisendlahtri kohal olevate nuppude abil kui ka käsitsi TeX kujul. Viimasel juhul asendatakse sisestatu automaatselt vastavate sümbolitega.",
         pressStartButtonGuide: "Vajuta nupule 'Alusta teisendamist'.",
-        conversionGuide: "Vali hiirega sisendlahtris teisendatav osavalem ning vajuta vastavale nupule. Et teisendust teha vastassuunas, vajuta teisendusnupul olevale nooltega ikoonile.",
+        conversionGuide: "Vali hiirega sisendlahtris teisendatav osavalem ja vajuta vastavale nupule. Kui tehte suund on vasakult paremale, vajuta samaväärsusmärgist vasakul olevale valemile, kui paremalt vasakule, siis paremal asuvale valemile.",
         resultGuide: "Teisendussammud kuvatakse paremal. Viimane teisendussamm kuvatakse lisaks ka kõige ülemisena.",
         showHelp: "Näita abi",
         hideHelp: "Peida abi",
