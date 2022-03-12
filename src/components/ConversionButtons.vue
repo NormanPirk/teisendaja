@@ -9,102 +9,104 @@
   <div class="conversion-btns" v-show="showPropLogic">
     <div class="small">
       <ConvButton
-        f1="\mathcal{F} \equiv (\mathcal{F})"
-        f2="(\mathcal{F}) \equiv \mathcal{F}"
+        left="\mathcal{F}"
+        right="(\mathcal{F})"
       ></ConvButton>
       <ConvButton
-        f1="\neg \neg \mathcal{F} \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \neg \neg \mathcal{F}"
+        left="\neg \neg \mathcal{F}"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land \mathcal{F} \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \land \mathcal{F}"
+        left="\mathcal{F} \land \mathcal{F}"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor \mathcal{F} \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \lor \mathcal{F}"
+        left="\mathcal{F} \lor \mathcal{F}"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land 1 \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \land 1"
+        left="\mathcal{F} \land 1"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor 1 \equiv 1"
-        f2="1 \equiv \mathcal{F} \lor 1"
+        left="\mathcal{F} \lor 1"
+        right="1"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land 0 \equiv 0"
-        f2="0 \equiv \mathcal{F} \land 0"
+        left="\mathcal{F} \land 0"
+        right="0"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor 0 \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \lor 0"
+        left="\mathcal{F} \lor 0"
+        right="\mathcal{F}"
       ></ConvButton>
     </div>
     <div class="medium">
       <ConvButton
-        f1="\mathcal{F} \land \mathcal{G} \equiv \mathcal{G} \land \mathcal{F}"
+        left="\mathcal{F} \land \mathcal{G}"
+        right="\mathcal{G} \land \mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor \mathcal{G} \equiv \mathcal{G} \lor \mathcal{F}"
+        left="\mathcal{F} \lor \mathcal{G}"
+        right="\mathcal{G} \lor \mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land (\mathcal{F} \lor \mathcal{G}) \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \land (\mathcal{F} \lor \mathcal{G})"
+        left="\mathcal{F} \land (\mathcal{F} \lor \mathcal{G})"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor \mathcal{F} \land \mathcal{G} \equiv \mathcal{F}"
-        f2="\mathcal{F} \equiv \mathcal{F} \lor \mathcal{F} \land \mathcal{G}"
+        left="\mathcal{F} \lor \mathcal{F} \land \mathcal{G}"
+        right="\mathcal{F}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land \mathcal{G} \equiv \neg (\mathcal{F} \Rightarrow \mathcal{G})"
-        f2="\neg (\mathcal{F} \Rightarrow \mathcal{G}) \equiv \mathcal{F} \land \mathcal{G}"
+        left="\mathcal{F} \land \mathcal{G}"
+        right="\neg (\mathcal{F} \Rightarrow \mathcal{G})"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor \mathcal{G} \equiv \neg \mathcal{F} \Rightarrow \mathcal{G}"
-        f2="\neg \mathcal{F} \Rightarrow \mathcal{G} \equiv \mathcal{F} \lor \mathcal{G}"
+        left="\mathcal{F} \lor \mathcal{G}"
+        right="\neg \mathcal{F} \Rightarrow \mathcal{G}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \Rightarrow \mathcal{G} \equiv \neg (\mathcal{F} \land \neg \mathcal{G})"
-        f2="\neg (\mathcal{F} \land \neg \mathcal{G}) \equiv \mathcal{F} \Rightarrow \mathcal{G}"
+        left="\mathcal{F} \Rightarrow \mathcal{G}"
+        right="\neg (\mathcal{F} \land \neg \mathcal{G})"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \Rightarrow \mathcal{G} \equiv \neg \mathcal{F} \lor \mathcal{G}"
-        f2="\neg \mathcal{F} \lor \mathcal{G} \equiv \mathcal{F} \Rightarrow \mathcal{G}"
+        left="\mathcal{F} \Rightarrow \mathcal{G}"
+        right="\neg \mathcal{F} \lor \mathcal{G}"
       ></ConvButton>
     </div>
     <div class="large">
       <ConvButton
-        f1="\neg(\mathcal{F} \land \mathcal{G}) \equiv \neg \mathcal{F} \lor \neg \mathcal{G}"
-        f2="\neg \mathcal{F} \lor \neg \mathcal{G} \equiv \neg(\mathcal{F} \land \mathcal{G})"
+        left="\neg(\mathcal{F} \land \mathcal{G})"
+        right="\neg \mathcal{F} \lor \neg \mathcal{G}"
       ></ConvButton>
       <ConvButton
-        f1="\neg(\mathcal{F} \lor \mathcal{G}) \equiv \neg \mathcal{F} \land \neg \mathcal{G}"
-        f2="\neg \mathcal{F} \land \neg \mathcal{G} \equiv \neg(\mathcal{F} \lor \mathcal{G})"
+        left="\neg(\mathcal{F} \lor \mathcal{G})"
+        right="\neg \mathcal{F} \land \neg \mathcal{G}"
       ></ConvButton>
       <ConvButton
-        f1="(\mathcal{F} \land \mathcal{G}) \land \mathcal{H} \equiv \mathcal{F} \land (\mathcal{G} \land \mathcal{H})"
-        f2="\mathcal{F} \land (\mathcal{G} \land \mathcal{H}) \equiv (\mathcal{F} \land \mathcal{G}) \land \mathcal{H}"
+        left="(\mathcal{F} \land \mathcal{G}) \land \mathcal{H}"
+        right="\mathcal{F} \land (\mathcal{G} \land \mathcal{H})"
       ></ConvButton>
       <ConvButton
-        f1="(\mathcal{F} \lor \mathcal{G}) \lor \mathcal{H} \equiv \mathcal{F} \lor (\mathcal{G} \lor \mathcal{H})"
-        f2="\mathcal{F} \lor (\mathcal{G} \lor \mathcal{H}) \equiv (\mathcal{F} \lor \mathcal{G}) \lor \mathcal{H}"
+        left="(\mathcal{F} \lor \mathcal{G}) \lor \mathcal{H}"
+        right="\mathcal{F} \lor (\mathcal{G} \lor \mathcal{H})"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \Leftrightarrow \mathcal{G} \equiv \mathcal{F} \land \mathcal{G} \lor \neg \mathcal{F} \land \neg \mathcal{G}"
-        f2="\mathcal{F} \land \mathcal{G} \lor \neg \mathcal{F} \land \neg \mathcal{G} \equiv \mathcal{F} \Leftrightarrow \mathcal{G}"
+        left="\mathcal{F} \Leftrightarrow \mathcal{G}"
+        right="\mathcal{F} \land \mathcal{G} \lor \neg \mathcal{F} \land \neg \mathcal{G}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \Leftrightarrow \mathcal{G} \equiv (\mathcal{F} \Rightarrow \mathcal{G}) \land (\mathcal{G} \Rightarrow \mathcal{F})"
-        f2="(\mathcal{F} \Rightarrow \mathcal{G}) \land (\mathcal{G} \Rightarrow \mathcal{F}) \equiv \mathcal{F} \Leftrightarrow \mathcal{G}"
+        left="\mathcal{F} \Leftrightarrow \mathcal{G}"
+        right="(\mathcal{F} \Rightarrow \mathcal{G}) \land (\mathcal{G} \Rightarrow \mathcal{F})"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \land (\mathcal{G} \lor \mathcal{H}) \equiv \mathcal{F} \land \mathcal{G} \lor \mathcal{F} \land \mathcal{H}"
-        f2="\mathcal{F} \land \mathcal{G} \lor \mathcal{F} \land \mathcal{H} \equiv \mathcal{F} \land (\mathcal{G} \lor \mathcal{H})"
+        left="\mathcal{F} \land (\mathcal{G} \lor \mathcal{H})"
+        right="\mathcal{F} \land \mathcal{G} \lor \mathcal{F} \land \mathcal{H}"
       ></ConvButton>
       <ConvButton
-        f1="\mathcal{F} \lor \mathcal{G} \land \mathcal{H} \equiv (\mathcal{F} \lor \mathcal{G}) \land (\mathcal{F} \lor \mathcal{H})"
-        f2="(\mathcal{F} \lor \mathcal{G}) \land (\mathcal{F} \lor \mathcal{H}) \equiv \mathcal{F} \lor \mathcal{G} \land \mathcal{H}"
+        left="\mathcal{F} \lor \mathcal{G} \land \mathcal{H}"
+        right="(\mathcal{F} \lor \mathcal{G}) \land (\mathcal{F} \lor \mathcal{H})"
       ></ConvButton>
     </div>
   </div>
