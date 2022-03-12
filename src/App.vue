@@ -2,8 +2,7 @@
   <!-- <div id="nav">
     <router-link to="/">Home</router-link>
   </div> -->
-  <h1>{{ $t("title") }}</h1>
-  <hr id="divider">
+  <h3>{{ $t("title") }}</h3>
   <router-view />
 </template>
 
@@ -49,11 +48,12 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 2em;
+  min-height: 1em;
 }
 
-#divider {
-  width: 50%;
-  margin-bottom: 50px;
+button {
+  margin: 0.2em;
+  font-size: medium;
 }
+
 </style>

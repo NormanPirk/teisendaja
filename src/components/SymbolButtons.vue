@@ -1,24 +1,24 @@
 <template>
   <div>
-    <button @click="addSymbol('\\neg ')">
+    <button @click="addSymbol('\\neg')">
       <math-jax :latex="'\\neg'"></math-jax>
     </button>
-    <button @click="addSymbol('\\land ')">
+    <button @click="addSymbol('\\land')">
       <math-jax :latex="'\\land'"></math-jax>
     </button>
-    <button @click="addSymbol('\\lor ')">
+    <button @click="addSymbol('\\lor')">
       <math-jax :latex="'\\lor'"></math-jax>
     </button>
-    <button @click="addSymbol('\\Rightarrow ')">
+    <button @click="addSymbol('\\Rightarrow')">
       <math-jax :latex="'\\Rightarrow'"></math-jax>
     </button>
-    <button @click="addSymbol('\\Leftrightarrow ')">
+    <button @click="addSymbol('\\Leftrightarrow')">
       <math-jax :latex="'\\Leftrightarrow'"></math-jax>
     </button>
-    <button @click="addSymbol('\\exists ')">
+    <button @click="addSymbol('\\exists')">
       <math-jax :latex="'\\exists'"></math-jax>
     </button>
-    <button @click="addSymbol('\\forall ')">
+    <button @click="addSymbol('\\forall')">
       <math-jax :latex="'\\forall'"></math-jax>
     </button>
   </div>
@@ -27,12 +27,20 @@
 <script>
 export default {
   name: "SymbolButtons",
+  props: {
+    target: String
+  },
   data() {
     return {};
   },
   methods: {
     addSymbol: function (value) {
-      this.$store.commit("addSymbol", value);
+      if (this.target === "formula") {
+        this.$store.commit("addSymbol", value);
+      } else if (this.target === "newFormula") {
+        this.$store.commit("addSymbolToNew", value);
+      }
+      
     },
   },
 };
@@ -40,11 +48,13 @@ export default {
 
 <style scoped>
 div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
   margin-top: 0;
   height: 2em;
 }
 button {
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  width: 2em;
 }
 </style>

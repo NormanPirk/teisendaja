@@ -3,20 +3,23 @@
     <div>
       <div class="intro">
         <strong>{{ $t("conversions") }}</strong>
-        <button @click="removeLast">{{ $t("deleteLast") }}</button>
       </div>
       <hr />
     </div>
-
-    <div id="pdf">
-      <p v-for="formula in formulas" :key="formula">
-        <math-jax :latex="formula"></math-jax>
-      </p>
+    <div id="action-buttons">
+      <!-- <button @click="downloadTEX">{{ $t("downloadTeX") }}</button> -->
+    </div>
+    <div>
+      <div id="last">
+        <p>{{ formulas[formulas.length - 1]?.replace("≡", "") }}</p>
+      </div>
+      <hr />
+      <div id="pdf">
+        <p v-for="formula in formulas" :key="formula">{{ formula }}</p>
+      </div>
     </div>
   </div>
-  <div>
-    <button @click="downloadTEX">{{ $t("downloadTeX") }}</button>
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -35,9 +38,6 @@ export default {
     },
   },
   methods: {
-    removeLast: function () {
-      this.$store.commit("removeLast");
-    },
     downloadTEX() {
       let content =
         "\\documentclass{article}\n\\usepackage[utf8]{inputenc}\n\\begin{document}\n";
@@ -45,7 +45,6 @@ export default {
         content += "$$" + formula + "$$\n";
       });
       content += "\\end{document}";
-      console.log(content);
       let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "sample.tex");
     },
@@ -55,6 +54,33 @@ export default {
 
 <style scoped>
 #pdf {
-  min-height: 2em;
+  min-height: 4em;
+  overflow-x: scroll;
+  overflow: overlay;
+  max-height: 30em;
+}
+
+#last {
+  overflow-x: scroll;
+  overflow: overlay;
+}
+
+#action-buttons {
+  display: flex;
+  justify-content: right;
+}
+
+p {
+  font-size: 1.2em;
+  font-family: "Computer Modern Sans", sans-serif;
+  padding: 0.2em;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(204, 204, 204);
 }
 </style>

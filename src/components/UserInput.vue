@@ -1,39 +1,42 @@
 <template>
-  <div id="editor">
-    <div id="editor-left">
-      <SymbolButtons></SymbolButtons>
-      <div class="shadow">
-        <div class="intro">
-          <strong>{{ $t("input") }}</strong>
-          <button @click="start" v-show="showStartButton()">{{ $t("startConversions") }}</button>
-        </div>
-        <hr>
-        <textarea id="selectable" v-model="formula" :placeholder="$t('inputDescription')"></textarea>
-        <p><math-jax :latex="formula"></math-jax></p>
-      </div>
-      <Output></Output>
-    </div>
-
-    <div id="editor-right">
-      <ConversionButtons></ConversionButtons>
-    </div>
+  <div class="intro">
+    <strong>{{ $t("input") }}</strong>
+    <ErrorMessages></ErrorMessages>
   </div>
+  <hr />
+  <div id="buttons">
+    <SymbolButtons target="formula"></SymbolButtons>
+    <button @click="start" v-show="showStartButton()">
+      {{ $t("startConversions") }}
+    </button>
+  </div>
+  <textarea
+    id="selectable"
+    v-model="formula"
+    :placeholder="$t('inputDescription')"
+    :class="{ faulty: !isFaulty(), error: errorExists() }"
+    @input="
+      renderMathSymbols();
+      clearErrors();
+    "
+    @click="clearErrors()"
+  ></textarea>
 </template>
 
 <script>
-import ConversionButtons from "./ConversionButtons.vue";
 import SymbolButtons from "./SymbolButtons.vue";
-import Output from "./Output.vue";
+import ErrorMessages from "./ErrorMessages.vue";
+import validateInput from "../js/InputValidator.js";
+import getNewPosition from "../js/CursorPosition.js";
 
 export default {
-  name: "Input",
+  name: "UserInput",
   data() {
     return {};
   },
   components: {
-    SymbolButtons,
-    ConversionButtons,
-    Output,
+      ErrorMessages,
+      SymbolButtons
   },
   computed: {
     formula: {
@@ -49,47 +52,76 @@ export default {
         return this.$store.getters.formulas;
       },
     },
+    errorWithConversion: {
+      get() {
+        return this.$store.getters.errorWithConversion;
+      }
+    }
   },
   methods: {
-    start: function () {
-      if (this.formulas.length === 0) {
-        this.$store.commit("addFormula");
+    start() {
+      if (this.formula.length !== 0) {
+        if (this.formulas.length === 0) {
+          if (validateInput(this.formula)) {
+            this.$store.commit("addFormula");
+          } else {
+            this.$store.commit("showFaultyInputError");
+          }          
+        }
+      } else {
+        this.$store.commit("showNoInputError");
       }
     },
-    showStartButton: function () {
-      console.log(this.formulas.length);
+    showStartButton() {
       return this.formulas.length === 0;
     },
+    isFaulty() {
+      return this.formula.length === 0 ? true : validateInput(this.formula);
+    },
+    errorExists() {
+      if (this.errorWithConversion) {
+        const el = document.getElementById("selectable");
+        el.setSelectionRange(el.selectionStart, el.selectionEnd);
+        el.focus();
+        return true;
+      }
+      return false;
+    },
+    renderMathSymbols() {
+      let el = document.getElementById("selectable");
+      let position = el.selectionStart;
+      let formulaBeginning = el.value.substring(0, position);
+      let newPosition = getNewPosition(formulaBeginning, position);
+      this.formula = this.formula.replaceAll("\\neg", "¬")
+          .replaceAll("\\land", "∧")
+          .replaceAll("\\lor", "∨")
+          .replaceAll("\\Rightarrow", "⇒")
+          .replaceAll("\\Leftrightarrow", "⇔")
+          .replaceAll("\\forall", "∀")
+          .replaceAll("\\exists", "∃")
+          .replaceAll(" ", "");
+      this.$nextTick(() => {
+        el.selectionEnd = newPosition;
+      });
+    },
+    clearErrors() {
+      this.$store.commit("clearErrors");
+    }
   }
 };
 </script>
 
 <style scoped>
-#editor {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 80%;
-  margin: auto;
-  border: none !important;
-}
-#editor div {
-  min-height: 2em;
-}
-
 textarea {
   width: 100%;
   border: none;
   outline: none;
   resize: vertical;
   text-align: left !important;
-}
-
-#editor-left {
-  width: 60%;
-}
-#editor-right {
-  width: 40%;
+  vertical-align: middle !important;
+  margin-top: 1em;
+  font-size: 1.2em;
+  font-family: "Computer Modern Sans", sans-serif;
 }
 
 #guide {
@@ -97,4 +129,21 @@ textarea {
   opacity: 0.75;
 }
 
+.faulty {
+  color: rgb(252, 74, 74);
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+textarea::selection {
+  background-color: #7ff389;
+}
+
+.error::selection {
+  color: rgb(252, 74, 74);
+  background-color: transparent;
+}
 </style>

@@ -6,7 +6,6 @@ import MathJax, { initMathJax, renderByMathjax } from "mathjax-vue3";
 import i18n from "./i18n";
 import titleMixin from './mixins/titleMixin'
 
-
 function onMathJaxReady() {
   // The parent node of need to be rendered into the formula node set
   const el = document.getElementById("app");
