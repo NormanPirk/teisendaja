@@ -12,6 +12,18 @@
         conversionTypeL="PS1_1"
         conversionTypeR="PS1_2"
       ></ConvButton>
+      <ConvButton
+        left="\forall x (\mathcal{F}(x) \land \mathcal{G}(x))"
+        right="\forall x \mathcal{F}(x) \land \forall x \mathcal{G}(x)"
+        conversionTypeL="PS2_1"
+        conversionTypeR="PS2_2"
+      ></ConvButton>
+      <ConvButton
+        left="\exists x (\mathcal{F}(x) \lor \mathcal{G}(x))"
+        right="\exists x \mathcal{F}(x) \lor \forall x \mathcal{G}(x)"
+        conversionTypeL="PS2_1"
+        conversionTypeR="PS2_2"
+      ></ConvButton>
     </div>
   
 </template>

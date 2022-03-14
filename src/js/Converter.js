@@ -48,6 +48,8 @@ import LS23_2Visitor from "../ANTLR/visitors/propositional/LS23_2Visitor.js";
 import LS24Visitor from "../ANTLR/visitors/propositional/LS24Visitor.js";
 import PS1_1Visitor from "../ANTLR/visitors/predicate/PS1_1Visitor.js";
 import PS1_2Visitor from "../ANTLR/visitors/predicate/PS1_2Visitor.js";
+import PS2_1Visitor from "../ANTLR/visitors/predicate/PS2_1Visitor.js";
+import PS2_2Visitor from "../ANTLR/visitors/predicate/PS2_2Visitor.js";
 
 export default function convert(input, visitorType) { 
     const tree = getParseTree(input);
@@ -158,6 +160,10 @@ function getVisitor(visitorType) {
             return new PS1_1Visitor();
         case 'PS1_2':
             return new PS1_2Visitor();
+        case 'PS2_1':
+            return new PS2_1Visitor();
+        case 'PS2_2':
+            return new PS2_2Visitor();
                 
     }
 }
