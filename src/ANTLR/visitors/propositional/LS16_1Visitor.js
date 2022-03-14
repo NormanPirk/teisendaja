@@ -1,7 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import { addParensNeg } from '../../js/Parentheses';
+import { addParensNeg } from '../../../js/Parentheses';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 

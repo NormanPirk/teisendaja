@@ -24,6 +24,4 @@ export default class LS0_2Visitor extends antlr4.tree.ParseTreeVisitor {
         }
         throw "Incompatible input!";        
 	}
-
-
 }

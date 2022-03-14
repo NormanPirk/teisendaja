@@ -4,23 +4,17 @@ start: formula EOF;
 
 formula
     : predicate                             #pred
+    | FORALL IND formula                    #forall
+    | EXISTS IND formula                    #exists 
     | NEG formula                           #neg
     | left=formula op=AND right=formula     #and
 	| left=formula op=OR right=formula      #or
 	| left=formula op=IMPL right=formula    #impl
 	| left=formula op=EQ right=formula      #eq
 	| LPAREN formula RPAREN                 #paren
-    | quantifier                            #quant
     | T                                     #true
     | F                                     #false
-    ;
-
-quantifier 
-    : FORALL IND afterQuantifier    #forall
-    | EXISTS IND afterQuantifier    #exists
-    ;
-
-afterQuantifier: predicate | LPAREN formula RPAREN | quantifier;   
+    ;   
 
 predicate: PRED (LPAREN term (SEP term)* RPAREN)?;
 

@@ -1,51 +1,53 @@
 import getParseTree from "../ANTLR/ParseTree.js";
-import LS1_1Visitor from '../ANTLR/visitors/LS1_1Visitor.js';
-import LS2_1Visitor from '../ANTLR/visitors/LS2_1Visitor.js';
-import LS0_1Visitor from '../ANTLR/visitors/LS0_1Visitor.js';
-import LS0_2Visitor from '../ANTLR/visitors/LS0_2Visitor.js';
-import LS1_2Visitor from '../ANTLR/visitors/LS1_2Visitor.js';
-import LS2_2Visitor from '../ANTLR/visitors/LS2_2Visitor.js';
-import LS3Visitor from "../ANTLR/visitors/LS3Visitor.js";
-import LS4Visitor from "../ANTLR/visitors/LS4Visitor.js";
-import LS5_1Visitor from "../ANTLR/visitors/LS5_1Visitor.js";
-import LS5_2Visitor from "../ANTLR/visitors/LS5_2Visitor.js";
-import LS6_1Visitor from "../ANTLR/visitors/LS6_1Visitor.js";
-import LS6_2Visitor from "../ANTLR/visitors/LS6_2Visitor.js";
-import LS7_1Visitor from "../ANTLR/visitors/LS7_1Visitor.js";
-import LS7_2Visitor from "../ANTLR/visitors/LS7_2Visitor.js";
-import LS8_1Visitor from "../ANTLR/visitors/LS8_1Visitor.js";
-import LS8_2Visitor from "../ANTLR/visitors/LS8_2Visitor.js";
-import LS9_1Visitor from "../ANTLR/visitors/LS9_1Visitor.js";
-import LS9_2Visitor from "../ANTLR/visitors/LS9_2Visitor.js";
-import LS10_1Visitor from "../ANTLR/visitors/LS10_1Visitor.js";
-import LS10_2Visitor from "../ANTLR/visitors/LS10_2Visitor.js";
-import LS11_1Visitor from "../ANTLR/visitors/LS11_1Visitor.js";
-import LS11_2Visitor from "../ANTLR/visitors/LS11_2Visitor.js";
-import LS12_1Visitor from "../ANTLR/visitors/LS12_1Visitor.js";
-import LS12_2Visitor from "../ANTLR/visitors/LS12_2Visitor.js";
-import LS13_1Visitor from "../ANTLR/visitors/LS13_1Visitor.js";
-import LS13_2Visitor from "../ANTLR/visitors/LS13_2Visitor.js";
-import LS14_1Visitor from "../ANTLR/visitors/LS14_1Visitor.js";
-import LS14_2Visitor from "../ANTLR/visitors/LS14_2Visitor.js";
-import LS15_1Visitor from "../ANTLR/visitors/LS15_1Visitor.js";
-import LS15_2Visitor from "../ANTLR/visitors/LS15_2Visitor.js";
-import LS16_1Visitor from "../ANTLR/visitors/LS16_1Visitor.js";
-import LS16_2Visitor from "../ANTLR/visitors/LS16_2Visitor.js";
-import LS17_1Visitor from "../ANTLR/visitors/LS17_1Visitor.js";
-import LS17_2Visitor from "../ANTLR/visitors/LS17_2Visitor.js";
-import LS18_1Visitor from "../ANTLR/visitors/LS18_1Visitor.js";
-import LS18_2Visitor from "../ANTLR/visitors/LS18_2Visitor.js";
-import LS19_1Visitor from "../ANTLR/visitors/LS19_1Visitor.js";
-import LS19_2Visitor from "../ANTLR/visitors/LS19_2Visitor.js";
-import LS20_1Visitor from "../ANTLR/visitors/LS20_1Visitor.js";
-import LS20_2Visitor from "../ANTLR/visitors/LS20_2Visitor.js";
-import LS21_1Visitor from "../ANTLR/visitors/LS21_1Visitor.js";
-import LS21_2Visitor from "../ANTLR/visitors/LS21_2Visitor.js";
-import LS22_1Visitor from "../ANTLR/visitors/LS22_1Visitor.js";
-import LS22_2Visitor from "../ANTLR/visitors/LS22_2Visitor.js";
-import LS23_1Visitor from "../ANTLR/visitors/LS23_1Visitor.js";
-import LS23_2Visitor from "../ANTLR/visitors/LS23_2Visitor.js";
-import LS24Visitor from "../ANTLR/visitors/LS24Visitor.js";
+import LS1_1Visitor from '../ANTLR/visitors/propositional/LS1_1Visitor.js';
+import LS2_1Visitor from '../ANTLR/visitors/propositional/LS2_1Visitor.js';
+import LS0_1Visitor from '../ANTLR/visitors/propositional/LS0_1Visitor.js';
+import LS0_2Visitor from '../ANTLR/visitors/propositional/LS0_2Visitor.js';
+import LS1_2Visitor from '../ANTLR/visitors/propositional/LS1_2Visitor.js';
+import LS2_2Visitor from '../ANTLR/visitors/propositional/LS2_2Visitor.js';
+import LS3Visitor from "../ANTLR/visitors/propositional/LS3Visitor.js";
+import LS4Visitor from "../ANTLR/visitors/propositional/LS4Visitor.js";
+import LS5_1Visitor from "../ANTLR/visitors/propositional/LS5_1Visitor.js";
+import LS5_2Visitor from "../ANTLR/visitors/propositional/LS5_2Visitor.js";
+import LS6_1Visitor from "../ANTLR/visitors/propositional/LS6_1Visitor.js";
+import LS6_2Visitor from "../ANTLR/visitors/propositional/LS6_2Visitor.js";
+import LS7_1Visitor from "../ANTLR/visitors/propositional/LS7_1Visitor.js";
+import LS7_2Visitor from "../ANTLR/visitors/propositional/LS7_2Visitor.js";
+import LS8_1Visitor from "../ANTLR/visitors/propositional/LS8_1Visitor.js";
+import LS8_2Visitor from "../ANTLR/visitors/propositional/LS8_2Visitor.js";
+import LS9_1Visitor from "../ANTLR/visitors/propositional/LS9_1Visitor.js";
+import LS9_2Visitor from "../ANTLR/visitors/propositional/LS9_2Visitor.js";
+import LS10_1Visitor from "../ANTLR/visitors/propositional/LS10_1Visitor.js";
+import LS10_2Visitor from "../ANTLR/visitors/propositional/LS10_2Visitor.js";
+import LS11_1Visitor from "../ANTLR/visitors/propositional/LS11_1Visitor.js";
+import LS11_2Visitor from "../ANTLR/visitors/propositional/LS11_2Visitor.js";
+import LS12_1Visitor from "../ANTLR/visitors/propositional/LS12_1Visitor.js";
+import LS12_2Visitor from "../ANTLR/visitors/propositional/LS12_2Visitor.js";
+import LS13_1Visitor from "../ANTLR/visitors/propositional/LS13_1Visitor.js";
+import LS13_2Visitor from "../ANTLR/visitors/propositional/LS13_2Visitor.js";
+import LS14_1Visitor from "../ANTLR/visitors/propositional/LS14_1Visitor.js";
+import LS14_2Visitor from "../ANTLR/visitors/propositional/LS14_2Visitor.js";
+import LS15_1Visitor from "../ANTLR/visitors/propositional/LS15_1Visitor.js";
+import LS15_2Visitor from "../ANTLR/visitors/propositional/LS15_2Visitor.js";
+import LS16_1Visitor from "../ANTLR/visitors/propositional/LS16_1Visitor.js";
+import LS16_2Visitor from "../ANTLR/visitors/propositional/LS16_2Visitor.js";
+import LS17_1Visitor from "../ANTLR/visitors/propositional/LS17_1Visitor.js";
+import LS17_2Visitor from "../ANTLR/visitors/propositional/LS17_2Visitor.js";
+import LS18_1Visitor from "../ANTLR/visitors/propositional/LS18_1Visitor.js";
+import LS18_2Visitor from "../ANTLR/visitors/propositional/LS18_2Visitor.js";
+import LS19_1Visitor from "../ANTLR/visitors/propositional/LS19_1Visitor.js";
+import LS19_2Visitor from "../ANTLR/visitors/propositional/LS19_2Visitor.js";
+import LS20_1Visitor from "../ANTLR/visitors/propositional/LS20_1Visitor.js";
+import LS20_2Visitor from "../ANTLR/visitors/propositional/LS20_2Visitor.js";
+import LS21_1Visitor from "../ANTLR/visitors/propositional/LS21_1Visitor.js";
+import LS21_2Visitor from "../ANTLR/visitors/propositional/LS21_2Visitor.js";
+import LS22_1Visitor from "../ANTLR/visitors/propositional/LS22_1Visitor.js";
+import LS22_2Visitor from "../ANTLR/visitors/propositional/LS22_2Visitor.js";
+import LS23_1Visitor from "../ANTLR/visitors/propositional/LS23_1Visitor.js";
+import LS23_2Visitor from "../ANTLR/visitors/propositional/LS23_2Visitor.js";
+import LS24Visitor from "../ANTLR/visitors/propositional/LS24Visitor.js";
+import PS1_1Visitor from "../ANTLR/visitors/predicate/PS1_1Visitor.js";
+import PS1_2Visitor from "../ANTLR/visitors/predicate/PS1_2Visitor.js";
 
 export default function convert(input, visitorType) { 
     const tree = getParseTree(input);
@@ -151,6 +153,11 @@ function getVisitor(visitorType) {
         case 'LS23_2':
             return new LS23_2Visitor();
         case 'LS24':
-            return new LS24Visitor();    
+            return new LS24Visitor();
+        case 'PS1_1':
+            return new PS1_1Visitor();
+        case 'PS1_2':
+            return new PS1_2Visitor();
+                
     }
 }
