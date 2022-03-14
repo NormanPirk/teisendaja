@@ -49,10 +49,16 @@ import LS22_2Visitor from './visitors/propositional/LS22_2Visitor.js';
 import LS23_1Visitor from './visitors/propositional/LS23_1Visitor.js';
 import LS23_2Visitor from './visitors/propositional/LS23_2Visitor.js';
 import LS24Visitor from './visitors/propositional/LS24Visitor.js';
-import PS1_1Visitor from './visitors/predicate/PS1_1Visitor.js';
-import PS1_2Visitor from './visitors/predicate/PS1_2Visitor.js';
-import PS2_1Visitor from './visitors/predicate/PS2_1Visitor.js';
-import PS2_2Visitor from './visitors/predicate/PS2_2Visitor.js';
+import PS1_11Visitor from './visitors/predicate/PS1_11Visitor.js';
+import PS1_12Visitor from './visitors/predicate/PS1_12Visitor.js';
+import PS1_21Visitor from './visitors/predicate/PS1_21Visitor.js';
+import PS1_22Visitor from './visitors/predicate/PS1_22Visitor.js';
+import PS2_11Visitor from './visitors/predicate/PS2_11Visitor.js';
+import PS2_12Visitor from './visitors/predicate/PS2_12Visitor.js';
+import PS2_21Visitor from './visitors/predicate/PS2_21Visitor.js';
+import PS2_22Visitor from './visitors/predicate/PS2_22Visitor.js';
+import PS6_1Visitor from './visitors/predicate/PS6_1Visitor.js';
+import PS6_2Visitor from './visitors/predicate/PS6_2Visitor.js';
 
 function isValidVisitor(visitor) {
     const visitors = [LS0_1Visitor, LS0_2Visitor, LS1_1Visitor, LS1_2Visitor, LS2_1Visitor, LS2_2Visitor, LS3Visitor,
@@ -62,7 +68,8 @@ function isValidVisitor(visitor) {
         LS15_1Visitor, LS15_2Visitor, LS16_1Visitor, LS16_2Visitor, LS17_1Visitor, LS17_2Visitor,
         LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor, 
         LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
-        LS24Visitor, PS1_1Visitor, PS1_2Visitor, PS2_1Visitor, PS2_2Visitor];
+        LS24Visitor, PS1_11Visitor, PS1_12Visitor, PS1_21Visitor, PS1_22Visitor, PS2_11Visitor, PS2_12Visitor,
+		PS2_21Visitor, PS2_22Visitor, PS6_1Visitor, PS6_2Visitor];
     for (let i = 0; i < visitors.length; i++) {
         if (visitor instanceof visitors[i]) {
             return true;

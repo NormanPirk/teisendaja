@@ -46,17 +46,23 @@ import LS22_2Visitor from "../ANTLR/visitors/propositional/LS22_2Visitor.js";
 import LS23_1Visitor from "../ANTLR/visitors/propositional/LS23_1Visitor.js";
 import LS23_2Visitor from "../ANTLR/visitors/propositional/LS23_2Visitor.js";
 import LS24Visitor from "../ANTLR/visitors/propositional/LS24Visitor.js";
-import PS1_1Visitor from "../ANTLR/visitors/predicate/PS1_1Visitor.js";
-import PS1_2Visitor from "../ANTLR/visitors/predicate/PS1_2Visitor.js";
-import PS2_1Visitor from "../ANTLR/visitors/predicate/PS2_1Visitor.js";
-import PS2_2Visitor from "../ANTLR/visitors/predicate/PS2_2Visitor.js";
+import PS1_11Visitor from '../ANTLR/visitors/predicate/PS1_11Visitor.js';
+import PS1_12Visitor from '../ANTLR/visitors/predicate/PS1_12Visitor.js';
+import PS1_21Visitor from '../ANTLR/visitors/predicate/PS1_21Visitor.js';
+import PS1_22Visitor from '../ANTLR/visitors/predicate/PS1_22Visitor.js';
+import PS2_11Visitor from '../ANTLR/visitors/predicate/PS2_11Visitor.js';
+import PS2_12Visitor from '../ANTLR/visitors/predicate/PS2_12Visitor.js';
+import PS2_21Visitor from '../ANTLR/visitors/predicate/PS2_21Visitor.js';
+import PS2_22Visitor from '../ANTLR/visitors/predicate/PS2_22Visitor.js';
+import PS6_1Visitor from '../ANTLR/visitors/predicate/PS6_1Visitor.js';
+import PS6_2Visitor from '../ANTLR/visitors/predicate/PS6_2Visitor.js';
 
-export default function convert(input, visitorType) { 
+export default function convert(input, visitorType) {
     const tree = getParseTree(input);
 
     const visitor = getVisitor(visitorType);
     const result = visitor.visit(tree);
-    
+
     return result;
 }
 
@@ -79,17 +85,17 @@ function getVisitor(visitorType) {
         case 'LS4':
             return new LS4Visitor();
         case 'LS5_1':
-            return new LS5_1Visitor(); 
+            return new LS5_1Visitor();
         case 'LS5_2':
             return new LS5_2Visitor();
         case 'LS6_1':
-            return new LS6_1Visitor(); 
+            return new LS6_1Visitor();
         case 'LS6_2':
             return new LS6_2Visitor();
         case 'LS7_1':
             return new LS7_1Visitor();
         case 'LS7_2':
-            return new LS7_2Visitor(); 
+            return new LS7_2Visitor();
         case 'LS8_1':
             return new LS8_1Visitor();
         case 'LS8_2':
@@ -97,11 +103,11 @@ function getVisitor(visitorType) {
         case 'LS9_1':
             return new LS9_1Visitor();
         case 'LS9_2':
-            return new LS9_2Visitor(); 
+            return new LS9_2Visitor();
         case 'LS10_1':
             return new LS10_1Visitor();
         case 'LS10_2':
-            return new LS10_2Visitor(); 
+            return new LS10_2Visitor();
         case 'LS11_1':
             return new LS11_1Visitor();
         case 'LS11_2':
@@ -117,7 +123,7 @@ function getVisitor(visitorType) {
         case 'LS14_1':
             return new LS14_1Visitor();
         case 'LS14_2':
-            return new LS14_2Visitor(); 
+            return new LS14_2Visitor();
         case 'LS15_1':
             return new LS15_1Visitor();
         case 'LS15_2':
@@ -156,14 +162,26 @@ function getVisitor(visitorType) {
             return new LS23_2Visitor();
         case 'LS24':
             return new LS24Visitor();
-        case 'PS1_1':
-            return new PS1_1Visitor();
-        case 'PS1_2':
-            return new PS1_2Visitor();
-        case 'PS2_1':
-            return new PS2_1Visitor();
-        case 'PS2_2':
-            return new PS2_2Visitor();
-                
+        case 'PS1_11':
+            return new PS1_11Visitor();
+        case 'PS1_12':
+            return new PS1_12Visitor();
+        case 'PS1_21':
+            return new PS1_21Visitor();
+        case 'PS1_22':
+            return new PS1_22Visitor();
+        case 'PS2_11':
+            return new PS2_11Visitor();
+        case 'PS2_12':
+            return new PS2_12Visitor();
+        case 'PS2_21':
+            return new PS2_21Visitor();
+        case 'PS2_22':
+            return new PS2_22Visitor();
+        case 'PS6_1':
+            return new PS6_1Visitor();
+        case 'PS6_2':
+            return new PS6_2Visitor();
+
     }
 }
