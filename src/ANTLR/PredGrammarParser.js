@@ -48,6 +48,7 @@ import LS22_1Visitor from './visitors/LS22_1Visitor.js';
 import LS22_2Visitor from './visitors/LS22_2Visitor.js';
 import LS23_1Visitor from './visitors/LS23_1Visitor.js';
 import LS23_2Visitor from './visitors/LS23_2Visitor.js';
+import LS24Visitor from './visitors/LS24Visitor.js';
 
 function isValidVisitor(visitor) {
     const visitors = [LS0_1Visitor, LS0_2Visitor, LS1_1Visitor, LS1_2Visitor, LS2_1Visitor, LS2_2Visitor, LS3Visitor,
@@ -56,7 +57,8 @@ function isValidVisitor(visitor) {
         LS12_1Visitor, LS12_2Visitor, LS13_1Visitor, LS13_2Visitor, LS14_1Visitor, LS14_2Visitor,
         LS15_1Visitor, LS15_2Visitor, LS16_1Visitor, LS16_2Visitor, LS17_1Visitor, LS17_2Visitor,
         LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor, 
-		LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor];
+		LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
+		LS24Visitor];
     for (let i = 0; i < visitors.length; i++) {
         if (visitor instanceof visitors[i]) {
             return true;

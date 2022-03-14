@@ -1,7 +1,7 @@
 <template>
   <div class="conv-btn">
     <button
-      @click="startConversion(this.operationToRight)"
+      @click="startConversion(this.conversionTypeL)"
       :disabled="isDisabled"
     >
       <math-jax :latex="this.left"></math-jax>
@@ -9,11 +9,8 @@
     <math-jax :latex="'\\equiv'"></math-jax>
     <button
       @click="
-        startConversion(
-          isOnlyLeftToRightOp ? this.operationToRight : this.operationToLeft
-        )
-      "
-      :disabled="isDisabled"
+        startConversion(this.conversionTypeR)"
+        :disabled="isDisabled"
     >
       <math-jax :latex="this.right"></math-jax>
     </button>
@@ -21,12 +18,11 @@
 </template>
 
 <script>
-import getConversionType from "../js/ConversionType.js";
 import validateInput from "../js/InputValidator.js";
 
 export default {
   name: "ConvButton",
-  props: ["left", "right"],
+  props: ["left", "right", "conversionTypeL", "conversionTypeR"],
   data() {
     return {
       operationToRight: this.left + " \\equiv " + this.right,
@@ -37,12 +33,6 @@ export default {
     isDisabled() {
       return this.$store.getters.formulas.length === 0;
     },
-    isOnlyLeftToRightOp() {
-      return [
-        "\\mathcal{G} \\land \\mathcal{F}",
-        "\\mathcal{G} \\lor \\mathcal{F}",
-      ].includes(this.right);
-    },
   },
   methods: {
     switchButtonText() {
@@ -50,8 +40,7 @@ export default {
         this.buttonText = this.buttonText === this.f1 ? this.f2 : this.f1;
       }
     },
-    async startConversion(conversion) {
-      const conversionType = getConversionType(conversion);
+    async startConversion(conversionType) {
       if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
         this.$store.commit("setAskNewFormulaTrue");
         await new Promise((resolve) => {

@@ -45,13 +45,14 @@ import LS22_1Visitor from "../ANTLR/visitors/LS22_1Visitor.js";
 import LS22_2Visitor from "../ANTLR/visitors/LS22_2Visitor.js";
 import LS23_1Visitor from "../ANTLR/visitors/LS23_1Visitor.js";
 import LS23_2Visitor from "../ANTLR/visitors/LS23_2Visitor.js";
+import LS24Visitor from "../ANTLR/visitors/LS24Visitor.js";
 
 export default function convert(input, visitorType) { 
     const tree = getParseTree(input);
 
     const visitor = getVisitor(visitorType);
-    
     const result = visitor.visit(tree);
+    
     return result;
 }
 
@@ -148,6 +149,8 @@ function getVisitor(visitorType) {
         case 'LS23_1':
             return new LS23_1Visitor();
         case 'LS23_2':
-            return new LS23_2Visitor();    
+            return new LS23_2Visitor();
+        case 'LS24':
+            return new LS24Visitor();    
     }
 }
