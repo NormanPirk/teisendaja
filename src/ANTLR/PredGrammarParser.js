@@ -57,8 +57,27 @@ import PS2_11Visitor from './visitors/predicate/PS2_11Visitor.js';
 import PS2_12Visitor from './visitors/predicate/PS2_12Visitor.js';
 import PS2_21Visitor from './visitors/predicate/PS2_21Visitor.js';
 import PS2_22Visitor from './visitors/predicate/PS2_22Visitor.js';
+import PS3_1Visitor from './visitors/predicate/PS3_1Visitor.js';
+import PS3_2Visitor from './visitors/predicate/PS3_2Visitor.js';
+import PS3_3Visitor from './visitors/predicate/PS3_3Visitor.js';
+import PS3_4Visitor from './visitors/predicate/PS3_4Visitor.js';
+import PS3_5Visitor from './visitors/predicate/PS3_5Visitor.js';
+import PS3_6Visitor from './visitors/predicate/PS3_6Visitor.js';
+import PS3_7Visitor from './visitors/predicate/PS3_7Visitor.js';
+import PS3_8Visitor from './visitors/predicate/PS3_8Visitor.js';
+import PS4_1Visitor from './visitors/predicate/PS4_1Visitor.js';
+import PS4_2Visitor from './visitors/predicate/PS4_2Visitor.js';
+import PS4_3Visitor from './visitors/predicate/PS4_3Visitor.js';
+import PS4_4Visitor from './visitors/predicate/PS4_4Visitor.js';
+import PS4_5Visitor from './visitors/predicate/PS4_5Visitor.js';
+import PS4_6Visitor from './visitors/predicate/PS4_6Visitor.js';
+import PS4_7Visitor from './visitors/predicate/PS4_7Visitor.js';
+import PS4_8Visitor from './visitors/predicate/PS4_8Visitor.js';
+import PS5_1Visitor from './visitors/predicate/PS5_1Visitor.js';
+import PS5_2Visitor from './visitors/predicate/PS5_2Visitor.js';
 import PS6_1Visitor from './visitors/predicate/PS6_1Visitor.js';
 import PS6_2Visitor from './visitors/predicate/PS6_2Visitor.js';
+import FreeVarsVisitor from './visitors/freeVariables/FreeVarsVisitor.js';
 
 function isValidVisitor(visitor) {
     const visitors = [LS0_1Visitor, LS0_2Visitor, LS1_1Visitor, LS1_2Visitor, LS2_1Visitor, LS2_2Visitor, LS3Visitor,
@@ -69,7 +88,10 @@ function isValidVisitor(visitor) {
         LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor, 
         LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
         LS24Visitor, PS1_11Visitor, PS1_12Visitor, PS1_21Visitor, PS1_22Visitor, PS2_11Visitor, PS2_12Visitor,
-		PS2_21Visitor, PS2_22Visitor, PS6_1Visitor, PS6_2Visitor];
+		PS2_21Visitor, PS2_22Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
+		PS3_5Visitor, PS3_6Visitor, PS3_7Visitor, PS3_8Visitor, PS4_1Visitor, PS4_2Visitor, PS4_3Visitor, PS4_4Visitor,
+		PS4_5Visitor, PS4_6Visitor, PS4_7Visitor, PS4_8Visitor, PS5_1Visitor, PS5_2Visitor, 
+		PS6_1Visitor, PS6_2Visitor, FreeVarsVisitor];
     for (let i = 0; i < visitors.length; i++) {
         if (visitor instanceof visitors[i]) {
             return true;

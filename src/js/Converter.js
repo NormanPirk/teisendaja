@@ -54,6 +54,24 @@ import PS2_11Visitor from '../ANTLR/visitors/predicate/PS2_11Visitor.js';
 import PS2_12Visitor from '../ANTLR/visitors/predicate/PS2_12Visitor.js';
 import PS2_21Visitor from '../ANTLR/visitors/predicate/PS2_21Visitor.js';
 import PS2_22Visitor from '../ANTLR/visitors/predicate/PS2_22Visitor.js';
+import PS3_1Visitor from '../ANTLR/visitors/predicate/PS3_1Visitor.js';
+import PS3_2Visitor from '../ANTLR/visitors/predicate/PS3_2Visitor.js';
+import PS3_3Visitor from '../ANTLR/visitors/predicate/PS3_3Visitor.js';
+import PS3_4Visitor from '../ANTLR/visitors/predicate/PS3_4Visitor.js';
+import PS3_5Visitor from '../ANTLR/visitors/predicate/PS3_5Visitor.js';
+import PS3_6Visitor from '../ANTLR/visitors/predicate/PS3_6Visitor.js';
+import PS3_7Visitor from '../ANTLR/visitors/predicate/PS3_7Visitor.js';
+import PS3_8Visitor from '../ANTLR/visitors/predicate/PS3_8Visitor.js';
+import PS4_1Visitor from '../ANTLR/visitors/predicate/PS4_1Visitor.js';
+import PS4_2Visitor from '../ANTLR/visitors/predicate/PS4_2Visitor.js';
+import PS4_3Visitor from '../ANTLR/visitors/predicate/PS4_3Visitor.js';
+import PS4_4Visitor from '../ANTLR/visitors/predicate/PS4_4Visitor.js';
+import PS4_5Visitor from '../ANTLR/visitors/predicate/PS4_5Visitor.js';
+import PS4_6Visitor from '../ANTLR/visitors/predicate/PS4_6Visitor.js';
+import PS4_7Visitor from '../ANTLR/visitors/predicate/PS4_7Visitor.js';
+import PS4_8Visitor from '../ANTLR/visitors/predicate/PS4_8Visitor.js';
+import PS5_1Visitor from '../ANTLR/visitors/predicate/PS5_1Visitor.js';
+import PS5_2Visitor from '../ANTLR/visitors/predicate/PS5_2Visitor.js';
 import PS6_1Visitor from '../ANTLR/visitors/predicate/PS6_1Visitor.js';
 import PS6_2Visitor from '../ANTLR/visitors/predicate/PS6_2Visitor.js';
 
@@ -178,6 +196,42 @@ function getVisitor(visitorType) {
             return new PS2_21Visitor();
         case 'PS2_22':
             return new PS2_22Visitor();
+        case 'PS3_1':
+            return new PS3_1Visitor();
+        case 'PS3_2':
+            return new PS3_2Visitor();
+        case 'PS3_3':
+            return new PS3_3Visitor();
+        case 'PS3_4':
+            return new PS3_4Visitor();
+        case 'PS3_5':
+            return new PS3_5Visitor();
+        case 'PS3_6':
+            return new PS3_6Visitor();
+        case 'PS3_7':
+            return new PS3_7Visitor();
+        case 'PS3_8':
+            return new PS3_8Visitor();
+        case 'PS4_1':
+            return new PS4_1Visitor();
+        case 'PS4_2':
+            return new PS4_2Visitor();
+        case 'PS4_3':
+            return new PS4_3Visitor();
+        case 'PS4_4':
+            return new PS4_4Visitor();
+        case 'PS4_5':
+            return new PS4_5Visitor();
+        case 'PS4_6':
+            return new PS4_6Visitor();
+        case 'PS4_7':
+            return new PS4_7Visitor();
+        case 'PS4_8':
+            return new PS4_8Visitor();
+        case 'PS5_1':
+            return new PS5_1Visitor();
+        case 'PS5_2':
+            return new PS5_2Visitor();
         case 'PS6_1':
             return new PS6_1Visitor();
         case 'PS6_2':

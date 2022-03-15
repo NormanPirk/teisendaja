@@ -4,7 +4,7 @@
         left="\mathcal{F}"
         right="(\mathcal{F})"
         conversionTypeL="LS0_1"
-        conversionTypeR="LS_2"
+        conversionTypeR="LS0_2"
       ></ConvButton>
       <ConvButton
         left="\neg \neg \mathcal{F}"
