@@ -53,6 +53,7 @@ div {
   align-items: center;
   margin-top: 0;
   height: 2em;
+  flex-wrap: wrap;
 }
 button {
   width: 2em;
