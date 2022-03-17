@@ -2,8 +2,9 @@ import getParseTree from "../ANTLR/ParseTree";
 import PredGrammarParser from "../ANTLR/PredGrammarParser";
 
 export default function matchInput(formula, subFormula, startIndex, endIndex) {
+
     if (formula === subFormula) {
-        return formula;
+        return getParseTree(subFormula);
     }
     try {
         const mainTree = getParseTree(formula);
@@ -30,8 +31,8 @@ function indicesMatch(child, comparable, startIndex, endIndex) {
             return child;
         }
     } else if (child.children) {
-        for (let i = 0; i < child.children.length; i++) {
-            let mathingChild = indicesMatch(child.children[i], comparable, startIndex, endIndex);
+        for (let ch of child.children) {
+            let mathingChild = indicesMatch(ch, comparable, startIndex, endIndex);
             if (mathingChild) {
                 return mathingChild;
             }

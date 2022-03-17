@@ -8,9 +8,8 @@
     </button>
     <math-jax :latex="'\\equiv'"></math-jax>
     <button
-      @click="
-        startConversion(this.conversionTypeR)"
-        :disabled="isDisabled"
+      @click="startConversion(this.conversionTypeR)"
+      :disabled="isDisabled"
     >
       <math-jax :latex="this.right"></math-jax>
     </button>
@@ -19,6 +18,8 @@
 
 <script>
 import validateInput from "../js/InputValidator.js";
+import matchInput from "../js/InputMatcher.js";
+import conversionAllowed from "../js/ConversionValidator.js";
 
 export default {
   name: "ConvButton",
@@ -41,26 +42,50 @@ export default {
       }
     },
     async startConversion(conversionType) {
-      if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
-        this.$store.commit("setAskNewFormulaTrue");
-        await new Promise((resolve) => {
-          document.getElementById("add-new-formula").onclick = () => {
-            let f = this.$store.getters.newFormula;
-            if (validateInput(f)) {
-              resolve(f);
+      const el = document.getElementById("selectable");
+      const startIndex = el.selectionStart;
+      const endIndex = el.selectionEnd;
+      const formula = el.value.toString();
+      let subFormula = el.value.toString().substring(startIndex, endIndex);
+      if (subFormula) {
+        let replacable = matchInput(formula, subFormula, startIndex, endIndex);
+        if (replacable) {
+          if (conversionAllowed(replacable, conversionType)) {
+            if (
+              ["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)
+            ) {
+              this.$store.commit("setAskNewFormulaTrue");
+              await new Promise((resolve) => {
+                document.getElementById("add-new-formula").onclick = () => {
+                  let f = this.$store.getters.newFormula;
+                  if (validateInput(f)) {
+                    resolve(f);
+                  } else {
+                    this.$store.commit("showNewFormulaError");
+                  }
+                };
+              });
+              this.$store.commit("newFormulaAdded");
+              this.convert(subFormula, replacable, conversionType);
             } else {
-              this.$store.commit("showNewFormulaError");
+              this.convert(subFormula, replacable, conversionType);
             }
-          };
-        });
-        this.$store.commit("newFormulaAdded");
-        this.convert(conversionType);
+          } else {
+            if (["LS20_2", "LS21_2"].includes(conversionType)) {
+              this.$store.commit("showFaultyConversionError");
+            } else {
+              this.$store.commit("showConversionNotAllowedError");
+            }
+          }
+        } else {
+          this.$store.commit("showNotSubformulaError");
+        }
       } else {
-        this.convert(conversionType);
+        this.$store.commit("showNoSubformulaError");
       }
     },
-    convert(conversionType) {
-      this.$store.commit("convert", conversionType);
+    convert(subFormula, replacable, conversionType) {
+      this.$store.commit("convert", { subFormula, replacable, conversionType });
       if (this.$store.getters.converted) {
         this.$store.commit("addFormula");
         this.$store.commit("finishConversion");

@@ -75,17 +75,16 @@ import PS5_2Visitor from '../ANTLR/visitors/predicate/PS5_2Visitor.js';
 import PS6_1Visitor from '../ANTLR/visitors/predicate/PS6_1Visitor.js';
 import PS6_2Visitor from '../ANTLR/visitors/predicate/PS6_2Visitor.js';
 
-export default function convert(input, visitorType) {
-    const tree = getParseTree(input);
-
-    const visitor = getVisitor(visitorType);
+export default function convert(subFormula, conversionType) {
+    const tree = getParseTree(subFormula);
+    const visitor = getVisitor(conversionType);
     const result = visitor.visit(tree);
 
     return result;
 }
 
-function getVisitor(visitorType) {
-    switch (visitorType) {
+function getVisitor(conversionType) {
+    switch (conversionType) {
         case 'LS0_1':
             return new LS0_1Visitor();
         case 'LS0_2':

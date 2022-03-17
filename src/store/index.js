@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
 import insertTextAtCursor from "insert-text-at-cursor";
 import convert from "../js/Converter.js";
-import matchInput from "../js/InputMatcher.js";
-import conversionAllowed from "../js/ConversionValidator.js";
+//import matchInput from "../js/InputMatcher.js";
+//import conversionAllowed from "../js/ConversionValidator.js";
 import addParentheses from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
 
@@ -139,41 +139,19 @@ export default createStore({
       state.formulas = [];
       state.converted = false;
     },
-    convert (state, conversionType) {
+    convert (state, { subFormula, replacable, conversionType }) {
       const el = document.getElementById("selectable");
-      const startIndex = el.selectionStart;
-      const endIndex = el.selectionEnd;
-      const formula = el.value.toString();
-      let subFormula = el.value.toString().substring(startIndex, endIndex);
-
-      if (subFormula) {
-        try {
-          let replacable = matchInput(formula, subFormula, startIndex, endIndex);
-          if (replacable) {
-            if (conversionAllowed(replacable, conversionType)) {
-              let result = convert(subFormula, conversionType);
-              if (result) {
-                if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
-                  result = handleNewFormula(conversionType, state.newFormula, result);
-                  state.newFormula = "";
-                }
-                result = addParentheses(replacable, result);
-                insertTextAtCursor(el, result);
-                state.converted = true;
-              } else {
-                state.faultyConversion = true;
-              }
-            } else {
-              state.conversionNotAllowed = true;
-            }
-          } else {
-            state.notSubformula = true;
-          }
-        } catch (err) {
-          console.log(err);
+      let result = convert(subFormula, conversionType);
+      if (result) {
+        if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+          result = handleNewFormula(conversionType, state.newFormula, result);
+          state.newFormula = "";
         }
+        result = addParentheses(replacable, result);
+        insertTextAtCursor(el, result);
+        state.converted = true;
       } else {
-        state.noSubformula = true;
+        state.faultyConversion = true;
       }
     }
   },

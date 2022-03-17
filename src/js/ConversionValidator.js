@@ -1,6 +1,12 @@
 export default function conversionAllowed(matchingChild, conversionType) {
     if (conversionType === 'LS0_2') {
         return allowLS0_2(matchingChild);
+    } 
+    if (conversionType === 'LS20_2') {
+        return allowLS20_2(matchingChild);
+    }
+    if (conversionType === 'LS21_2') {
+        return allowLS21_2(matchingChild);
     }
     return true;
 }
@@ -30,7 +36,13 @@ function allowLS0_2(matchingChild) {
             }
         }
     }
-
-
     return true;
+}
+
+function allowLS20_2(matchingChild) {
+    return matchingChild.constructor.name === "TrueContext";
+}
+
+function allowLS21_2(matchingChild) {
+    return matchingChild.constructor.name === "FalseContext";
 }

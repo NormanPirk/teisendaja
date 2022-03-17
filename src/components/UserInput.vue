@@ -121,7 +121,7 @@ textarea {
   vertical-align: middle !important;
   margin-top: 1em;
   font-size: 1.2em;
-  font-family: "Computer Modern Sans", sans-serif;
+  /* font-family: "Computer Modern Sans", sans-serif; */
 }
 
 #guide {
@@ -136,6 +136,7 @@ textarea {
 #buttons {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 textarea::selection {
