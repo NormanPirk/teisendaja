@@ -11,11 +11,11 @@
     </div>
     <div>
       <div id="last">
-        <p>{{ formulas[formulas.length - 1] }}</p>
+        {{ formulas[formulas.length - 1] }}
       </div>
       <hr />
       <div id="pdf">
-        <p v-for="(formula, index) in formulas" :key="formula">{{ (index === 0)? formula : "≡  " + formula }}</p>
+        <div v-for="(formula, index) in formulas" :key="formula">{{ (index === 0)? formula : "≡  " + formula }}</div>
       </div>
     </div>
   </div>
@@ -55,14 +55,21 @@ export default {
 <style scoped>
 #pdf {
   min-height: 4em;
-  overflow-x: scroll;
-  overflow: overlay;
+  overflow: scroll;;
   max-height: 30em;
+  font-size: 1.2em;
+}
+
+#pdf div {
+  text-align: left;
+  padding: 0.4em 0;
 }
 
 #last {
+  min-height: 3em;
   overflow-x: scroll;
-  overflow: overlay;
+  font-size: 1.5em;
+  text-align: left;
 }
 
 #action-buttons {
@@ -72,7 +79,6 @@ export default {
 
 p {
   font-size: 1.2em;
-  font-family: "Computer Modern Sans", sans-serif;
   padding: 0.2em;
 }
 

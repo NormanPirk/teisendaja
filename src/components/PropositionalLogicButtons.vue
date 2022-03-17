@@ -82,7 +82,7 @@
       ></ConvButton>
       <ConvButton
         left="\mathcal{F} \land \mathcal{G}"
-        right="\neg (\mathcal{F} \Rightarrow \mathcal{G})"
+        right="\neg (\mathcal{F} \Rightarrow \neg \mathcal{G})"
         conversionTypeL="LS15_1"
         conversionTypeR="LS15_2"
       ></ConvButton>
@@ -129,6 +129,12 @@
         right="\mathcal{F} \lor (\mathcal{G} \lor \mathcal{H})"
         conversionTypeL="LS6_1"
         conversionTypeR="LS6_2"
+      ></ConvButton>
+      <ConvButton
+        left="(\mathcal{F} \Leftrightarrow \mathcal{G}) \Leftrightarrow \mathcal{H}"
+        right="\mathcal{F} \Leftrightarrow (\mathcal{G} \Leftrightarrow \mathcal{H})"
+        conversionTypeL="LS25_1"
+        conversionTypeR="LS25_2"
       ></ConvButton>
       <ConvButton
         left="\mathcal{F} \Leftrightarrow \mathcal{G}"

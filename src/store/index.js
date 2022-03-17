@@ -1,8 +1,6 @@
 import { createStore } from "vuex";
 import insertTextAtCursor from "insert-text-at-cursor";
 import convert from "../js/Converter.js";
-//import matchInput from "../js/InputMatcher.js";
-//import conversionAllowed from "../js/ConversionValidator.js";
 import addParentheses from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
 
@@ -80,7 +78,7 @@ export default createStore({
       state.askNewFormula = true;
     },
     addSymbol: (state, value) => {
-      const el = document.getElementById("selectable");
+      const el = document.getElementById("input-field");
       insertTextAtCursor(el, value);
     },
     addSymbolToNew: (state, value) => {
@@ -139,18 +137,26 @@ export default createStore({
       state.formulas = [];
       state.converted = false;
     },
-    convert (state, { subFormula, replacable, conversionType }) {
-      const el = document.getElementById("selectable");
-      let result = convert(subFormula, conversionType);
-      if (result) {
-        if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
-          result = handleNewFormula(conversionType, state.newFormula, result);
-          state.newFormula = "";
+    convert(state, { subFormula, replacable, conversionType, origStart, origEnd }) {
+      try {
+        let result = convert(subFormula, conversionType);
+        if (result) {
+          if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+            result = handleNewFormula(conversionType, state.newFormula, result);
+            state.newFormula = "";
+          }
+          result = addParentheses(replacable, result);
+          const beginning = state.formula.substring(0, origStart);
+          const ending = state.formula.substring(origEnd, state.formula.length);
+
+          state.formula = beginning + result + ending;
+          state.converted = true;
+        } else {
+          state.faultyConversion = true;
         }
-        result = addParentheses(replacable, result);
-        insertTextAtCursor(el, result);
-        state.converted = true;
-      } else {
+
+      } catch (err) {
+        console.log(err);
         state.faultyConversion = true;
       }
     }

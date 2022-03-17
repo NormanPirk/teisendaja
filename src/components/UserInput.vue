@@ -4,14 +4,16 @@
     <ErrorMessages></ErrorMessages>
   </div>
   <hr />
-  <div id="buttons">
+  <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
     <button @click="start" v-show="showStartButton()">
       {{ $t("startConversions") }}
     </button>
   </div>
+  <DeleteButtons v-else></DeleteButtons>
   <textarea
-    id="selectable"
+    id="input-field"
+    v-if="showStartButton()"
     v-model="formula"
     :placeholder="$t('inputDescription')"
     :class="{ faulty: !isFaulty(), error: errorExists() }"
@@ -21,11 +23,20 @@
     "
     @click="clearErrors()"
   ></textarea>
+  <div
+    v-else
+    id="selectable"
+    :class="{ error: errorExists() }"
+    @click="clearErrors()"
+  >
+    {{ formula }}
+  </div>
 </template>
 
 <script>
 import SymbolButtons from "./SymbolButtons.vue";
 import ErrorMessages from "./ErrorMessages.vue";
+import DeleteButtons from "./DeleteButtons.vue";
 import validateInput from "../js/InputValidator.js";
 import getNewPosition from "../js/CursorPosition.js";
 
@@ -35,8 +46,9 @@ export default {
     return {};
   },
   components: {
-      ErrorMessages,
-      SymbolButtons
+    ErrorMessages,
+    SymbolButtons,
+    DeleteButtons
   },
   computed: {
     formula: {
@@ -55,8 +67,8 @@ export default {
     errorWithConversion: {
       get() {
         return this.$store.getters.errorWithConversion;
-      }
-    }
+      },
+    },
   },
   methods: {
     start() {
@@ -66,7 +78,7 @@ export default {
             this.$store.commit("addFormula");
           } else {
             this.$store.commit("showFaultyInputError");
-          }          
+          }
         }
       } else {
         this.$store.commit("showNoInputError");
@@ -80,34 +92,32 @@ export default {
     },
     errorExists() {
       if (this.errorWithConversion) {
-        const el = document.getElementById("selectable");
-        el.setSelectionRange(el.selectionStart, el.selectionEnd);
-        el.focus();
         return true;
       }
       return false;
     },
     renderMathSymbols() {
-      let el = document.getElementById("selectable");
+      let el = document.getElementById("input-field");
       let position = el.selectionStart;
       let formulaBeginning = el.value.substring(0, position);
       let newPosition = getNewPosition(formulaBeginning, position);
-      this.formula = this.formula.replaceAll("\\neg", "¬")
-          .replaceAll("\\land", "∧")
-          .replaceAll("\\lor", "∨")
-          .replaceAll("\\Rightarrow", "⇒")
-          .replaceAll("\\Leftrightarrow", "⇔")
-          .replaceAll("\\forall", "∀")
-          .replaceAll("\\exists", "∃")
-          .replaceAll(" ", "");
+      this.formula = this.formula
+        .replaceAll("\\neg", "¬")
+        .replaceAll("\\land", "∧")
+        .replaceAll("\\lor", "∨")
+        .replaceAll("\\Rightarrow", "⇒")
+        .replaceAll("\\Leftrightarrow", "⇔")
+        .replaceAll("\\forall", "∀")
+        .replaceAll("\\exists", "∃")
+        .replaceAll(" ", "");
       this.$nextTick(() => {
         el.selectionEnd = newPosition;
       });
     },
     clearErrors() {
       this.$store.commit("clearErrors");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -121,7 +131,6 @@ textarea {
   vertical-align: middle !important;
   margin-top: 1em;
   font-size: 1.2em;
-  /* font-family: "Computer Modern Sans", sans-serif; */
 }
 
 #guide {
@@ -139,12 +148,19 @@ textarea {
   flex-wrap: wrap;
 }
 
-textarea::selection {
+#selectable::selection {
   background-color: #7ff389;
 }
 
-.error::selection {
+#selectable.error::selection {
   color: rgb(252, 74, 74);
   background-color: transparent;
+}
+
+#selectable {
+  font-size: 1.5em;
+  overflow-wrap: break-word;
+  text-align: left;
+  padding: 0.5em 0;
 }
 </style>

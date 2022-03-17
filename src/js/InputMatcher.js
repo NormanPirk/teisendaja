@@ -2,7 +2,6 @@ import getParseTree from "../ANTLR/ParseTree";
 import PredGrammarParser from "../ANTLR/PredGrammarParser";
 
 export default function matchInput(formula, subFormula, startIndex, endIndex) {
-
     if (formula === subFormula) {
         return getParseTree(subFormula);
     }
@@ -19,6 +18,7 @@ export default function matchInput(formula, subFormula, startIndex, endIndex) {
         } 
         return false;        
     } catch (err) {
+        console.log(err);
         return false;
     }
 }

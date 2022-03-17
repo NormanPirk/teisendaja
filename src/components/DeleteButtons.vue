@@ -27,7 +27,7 @@ export default {
 <style scoped>
 div {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 button {
     width: 17em;
