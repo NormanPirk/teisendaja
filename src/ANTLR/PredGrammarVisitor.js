@@ -48,6 +48,12 @@ export default class PredGrammarVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by PredGrammarParser#forall.
+	visitForall(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by PredGrammarParser#true.
 	visitTrue(ctx) {
 	  return this.visitChildren(ctx);
@@ -60,32 +66,14 @@ export default class PredGrammarVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by PredGrammarParser#quant.
-	visitQuant(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by PredGrammarParser#eq.
-	visitEq(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by PredGrammarParser#forall.
-	visitForall(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
 	// Visit a parse tree produced by PredGrammarParser#exists.
 	visitExists(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by PredGrammarParser#afterQuantifier.
-	visitAfterQuantifier(ctx) {
+	// Visit a parse tree produced by PredGrammarParser#eq.
+	visitEq(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

@@ -36,6 +36,7 @@ const messages = {
         ready: "Valmis",
         cancel: "Katkesta",
         propLogic: "Lausearvutuse põhisamaväärsused",
+        predicateLogic: "Predikaatarvutuse põhisamaväärsused",
         show: "Näita",
         hide: "Peida",
         truthValues: "Tõeväärtused",
