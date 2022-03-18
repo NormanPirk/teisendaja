@@ -8,7 +8,7 @@
 
 <style>
 * {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans Math", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -53,7 +53,7 @@ hr {
 
 button {
   margin: 0.2em;
-  font-size: medium;
+  font-size: 1em;
 }
 
 

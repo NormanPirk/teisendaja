@@ -40,9 +40,15 @@ function allowLS0_2(matchingChild) {
 }
 
 function allowLS20_2(matchingChild) {
+    if (matchingChild.constructor.name === "StartContext") {
+        return matchingChild.formula().constructor.name === "TrueContext";
+    }
     return matchingChild.constructor.name === "TrueContext";
 }
 
 function allowLS21_2(matchingChild) {
+    if (matchingChild.constructor.name === "StartContext") {
+        return matchingChild.formula().constructor.name === "FalseContext";
+    }
     return matchingChild.constructor.name === "FalseContext";
 }

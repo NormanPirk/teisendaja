@@ -12,7 +12,7 @@
         :class="{ faulty: !isFaulty() }"
         @input="renderMathSymbols(); clearNewFormulaError()"
         @click="clearNewFormulaError()"
-        :placeholder="$t('inputDescription')"
+        :placeholder="$t('newInputDescription')"
       ></textarea>
       <div id="confirm-btns">
         <button @click="cancelConversion">{{ $t("cancel") }}</button>
@@ -124,7 +124,7 @@ textarea {
   vertical-align: middle !important;
   margin-top: 1em;
   font-size: 1.2em;
-  font-family: "Computer Modern Sans", sans-serif;
+  /* font-family: "Computer Modern Sans", sans-serif; */
 }
 
 .faulty {

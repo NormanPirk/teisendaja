@@ -7,15 +7,20 @@
       <hr />
     </div>
     <div id="action-buttons">
-      <!-- <button @click="downloadTEX">{{ $t("downloadTeX") }}</button> -->
+      <button @click="downloadPDF">{{ $t("downloadPDF") }}</button>
     </div>
     <div>
       <div id="last">
-        <p>{{ formulas[formulas.length - 1] }}</p>
+        <p>{{ formulas[formulas.length - 1]?.formula }}</p>
       </div>
       <hr />
       <div id="pdf">
-        <p v-for="(formula, index) in formulas" :key="formula">{{ (index === 0)? formula : "≡  " + formula }}</p>
+        <p v-for="(formula, index) in formulas" :key="formula">
+          {{ index === 0 ? formula.getStart() : "≡  " + formula.getStart()
+          }}<u>{{ formula.getUnderlined() }}</u
+          >{{ formula.getEnding() }}<sup
+          >{{ formula.ct? formula.ct : "" }}</sup>
+        </p>
       </div>
     </div>
   </div>
@@ -23,6 +28,8 @@
 </template>
 
 <script>
+import * as html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { saveAs } from "file-saver";
 
 export default {
@@ -48,6 +55,15 @@ export default {
       let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "sample.tex");
     },
+    downloadPDF() {
+      const el = document.getElementById("pdf");
+      html2canvas(el).then((canvas) => {
+        let img = canvas.toDataURL();
+        let doc = new jsPDF();
+        doc.addImage(img, "PNG", 10, 10);
+        doc.save("sample.pdf");
+      });
+    },
   },
 };
 </script>
@@ -65,6 +81,15 @@ export default {
   overflow: overlay;
 }
 
+#last p {
+  font-size: 1.2em;
+}
+
+u {
+  text-decoration-style: double;
+  text-decoration-skip-ink: none;
+}
+
 #action-buttons {
   display: flex;
   justify-content: right;
@@ -72,8 +97,10 @@ export default {
 
 p {
   font-size: 1.2em;
-  font-family: "Computer Modern Sans", sans-serif;
-  padding: 0.2em;
+}
+
+sup {
+  font-size: 0.6em;
 }
 
 ::-webkit-scrollbar {
@@ -83,4 +110,5 @@ p {
 ::-webkit-scrollbar-thumb {
   background: rgb(204, 204, 204);
 }
+
 </style>

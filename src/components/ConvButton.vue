@@ -1,25 +1,30 @@
 <template>
+<div class="btn-container">
+  <ConvTypeMarker :convType="this.conversionTypeL.split('_')[0]"></ConvTypeMarker>
   <div class="conv-btn">
     <button
       @click="startConversion(this.conversionTypeL)"
       :disabled="isDisabled"
     >
-      <math-jax :latex="this.left"></math-jax>
+    {{ this.left }}
     </button>
-    <math-jax :latex="'\\equiv'"></math-jax>
+    ≡
     <button
       @click="startConversion(this.conversionTypeR)"
       :disabled="isDisabled"
     >
-      <math-jax :latex="this.right"></math-jax>
+    {{ this.right }}
     </button>
   </div>
+</div>
+  
 </template>
 
 <script>
 import validateInput from "../js/InputValidator.js";
 import matchInput from "../js/InputMatcher.js";
 import conversionAllowed from "../js/ConversionValidator.js";
+import ConvTypeMarker from "./ConvTypeMarker.vue";
 
 export default {
   name: "ConvButton",
@@ -29,6 +34,9 @@ export default {
       operationToRight: this.left + " \\equiv " + this.right,
       operationToLeft: this.right + " \\equiv " + this.left,
     };
+  },
+  components: {
+    ConvTypeMarker
   },
   computed: {
     isDisabled() {
@@ -96,19 +104,23 @@ export default {
 </script>
 
 <style scoped>
-button {
+.btn-container {
   display: flex;
-  justify-content: space-between;
-  height: 2em;
-  font-size: medium;
+  justify-content: left;
   align-items: center;
   margin: 0.5em;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(85, 85, 85);
+  height: 2em;
+  border-radius: 5px;
 }
 
-div {
-  height: 1em;
-  background: transparent;
-  margin-left: 5px;
+
+button {
+  height: 2em;
+  align-items: center;
+  margin: 0.1em;
+  font-size: 1em;
 }
 
 img {
@@ -120,16 +132,10 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5em;
-  background-color: rgb(238, 238, 238);
-  border: 1px solid rgb(85, 85, 85);
-  height: 2em;
-  border-radius: 5px;
+  width: 100%;
 }
 
 .conv-btn button {
-  margin: 0.5em;
-  padding: 0.5em;
   background: transparent;
   border: none;
 }

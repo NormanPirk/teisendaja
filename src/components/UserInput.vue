@@ -121,11 +121,9 @@ textarea {
   vertical-align: middle !important;
   margin-top: 1em;
   font-size: 1.2em;
-  /* font-family: "Computer Modern Sans", sans-serif; */
 }
 
 #guide {
-  font-size: smaller;
   opacity: 0.75;
 }
 

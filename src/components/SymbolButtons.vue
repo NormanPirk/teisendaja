@@ -1,26 +1,12 @@
 <template>
   <div>
-    <button @click="addSymbol('\\neg')">
-      <math-jax :latex="'\\neg'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\land')">
-      <math-jax :latex="'\\land'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\lor')">
-      <math-jax :latex="'\\lor'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\Rightarrow')">
-      <math-jax :latex="'\\Rightarrow'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\Leftrightarrow')">
-      <math-jax :latex="'\\Leftrightarrow'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\forall')">
-      <math-jax :latex="'\\forall'"></math-jax>
-    </button>
-    <button @click="addSymbol('\\exists')">
-      <math-jax :latex="'\\exists'"></math-jax>
-    </button>
+    <button @click="addSymbol('\\neg')">¬</button>
+    <button @click="addSymbol('\\land')">∧</button>
+    <button @click="addSymbol('\\lor')">∨</button>
+    <button @click="addSymbol('\\Rightarrow')">⇒</button>
+    <button @click="addSymbol('\\Leftrightarrow')">⇔</button>
+    <button @click="addSymbol('\\forall')">∀</button>
+    <button @click="addSymbol('\\exists')">∃</button>
   </div>
 </template>
 
