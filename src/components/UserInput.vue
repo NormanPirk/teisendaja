@@ -21,6 +21,7 @@
       renderMathSymbols();
       clearErrors();
     "
+    @keyup.ctrl="addSymbolsFromKeyboard"
     @click="clearErrors()"
   ></textarea>
   <div
@@ -39,6 +40,7 @@ import ErrorMessages from "./ErrorMessages.vue";
 import DeleteButtons from "./DeleteButtons.vue";
 import validateInput from "../js/InputValidator.js";
 import getNewPosition from "../js/CursorPosition.js";
+import insertTextAtCursor from "insert-text-at-cursor";
 
 export default {
   name: "UserInput",
@@ -48,7 +50,7 @@ export default {
   components: {
     ErrorMessages,
     SymbolButtons,
-    DeleteButtons
+    DeleteButtons,
   },
   computed: {
     formula: {
@@ -113,6 +115,36 @@ export default {
       this.$nextTick(() => {
         el.selectionEnd = newPosition;
       });
+    },
+    addSymbolsFromKeyboard(event) {
+      const el = document.getElementById("input-field");
+      try {
+        switch (event.key) {
+          case "2":
+            insertTextAtCursor(el, "\\neg");
+            break;
+          case "3":
+            insertTextAtCursor(el, "\\land");
+            break;
+          case "4":
+            insertTextAtCursor(el, "\\lor");
+            break;
+          case "5":
+            insertTextAtCursor(el, "\\Rightarrow");
+            break;
+          case "6":
+            insertTextAtCursor(el, "\\Leftrightarrow");
+            break;
+          case "7":
+            insertTextAtCursor(el, "\\forall");
+            break;
+          case "8":
+            insertTextAtCursor(el, "\\exists");
+            break;
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
     clearErrors() {
       this.$store.commit("clearErrors");
