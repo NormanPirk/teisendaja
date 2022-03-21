@@ -18,8 +18,8 @@
         <p v-for="(formula, index) in formulas" :key="formula">
           {{ index === 0 ? formula.getStart() : "≡  " + formula.getStart()
           }}<u>{{ formula.getUnderlined() }}</u
-          >{{ formula.getEnding() }}<sup
-          >{{ formula.ct? formula.ct : "" }}</sup>
+          >{{ formula.getEnding() }}<sup v-if="formula.ct"
+          >&nbsp;&nbsp;&nbsp;{{ formula.ct}}</sup>
         </p>
 
       </div>
@@ -98,11 +98,6 @@ u {
 #action-buttons {
   display: flex;
   justify-content: right;
-}
-
-p {
-  font-size: 1.2em;
-
 }
 
 sup {
