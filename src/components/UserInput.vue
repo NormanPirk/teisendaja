@@ -134,7 +134,6 @@ textarea {
 }
 
 #guide {
-  font-size: smaller;
   opacity: 0.75;
 }
 

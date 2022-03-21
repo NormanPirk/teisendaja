@@ -3,6 +3,7 @@ import insertTextAtCursor from "insert-text-at-cursor";
 import convert from "../js/Converter.js";
 import addParentheses from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
+import Formula from "../js/Formula.js";
 
 export default createStore({
   state: {
@@ -87,7 +88,7 @@ export default createStore({
     },
     addFormula: (state) => {
       if (state.formula.length > 0) {
-        state.formulas.push(state.formula);
+        state.formulas.push(new Formula(state.formula));
       }
     },
     showNoInputError: (state) => {
@@ -127,7 +128,7 @@ export default createStore({
         state.formulas.pop();
       }
       if (state.formulas.length > 0) {
-        state.formula = state.formulas[state.formulas.length - 1];
+        state.formula = state.formulas[state.formulas.length - 1].formula;
       } else {
         state.formula = "";
       }
@@ -137,26 +138,23 @@ export default createStore({
       state.formulas = [];
       state.converted = false;
     },
-    convert(state, { subFormula, replacable, conversionType, origStart, origEnd }) {
-      try {
-        let result = convert(subFormula, conversionType);
-        if (result) {
-          if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
-            result = handleNewFormula(conversionType, state.newFormula, result);
-            state.newFormula = "";
-          }
-          result = addParentheses(replacable, result);
-          const beginning = state.formula.substring(0, origStart);
-          const ending = state.formula.substring(origEnd, state.formula.length);
-
-          state.formula = beginning + result + ending;
-          state.converted = true;
-        } else {
-          state.faultyConversion = true;
+    convert (state, { subFormula, replacable, conversionType }) {
+      const el = document.getElementById("selectable");
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      let result = convert(subFormula, conversionType);
+      if (result) {
+        if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+          result = handleNewFormula(conversionType, state.newFormula, result);
+          state.newFormula = "";
         }
-
-      } catch (err) {
-        console.log(err);
+        result = addParentheses(replacable, result);
+        insertTextAtCursor(el, result);
+        state.formulas[state.formulas.length-1].selStart = start;
+        state.formulas[state.formulas.length-1].selEnd = end;
+        state.formulas[state.formulas.length-1].ct = conversionType.split("_")[0];
+        state.converted = true;
+      } else {
         state.faultyConversion = true;
       }
     }
