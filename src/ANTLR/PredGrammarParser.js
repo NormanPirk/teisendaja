@@ -51,6 +51,10 @@ import LS23_2Visitor from './visitors/propositional/LS23_2Visitor.js';
 import LS24Visitor from './visitors/propositional/LS24Visitor.js';
 import LS25_1Visitor from './visitors/propositional/LS25_1Visitor.js';
 import LS25_2Visitor from './visitors/propositional/LS25_2Visitor.js';
+import LS26_1Visitor from './visitors/propositional/LS26_1Visitor.js';
+import LS26_2Visitor from './visitors/propositional/LS26_2Visitor.js';
+import LS27_1Visitor from './visitors/propositional/LS27_1Visitor.js';
+import LS27_2Visitor from './visitors/propositional/LS27_2Visitor.js';
 import PS1_11Visitor from './visitors/predicate/PS1_11Visitor.js';
 import PS1_12Visitor from './visitors/predicate/PS1_12Visitor.js';
 import PS1_21Visitor from './visitors/predicate/PS1_21Visitor.js';
@@ -89,7 +93,8 @@ function isValidVisitor(visitor) {
         LS15_1Visitor, LS15_2Visitor, LS16_1Visitor, LS16_2Visitor, LS17_1Visitor, LS17_2Visitor,
         LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor, 
         LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
-        LS24Visitor, PS1_11Visitor, PS1_12Visitor, PS1_21Visitor, PS1_22Visitor, PS2_11Visitor, PS2_12Visitor,
+        LS24Visitor, LS25_1Visitor, LS25_2Visitor, LS26_1Visitor, LS26_2Visitor, LS27_1Visitor, LS27_2Visitor,
+		PS1_11Visitor, PS1_12Visitor, PS1_21Visitor, PS1_22Visitor, PS2_11Visitor, PS2_12Visitor,
 		PS2_21Visitor, PS2_22Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
 		PS3_5Visitor, PS3_6Visitor, PS3_7Visitor, PS3_8Visitor, PS4_1Visitor, PS4_2Visitor, PS4_3Visitor, PS4_4Visitor,
 		PS4_5Visitor, PS4_6Visitor, PS4_7Visitor, PS4_8Visitor, PS5_1Visitor, PS5_2Visitor, 

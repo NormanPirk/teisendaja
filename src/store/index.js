@@ -125,6 +125,7 @@ export default createStore({
     },
     removeLast: (state) => {
       if (state.formulas.length > 0) {
+        console.log(state.formulas.length);
         state.formulas.pop();
       }
       if (state.formulas.length > 0) {
@@ -138,8 +139,33 @@ export default createStore({
       state.formulas = [];
       state.converted = false;
     },
-    convert (state, { subFormula, replacable, conversionType }) {
-      const el = document.getElementById("selectable");
+    convert (state, { subFormula, replacable, conversionType, origStart, origEnd }) {
+      try {
+        let result = convert(subFormula, conversionType);
+        if (result) {
+          if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+            result = handleNewFormula(conversionType, state.newFormula, result);
+            state.newFormula = "";
+          }
+          result = addParentheses(replacable, result);
+          const beginning = state.formula.substring(0, origStart);
+          const ending = state.formula.substring(origEnd, state.formula.length);
+          state.formula = beginning + result + ending;
+          state.formulas[state.formulas.length-1].selStart = origStart;
+          state.formulas[state.formulas.length-1].selEnd = origEnd;
+          state.formulas[state.formulas.length-1].ct = conversionType.split("_")[0];
+          state.converted = true;
+        } else {
+          state.faultyConversion = true;
+        }
+
+      } catch (err) {
+        console.log(err);
+      }
+
+
+
+      /* const el = document.getElementById("selectable");
       const start = el.selectionStart;
       const end = el.selectionEnd;
       let result = convert(subFormula, conversionType);
@@ -148,7 +174,7 @@ export default createStore({
           result = handleNewFormula(conversionType, state.newFormula, result);
           state.newFormula = "";
         }
-        result = addParentheses(replacable, result);
+        
         insertTextAtCursor(el, result);
         state.formulas[state.formulas.length-1].selStart = start;
         state.formulas[state.formulas.length-1].selEnd = end;
@@ -156,7 +182,7 @@ export default createStore({
         state.converted = true;
       } else {
         state.faultyConversion = true;
-      }
+      } */
     }
   },
   actions: {},

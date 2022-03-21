@@ -48,6 +48,10 @@ import LS23_2Visitor from "../ANTLR/visitors/propositional/LS23_2Visitor.js";
 import LS24Visitor from "../ANTLR/visitors/propositional/LS24Visitor.js";
 import LS25_1Visitor from "../ANTLR/visitors/propositional/LS25_1Visitor.js";
 import LS25_2Visitor from "../ANTLR/visitors/propositional/LS25_2Visitor.js";
+import LS26_1Visitor from "../ANTLR/visitors/propositional/LS26_1Visitor.js";
+import LS26_2Visitor from "../ANTLR/visitors/propositional/LS26_2Visitor.js";
+import LS27_1Visitor from "../ANTLR/visitors/propositional/LS27_1Visitor.js";
+import LS27_2Visitor from "../ANTLR/visitors/propositional/LS27_2Visitor.js";
 import PS1_11Visitor from '../ANTLR/visitors/predicate/PS1_11Visitor.js';
 import PS1_12Visitor from '../ANTLR/visitors/predicate/PS1_12Visitor.js';
 import PS1_21Visitor from '../ANTLR/visitors/predicate/PS1_21Visitor.js';
@@ -185,6 +189,14 @@ function getVisitor(conversionType) {
             return new LS25_1Visitor();
         case 'LS25_2':
             return new LS25_2Visitor();
+        case 'LS26_1':
+            return new LS26_1Visitor();
+        case 'LS26_2':
+            return new LS26_2Visitor();
+        case 'LS27_1':
+            return new LS27_1Visitor();
+        case 'LS27_2':
+            return new LS27_2Visitor();
         case 'PS1_11':
             return new PS1_11Visitor();
         case 'PS1_12':

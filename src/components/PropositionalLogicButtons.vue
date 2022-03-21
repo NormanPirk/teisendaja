@@ -160,6 +160,18 @@
         conversionTypeL="LS25_1"
         conversionTypeR="LS25_2"
       ></ConvButton>
+      <ConvButton
+        left="¬1"
+        right="0"
+        conversionTypeL="LS26_1"
+        conversionTypeR="LS26_2"
+      ></ConvButton>
+      <ConvButton
+        left="¬0"
+        right="1"
+        conversionTypeL="LS27_1"
+        conversionTypeR="LS27_2"
+      ></ConvButton>
     </div>
   
 </template>

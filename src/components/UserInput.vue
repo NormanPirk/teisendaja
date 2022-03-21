@@ -157,9 +157,10 @@ textarea {
 }
 
 #selectable {
-  font-size: 1.5em;
+  font-size: 1.2em;
   overflow-wrap: break-word;
   text-align: left;
   padding: 0.5em 0;
+  margin: 0.5em 0;
 }
 </style>

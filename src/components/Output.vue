@@ -11,7 +11,7 @@
     </div>
     <div>
       <div id="last">
-        <p>{{ formulas[formulas.length - 1]?.formula }}</p>
+        {{ formulas[formulas.length - 1]?.formula }}
       </div>
       <hr />
       <div id="pdf">
@@ -85,16 +85,13 @@ export default {
 #last {
   min-height: 3em;
   overflow-x: scroll;
-  font-size: 1.5em;
   text-align: left;
-}
-
-#last p {
   font-size: 1.2em;
+  padding: 0.5em 0;
+  margin: 0.5em 0;
 }
 
 u {
-  text-decoration-style: double;
   text-decoration-skip-ink: none;
 }
 
