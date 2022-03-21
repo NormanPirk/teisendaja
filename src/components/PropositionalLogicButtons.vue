@@ -154,6 +154,12 @@
         conversionTypeL="LS24"
         conversionTypeR="LS24"
       ></ConvButton>
+      <ConvButton
+        left="(F⇔G)⇔H"
+        right="F⇔(G⇔H)"
+        conversionTypeL="LS25_1"
+        conversionTypeR="LS25_2"
+      ></ConvButton>
     </div>
   
 </template>

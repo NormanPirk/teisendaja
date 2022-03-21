@@ -50,50 +50,81 @@ export default {
       }
     },
     async startConversion(conversionType) {
-      const el = document.getElementById("selectable");
-      const startIndex = el.selectionStart;
-      const endIndex = el.selectionEnd;
-      const formula = el.value.toString();
-      let subFormula = el.value.toString().substring(startIndex, endIndex);
-      if (subFormula) {
-        let replacable = matchInput(formula, subFormula, startIndex, endIndex);
-        if (replacable) {
-          if (conversionAllowed(replacable, conversionType)) {
-            if (
-              ["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)
-            ) {
-              this.$store.commit("setAskNewFormulaTrue");
-              await new Promise((resolve) => {
-                document.getElementById("add-new-formula").onclick = () => {
-                  let f = this.$store.getters.newFormula;
-                  if (validateInput(f)) {
-                    resolve(f);
-                  } else {
-                    this.$store.commit("showNewFormulaError");
-                  }
-                };
-              });
-              this.$store.commit("newFormulaAdded");
-              this.convert(subFormula, replacable, conversionType);
+      const selection = document.getSelection();
+      if (
+        selection.anchorNode.parentElement.id === "selectable" &&
+        selection.focusNode.parentElement.id === "selectable"
+      ) {
+        const el = document.getElementById("selectable");
+        const formula = el.innerHTML.toString();
+        const selection = document.getSelection();
+        const sel = selection.getRangeAt(0);
+        const startIndex = sel.startOffset;
+        const endIndex = sel.endOffset;
+        const subFormula = selection.toString();
+        if (subFormula) {
+          let replacable = matchInput(
+            formula,
+            subFormula,
+            startIndex,
+            endIndex
+          );
+          if (replacable) {
+            if (conversionAllowed(replacable, conversionType)) {
+              if (
+                ["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)
+              ) {
+                this.$store.commit("setAskNewFormulaTrue");
+                await new Promise((resolve) => {
+                  document.getElementById("add-new-formula").onclick = () => {
+                    let f = this.$store.getters.newFormula;
+                    if (validateInput(f)) {
+                      resolve(f);
+                    } else {
+                      this.$store.commit("showNewFormulaError");
+                    }
+                  };
+                });
+                this.$store.commit("newFormulaAdded");
+                this.convert(
+                  subFormula,
+                  replacable,
+                  conversionType,
+                  startIndex,
+                  endIndex
+                );
+              } else {
+                this.convert(
+                  subFormula,
+                  replacable,
+                  conversionType,
+                  startIndex,
+                  endIndex
+                );
+              }
             } else {
-              this.convert(subFormula, replacable, conversionType);
+              if (["LS20_2", "LS21_2"].includes(conversionType)) {
+                this.$store.commit("showFaultyConversionError");
+              } else {
+                this.$store.commit("showConversionNotAllowedError");
+              }
             }
           } else {
-            if (["LS20_2", "LS21_2"].includes(conversionType)) {
-              this.$store.commit("showFaultyConversionError");
-            } else {
-              this.$store.commit("showConversionNotAllowedError");
-            }
+            this.$store.commit("showNotSubformulaError");
           }
         } else {
-          this.$store.commit("showNotSubformulaError");
+          this.$store.commit("showNoSubformulaError");
         }
-      } else {
-        this.$store.commit("showNoSubformulaError");
       }
     },
-    convert(subFormula, replacable, conversionType) {
-      this.$store.commit("convert", { subFormula, replacable, conversionType });
+    convert(subFormula, replacable, conversionType, origStart, origEnd) {
+      this.$store.commit("convert", {
+        subFormula,
+        replacable,
+        conversionType,
+        origStart,
+        origEnd,
+      });
       if (this.$store.getters.converted) {
         this.$store.commit("addFormula");
         this.$store.commit("finishConversion");

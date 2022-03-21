@@ -4,7 +4,6 @@
       <div class="shadow">
         <UserInput></UserInput>
         <ConversionButtons></ConversionButtons>
-        <DeleteButtons></DeleteButtons>
         <hr>
         <Help></Help>
       </div>
@@ -20,7 +19,6 @@
 <script>
 /* eslint-disable */
 import ConversionButtons from "./ConversionButtons.vue";
-import DeleteButtons from "./DeleteButtons.vue";
 import Output from "./Output.vue";
 import UserInput from "./UserInput.vue";
 import Help from "./Help.vue";
@@ -33,7 +31,6 @@ export default {
   },
   components: {
     ConversionButtons,
-    DeleteButtons,
     Output,
     Help,
     UserInput,

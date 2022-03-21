@@ -49,6 +49,8 @@ import LS22_2Visitor from './visitors/propositional/LS22_2Visitor.js';
 import LS23_1Visitor from './visitors/propositional/LS23_1Visitor.js';
 import LS23_2Visitor from './visitors/propositional/LS23_2Visitor.js';
 import LS24Visitor from './visitors/propositional/LS24Visitor.js';
+import LS25_1Visitor from './visitors/propositional/LS25_1Visitor.js';
+import LS25_2Visitor from './visitors/propositional/LS25_2Visitor.js';
 import PS1_11Visitor from './visitors/predicate/PS1_11Visitor.js';
 import PS1_12Visitor from './visitors/predicate/PS1_12Visitor.js';
 import PS1_21Visitor from './visitors/predicate/PS1_21Visitor.js';
@@ -91,7 +93,7 @@ function isValidVisitor(visitor) {
 		PS2_21Visitor, PS2_22Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
 		PS3_5Visitor, PS3_6Visitor, PS3_7Visitor, PS3_8Visitor, PS4_1Visitor, PS4_2Visitor, PS4_3Visitor, PS4_4Visitor,
 		PS4_5Visitor, PS4_6Visitor, PS4_7Visitor, PS4_8Visitor, PS5_1Visitor, PS5_2Visitor, 
-		PS6_1Visitor, PS6_2Visitor, FreeVarsVisitor];
+		PS6_1Visitor, PS6_2Visitor, FreeVarsVisitor, LS25_1Visitor, LS25_2Visitor];
     for (let i = 0; i < visitors.length; i++) {
         if (visitor instanceof visitors[i]) {
             return true;

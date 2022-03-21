@@ -21,6 +21,7 @@
           >{{ formula.getEnding() }}<sup
           >{{ formula.ct? formula.ct : "" }}</sup>
         </p>
+
       </div>
     </div>
   </div>
@@ -71,14 +72,21 @@ export default {
 <style scoped>
 #pdf {
   min-height: 4em;
-  overflow-x: scroll;
-  overflow: overlay;
+  overflow: scroll;;
   max-height: 30em;
+  font-size: 1.2em;
+}
+
+#pdf div {
+  text-align: left;
+  padding: 0.4em 0;
 }
 
 #last {
+  min-height: 3em;
   overflow-x: scroll;
-  overflow: overlay;
+  font-size: 1.5em;
+  text-align: left;
 }
 
 #last p {
@@ -97,6 +105,7 @@ u {
 
 p {
   font-size: 1.2em;
+
 }
 
 sup {

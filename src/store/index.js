@@ -79,7 +79,7 @@ export default createStore({
       state.askNewFormula = true;
     },
     addSymbol: (state, value) => {
-      const el = document.getElementById("selectable");
+      const el = document.getElementById("input-field");
       insertTextAtCursor(el, value);
     },
     addSymbolToNew: (state, value) => {
