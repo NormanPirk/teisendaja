@@ -19,7 +19,8 @@ export default createStore({
     faultyConversion: false,
     noSubformula: false,
     conversionNotAllowed: false,
-    errorWithConversion: false
+    errorWithConversion: false,
+    inputFileError: false,
   },
   getters: {
     formula: (state) => {
@@ -59,8 +60,16 @@ export default createStore({
       return state.conversionNotAllowed;
     },
     errorWithConversion: (state) => {
-      return state.notSubformula || state.faultyConversion || state.noSubformula || state.conversionNotAllowed;
-    }
+      return (
+        state.notSubformula ||
+        state.faultyConversion ||
+        state.noSubformula ||
+        state.conversionNotAllowed
+      );
+    },
+    inputFileError: (state) => {
+      return state.inputFileError;
+    },
   },
   mutations: {
     finishConversion: (state) => {
@@ -68,6 +77,9 @@ export default createStore({
     },
     updateFormula: (state, value) => {
       state.formula = value;
+    },
+    updateFormulas: (state, value) => {
+      state.formulas = value;
     },
     updateNewFormula: (state, value) => {
       state.newFormula = value;
@@ -112,6 +124,9 @@ export default createStore({
     showNewFormulaError: (state) => {
       state.incorrectNewFormula = true;
     },
+    showInputFileError: (state) => {
+      state.inputFileError = true;
+    },
     clearErrors: (state) => {
       state.noInput = false;
       state.faultyInput = false;
@@ -119,13 +134,13 @@ export default createStore({
       state.faultyConversion = false;
       state.noSubformula = false;
       state.conversionNotAllowed = false;
+      state.inputFileError = false;
     },
     clearNewFormulaError: (state) => {
       state.incorrectNewFormula = false;
     },
     removeLast: (state) => {
       if (state.formulas.length > 0) {
-        console.log(state.formulas.length);
         state.formulas.pop();
       }
       if (state.formulas.length > 0) {
@@ -139,7 +154,10 @@ export default createStore({
       state.formulas = [];
       state.converted = false;
     },
-    convert (state, { subFormula, replacable, conversionType, origStart, origEnd }) {
+    convert(
+      state,
+      { subFormula, replacable, conversionType, origStart, origEnd }
+    ) {
       try {
         let result = convert(subFormula, conversionType);
         if (result) {
@@ -151,19 +169,17 @@ export default createStore({
           const beginning = state.formula.substring(0, origStart);
           const ending = state.formula.substring(origEnd, state.formula.length);
           state.formula = beginning + result + ending;
-          state.formulas[state.formulas.length-1].selStart = origStart;
-          state.formulas[state.formulas.length-1].selEnd = origEnd;
-          state.formulas[state.formulas.length-1].ct = conversionType.split("_")[0];
+          state.formulas[state.formulas.length - 1].selStart = origStart;
+          state.formulas[state.formulas.length - 1].selEnd = origEnd;
+          state.formulas[state.formulas.length - 1].ct =
+            conversionType.split("_")[0];
           state.converted = true;
         } else {
           state.faultyConversion = true;
         }
-
       } catch (err) {
         console.log(err);
       }
-
-
 
       /* const el = document.getElementById("selectable");
       const start = el.selectionStart;
@@ -183,7 +199,7 @@ export default createStore({
       } else {
         state.faultyConversion = true;
       } */
-    }
+    },
   },
   actions: {},
   modules: {},

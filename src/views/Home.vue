@@ -13,6 +13,6 @@ export default {
   title: "Loogikavalemite teisendaja",
   components: {
     Main,
-  }
+  },
 };
 </script>

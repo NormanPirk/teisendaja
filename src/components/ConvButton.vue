@@ -1,23 +1,24 @@
 <template>
-<div class="btn-container">
-  <ConvTypeMarker :convType="this.conversionTypeL.split('_')[0]"></ConvTypeMarker>
-  <div class="conv-btn">
-    <button
-      @click="startConversion(this.conversionTypeL)"
-      :disabled="isDisabled"
-    >
-    {{ this.left }}
-    </button>
-    ≡
-    <button
-      @click="startConversion(this.conversionTypeR)"
-      :disabled="isDisabled"
-    >
-    {{ this.right }}
-    </button>
+  <div class="btn-container">
+    <ConvTypeMarker
+      :convType="this.conversionTypeL.split('_')[0]"
+    ></ConvTypeMarker>
+    <div class="conv-btn">
+      <button
+        @click="startConversion(this.conversionTypeL)"
+        :disabled="isDisabled"
+      >
+        {{ this.left }}
+      </button>
+      ≡
+      <button
+        @click="startConversion(this.conversionTypeR)"
+        :disabled="isDisabled"
+      >
+        {{ this.right }}
+      </button>
+    </div>
   </div>
-</div>
-  
 </template>
 
 <script>
@@ -36,7 +37,7 @@ export default {
     };
   },
   components: {
-    ConvTypeMarker
+    ConvTypeMarker,
   },
   computed: {
     isDisabled() {
@@ -139,19 +140,19 @@ export default {
   display: flex;
   justify-content: left;
   align-items: center;
-  margin: 0.5em;
+  margin: 0.2em;
   background-color: rgb(245, 245, 245);
   border: 1px solid rgb(85, 85, 85);
   height: 2em;
   border-radius: 5px;
+  width: fit-content;
 }
-
 
 button {
   height: 2em;
   align-items: center;
   margin: 0.1em;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 img {

@@ -1,51 +1,54 @@
 import getParseTree from "../ANTLR/ParseTree";
 
 export default function addParentheses(replacable, result) {
-    if (replacable.parentCtx) {
-        const parentContext = replacable.parentCtx.constructor.name;
-        const childContext = getParseTree(result).formula().constructor.name;
-        if (parentContext === "NegContext") {
-            result = addParensNeg(childContext, result);
-        } else if (parentContext === "AndContext") {
-            result = addParensAnd(childContext, result);
-        } else if (parentContext === "OrContext") {
-            result = addParensOr(childContext, result);
-        } else if (parentContext === "ImplContext") {
-            result = addParensImpl(childContext, result);
-        }
+  if (replacable.parentCtx) {
+    const parentContext = replacable.parentCtx.constructor.name;
+    const childContext = getParseTree(result).formula().constructor.name;
+    if (parentContext === "NegContext") {
+      result = addParensNeg(childContext, result);
+    } else if (parentContext === "AndContext") {
+      result = addParensAnd(childContext, result);
+    } else if (parentContext === "OrContext") {
+      result = addParensOr(childContext, result);
+    } else if (parentContext === "ImplContext") {
+      result = addParensImpl(childContext, result);
     }
-    return result;
+  }
+  return result;
 }
 
 export function addParensNeg(childContext, result) {
-    if (["AndContext", "OrContext", "ImplContext", "EqContext"].includes(childContext)) {
-        result = addParens(result);
-    }
-    return result;
+  if (
+    ["AndContext", "OrContext", "ImplContext", "EqContext"].includes(
+      childContext
+    )
+  ) {
+    result = addParens(result);
+  }
+  return result;
 }
 
-
 export function addParensAnd(childContext, result) {
-    if (["OrContext", "ImplContext", "EqContext"].includes(childContext)) {
-        result = addParens(result);
-    }
-    return result;
+  if (["OrContext", "ImplContext", "EqContext"].includes(childContext)) {
+    result = addParens(result);
+  }
+  return result;
 }
 
 export function addParensOr(childContext, result) {
-    if (["ImplContext", "EqContext"].includes(childContext)) {
-        result = addParens(result);
-    }
-    return result;
+  if (["ImplContext", "EqContext"].includes(childContext)) {
+    result = addParens(result);
+  }
+  return result;
 }
 
 export function addParensImpl(childContext, result) {
-    if (childContext === "EqContext") {
-        result = addParens(result);
-    }
-    return result;
+  if (childContext === "EqContext") {
+    result = addParens(result);
+  }
+  return result;
 }
 
 function addParens(result) {
-    return "(" + result + ")";
+  return "(" + result + ")";
 }

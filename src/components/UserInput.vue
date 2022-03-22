@@ -32,6 +32,16 @@
   >
     {{ formula }}
   </div>
+  <div v-show="showStartButton()" id="file-uploader" @click="clearErrors()">
+    <input
+      type="file"
+      @change="loadDataFromJson"
+      accept=".json"
+      :placeholder="$t('inputDescription')"
+      id="file"
+    />
+    <label for="file">{{ $t("fileInputDescription") }}</label>
+  </div>
 </template>
 
 <script>
@@ -41,11 +51,15 @@ import DeleteButtons from "./DeleteButtons.vue";
 import validateInput from "../js/InputValidator.js";
 import getNewPosition from "../js/CursorPosition.js";
 import insertTextAtCursor from "insert-text-at-cursor";
+import texToMathSymbols from "../js/MathSymbolConverter.js";
+import Formula from "../js/Formula.js";
 
 export default {
   name: "UserInput",
   data() {
-    return {};
+    return {
+      uploadFile: false,
+    };
   },
   components: {
     ErrorMessages,
@@ -64,6 +78,9 @@ export default {
     formulas: {
       get() {
         return this.$store.getters.formulas;
+      },
+      set(formulas) {
+        this.$store.commit("updateFormulas", formulas);
       },
     },
     errorWithConversion: {
@@ -86,6 +103,9 @@ export default {
         this.$store.commit("showNoInputError");
       }
     },
+    showFileUploader() {
+      this.uploadFile = true;
+    },
     showStartButton() {
       return this.formulas.length === 0;
     },
@@ -98,20 +118,40 @@ export default {
       }
       return false;
     },
+    loadDataFromJson(event) {
+      try {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", (event) => {
+          console.log(event);
+          try {
+            const res = JSON.parse(reader.result);
+            const formulas = res.map((f) => {
+              if (f.formula && validateInput(f.formula)) {
+                return new Formula(f.formula, f.selStart, f.selEnd, f.ct);
+              } else {
+                throw "Unexpected file content!";
+              }
+            });
+            this.formulas = formulas;
+            this.formula = formulas[formulas.length - 1].formula;
+            this.uploadFile = false;
+          } catch (error) {
+            console.log(error);
+            this.$store.commit("showInputFileError");
+          }
+        });
+        reader.readAsText(file);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     renderMathSymbols() {
       let el = document.getElementById("input-field");
       let position = el.selectionStart;
       let formulaBeginning = el.value.substring(0, position);
       let newPosition = getNewPosition(formulaBeginning, position);
-      this.formula = this.formula
-        .replaceAll("\\neg", "¬")
-        .replaceAll("\\land", "∧")
-        .replaceAll("\\lor", "∨")
-        .replaceAll("\\Rightarrow", "⇒")
-        .replaceAll("\\Leftrightarrow", "⇔")
-        .replaceAll("\\forall", "∀")
-        .replaceAll("\\exists", "∃")
-        .replaceAll(" ", "");
+      this.formula = texToMathSymbols(this.formula);
       this.$nextTick(() => {
         el.selectionEnd = newPosition;
       });
@@ -162,7 +202,7 @@ textarea {
   text-align: left !important;
   vertical-align: middle !important;
   margin-top: 1em;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 #guide {
@@ -189,10 +229,31 @@ textarea {
 }
 
 #selectable {
-  font-size: 1.2em;
+  font-size: 1em;
   overflow-wrap: break-word;
   text-align: left;
   padding: 0.5em 0;
   margin: 0.5em 0;
+}
+
+#file-uploader {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+#file-uploader input {
+  display: none;
+}
+
+#file-uploader label {
+  display: flex;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(85, 85, 85);
+  border-radius: 5px;
+  height: 2em;
+  padding: 0 0.5em;
+  font-size: 0.8em;
 }
 </style>

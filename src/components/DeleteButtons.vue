@@ -26,10 +26,10 @@ export default {
 
 <style scoped>
 div {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 button {
-    width: 17em;
+  width: 17em;
 }
 </style>

@@ -3,14 +3,19 @@
     <div class="foreground">
       <div class="intro">
         <strong>{{ $t("insertNew") }}</strong>
-        <strong v-show="incorrectNewFormula" class="error">{{ $t("newIsIncorrect") }}</strong>
+        <strong v-show="incorrectNewFormula" class="error">{{
+          $t("newIsIncorrect")
+        }}</strong>
       </div>
       <SymbolButtons target="newFormula"></SymbolButtons>
       <textarea
         id="selectable-new"
         v-model="newFormula"
         :class="{ faulty: !isFaulty() }"
-        @input="renderMathSymbols(); clearNewFormulaError()"
+        @input="
+          renderMathSymbols();
+          clearNewFormulaError();
+        "
         @click="clearNewFormulaError()"
         :placeholder="$t('newInputDescription')"
       ></textarea>
@@ -47,8 +52,8 @@ export default {
     incorrectNewFormula: {
       get() {
         return this.$store.getters.incorrectNewFormula;
-      }
-    }
+      },
+    },
   },
   methods: {
     cancelConversion() {
@@ -57,7 +62,9 @@ export default {
       this.$store.commit("newFormulaAdded");
     },
     isFaulty() {
-      return this.newFormula.length === 0 ? true : validateInput(this.newFormula);
+      return this.newFormula.length === 0
+        ? true
+        : validateInput(this.newFormula);
     },
     clearNewFormulaError() {
       this.$store.commit("clearNewFormulaError");
@@ -134,5 +141,4 @@ textarea {
 .error {
   color: rgb(252, 74, 74);
 }
-
 </style>
