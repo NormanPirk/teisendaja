@@ -7,6 +7,8 @@
       <hr />
     </div>
     <div id="action-buttons">
+      <button @click="downloadJSON">{{ $t("downloadJSON") }}</button>
+      <button @click="downloadTEX">{{ $t("downloadTEX") }}</button>
       <button @click="downloadPDF">{{ $t("downloadPDF") }}</button>
     </div>
     <div>
@@ -18,10 +20,9 @@
         <p v-for="(formula, index) in formulas" :key="formula">
           {{ index === 0 ? formula.getStart() : "≡  " + formula.getStart()
           }}<u>{{ formula.getUnderlined() }}</u
-          >{{ formula.getEnding() }}<sup v-if="formula.ct"
-          >&nbsp;&nbsp;&nbsp;{{ formula.ct}}</sup>
+          >{{ formula.getEnding()
+          }}<sup v-if="formula.ct">&nbsp;&nbsp;&nbsp;{{ formula.ct }}</sup>
         </p>
-
       </div>
     </div>
   </div>
@@ -46,13 +47,25 @@ export default {
     },
   },
   methods: {
+    downloadJSON() {
+      const content = JSON.stringify(this.formulas);
+      console.log(content);
+      let blob = new Blob([content], {
+        type: "application/json;charset=utf-8",
+      });
+      saveAs(blob, "sample.json");
+    },
     downloadTEX() {
       let content =
-        "\\documentclass{article}\n\\usepackage[utf8]{inputenc}\n\\begin{document}\n";
-      this.formulas.forEach((formula) => {
-        content += "$$" + formula + "$$\n";
-      });
-      content += "\\end{document}";
+        "\\documentclass{article}\n\\usepackage{amsmath}\n\\begin{document}\n\\begin{align*}\n";
+      for (let [i, formula] of this.formulas.entries()) {
+        if (i === 0) {
+          content += "&" + formula.toTex() + "\\\\\n";
+        } else {
+          content += "&\\equiv " + formula.toTex() + "\\\\\n";
+        }
+      }
+      content += "\\end{align*}\n\\end{document}";
       let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "sample.tex");
     },
@@ -72,9 +85,9 @@ export default {
 <style scoped>
 #pdf {
   min-height: 4em;
-  overflow: scroll;;
+  overflow: scroll;
   max-height: 30em;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 #pdf div {
@@ -86,7 +99,7 @@ export default {
   min-height: 3em;
   overflow-x: scroll;
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 0.5em 0;
   margin: 0.5em 0;
 }
@@ -101,7 +114,7 @@ u {
 }
 
 sup {
-  font-size: 0.6em;
+  font-size: 0.5em;
 }
 
 ::-webkit-scrollbar {
@@ -111,5 +124,4 @@ sup {
 ::-webkit-scrollbar-thumb {
   background: rgb(204, 204, 204);
 }
-
 </style>

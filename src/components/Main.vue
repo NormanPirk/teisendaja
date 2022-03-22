@@ -4,7 +4,7 @@
       <div class="shadow">
         <UserInput></UserInput>
         <ConversionButtons></ConversionButtons>
-        <hr>
+        <hr />
         <Help></Help>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div id="editor-right">
       <Output></Output>
     </div>
-  <ModalPrompt v-show="askNewFormula"></ModalPrompt>
+    <ModalPrompt v-show="askNewFormula"></ModalPrompt>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 90%;
+  width: 95%;
   margin: auto;
   border: none !important;
 }
@@ -60,11 +60,11 @@ export default {
 }
 
 #editor-left {
-  width: 50%;
+  width: 55%;
   margin-right: 0.5em;
 }
 #editor-right {
-  width: 50%;
+  width: 45%;
   margin-left: 0.5em;
 }
 

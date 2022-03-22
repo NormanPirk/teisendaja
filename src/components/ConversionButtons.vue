@@ -35,16 +35,16 @@ export default {
   },
   components: {
     PropositionalLogicButtons,
-    PredicateLogicButtons
+    PredicateLogicButtons,
   },
   methods: {
     togglePropLogic() {
-          this.showPropLogic = !this.showPropLogic;
-      },
+      this.showPropLogic = !this.showPropLogic;
+    },
     togglePredicateLogic() {
-          this.showPredicateLogic = !this.showPredicateLogic;
-      },
-  }
+      this.showPredicateLogic = !this.showPredicateLogic;
+    },
+  },
 };
 </script>
 
@@ -54,5 +54,6 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 </style>
