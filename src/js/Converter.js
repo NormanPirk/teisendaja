@@ -52,14 +52,14 @@ import LS26_1Visitor from "../ANTLR/visitors/propositional/LS26_1Visitor.js";
 import LS26_2Visitor from "../ANTLR/visitors/propositional/LS26_2Visitor.js";
 import LS27_1Visitor from "../ANTLR/visitors/propositional/LS27_1Visitor.js";
 import LS27_2Visitor from "../ANTLR/visitors/propositional/LS27_2Visitor.js";
-import PS1_11Visitor from "../ANTLR/visitors/predicate/PS1_11Visitor.js";
-import PS1_12Visitor from "../ANTLR/visitors/predicate/PS1_12Visitor.js";
-import PS1_21Visitor from "../ANTLR/visitors/predicate/PS1_21Visitor.js";
-import PS1_22Visitor from "../ANTLR/visitors/predicate/PS1_22Visitor.js";
-import PS2_11Visitor from "../ANTLR/visitors/predicate/PS2_11Visitor.js";
-import PS2_12Visitor from "../ANTLR/visitors/predicate/PS2_12Visitor.js";
-import PS2_21Visitor from "../ANTLR/visitors/predicate/PS2_21Visitor.js";
-import PS2_22Visitor from "../ANTLR/visitors/predicate/PS2_22Visitor.js";
+import PS1_1Visitor from "../ANTLR/visitors/predicate/PS1_1Visitor.js";
+import PS1_2Visitor from "../ANTLR/visitors/predicate/PS1_2Visitor.js";
+import PS1_3Visitor from "../ANTLR/visitors/predicate/PS1_3Visitor.js";
+import PS1_4Visitor from "../ANTLR/visitors/predicate/PS1_4Visitor.js";
+import PS2_1Visitor from "../ANTLR/visitors/predicate/PS2_1Visitor.js";
+import PS2_2Visitor from "../ANTLR/visitors/predicate/PS2_2Visitor.js";
+import PS2_3Visitor from "../ANTLR/visitors/predicate/PS2_3Visitor.js";
+import PS2_4Visitor from "../ANTLR/visitors/predicate/PS2_4Visitor.js";
 import PS3_1Visitor from "../ANTLR/visitors/predicate/PS3_1Visitor.js";
 import PS3_2Visitor from "../ANTLR/visitors/predicate/PS3_2Visitor.js";
 import PS3_3Visitor from "../ANTLR/visitors/predicate/PS3_3Visitor.js";
@@ -197,22 +197,22 @@ function getVisitor(conversionType) {
       return new LS27_1Visitor();
     case "LS27_2":
       return new LS27_2Visitor();
-    case "PS1_11":
-      return new PS1_11Visitor();
-    case "PS1_12":
-      return new PS1_12Visitor();
-    case "PS1_21":
-      return new PS1_21Visitor();
-    case "PS1_22":
-      return new PS1_22Visitor();
-    case "PS2_11":
-      return new PS2_11Visitor();
-    case "PS2_12":
-      return new PS2_12Visitor();
-    case "PS2_21":
-      return new PS2_21Visitor();
-    case "PS2_22":
-      return new PS2_22Visitor();
+    case "PS1_1":
+      return new PS1_1Visitor();
+    case "PS1_2":
+      return new PS1_2Visitor();
+    case "PS1_3":
+      return new PS1_3Visitor();
+    case "PS1_4":
+      return new PS1_4Visitor();
+    case "PS2_1":
+      return new PS2_1Visitor();
+    case "PS2_2":
+      return new PS2_2Visitor();
+    case "PS2_3":
+      return new PS2_3Visitor();
+    case "PS2_4":
+      return new PS2_4Visitor();
     case "PS3_1":
       return new PS3_1Visitor();
     case "PS3_2":

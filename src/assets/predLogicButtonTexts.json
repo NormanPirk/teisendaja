@@ -1,0 +1,92 @@
+[
+    {
+        "left": "¬∀xF(x)",
+        "right": "∃x¬F(x)",
+        "conversionTypeL": "PS1_1",
+        "conversionTypeR": "PS1_2"
+    },
+    {
+        "left": "¬∃xF(x)",
+        "right": "∀x¬F(x)",
+        "conversionTypeL": "PS1_3",
+        "conversionTypeR": "PS1_4"
+    },
+    {
+        "left": "∀x(F(x)∧G(x))",
+        "right": "∀xF(x)∧∀xG(x)",
+        "conversionTypeL": "PS2_1",
+        "conversionTypeR": "PS2_2"
+    },
+    {
+        "left": "∃x(F(x)∨G(x))",
+        "right": "∃xF(x)∨∀xG(x)",
+        "conversionTypeL": "PS2_3",
+        "conversionTypeR": "PS2_4"
+    },
+    {
+        "left": "∀x(F(x)∧G)",
+        "right": "∀xF(x)∧G",
+        "conversionTypeL": "PS3_1",
+        "conversionTypeR": "PS3_2"
+    },
+    {
+        "left": "∀x(F(x)∨G)",
+        "right": "∀xF(x)∨G",
+        "conversionTypeL": "PS3_3",
+        "conversionTypeR": "PS3_4"
+    },
+    {
+        "left": "∃x(F(x)∧G)",
+        "right": "∃xF(x)∧G",
+        "conversionTypeL": "PS3_5",
+        "conversionTypeR": "PS3_6"
+    },
+    {
+        "left": "∃x(F(x)∨G)",
+        "right": "∃xF(x)∨G",
+        "conversionTypeL": "PS3_7",
+        "conversionTypeR": "PS3_8"
+    },
+    {
+        "left": "∀x(F(x)⇒G)",
+        "right": "∃xF(x)⇒G",
+        "conversionTypeL": "PS4_1",
+        "conversionTypeR": "PS4_2"
+    },
+    {
+        "left": "∃x(F(x)⇒G)",
+        "right": "∀xF(x)⇒G",
+        "conversionTypeL": "PS4_3",
+        "conversionTypeR": "PS4_4"
+    },
+    {
+        "left": "∀x(F⇒G(x))",
+        "right": "F⇒∀xG(x)",
+        "conversionTypeL": "PS4_5",
+        "conversionTypeR": "PS4_6"
+    },
+    {
+        "left": "∃x(F⇒G(x))",
+        "right": "F⇒∃xG(x)",
+        "conversionTypeL": "PS4_7",
+        "conversionTypeR": "PS4_8"
+    },
+    {
+        "left": "∀xF(x)",
+        "right": "∀yF(y)",
+        "conversionTypeL": "PS5_1",
+        "conversionTypeR": "PS5_1"
+    },
+    {
+        "left": "∀x∀yF(x,y)",
+        "right": "∀y∀xF(x,y)",
+        "conversionTypeL": "PS6_1",
+        "conversionTypeR": "PS6_1"
+    },
+    {
+        "left": "∃x∃yF(x,y)",
+        "right": "∃y∃xF(x,y)",
+        "conversionTypeL": "PS6_2",
+        "conversionTypeR": "PS6_2"
+    }
+]

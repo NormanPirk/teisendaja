@@ -2,22 +2,23 @@
   <div class="btn-container">
     <ConvTypeMarker
       :convType="this.conversionTypeL.split('_')[0]"
+      class="item1"
     ></ConvTypeMarker>
-    <div class="conv-btn">
-      <button
-        @click="startConversion(this.conversionTypeL)"
-        :disabled="isDisabled"
-      >
-        {{ this.left }}
-      </button>
-      ≡
-      <button
-        @click="startConversion(this.conversionTypeR)"
-        :disabled="isDisabled"
-      >
-        {{ this.right }}
-      </button>
-    </div>
+    <button
+      class="item2"
+      @click="startConversion(this.conversionTypeL)"
+      :disabled="isDisabled"
+    >
+      {{ this.left }}
+    </button>
+    <div class="item3">≡</div>
+    <button
+      class="item4"
+      @click="startConversion(this.conversionTypeR)"
+      :disabled="isDisabled"
+    >
+      {{ this.right }}
+    </button>
   </div>
 </template>
 
@@ -137,46 +138,39 @@ export default {
 
 <style scoped>
 .btn-container {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  margin: 0.2em;
-  background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(85, 85, 85);
+  display: inline-grid;
+  grid-template-columns: 9% 43% 5% 43%;
   height: 2em;
-  border-radius: 5px;
   width: fit-content;
+  align-items: center;
+}
+
+.item1 {
+  grid-column: 1;
+  text-align: left;
+  font-size: 0.8vw;
+}
+
+.item2 {
+  grid-column: 2;
+}
+
+.item3 {
+  grid-column: 3;
+}
+
+.item4 {
+  grid-column: 4;
 }
 
 button {
-  height: 2em;
-  align-items: center;
-  margin: 0.1em;
-  font-size: 0.8em;
+  min-width: fit-content;
+  font-size: 0.85vw;
+
+  font-weight: bold;
 }
 
-img {
-  height: 100%;
-  transform: rotate(90deg);
-}
-
-.conv-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.conv-btn button {
-  background: transparent;
-  border: none;
-}
-
-.conv-btn button:hover {
-  transform: scale(1.1);
-}
-
-.conv.btn button:disabled {
-  background: #ffffff;
+button:hover {
+  transform: scale(1.05);
 }
 </style>

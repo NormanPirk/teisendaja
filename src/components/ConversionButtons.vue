@@ -7,7 +7,14 @@
     </button>
   </div>
   <div class="conversion-btns" v-show="showPropLogic">
-    <PropositionalLogicButtons></PropositionalLogicButtons>
+    <ConvButton
+      v-for="btnText in propBtnTexts"
+      :key="btnText.conversionTypeL"
+      :left="btnText.left"
+      :right="btnText.right"
+      :conversionTypeL="btnText.conversionTypeL"
+      :conversionTypeR="btnText.conversionTypeR"
+    ></ConvButton>
   </div>
   <div class="intro">
     <strong>{{ $t("predicateLogic") }}</strong>
@@ -17,13 +24,21 @@
     </button>
   </div>
   <div class="conversion-btns" v-show="showPredicateLogic">
-    <PredicateLogicButtons></PredicateLogicButtons>
+    <ConvButton
+      v-for="btnText in predBtnTexts"
+      :key="btnText.conversionTypeL"
+      :left="btnText.left"
+      :right="btnText.right"
+      :conversionTypeL="btnText.conversionTypeL"
+      :conversionTypeR="btnText.conversionTypeR"
+    ></ConvButton>
   </div>
 </template>
 
 <script>
-import PropositionalLogicButtons from "./PropositionalLogicButtons.vue";
-import PredicateLogicButtons from "./PredicateLogicButtons.vue";
+import ConvButton from "./ConvButton.vue";
+import PropBtnTexts from "@/assets/propLogicButtonTexts.json";
+import PredBtnTexts from "@/assets/predLogicButtonTexts.json";
 
 export default {
   name: "ConversionButtons",
@@ -31,11 +46,12 @@ export default {
     return {
       showPropLogic: true,
       showPredicateLogic: true,
+      propBtnTexts: PropBtnTexts,
+      predBtnTexts: PredBtnTexts,
     };
   },
   components: {
-    PropositionalLogicButtons,
-    PredicateLogicButtons,
+    ConvButton,
   },
   methods: {
     togglePropLogic() {
@@ -51,9 +67,14 @@ export default {
 <style scoped>
 .conversion-btns {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
+.conversion-btns div {
+  flex: 0 0 47%;
+}
+
 </style>

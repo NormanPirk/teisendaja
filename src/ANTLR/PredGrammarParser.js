@@ -55,14 +55,14 @@ import LS26_1Visitor from './visitors/propositional/LS26_1Visitor.js';
 import LS26_2Visitor from './visitors/propositional/LS26_2Visitor.js';
 import LS27_1Visitor from './visitors/propositional/LS27_1Visitor.js';
 import LS27_2Visitor from './visitors/propositional/LS27_2Visitor.js';
-import PS1_11Visitor from './visitors/predicate/PS1_11Visitor.js';
-import PS1_12Visitor from './visitors/predicate/PS1_12Visitor.js';
-import PS1_21Visitor from './visitors/predicate/PS1_21Visitor.js';
-import PS1_22Visitor from './visitors/predicate/PS1_22Visitor.js';
-import PS2_11Visitor from './visitors/predicate/PS2_11Visitor.js';
-import PS2_12Visitor from './visitors/predicate/PS2_12Visitor.js';
-import PS2_21Visitor from './visitors/predicate/PS2_21Visitor.js';
-import PS2_22Visitor from './visitors/predicate/PS2_22Visitor.js';
+import PS1_1Visitor from './visitors/predicate/PS1_1Visitor.js';
+import PS1_2Visitor from './visitors/predicate/PS1_2Visitor.js';
+import PS1_3Visitor from './visitors/predicate/PS1_3Visitor.js';
+import PS1_4Visitor from './visitors/predicate/PS1_4Visitor.js';
+import PS2_1Visitor from './visitors/predicate/PS2_1Visitor.js';
+import PS2_2Visitor from './visitors/predicate/PS2_2Visitor.js';
+import PS2_3Visitor from './visitors/predicate/PS2_3Visitor.js';
+import PS2_4Visitor from './visitors/predicate/PS2_4Visitor.js';
 import PS3_1Visitor from './visitors/predicate/PS3_1Visitor.js';
 import PS3_2Visitor from './visitors/predicate/PS3_2Visitor.js';
 import PS3_3Visitor from './visitors/predicate/PS3_3Visitor.js';
@@ -94,8 +94,8 @@ function isValidVisitor(visitor) {
         LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor, 
         LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
         LS24Visitor, LS25_1Visitor, LS25_2Visitor, LS26_1Visitor, LS26_2Visitor, LS27_1Visitor, LS27_2Visitor,
-		PS1_11Visitor, PS1_12Visitor, PS1_21Visitor, PS1_22Visitor, PS2_11Visitor, PS2_12Visitor,
-		PS2_21Visitor, PS2_22Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
+		PS1_1Visitor, PS1_2Visitor, PS1_3Visitor, PS1_4Visitor, PS2_1Visitor, PS2_2Visitor,
+		PS2_3Visitor, PS2_4Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
 		PS3_5Visitor, PS3_6Visitor, PS3_7Visitor, PS3_8Visitor, PS4_1Visitor, PS4_2Visitor, PS4_3Visitor, PS4_4Visitor,
 		PS4_5Visitor, PS4_6Visitor, PS4_7Visitor, PS4_8Visitor, PS5_1Visitor, PS5_2Visitor, 
 		PS6_1Visitor, PS6_2Visitor, FreeVarsVisitor, LS25_1Visitor, LS25_2Visitor];

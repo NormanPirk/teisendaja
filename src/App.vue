@@ -14,6 +14,9 @@
   text-align: center;
   color: #2c3e50;
 }
+body {
+  min-width: 900px;
+}
 
 #nav {
   padding: 30px;

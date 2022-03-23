@@ -1,4 +1,7 @@
 <template>
+<!--   <div v-if="this.convType.length === 4">
+    {{ this.convType }}
+  </div> -->
   <div>
     {{ this.convType }}
   </div>
@@ -14,14 +17,5 @@ export default {
 };
 </script>
 
-<style scoped>
-div {
-  color: #585858;
-  font-size: 0.8em;
-  font-weight: bold;
-  width: fit-content;
-  height: fit-content;
-  padding: 0.2em;
-  margin-left: 0.2em;
-}
+<style>
 </style>

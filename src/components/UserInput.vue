@@ -21,7 +21,7 @@
       renderMathSymbols();
       clearErrors();
     "
-    @keyup.ctrl="addSymbolsFromKeyboard"
+    @keyup.shift="addSymbolsFromKeyboard"
     @click="clearErrors()"
   ></textarea>
   <div
@@ -160,25 +160,25 @@ export default {
       const el = document.getElementById("input-field");
       try {
         switch (event.key) {
-          case "2":
+          case "F4":
             insertTextAtCursor(el, "\\neg");
             break;
-          case "3":
+          case "F5":
             insertTextAtCursor(el, "\\land");
             break;
-          case "4":
+          case "F6":
             insertTextAtCursor(el, "\\lor");
             break;
-          case "5":
+          case "F7":
             insertTextAtCursor(el, "\\Rightarrow");
             break;
-          case "6":
+          case "F8":
             insertTextAtCursor(el, "\\Leftrightarrow");
             break;
-          case "7":
+          case "F9":
             insertTextAtCursor(el, "\\forall");
             break;
-          case "8":
+          case "F10":
             insertTextAtCursor(el, "\\exists");
             break;
         }

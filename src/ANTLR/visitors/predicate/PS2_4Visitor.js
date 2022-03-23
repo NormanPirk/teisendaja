@@ -2,7 +2,7 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
-export default class PS2_22Visitor extends antlr4.tree.ParseTreeVisitor {
+export default class PS2_4Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	visitStart(ctx) {
 		try {
