@@ -1,4 +1,4 @@
-import getParseTree from "../ANTLR/ParseTree";
+import getParseTree from "../ANTLR/leftAssocGrammar/ParseTree";
 import { addParensAnd, addParensOr } from "./Parentheses";
 
 export default function handleNewFormula(conversionType, newFormula, result) {

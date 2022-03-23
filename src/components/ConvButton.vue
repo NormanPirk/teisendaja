@@ -65,14 +65,14 @@ export default {
         const endIndex = sel.endOffset;
         const subFormula = selection.toString();
         if (subFormula) {
-          let replacable = matchInput(
+          let matchingChild = matchInput(
             formula,
             subFormula,
             startIndex,
             endIndex
           );
-          if (replacable) {
-            if (conversionAllowed(replacable, conversionType)) {
+          if (matchingChild) {
+            if (conversionAllowed(matchingChild, conversionType)) {
               if (
                 ["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)
               ) {
@@ -90,7 +90,7 @@ export default {
                 this.$store.commit("newFormulaAdded");
                 this.convert(
                   subFormula,
-                  replacable,
+                  matchingChild,
                   conversionType,
                   startIndex,
                   endIndex
@@ -98,7 +98,7 @@ export default {
               } else {
                 this.convert(
                   subFormula,
-                  replacable,
+                  matchingChild,
                   conversionType,
                   startIndex,
                   endIndex
@@ -119,10 +119,10 @@ export default {
         }
       }
     },
-    convert(subFormula, replacable, conversionType, origStart, origEnd) {
+    convert(subFormula, matchingChild, conversionType, origStart, origEnd) {
       this.$store.commit("convert", {
         subFormula,
-        replacable,
+        matchingChild,
         conversionType,
         origStart,
         origEnd,
@@ -139,7 +139,7 @@ export default {
 <style scoped>
 .btn-container {
   display: inline-grid;
-  grid-template-columns: 9% 43% 5% 43%;
+  grid-template-columns: 10% 43% 4% 43%;
   height: 2em;
   width: fit-content;
   align-items: center;
@@ -148,7 +148,7 @@ export default {
 .item1 {
   grid-column: 1;
   text-align: left;
-  font-size: 0.8vw;
+  font-size: 0.8em;
 }
 
 .item2 {
@@ -165,7 +165,7 @@ export default {
 
 button {
   min-width: fit-content;
-  font-size: 0.85vw;
+  font-size: 0.8em;
 
   font-weight: bold;
 }

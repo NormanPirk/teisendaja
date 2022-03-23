@@ -1,26 +1,20 @@
-import getParseTree from "../ANTLR/ParseTree";
-import PredGrammarParser from "../ANTLR/PredGrammarParser";
+import getParseTree from "../ANTLR/leftAssocGrammar/ParseTree.js";
+import PredGrammarParser from "../ANTLR/leftAssocGrammar/PredGrammarParser";
+import getParseTreeRight from "../ANTLR/rightAssocGrammar/ParseTreeRight";
+import PredGrammarRightParser from "../ANTLR/rightAssocGrammar/PredGrammarRightParser";
 
 export default function matchInput(formula, subFormula, startIndex, endIndex) {
   if (formula === subFormula) {
     return getParseTree(subFormula);
   }
   try {
-    const mainTree = getParseTree(formula);
-    const subTree = getParseTree(subFormula);
-    const mainTreeString = mainTree.toStringTree(PredGrammarParser.ruleNames);
-    const subTreeString = subTree
-      .formula()
-      .toStringTree(PredGrammarParser.ruleNames);
-    if (mainTreeString.includes(subTreeString)) {
-      let matchingChild = indicesMatch(
-        mainTree,
-        subTree.formula(),
-        startIndex,
-        endIndex
-      );
-      if (matchingChild) {
-        return matchingChild;
+    const matchingChildLeft = getMatchingChild(getParseTree, PredGrammarParser, formula, subFormula, startIndex, endIndex)
+    if (matchingChildLeft) {
+      return matchingChildLeft;
+    } else if (isAssociativeOperation(getParseTree(subFormula))) {
+      const matchingChildRight = getMatchingChild(getParseTreeRight, PredGrammarRightParser, formula, subFormula, startIndex, endIndex);
+      if (matchingChildRight) {
+        return matchingChildRight;
       }
     }
     return false;
@@ -46,4 +40,27 @@ function indicesMatch(child, comparable, startIndex, endIndex) {
     }
   }
   return false;
+}
+
+function isAssociativeOperation(tree) {
+  return ["AndContext", "OrContext", "EqContext"].includes(tree.formula().constructor.name);
+}
+
+function getMatchingChild(treeCreator, parser, formula, subFormula, startIndex, endIndex) {
+  const tree = treeCreator(formula);
+  const subTree = treeCreator(subFormula);
+  const treeStr = tree.toStringTree(parser.ruleNames);
+  const subTreeStr = subTree.formula().toStringTree(parser.ruleNames);
+    if (treeStr.includes(subTreeStr)) {
+      let matchingChild = indicesMatch(
+        tree,
+        subTree.formula(),
+        startIndex,
+        endIndex
+      );
+      if (matchingChild) {
+        return matchingChild;
+      }
+    }
+  return null;
 }

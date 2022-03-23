@@ -1,4 +1,4 @@
-import FreeVarsVisitor from "../ANTLR/visitors/freeVariables/FreeVarsVisitor.js";
+import FreeVarsVisitor from "../ANTLR/leftAssocGrammar/visitors/freeVariables/FreeVarsVisitor.js";
 
 export default function getNewVariable(formula) {
   const indVariables = ["x", "y", "z", "u", "v", "w", "p", "q", "r", "s", "t"];

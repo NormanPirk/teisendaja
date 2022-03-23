@@ -61,12 +61,12 @@ export default {
 
 #editor-left {
   width: 55%;
-  min-width: 500px;
+  min-width: 600px;
   margin-right: 0.5em;
 }
 #editor-right {
   width: 45%;
-  min-width: 400px;
+  min-width: 490px;
   margin-left: 0.5em;
 }
 

@@ -156,7 +156,7 @@ export default createStore({
     },
     convert(
       state,
-      { subFormula, replacable, conversionType, origStart, origEnd }
+      { subFormula, matchingChild, conversionType, origStart, origEnd }
     ) {
       try {
         let result = convert(subFormula, conversionType);
@@ -165,7 +165,7 @@ export default createStore({
             result = handleNewFormula(conversionType, state.newFormula, result);
             state.newFormula = "";
           }
-          result = addParentheses(replacable, result);
+          result = addParentheses(matchingChild, result);
           const beginning = state.formula.substring(0, origStart);
           const ending = state.formula.substring(origEnd, state.formula.length);
           state.formula = beginning + result + ending;
@@ -180,25 +180,6 @@ export default createStore({
       } catch (err) {
         console.log(err);
       }
-
-      /* const el = document.getElementById("selectable");
-      const start = el.selectionStart;
-      const end = el.selectionEnd;
-      let result = convert(subFormula, conversionType);
-      if (result) {
-        if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
-          result = handleNewFormula(conversionType, state.newFormula, result);
-          state.newFormula = "";
-        }
-        
-        insertTextAtCursor(el, result);
-        state.formulas[state.formulas.length-1].selStart = start;
-        state.formulas[state.formulas.length-1].selEnd = end;
-        state.formulas[state.formulas.length-1].ct = conversionType.split("_")[0];
-        state.converted = true;
-      } else {
-        state.faultyConversion = true;
-      } */
     },
   },
   actions: {},

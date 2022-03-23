@@ -1,11 +1,5 @@
 [
     {
-        "left": "F",
-        "right": "(F)",
-        "conversionTypeL": "LS0_1",
-        "conversionTypeR": "LS0_2"
-    },
-    {
         "left": "F∧F",
         "right": "F",
         "conversionTypeL": "LS1_1",
@@ -166,5 +160,11 @@
         "right": "1",
         "conversionTypeL": "LS27_1",
         "conversionTypeR": "LS27_2"
+    },
+    {
+        "left": "F",
+        "right": "(F)",
+        "conversionTypeL": "LS28_1",
+        "conversionTypeR": "LS28_2"
     }
 ]

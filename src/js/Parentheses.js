@@ -1,8 +1,8 @@
-import getParseTree from "../ANTLR/ParseTree";
+import getParseTree from "../ANTLR/leftAssocGrammar/ParseTree";
 
-export default function addParentheses(replacable, result) {
-  if (replacable.parentCtx) {
-    const parentContext = replacable.parentCtx.constructor.name;
+export default function addParentheses(matchingChild, result) {
+  if (matchingChild.parentCtx) {
+    const parentContext = matchingChild.parentCtx.constructor.name;
     const childContext = getParseTree(result).formula().constructor.name;
     if (parentContext === "NegContext") {
       result = addParensNeg(childContext, result);

@@ -1,5 +1,5 @@
-import getNewVariable, { getFreeIndVars } from "../../src/js/IndVariables";
-import getParseTree from "../../src/ANTLR/ParseTree.js";
+import getNewVariable, { getFreeIndVars } from "@/js/IndVariables";
+import getParseTree from "../../src/ANTLR/leftAssocGrammar/ParseTree.js";
 
 describe("New variables tests", () => {
   test("Gets new variable for a formula with the quantifier ∀", () => {

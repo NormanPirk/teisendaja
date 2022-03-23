@@ -1,4 +1,4 @@
-import getParseTree from "../ANTLR/ParseTree.js";
+import getParseTree from "../ANTLR/leftAssocGrammar/ParseTree.js";
 
 export default function validateInput(input) {
   try {

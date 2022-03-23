@@ -1,7 +1,4 @@
 <template>
-<!--   <div v-if="this.convType.length === 4">
-    {{ this.convType }}
-  </div> -->
   <div>
     {{ this.convType }}
   </div>
