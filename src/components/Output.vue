@@ -1,15 +1,18 @@
 <template>
   <div class="shadow">
-    <div>
-      <div class="intro">
-        <strong>{{ $t("conversions") }}</strong>
-      </div>
-      <hr />
+    <div class="intro">
+      <div>{{ $t("conversions") }}</div>
     </div>
     <div id="action-buttons">
-      <button @click="downloadJSON">{{ $t("downloadJSON") }}</button>
-      <button @click="downloadTEX">{{ $t("downloadTEX") }}</button>
-      <button @click="downloadPDF">{{ $t("downloadPDF") }}</button>
+      <button @click="downloadJSON" v-tooltip="$t('downloadJSON')">
+        <i class="fa-solid fa-download"></i><div>JSON</div>
+      </button>
+      <button @click="downloadTEX" v-tooltip="$t('downloadTEX')">
+        <i class="fa-solid fa-download"></i><div>TeX</div>
+      </button>
+      <button @click="downloadPDF" v-tooltip="$t('downloadPDF')">
+        <i class="fa-solid fa-download"></i><div>PDF</div>
+      </button>
     </div>
     <div>
       <div id="last">
@@ -111,6 +114,16 @@ u {
 #action-buttons {
   display: flex;
   justify-content: right;
+  flex-wrap: wrap;
+}
+
+button {
+  display: flex;
+  align-items: center;
+}
+
+button * {
+  margin: 0 0.3em;
 }
 
 sup {

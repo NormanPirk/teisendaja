@@ -1,8 +1,4 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link>
-  </div> -->
-  <h3>{{ $t("title") }}</h3>
   <router-view />
 </template>
 
@@ -11,24 +7,15 @@
   font-family: "Noto Sans Math", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #2C3E50;
 }
 body {
-  min-width: 900px;
-}
-
-#nav {
-  padding: 30px;
+  background: rgb(247,248,249);
 }
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 
 p {
@@ -39,8 +26,9 @@ p {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   min-height: 4em;
   border-radius: 8px;
-  padding: 0.5em;
   margin-bottom: 2em;
+  padding-bottom: 1em;
+  background: #ffffff;
 }
 
 hr {
@@ -51,11 +39,52 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 1em;
+  height: 1.5em;
+  background: #2C3E50;
+  margin: 0 0 1em 0;
+  padding: 0.5em 1em 0.5em 1em;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom: solid 0.2em #E39E21;
+}
+
+.intro * {
+  color: rgb(236, 237, 238);
+}
+
+.intro ~ * {
+  padding: 0 1em;
 }
 
 button {
-  margin: 0.2em;
+  margin: 0.3em;
   font-size: 0.8em;
+  background: rgb(247,248,249);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  height: 2em;
 }
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#nav {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 3em;
+}
+
+h3 {
+  padding: 0 3em;
+}
+
+.yellow {
+  background: #E39E21;
+  color: rgb(247,248,249);
+  padding: 0 1em;
+}
+
 </style>

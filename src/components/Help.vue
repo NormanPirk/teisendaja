@@ -1,13 +1,8 @@
 <template>
-  <div class="help-button-div">
-    <button @click="toggleHelp()">
-      <div v-if="showHelp">{{ $t("hideHelp") }}</div>
-      <strong v-else>{{ $t("showHelp") }}</strong>
-    </button>
-  </div>
-
-  <div id="help" v-show="showHelp">
-    <strong>{{ $t("enteringFormulas") }}</strong>
+  <div id="help" class="shadow">
+    <div class="intro">
+      <div>{{ $t("enteringFormulas") }}</div>
+    </div>
     <ol>
       <li>
         {{ $t("insertFormulaGuide") }}
@@ -52,9 +47,18 @@
       <li>{{ $t("conversionGuide") }}</li>
       <li>{{ $t("resultGuide") }}</li>
       <li>{{ $t("associativityGuide") }}</li>
-      <li>{{ $t("downloadGuide") }}</li>
     </ol>
-    <strong>{{ $t("symbols") }}</strong>
+    <div class="intro help-intro">
+      <div>{{ $t("resultSaveGuide") }}</div>
+    </div>
+    
+    <ol>
+      <li>{{ $t("downloadGuide") }}</li>
+      <li>{{ $t("itermediateDownloadGuide") }}</li>
+    </ol>
+    <div class="intro help-intro">
+      <div>{{ $t("symbols") }}</div>
+    </div>
     <ol>
       <li>{{ $t("pred") }}: A, B, ..., Y, Z.</li>
       <li>{{ $t("ind") }}: p, q, r, s, t, u, v, w, x, y, z.</li>
@@ -62,42 +66,38 @@
       <li>{{ $t("funct") }}: f, g, h, i, j, k, l, m, n, o.</li>
       <li>{{ $t("truthValues") }}: 1, 0</li>
     </ol>
+    <div id="hider">
+      <button @click="hideHelp()" class="yellow">{{ $t("hideHelp") }}</button>
+    </div>
   </div>
+  
 </template>
 
 <script>
 export default {
   name: "Help",
   data() {
-    return {
-      showHelp: false,
-      showTexSymbols: true,
-    };
+    return {}
   },
   methods: {
-    toggleHelp() {
-      this.showHelp = !this.showHelp;
-    },
-    toggleTexSymbols() {
-      this.showTexSymbols = !this.showTexSymbols;
-    },
-  },
+    hideHelp() {
+      this.$store.commit("toggleHelp");
+    }
+  }
 };
 </script>
 
 <style scoped>
-.help-button-div {
-  display: flex;
-  justify-content: right;
-}
 
 ol {
-  font-size: 0.8em;
+  font-size: 1em;
+  margin: 0 2em 1em 2em;
 }
 
 li {
   text-align: left;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
 }
 
 #help strong {
@@ -113,10 +113,6 @@ li {
   text-align: left;
 }
 
-ul {
-  list-style-type: none;
-}
-
 #symbols {
   display: flex;
   justify-content: center;
@@ -128,11 +124,6 @@ ul {
   flex-wrap: wrap;
   margin: 1em 0;
   width: 100%;
-}
-
-td {
-  text-align: left;
-  padding-left: 1em;
 }
 
 .column {
@@ -148,5 +139,26 @@ td {
 
 .row span {
   margin: 0 0.5em;
+  font-size: 0.9em;
 }
+
+.yellow div {
+  color: rgb(247,248,249);
+}
+
+.help-intro {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+button {
+  width: fit-content;
+  height: 2em;
+}
+
+#hider {
+  display: flex;
+  justify-content: right;
+}
+
 </style>

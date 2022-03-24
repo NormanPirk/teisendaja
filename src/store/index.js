@@ -21,6 +21,7 @@ export default createStore({
     conversionNotAllowed: false,
     errorWithConversion: false,
     inputFileError: false,
+    showHelp: false
   },
   getters: {
     formula: (state) => {
@@ -70,6 +71,9 @@ export default createStore({
     inputFileError: (state) => {
       return state.inputFileError;
     },
+    showHelp: (state) => {
+      return state.showHelp;
+    }
   },
   mutations: {
     finishConversion: (state) => {
@@ -126,6 +130,10 @@ export default createStore({
     },
     showInputFileError: (state) => {
       state.inputFileError = true;
+    },
+    toggleHelp: (state) => {
+      const current = state.showHelp;
+      state.showHelp = !current;
     },
     clearErrors: (state) => {
       state.noInput = false;

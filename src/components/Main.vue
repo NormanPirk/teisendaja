@@ -4,12 +4,11 @@
       <div class="shadow">
         <UserInput></UserInput>
         <ConversionButtons></ConversionButtons>
-        <hr />
-        <Help></Help>
       </div>
     </div>
 
     <div id="editor-right">
+      <Help v-show="this.showHelp"></Help>
       <Output></Output>
     </div>
     <ModalPrompt v-show="askNewFormula"></ModalPrompt>
@@ -41,12 +40,19 @@ export default {
       get() {
         return this.$store.getters.askNewFormula;
       }
+    },
+    showHelp: {
+      get() {
+        return this.$store.getters.showHelp;
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+
+
 #editor {
   display: flex;
   flex-direction: row;
@@ -61,13 +67,12 @@ export default {
 
 #editor-left {
   width: 55%;
-  min-width: 600px;
   margin-right: 0.5em;
 }
 #editor-right {
   width: 45%;
-  min-width: 490px;
   margin-left: 0.5em;
 }
+
 
 </style>

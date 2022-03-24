@@ -1,19 +1,18 @@
 <template>
   <div class="intro">
-    <strong>{{ $t("input") }}</strong>
-    <ErrorMessages></ErrorMessages>
+    <div>{{ $t("input") }}</div>
   </div>
-  <hr />
   <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
-    <button @click="start" v-show="showStartButton()">
+    <ErrorMessages></ErrorMessages>
+    <button @click="start" v-show="showStartButton()" class="yellow">
       {{ $t("startConversions") }}
     </button>
   </div>
   <DeleteButtons v-else></DeleteButtons>
-  <textarea
+  <div v-if="showStartButton()">
+    <textarea
     id="input-field"
-    v-if="showStartButton()"
     v-model="formula"
     :placeholder="$t('inputDescription')"
     :class="{ faulty: !isFaulty(), error: errorExists() }"
@@ -24,6 +23,8 @@
     @keyup.shift="addSymbolsFromKeyboard"
     @click="clearErrors()"
   ></textarea>
+  </div>
+  
   <div
     v-else
     id="selectable"
@@ -50,7 +51,7 @@ import ErrorMessages from "./ErrorMessages.vue";
 import DeleteButtons from "./DeleteButtons.vue";
 import validateInput from "../js/InputValidator.js";
 import getNewPosition from "../js/CursorPosition.js";
-import insertTextAtCursor from "insert-text-at-cursor";
+import insertSymbolsFromKeyboard from "@/js/SymbolsFromKeyboard.js";
 import texToMathSymbols from "../js/MathSymbolConverter.js";
 import Formula from "../js/Formula.js";
 
@@ -157,34 +158,7 @@ export default {
       });
     },
     addSymbolsFromKeyboard(event) {
-      const el = document.getElementById("input-field");
-      try {
-        switch (event.key) {
-          case "F4":
-            insertTextAtCursor(el, "\\neg");
-            break;
-          case "F5":
-            insertTextAtCursor(el, "\\land");
-            break;
-          case "F6":
-            insertTextAtCursor(el, "\\lor");
-            break;
-          case "F7":
-            insertTextAtCursor(el, "\\Rightarrow");
-            break;
-          case "F8":
-            insertTextAtCursor(el, "\\Leftrightarrow");
-            break;
-          case "F9":
-            insertTextAtCursor(el, "\\forall");
-            break;
-          case "F10":
-            insertTextAtCursor(el, "\\exists");
-            break;
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      insertSymbolsFromKeyboard(event, "input-field");
     },
     clearErrors() {
       this.$store.commit("clearErrors");
@@ -202,6 +176,7 @@ textarea {
   text-align: left !important;
   vertical-align: middle !important;
   margin-top: 1em;
+  margin-right: 1em;
   font-size: 1em;
 }
 
@@ -220,7 +195,7 @@ textarea {
 }
 
 #selectable::selection {
-  background-color: #7ff389;
+  background-color: #E39E21;
 }
 
 #selectable.error::selection {
@@ -233,7 +208,7 @@ textarea {
   overflow-wrap: break-word;
   text-align: left;
   padding: 0.5em 0;
-  margin: 0.5em 0;
+  margin: 0.5em 1em;
 }
 
 #file-uploader {
@@ -249,11 +224,16 @@ textarea {
 #file-uploader label {
   display: flex;
   align-items: center;
-  background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(85, 85, 85);
   border-radius: 5px;
+  border: none;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   height: 2em;
   padding: 0 0.5em;
   font-size: 0.8em;
+  background: rgb(247,248,249);
+}
+
+#file-uploader label:hover {
+  transform: scale(1.01);
 }
 </style>

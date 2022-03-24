@@ -2,23 +2,29 @@
   <div class="background">
     <div class="foreground">
       <div class="intro">
-        <strong>{{ $t("insertNew") }}</strong>
+        <div>{{ $t("insertNew") }}</div>
+      </div>
+      <div class="btns-err">
+        <SymbolButtons target="newFormula"></SymbolButtons>
         <strong v-show="incorrectNewFormula" class="error">{{
           $t("newIsIncorrect")
         }}</strong>
       </div>
-      <SymbolButtons target="newFormula"></SymbolButtons>
-      <textarea
-        id="selectable-new"
-        v-model="newFormula"
-        :class="{ faulty: !isFaulty() }"
-        @input="
-          renderMathSymbols();
-          clearNewFormulaError();
-        "
-        @click="clearNewFormulaError()"
-        :placeholder="$t('newInputDescription')"
-      ></textarea>
+      
+      <div>
+        <textarea
+          id="selectable-new"
+          v-model="newFormula"
+          :class="{ faulty: !isFaulty() }"
+          @input="
+            renderMathSymbols();
+            clearNewFormulaError();
+          "
+          @click="clearNewFormulaError()"
+          :placeholder="$t('newInputDescription')"
+          @keyup.shift="addSymbolsFromKeyboard"
+        ></textarea>
+      </div>
       <div id="confirm-btns">
         <button @click="cancelConversion">{{ $t("cancel") }}</button>
         <button id="add-new-formula">{{ $t("ready") }}</button>
@@ -31,6 +37,8 @@
 import SymbolButtons from "./SymbolButtons.vue";
 import getNewPosition from "../js/CursorPosition.js";
 import validateInput from "../js/InputValidator.js";
+//import insertTextAtCursor from "insert-text-at-cursor";
+import insertSymbolsFromKeyboard from "@/js/SymbolsFromKeyboard.js";
 
 export default {
   name: "ModalPrompt",
@@ -87,6 +95,9 @@ export default {
         el.selectionEnd = newPosition;
       });
     },
+    addSymbolsFromKeyboard(event) {
+      insertSymbolsFromKeyboard(event, "selectable-new");
+    },
   },
 };
 </script>
@@ -100,7 +111,7 @@ export default {
   right: 0;
   display: flex;
   justify-content: center;
-  background-color: rgba(136, 135, 135, 0.5);
+  background-color: rgba(135, 135, 135, 0.5);
 }
 
 .foreground {
@@ -108,12 +119,11 @@ export default {
   flex-direction: column;
   align-items: left;
   text-align: left;
-  height: 9em;
+  height: 15em;
   width: 40%;
   margin-top: 10%;
-  padding: 2em;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 #confirm-btns {
@@ -130,8 +140,12 @@ textarea {
   text-align: left !important;
   vertical-align: middle !important;
   margin-top: 1em;
-  font-size: 1.2em;
-  /* font-family: "Computer Modern Sans", sans-serif; */
+  font-size: 1em;
+}
+
+.btns-err {
+  display: flex;
+  justify-content: space-between;
 }
 
 .faulty {
