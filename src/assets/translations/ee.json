@@ -46,5 +46,9 @@
     "hide": "Peida",
     "truthValues": "Tõeväärtused",
     "associativityGuide": "Kui kõrvuti on sisestatud ilma sulgudeta kaks või enam sama prioriteediga tehet, siis peatehteks jääb kõige parempoolsem tehe. Näiteks valemi A∧B∧C korral on konjunktsiooni vasakuks pooleks konjunktsioon A∧B ja paremaks pooleks valem C.",
-    "or": "või"
+    "or": "või",
+    "insertFilename": "Sisesta failinimi ilma laiendita",
+    "fileNamePlaceholder": "Sisesta failinimi siia",
+    "invalidFilename": "Sisestatud failinimi pole lubatud!",
+    "forbiddenChars": "Väldi failinimes tühikuid, reavahetust ning järgmisi sümboleid: {symbols}"
 }

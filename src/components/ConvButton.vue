@@ -157,6 +157,7 @@ export default {
 
 .item3 {
   grid-column: 3;
+  text-align: center;
 }
 
 .item4 {

@@ -2,7 +2,7 @@
   <div class="intro">
     <div>{{ $t("input") }}</div>
   </div>
-  <div id="buttons" v-if="showStartButton()">
+    <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
     <ErrorMessages></ErrorMessages>
     <button @click="start" v-show="showStartButton()" class="yellow">
@@ -177,21 +177,18 @@ textarea {
   vertical-align: middle !important;
   margin-top: 1em;
   margin-right: 1em;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 #guide {
   opacity: 0.75;
 }
 
-.faulty {
-  color: rgb(252, 74, 74);
-}
-
 #buttons {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 #selectable::selection {
@@ -204,7 +201,7 @@ textarea {
 }
 
 #selectable {
-  font-size: 1em;
+  font-size: 1.2em;
   overflow-wrap: break-word;
   text-align: left;
   padding: 0.5em 0;

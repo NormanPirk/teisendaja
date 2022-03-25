@@ -11,7 +11,8 @@
       <Help v-show="this.showHelp"></Help>
       <Output></Output>
     </div>
-    <ModalPrompt v-show="askNewFormula"></ModalPrompt>
+    <NewSubformulaPrompt v-show="askNewFormula"></NewSubformulaPrompt>
+    <FilenamePrompt v-show="askFilename"></FilenamePrompt>
   </div>
 </template>
 
@@ -21,7 +22,8 @@ import ConversionButtons from "./ConversionButtons.vue";
 import Output from "./Output.vue";
 import UserInput from "./UserInput.vue";
 import Help from "./Help.vue";
-import ModalPrompt from "./ModalPrompt.vue";
+import NewSubformulaPrompt from "./NewSubformulaPrompt.vue";
+import FilenamePrompt from "./FilenamePrompt.vue";
 
 export default {
   name: "Main",
@@ -33,12 +35,18 @@ export default {
     Output,
     Help,
     UserInput,
-    ModalPrompt
+    NewSubformulaPrompt,
+    FilenamePrompt
   },
   computed: {
     askNewFormula: {
       get() {
         return this.$store.getters.askNewFormula;
+      }
+    },
+    askFilename: {
+      get() {
+        return this.$store.getters.askFilename;
       }
     },
     showHelp: {

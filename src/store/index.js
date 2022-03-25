@@ -10,7 +10,9 @@ export default createStore({
     formula: "",
     formulas: [],
     newFormula: "",
+    filename: "",
     askNewFormula: false,
+    askFilename: false,
     incorrectNewFormula: false,
     converted: false,
     noInput: false,
@@ -21,7 +23,8 @@ export default createStore({
     conversionNotAllowed: false,
     errorWithConversion: false,
     inputFileError: false,
-    showHelp: false
+    showHelp: false,
+    invalidFilename: false
   },
   getters: {
     formula: (state) => {
@@ -33,8 +36,14 @@ export default createStore({
     newFormula: (state) => {
       return state.newFormula;
     },
+    filename: (state) => {
+      return state.filename;
+    },
     askNewFormula: (state) => {
       return state.askNewFormula;
+    },
+    askFilename: (state) => {
+      return state.askFilename;
     },
     incorrectNewFormula: (state) => {
       return state.incorrectNewFormula;
@@ -73,6 +82,9 @@ export default createStore({
     },
     showHelp: (state) => {
       return state.showHelp;
+    },
+    invalidFilename: (state) => {
+      return state.invalidFilename;
     }
   },
   mutations: {
@@ -93,6 +105,18 @@ export default createStore({
     },
     setAskNewFormulaTrue: (state) => {
       state.askNewFormula = true;
+    },
+    setAskFilenameTrue: (state) => {
+      state.askFilename = true;
+    },
+    setFilename: (state, value) => {
+      state.filename = value;
+    },
+    clearFilename: (state) => {
+      state.filename = "";
+    },
+    hideFilenamePrompt: (state) => {
+      state.askFilename = false;
     },
     addSymbol: (state, value) => {
       const el = document.getElementById("input-field");
@@ -130,6 +154,12 @@ export default createStore({
     },
     showInputFileError: (state) => {
       state.inputFileError = true;
+    },
+    showInvalidFilenameError: (state) => {
+      state.invalidFilename = true;
+    },
+    clearInvalidFilenameError: (state) => {
+      state.invalidFilename = false;
     },
     toggleHelp: (state) => {
       const current = state.showHelp;

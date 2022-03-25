@@ -25,7 +25,7 @@
           @keyup.shift="addSymbolsFromKeyboard"
         ></textarea>
       </div>
-      <div id="confirm-btns">
+      <div class="confirm-btns">
         <button @click="cancelConversion">{{ $t("cancel") }}</button>
         <button id="add-new-formula">{{ $t("ready") }}</button>
       </div>
@@ -37,11 +37,10 @@
 import SymbolButtons from "./SymbolButtons.vue";
 import getNewPosition from "../js/CursorPosition.js";
 import validateInput from "../js/InputValidator.js";
-//import insertTextAtCursor from "insert-text-at-cursor";
 import insertSymbolsFromKeyboard from "@/js/SymbolsFromKeyboard.js";
 
 export default {
-  name: "ModalPrompt",
+  name: "NewSubformulaPrompt",
   data() {
     return {};
   },
@@ -103,34 +102,6 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(135, 135, 135, 0.5);
-}
-
-.foreground {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  text-align: left;
-  height: 15em;
-  width: 40%;
-  margin-top: 10%;
-  background-color: #ffffff;
-  border-radius: 8px;
-}
-
-#confirm-btns {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-}
 
 textarea {
   width: 100%;
@@ -146,13 +117,7 @@ textarea {
 .btns-err {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.faulty {
-  color: rgb(252, 74, 74);
-}
-
-.error {
-  color: rgb(252, 74, 74);
-}
 </style>

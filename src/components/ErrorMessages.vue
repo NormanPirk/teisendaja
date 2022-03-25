@@ -62,8 +62,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.error {
-  color: rgb(252, 74, 74);
-}
+<style>
 </style>

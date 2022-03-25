@@ -4,14 +4,17 @@
       <div>{{ $t("conversions") }}</div>
     </div>
     <div id="action-buttons">
-      <button @click="downloadJSON" v-tooltip="$t('downloadJSON')">
-        <i class="fa-solid fa-download"></i><div>JSON</div>
+      <button @click="download('JSON')" v-tooltip="$t('downloadJSON')">
+        <i class="fa-solid fa-download"></i>
+        <div>JSON</div>
       </button>
-      <button @click="downloadTEX" v-tooltip="$t('downloadTEX')">
-        <i class="fa-solid fa-download"></i><div>TeX</div>
+      <button @click="download('TEX')" v-tooltip="$t('downloadTEX')">
+        <i class="fa-solid fa-download"></i>
+        <div>TeX</div>
       </button>
-      <button @click="downloadPDF" v-tooltip="$t('downloadPDF')">
-        <i class="fa-solid fa-download"></i><div>PDF</div>
+      <button @click="download('PDF')" v-tooltip="$t('downloadPDF')">
+        <i class="fa-solid fa-download"></i>
+        <div>PDF</div>
       </button>
     </div>
     <div>
@@ -36,6 +39,7 @@
 import * as html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { saveAs } from "file-saver";
+import isValidFilename from "@/js/FilenameValidator.js";
 
 export default {
   name: "Output",
@@ -50,15 +54,48 @@ export default {
     },
   },
   methods: {
-    downloadJSON() {
+    async download(type) {
+      try {
+        this.$store.commit("setAskFilenameTrue");
+        const fn = await new Promise((resolve) => {
+          document.getElementById("add-filename").onclick = () => {
+            let filename = this.$store.getters.filename;
+            console.log(filename);
+            if (isValidFilename(filename)) {
+              resolve(filename);
+            } else {
+              this.$store.commit("showInvalidFilenameError");
+            }
+          };
+        });
+        switch (type) {
+          case "JSON":
+            this.downloadJSON(fn);
+            break;
+          case "TEX":
+            this.downloadTEX(fn);
+            break;
+          case "PDF":
+            this.downloadPDF(fn);
+            break;
+        }
+        this.$store.commit("clearFilename");
+        this.$store.commit("hideFilenamePrompt");
+      } catch (error) {
+        console.log(error);
+        this.$store.commit("showInvalidFilenameError");
+      }
+    },
+
+    downloadJSON(filename) {
       const content = JSON.stringify(this.formulas);
       console.log(content);
       let blob = new Blob([content], {
         type: "application/json;charset=utf-8",
       });
-      saveAs(blob, "sample.json");
+      saveAs(blob, filename + ".json");
     },
-    downloadTEX() {
+    downloadTEX(filename) {
       let content =
         "\\documentclass{article}\n\\usepackage{amsmath}\n\\begin{document}\n\\begin{align*}\n";
       for (let [i, formula] of this.formulas.entries()) {
@@ -70,15 +107,15 @@ export default {
       }
       content += "\\end{align*}\n\\end{document}";
       let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      saveAs(blob, "sample.tex");
+      saveAs(blob, filename + ".tex");
     },
-    downloadPDF() {
+    downloadPDF(filename) {
       const el = document.getElementById("pdf");
       html2canvas(el).then((canvas) => {
         let img = canvas.toDataURL();
         let doc = new jsPDF();
         doc.addImage(img, "PNG", 10, 10);
-        doc.save("sample.pdf");
+        doc.save(filename + ".pdf");
       });
     },
   },
@@ -102,7 +139,7 @@ export default {
   min-height: 3em;
   overflow-x: scroll;
   text-align: left;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 0.5em 0;
   margin: 0.5em 0;
 }
@@ -115,6 +152,7 @@ u {
   display: flex;
   justify-content: right;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 button {

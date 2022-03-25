@@ -87,4 +87,41 @@ h3 {
   padding: 0 1em;
 }
 
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(135, 135, 135, 0.5);
+}
+
+.foreground {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  height: 15em;
+  width: 40%;
+  margin-top: 10%;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.confirm-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.error, .faulty {
+  color: rgb(252, 74, 74);
+}
+
+/* .faulty {
+  color: rgb(252, 74, 74);
+} */
+
 </style>
