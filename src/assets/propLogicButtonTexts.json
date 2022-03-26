@@ -2,169 +2,169 @@
     {
         "left": "F∧F",
         "right": "F",
-        "conversionTypeL": "LS1_1",
-        "conversionTypeR": "LS1_2"
+        "conversionTypeL": "L1_1",
+        "conversionTypeR": "L1_2"
     },
     {
         "left": "F∨F",
         "right": "F",
-        "conversionTypeL": "LS2_1",
-        "conversionTypeR": "LS2_2"
+        "conversionTypeL": "L2_1",
+        "conversionTypeR": "L2_2"
     },
     {
         "left": "F∧G",
         "right": "G∧F",
-        "conversionTypeL": "LS3",
-        "conversionTypeR": "LS3"
+        "conversionTypeL": "L3",
+        "conversionTypeR": "L3"
     },
     {
         "left": "F∨G",
         "right": "G∨F",
-        "conversionTypeL": "LS4",
-        "conversionTypeR": "LS4"
+        "conversionTypeL": "L4",
+        "conversionTypeR": "L4"
     },
     {
         "left": "(F∧G)∧H",
         "right": "F∧(G∧H)",
-        "conversionTypeL": "LS5_1",
-        "conversionTypeR": "LS5_2"
+        "conversionTypeL": "L5_1",
+        "conversionTypeR": "L5_2"
     },
     {
         "left": "(F∨G)∨H",
         "right": "F∨(G∨H)",
-        "conversionTypeL": "LS6_1",
-        "conversionTypeR": "LS6_2"
+        "conversionTypeL": "L6_1",
+        "conversionTypeR": "L6_2"
     },
     {
         "left": "F∧(F∨G)",
         "right": "F",
-        "conversionTypeL": "LS7_1",
-        "conversionTypeR": "LS7_2"
+        "conversionTypeL": "L7_1",
+        "conversionTypeR": "L7_2"
     },
     {
         "left": "F∨F∧G",
         "right": "F",
-        "conversionTypeL": "LS8_1",
-        "conversionTypeR": "LS8_2"
+        "conversionTypeL": "L8_1",
+        "conversionTypeR": "L8_2"
     },
     {
         "left": "F∧(G∨H)",
         "right": "F∧G∨F∧H",
-        "conversionTypeL": "LS9_1",
-        "conversionTypeR": "LS9_2"
+        "conversionTypeL": "L9_1",
+        "conversionTypeR": "L9_2"
     },
     {
         "left": "F∨G∧H",
         "right": "(F∨G)∧(F∨H)",
-        "conversionTypeL": "LS10_1",
-        "conversionTypeR": "LS10_2"
+        "conversionTypeL": "L10_1",
+        "conversionTypeR": "L10_2"
     },
     {
         "left": "¬(F∧G)",
         "right": "¬F∨¬G",
-        "conversionTypeL": "LS11_1",
-        "conversionTypeR": "LS11_2"
+        "conversionTypeL": "L11_1",
+        "conversionTypeR": "L11_2"
     },
     {
         "left": "¬(F∨G)",
         "right": "¬F∧¬G",
-        "conversionTypeL": "LS12_1",
-        "conversionTypeR": "LS12_2"
+        "conversionTypeL": "L12_1",
+        "conversionTypeR": "L12_2"
     },
     {
         "left": "F⇒G",
         "right": "¬(F∧¬G)",
-        "conversionTypeL": "LS13_1",
-        "conversionTypeR": "LS13_2"
+        "conversionTypeL": "L13_1",
+        "conversionTypeR": "L13_2"
     },
     {
         "left": "F⇒G",
         "right": "¬F∨G",
-        "conversionTypeL": "LS14_1",
-        "conversionTypeR": "LS14_2"
+        "conversionTypeL": "L14_1",
+        "conversionTypeR": "L14_2"
     },
     {
         "left": "F∧G",
         "right": "¬(F⇒G)",
-        "conversionTypeL": "LS15_1",
-        "conversionTypeR": "LS15_2"
+        "conversionTypeL": "L15_1",
+        "conversionTypeR": "L15_2"
     },
     {
         "left": "F∨G",
         "right": "¬F⇒G",
-        "conversionTypeL": "LS16_1",
-        "conversionTypeR": "LS16_2"
+        "conversionTypeL": "L16_1",
+        "conversionTypeR": "L16_2"
     },
     {
         "left": "F⇔G",
         "right": "F∧G∨¬F∧¬G",
-        "conversionTypeL": "LS17_1",
-        "conversionTypeR": "LS17_2"
+        "conversionTypeL": "L17_1",
+        "conversionTypeR": "L17_2"
     },
     {
         "left": "F⇔G",
         "right": "(F⇒G)∧(G⇒F)",
-        "conversionTypeL": "LS18_1",
-        "conversionTypeR": "LS18_2"
-    },
-    {
-        "left": "F∧1",
-        "right": "F",
-        "conversionTypeL": "LS19_1",
-        "conversionTypeR": "LS19_2"
-    },
-    {
-        "left": "F∨1",
-        "right": "1",
-        "conversionTypeL": "LS20_1",
-        "conversionTypeR": "LS20_2"
-    },
-    {
-        "left": "F∧0",
-        "right": "0",
-        "conversionTypeL": "LS21_1",
-        "conversionTypeR": "LS21_2"
-    },
-    {
-        "left": "F∨0",
-        "right": "F",
-        "conversionTypeL": "LS22_1",
-        "conversionTypeR": "LS22_2"
-    },
-    {
-        "left": "¬¬F",
-        "right": "F",
-        "conversionTypeL": "LS23_1",
-        "conversionTypeR": "LS23_2"
+        "conversionTypeL": "L18_1",
+        "conversionTypeR": "L18_2"
     },
     {
         "left": "F⇔G",
         "right": "G⇔F",
-        "conversionTypeL": "LS24_1",
-        "conversionTypeR": "LS24_2"
+        "conversionTypeL": "L19",
+        "conversionTypeR": "L19"
     },
     {
         "left": "(F⇔G)⇔H",
         "right": "F⇔(G⇔H)",
-        "conversionTypeL": "LS25_1",
-        "conversionTypeR": "LS25_2"
+        "conversionTypeL": "L20_1",
+        "conversionTypeR": "L20_2"
+    },
+    {
+        "left": "F∧1",
+        "right": "F",
+        "conversionTypeL": "L21_1",
+        "conversionTypeR": "L21_2"
+    },
+    {
+        "left": "F∨1",
+        "right": "1",
+        "conversionTypeL": "L22_1",
+        "conversionTypeR": "L22_2"
+    },
+    {
+        "left": "F∧0",
+        "right": "0",
+        "conversionTypeL": "L23_1",
+        "conversionTypeR": "L23_2"
+    },
+    {
+        "left": "F∨0",
+        "right": "F",
+        "conversionTypeL": "L24_1",
+        "conversionTypeR": "L24_2"
     },
     {
         "left": "¬1",
         "right": "0",
-        "conversionTypeL": "LS26_1",
-        "conversionTypeR": "LS26_2"
+        "conversionTypeL": "L25_1",
+        "conversionTypeR": "L25_2"
     },
     {
         "left": "¬0",
         "right": "1",
-        "conversionTypeL": "LS27_1",
-        "conversionTypeR": "LS27_2"
+        "conversionTypeL": "L26_1",
+        "conversionTypeR": "L26_2"
+    },
+    {
+        "left": "¬¬F",
+        "right": "F",
+        "conversionTypeL": "L27_1",
+        "conversionTypeR": "L27_2"
     },
     {
         "left": "F",
         "right": "(F)",
-        "conversionTypeL": "LS28_1",
-        "conversionTypeR": "LS28_2"
+        "conversionTypeL": "L28_1",
+        "conversionTypeR": "L28_2"
     }
 ]

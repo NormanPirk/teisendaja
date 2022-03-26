@@ -1,4 +1,4 @@
-import validateInput from "../../src/js/InputValidator";
+import validateInput from "@/js/InputValidator";
 
 describe("Input validation tests", () => {
   test("recognises A", () => {

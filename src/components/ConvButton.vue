@@ -74,7 +74,7 @@ export default {
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
               if (
-                ["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)
+                ["L7_2", "L8_2", "L22_2", "L23_2"].includes(conversionType)
               ) {
                 this.$store.commit("setAskNewFormulaTrue");
                 await new Promise((resolve) => {
@@ -105,7 +105,7 @@ export default {
                 );
               }
             } else {
-              if (["LS20_2", "LS21_2"].includes(conversionType)) {
+              if (["L22_2", "L23_2"].includes(conversionType)) {
                 this.$store.commit("showFaultyConversionError");
               } else {
                 this.$store.commit("showConversionNotAllowedError");

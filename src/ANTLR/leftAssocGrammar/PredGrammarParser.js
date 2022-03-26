@@ -2,104 +2,104 @@
 // Generated from PredGrammar.g4 by ANTLR 4.9.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import LS1_1Visitor from './visitors/propositional/LS1_1Visitor.js';
-import LS1_2Visitor from './visitors/propositional/LS1_2Visitor.js';
-import LS2_1Visitor from './visitors/propositional/LS2_1Visitor.js';
-import LS2_2Visitor from './visitors/propositional/LS2_2Visitor.js';
-import LS3Visitor from './visitors/propositional/LS3Visitor.js';
-import LS4Visitor from './visitors/propositional/LS4Visitor.js';
-import LS5_1Visitor from './visitors/propositional/LS5_1Visitor.js';
-import LS5_2Visitor from './visitors/propositional/LS5_2Visitor.js';
-import LS6_1Visitor from './visitors/propositional/LS6_1Visitor.js';
-import LS6_2Visitor from './visitors/propositional/LS6_2Visitor.js';
-import LS7_1Visitor from './visitors/propositional/LS7_1Visitor.js';
-import LS7_2Visitor from './visitors/propositional/LS7_2Visitor.js';
-import LS8_1Visitor from './visitors/propositional/LS8_1Visitor.js';
-import LS8_2Visitor from './visitors/propositional/LS8_2Visitor.js';
-import LS9_1Visitor from './visitors/propositional/LS9_1Visitor.js';
-import LS9_2Visitor from './visitors/propositional/LS9_2Visitor.js';
-import LS10_1Visitor from './visitors/propositional/LS10_1Visitor.js';
-import LS10_2Visitor from './visitors/propositional/LS10_2Visitor.js';
-import LS11_1Visitor from './visitors/propositional/LS11_1Visitor.js';
-import LS11_2Visitor from './visitors/propositional/LS11_2Visitor.js';
-import LS12_1Visitor from './visitors/propositional/LS12_1Visitor.js';
-import LS12_2Visitor from './visitors/propositional/LS12_2Visitor.js';
-import LS13_1Visitor from './visitors/propositional/LS13_1Visitor.js';
-import LS13_2Visitor from './visitors/propositional/LS13_2Visitor.js';
-import LS14_1Visitor from './visitors/propositional/LS14_1Visitor.js';
-import LS14_2Visitor from './visitors/propositional/LS14_2Visitor.js';
-import LS15_1Visitor from './visitors/propositional/LS15_1Visitor.js';
-import LS15_2Visitor from './visitors/propositional/LS15_2Visitor.js';
-import LS16_1Visitor from './visitors/propositional/LS16_1Visitor.js';
-import LS16_2Visitor from './visitors/propositional/LS16_2Visitor.js';
-import LS17_1Visitor from './visitors/propositional/LS17_1Visitor.js';
-import LS17_2Visitor from './visitors/propositional/LS17_2Visitor.js';
-import LS18_1Visitor from './visitors/propositional/LS18_1Visitor.js';
-import LS18_2Visitor from './visitors/propositional/LS18_2Visitor.js';
-import LS19_1Visitor from './visitors/propositional/LS19_1Visitor.js';
-import LS19_2Visitor from './visitors/propositional/LS19_2Visitor.js';
-import LS20_1Visitor from './visitors/propositional/LS20_1Visitor.js';
-import LS20_2Visitor from './visitors/propositional/LS20_2Visitor.js';
-import LS21_1Visitor from './visitors/propositional/LS21_1Visitor.js';
-import LS21_2Visitor from './visitors/propositional/LS21_2Visitor.js';
-import LS22_1Visitor from './visitors/propositional/LS22_1Visitor.js';
-import LS22_2Visitor from './visitors/propositional/LS22_2Visitor.js';
-import LS23_1Visitor from './visitors/propositional/LS23_1Visitor.js';
-import LS23_2Visitor from './visitors/propositional/LS23_2Visitor.js';
-import LS24Visitor from './visitors/propositional/LS24Visitor.js';
-import LS25_1Visitor from './visitors/propositional/LS25_1Visitor.js';
-import LS25_2Visitor from './visitors/propositional/LS25_2Visitor.js';
-import LS26_1Visitor from './visitors/propositional/LS26_1Visitor.js';
-import LS26_2Visitor from './visitors/propositional/LS26_2Visitor.js';
-import LS27_1Visitor from './visitors/propositional/LS27_1Visitor.js';
-import LS27_2Visitor from './visitors/propositional/LS27_2Visitor.js';
-import LS28_1Visitor from './visitors/propositional/LS28_1Visitor.js';
-import LS28_2Visitor from './visitors/propositional/LS28_2Visitor.js';
-import PS1_1Visitor from './visitors/predicate/PS1_1Visitor.js';
-import PS1_2Visitor from './visitors/predicate/PS1_2Visitor.js';
-import PS1_3Visitor from './visitors/predicate/PS1_3Visitor.js';
-import PS1_4Visitor from './visitors/predicate/PS1_4Visitor.js';
-import PS2_1Visitor from './visitors/predicate/PS2_1Visitor.js';
-import PS2_2Visitor from './visitors/predicate/PS2_2Visitor.js';
-import PS2_3Visitor from './visitors/predicate/PS2_3Visitor.js';
-import PS2_4Visitor from './visitors/predicate/PS2_4Visitor.js';
-import PS3_1Visitor from './visitors/predicate/PS3_1Visitor.js';
-import PS3_2Visitor from './visitors/predicate/PS3_2Visitor.js';
-import PS3_3Visitor from './visitors/predicate/PS3_3Visitor.js';
-import PS3_4Visitor from './visitors/predicate/PS3_4Visitor.js';
-import PS3_5Visitor from './visitors/predicate/PS3_5Visitor.js';
-import PS3_6Visitor from './visitors/predicate/PS3_6Visitor.js';
-import PS3_7Visitor from './visitors/predicate/PS3_7Visitor.js';
-import PS3_8Visitor from './visitors/predicate/PS3_8Visitor.js';
-import PS4_1Visitor from './visitors/predicate/PS4_1Visitor.js';
-import PS4_2Visitor from './visitors/predicate/PS4_2Visitor.js';
-import PS4_3Visitor from './visitors/predicate/PS4_3Visitor.js';
-import PS4_4Visitor from './visitors/predicate/PS4_4Visitor.js';
-import PS4_5Visitor from './visitors/predicate/PS4_5Visitor.js';
-import PS4_6Visitor from './visitors/predicate/PS4_6Visitor.js';
-import PS4_7Visitor from './visitors/predicate/PS4_7Visitor.js';
-import PS4_8Visitor from './visitors/predicate/PS4_8Visitor.js';
-import PS5_1Visitor from './visitors/predicate/PS5_1Visitor.js';
-import PS5_2Visitor from './visitors/predicate/PS5_2Visitor.js';
-import PS6_1Visitor from './visitors/predicate/PS6_1Visitor.js';
-import PS6_2Visitor from './visitors/predicate/PS6_2Visitor.js';
+import L1_1Visitor from './visitors/propositional/L1_1Visitor.js';
+import L1_2Visitor from './visitors/propositional/L1_2Visitor.js';
+import L2_1Visitor from './visitors/propositional/L2_1Visitor.js';
+import L2_2Visitor from './visitors/propositional/L2_2Visitor.js';
+import L3Visitor from './visitors/propositional/L3Visitor.js';
+import L4Visitor from './visitors/propositional/L4Visitor.js';
+import L5_1Visitor from './visitors/propositional/L5_1Visitor.js';
+import L5_2Visitor from './visitors/propositional/L5_2Visitor.js';
+import L6_1Visitor from './visitors/propositional/L6_1Visitor.js';
+import L6_2Visitor from './visitors/propositional/L6_2Visitor.js';
+import L7_1Visitor from './visitors/propositional/L7_1Visitor.js';
+import L7_2Visitor from './visitors/propositional/L7_2Visitor.js';
+import L8_1Visitor from './visitors/propositional/L8_1Visitor.js';
+import L8_2Visitor from './visitors/propositional/L8_2Visitor.js';
+import L9_1Visitor from './visitors/propositional/L9_1Visitor.js';
+import L9_2Visitor from './visitors/propositional/L9_2Visitor.js';
+import L10_1Visitor from './visitors/propositional/L10_1Visitor.js';
+import L10_2Visitor from './visitors/propositional/L10_2Visitor.js';
+import L11_1Visitor from './visitors/propositional/L11_1Visitor.js';
+import L11_2Visitor from './visitors/propositional/L11_2Visitor.js';
+import L12_1Visitor from './visitors/propositional/L12_1Visitor.js';
+import L12_2Visitor from './visitors/propositional/L12_2Visitor.js';
+import L13_1Visitor from './visitors/propositional/L13_1Visitor.js';
+import L13_2Visitor from './visitors/propositional/L13_2Visitor.js';
+import L14_1Visitor from './visitors/propositional/L14_1Visitor.js';
+import L14_2Visitor from './visitors/propositional/L14_2Visitor.js';
+import L15_1Visitor from './visitors/propositional/L15_1Visitor.js';
+import L15_2Visitor from './visitors/propositional/L15_2Visitor.js';
+import L16_1Visitor from './visitors/propositional/L16_1Visitor.js';
+import L16_2Visitor from './visitors/propositional/L16_2Visitor.js';
+import L17_1Visitor from './visitors/propositional/L17_1Visitor.js';
+import L17_2Visitor from './visitors/propositional/L17_2Visitor.js';
+import L18_1Visitor from './visitors/propositional/L18_1Visitor.js';
+import L18_2Visitor from './visitors/propositional/L18_2Visitor.js';
+import L19Visitor from './visitors/propositional/L19Visitor.js';
+import L20_1Visitor from './visitors/propositional/L20_1Visitor.js';
+import L20_2Visitor from './visitors/propositional/L20_2Visitor.js';
+import L21_1Visitor from './visitors/propositional/L21_1Visitor.js';
+import L21_2Visitor from './visitors/propositional/L21_2Visitor.js';
+import L22_1Visitor from './visitors/propositional/L22_1Visitor.js';
+import L22_2Visitor from './visitors/propositional/L22_2Visitor.js';
+import L23_1Visitor from './visitors/propositional/L23_1Visitor.js';
+import L23_2Visitor from './visitors/propositional/L23_2Visitor.js';
+import L24_1Visitor from './visitors/propositional/L24_1Visitor.js';
+import L24_2Visitor from './visitors/propositional/L24_2Visitor.js';
+import L25_1Visitor from './visitors/propositional/L25_1Visitor.js';
+import L25_2Visitor from './visitors/propositional/L25_2Visitor.js';
+import L26_1Visitor from './visitors/propositional/L26_1Visitor.js';
+import L26_2Visitor from './visitors/propositional/L26_2Visitor.js';
+import L27_1Visitor from './visitors/propositional/L27_1Visitor.js';
+import L27_2Visitor from './visitors/propositional/L27_2Visitor.js';
+import L28_1Visitor from './visitors/propositional/L28_1Visitor.js';
+import L28_2Visitor from './visitors/propositional/L28_2Visitor.js';
+import P1_1Visitor from './visitors/predicate/P1_1Visitor.js';
+import P1_2Visitor from './visitors/predicate/P1_2Visitor.js';
+import P2_1Visitor from './visitors/predicate/P2_1Visitor.js';
+import P2_2Visitor from './visitors/predicate/P2_2Visitor.js';
+import P3_1Visitor from './visitors/predicate/P3_1Visitor.js';
+import P3_2Visitor from './visitors/predicate/P4_1Visitor.js';
+import P4_1Visitor from './visitors/predicate/P3_2Visitor.js';
+import P4_2Visitor from './visitors/predicate/P4_2Visitor.js';
+import P5_1Visitor from './visitors/predicate/P5_1Visitor.js';
+import P5_2Visitor from './visitors/predicate/P5_2Visitor.js';
+import P6_1Visitor from './visitors/predicate/P6_1Visitor.js';
+import P6_2Visitor from './visitors/predicate/P6_2Visitor.js';
+import P7_1Visitor from './visitors/predicate/P7_1Visitor.js';
+import P7_2Visitor from './visitors/predicate/P7_2Visitor.js';
+import P8_1Visitor from './visitors/predicate/P8_1Visitor.js';
+import P8_2Visitor from './visitors/predicate/P8_2Visitor.js';
+import P9_1Visitor from './visitors/predicate/P9_1Visitor.js';
+import P9_2Visitor from './visitors/predicate/P9_2Visitor.js';
+import P10_1Visitor from './visitors/predicate/P10_1Visitor.js';
+import P10_2Visitor from './visitors/predicate/P10_2Visitor.js';
+import P11_1Visitor from './visitors/predicate/P11_1Visitor.js';
+import P11_2Visitor from './visitors/predicate/P11_2Visitor.js';
+import P12_1Visitor from './visitors/predicate/P12_1Visitor.js';
+import P12_2Visitor from './visitors/predicate/P12_2Visitor.js';
+import P13Visitor from './visitors/predicate/P14Visitor.js';
+import P14Visitor from './visitors/predicate/P13Visitor.js';
+import P15Visitor from './visitors/predicate/P15Visitor.js';
+import P16Visitor from './visitors/predicate/P16Visitor.js';
 import FreeVarsVisitor from './visitors/freeVariables/FreeVarsVisitor.js';
 
 function isValidVisitor(visitor) {
-	const visitors = [LS1_1Visitor, LS1_2Visitor, LS2_1Visitor, LS2_2Visitor, LS3Visitor,
-		LS4Visitor, LS5_1Visitor, LS5_2Visitor, LS6_1Visitor, LS6_2Visitor, LS7_1Visitor, LS7_2Visitor, LS8_1Visitor,
-		LS8_2Visitor, LS9_1Visitor, LS9_2Visitor, LS10_1Visitor, LS10_2Visitor, LS11_1Visitor, LS11_2Visitor,
-		LS12_1Visitor, LS12_2Visitor, LS13_1Visitor, LS13_2Visitor, LS14_1Visitor, LS14_2Visitor,
-		LS15_1Visitor, LS15_2Visitor, LS16_1Visitor, LS16_2Visitor, LS17_1Visitor, LS17_2Visitor,
-		LS18_1Visitor, LS18_2Visitor, LS19_1Visitor, LS19_2Visitor, LS20_1Visitor, LS20_2Visitor,
-		LS21_1Visitor, LS21_2Visitor, LS22_1Visitor, LS22_2Visitor, LS23_1Visitor, LS23_2Visitor,
-		LS24Visitor, LS25_1Visitor, LS25_2Visitor, LS26_1Visitor, LS26_2Visitor, LS27_1Visitor, LS27_2Visitor,
-		LS28_1Visitor, LS28_2Visitor,
-		PS1_1Visitor, PS1_2Visitor, PS1_3Visitor, PS1_4Visitor, PS2_1Visitor, PS2_2Visitor,
-		PS2_3Visitor, PS2_4Visitor, PS3_1Visitor, PS3_2Visitor, PS3_3Visitor, PS3_4Visitor,
-		PS3_5Visitor, PS3_6Visitor, PS3_7Visitor, PS3_8Visitor, PS4_1Visitor, PS4_2Visitor, PS4_3Visitor, PS4_4Visitor,
-		PS4_5Visitor, PS4_6Visitor, PS4_7Visitor, PS4_8Visitor, PS5_1Visitor, PS5_2Visitor,
-		PS6_1Visitor, PS6_2Visitor, FreeVarsVisitor, LS25_1Visitor, LS25_2Visitor];
+	const visitors = [L1_1Visitor, L1_2Visitor, L2_1Visitor, L2_2Visitor, L3Visitor,
+		L4Visitor, L5_1Visitor, L5_2Visitor, L6_1Visitor, L6_2Visitor, L7_1Visitor, L7_2Visitor, L8_1Visitor,
+		L8_2Visitor, L9_1Visitor, L9_2Visitor, L10_1Visitor, L10_2Visitor, L11_1Visitor, L11_2Visitor,
+		L12_1Visitor, L12_2Visitor, L13_1Visitor, L13_2Visitor, L14_1Visitor, L14_2Visitor,
+		L15_1Visitor, L15_2Visitor, L16_1Visitor, L16_2Visitor, L17_1Visitor, L17_2Visitor,
+		L18_1Visitor, L18_2Visitor, L19Visitor, L20_1Visitor, L20_2Visitor,
+		L21_1Visitor, L21_2Visitor, L22_1Visitor, L22_2Visitor, L23_1Visitor, L23_2Visitor,
+		L24_1Visitor, L24_2Visitor, L25_1Visitor, L25_2Visitor, L25_1Visitor, L25_2Visitor, L26_1Visitor, L26_2Visitor,
+		L27_1Visitor, L27_2Visitor, L28_1Visitor, L28_2Visitor,	P1_1Visitor, P1_2Visitor, 
+		P2_1Visitor, P2_2Visitor, P3_1Visitor, P3_2Visitor,P4_1Visitor, P4_2Visitor,
+		P5_1Visitor, P5_2Visitor, P6_1Visitor, P6_2Visitor,P7_1Visitor, P7_2Visitor,
+		P8_1Visitor, P8_2Visitor, P9_1Visitor, P9_2Visitor, P10_1Visitor, P10_2Visitor,
+		P11_1Visitor, P11_2Visitor, P12_1Visitor, P12_2Visitor, P13Visitor, P14Visitor, 
+		P15Visitor, P16Visitor, FreeVarsVisitor, ];		
 	for (let i = 0; i < visitors.length; i++) {
 		if (visitor instanceof visitors[i]) {
 			return true;

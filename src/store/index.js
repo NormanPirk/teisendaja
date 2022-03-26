@@ -199,7 +199,7 @@ export default createStore({
       try {
         let result = convert(subFormula, conversionType);
         if (result) {
-          if (["LS7_2", "LS8_2", "LS20_2", "LS21_2"].includes(conversionType)) {
+          if (["L7_2", "L8_2", "L22_2", "L23_2"].includes(conversionType)) {
             result = handleNewFormula(conversionType, state.newFormula, result);
             state.newFormula = "";
           }

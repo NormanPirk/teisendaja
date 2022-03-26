@@ -195,6 +195,10 @@ textarea {
   background-color: #E39E21;
 }
 
+#selectable.error {
+  color: #2C3E50;
+}
+
 #selectable.error::selection {
   color: rgb(252, 74, 74);
   background-color: transparent;
