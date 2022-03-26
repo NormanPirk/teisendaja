@@ -1,8 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe("My First Test", () => {
-  it("Visits the app root url", () => {
-    cy.visit("/");
-    cy.contains("h3", "Loogikavalemite teisendaja");
+  it('Does not do much!', () => {
+    expect(true).to.equal(true)
   });
 });
