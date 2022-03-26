@@ -20,28 +20,27 @@ export default {
   name: "Home",
   title: "Loogikavalemite teisendaja",
   data() {
-    return {}
+    return {};
   },
   computed: {
     showHelp: {
       get() {
         return this.$store.getters.showHelp;
-      } 
-    }
+      },
+    },
   },
   components: {
-    Main
+    Main,
   },
   methods: {
     toggleHelp() {
       this.$store.commit("toggleHelp");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 #nav {
   display: flex;
   justify-content: space-between;
@@ -50,11 +49,10 @@ export default {
 }
 
 button div {
-  color: rgb(247,248,249);
+  color: rgb(247, 248, 249);
 }
 
 button {
   height: 2em;
 }
-
 </style>

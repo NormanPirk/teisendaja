@@ -10,7 +10,7 @@
           $t("newIsIncorrect")
         }}</strong>
       </div>
-      
+
       <div>
         <textarea
           id="selectable-new"
@@ -22,7 +22,6 @@
           "
           @click="clearNewFormulaError()"
           :placeholder="$t('newInputDescription')"
-          @keyup.shift="addSymbolsFromKeyboard"
         ></textarea>
       </div>
       <div class="confirm-btns">
@@ -37,7 +36,7 @@
 import SymbolButtons from "./SymbolButtons.vue";
 import getNewPosition from "../js/CursorPosition.js";
 import validateInput from "../js/InputValidator.js";
-import insertSymbolsFromKeyboard from "@/js/SymbolsFromKeyboard.js";
+import texAndDigitsToMathSymbols from "@/js/MathSymbolConverter.js";
 
 export default {
   name: "NewSubformulaPrompt",
@@ -81,28 +80,16 @@ export default {
       let position = el.selectionStart;
       let formulaBeginning = el.value.substring(0, position);
       let newPosition = getNewPosition(formulaBeginning, position);
-      this.newFormula = this.newFormula
-        .replaceAll("\\neg", "¬")
-        .replaceAll("\\land", "∧")
-        .replaceAll("\\lor", "∨")
-        .replaceAll("\\Rightarrow", "⇒")
-        .replaceAll("\\Leftrightarrow", "⇔")
-        .replaceAll("\\forall", "∀")
-        .replaceAll("\\exists", "∃")
-        .replaceAll(" ", "");
+      this.newFormula = texAndDigitsToMathSymbols(this.newFormula);
       this.$nextTick(() => {
         el.selectionEnd = newPosition;
       });
-    },
-    addSymbolsFromKeyboard(event) {
-      insertSymbolsFromKeyboard(event, "selectable-new");
     },
   },
 };
 </script>
 
 <style scoped>
-
 textarea {
   width: 100%;
   border: none;
@@ -119,5 +106,4 @@ textarea {
   justify-content: space-between;
   align-items: center;
 }
-
 </style>

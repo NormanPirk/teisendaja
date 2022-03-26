@@ -24,7 +24,7 @@ export default createStore({
     errorWithConversion: false,
     inputFileError: false,
     showHelp: false,
-    invalidFilename: false
+    invalidFilename: false,
   },
   getters: {
     formula: (state) => {
@@ -85,7 +85,7 @@ export default createStore({
     },
     invalidFilename: (state) => {
       return state.invalidFilename;
-    }
+    },
   },
   mutations: {
     finishConversion: (state) => {

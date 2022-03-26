@@ -73,9 +73,7 @@ export default {
           );
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
-              if (
-                ["L7_2", "L8_2", "L22_2", "L23_2"].includes(conversionType)
-              ) {
+              if (["L7_2", "L8_2", "L22_2", "L23_2"].includes(conversionType)) {
                 this.$store.commit("setAskNewFormulaTrue");
                 await new Promise((resolve) => {
                   document.getElementById("add-new-formula").onclick = () => {
@@ -167,13 +165,12 @@ export default {
 button {
   min-width: fit-content;
   font-size: 0.9em;
-  background: #5B6D81;
-  color: rgb(247,248,249);
+  background: #5b6d81;
+  color: rgb(247, 248, 249);
   padding: 0.2em;
 }
 
 button:hover {
   transform: scale(1.01);
 }
-
 </style>

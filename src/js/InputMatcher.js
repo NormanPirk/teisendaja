@@ -8,11 +8,25 @@ export default function matchInput(formula, subFormula, startIndex, endIndex) {
     return getParseTree(subFormula);
   }
   try {
-    const matchingChildLeft = getMatchingChild(getParseTree, PredGrammarParser, formula, subFormula, startIndex, endIndex)
+    const matchingChildLeft = getMatchingChild(
+      getParseTree,
+      PredGrammarParser,
+      formula,
+      subFormula,
+      startIndex,
+      endIndex
+    );
     if (matchingChildLeft) {
       return matchingChildLeft;
     } else if (isAssociativeOperation(getParseTree(subFormula))) {
-      const matchingChildRight = getMatchingChild(getParseTreeRight, PredGrammarRightParser, formula, subFormula, startIndex, endIndex);
+      const matchingChildRight = getMatchingChild(
+        getParseTreeRight,
+        PredGrammarRightParser,
+        formula,
+        subFormula,
+        startIndex,
+        endIndex
+      );
       if (matchingChildRight) {
         return matchingChildRight;
       }
@@ -43,24 +57,33 @@ function indicesMatch(child, comparable, startIndex, endIndex) {
 }
 
 function isAssociativeOperation(tree) {
-  return ["AndContext", "OrContext", "EqContext"].includes(tree.formula().constructor.name);
+  return ["AndContext", "OrContext", "EqContext"].includes(
+    tree.formula().constructor.name
+  );
 }
 
-function getMatchingChild(treeCreator, parser, formula, subFormula, startIndex, endIndex) {
+function getMatchingChild(
+  treeCreator,
+  parser,
+  formula,
+  subFormula,
+  startIndex,
+  endIndex
+) {
   const tree = treeCreator(formula);
   const subTree = treeCreator(subFormula);
   const treeStr = tree.toStringTree(parser.ruleNames);
   const subTreeStr = subTree.formula().toStringTree(parser.ruleNames);
-    if (treeStr.includes(subTreeStr)) {
-      let matchingChild = indicesMatch(
-        tree,
-        subTree.formula(),
-        startIndex,
-        endIndex
-      );
-      if (matchingChild) {
-        return matchingChild;
-      }
+  if (treeStr.includes(subTreeStr)) {
+    let matchingChild = indicesMatch(
+      tree,
+      subTree.formula(),
+      startIndex,
+      endIndex
+    );
+    if (matchingChild) {
+      return matchingChild;
     }
+  }
   return null;
 }

@@ -1,14 +1,12 @@
 <template>
   <div>
-    <button @click="addSymbol('\\neg')" v-tooltip="'shift+F4'">¬</button>
-    <button @click="addSymbol('\\land')" v-tooltip="'shift+F5'">∧</button>
-    <button @click="addSymbol('\\lor')" v-tooltip="'shift+F6'">∨</button>
-    <button @click="addSymbol('\\Rightarrow')" v-tooltip="'shift+F7'">⇒</button>
-    <button @click="addSymbol('\\Leftrightarrow')" v-tooltip="'shift+F8'">
-      ⇔
-    </button>
-    <button @click="addSymbol('\\forall')" v-tooltip="'shift+F9'">∀</button>
-    <button @click="addSymbol('\\exists')" v-tooltip="'shift+F10'">∃</button>
+    <button @click="addSymbol('\\neg')" v-tooltip="'2'">¬</button>
+    <button @click="addSymbol('\\land')" v-tooltip="'3'">∧</button>
+    <button @click="addSymbol('\\lor')" v-tooltip="'4'">∨</button>
+    <button @click="addSymbol('\\Rightarrow')" v-tooltip="'5'">⇒</button>
+    <button @click="addSymbol('\\Leftrightarrow')" v-tooltip="'6'">⇔</button>
+    <button @click="addSymbol('\\forall')" v-tooltip="'7'">∀</button>
+    <button @click="addSymbol('\\exists')" v-tooltip="'8'">∃</button>
   </div>
 </template>
 

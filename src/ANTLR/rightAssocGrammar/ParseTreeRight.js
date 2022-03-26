@@ -2,7 +2,6 @@ import antlr4 from "antlr4";
 import PredGrammarRightLexer from "./PredGrammarRightLexer.js";
 import PredGrammarRightParser from "./PredGrammarRightParser.js";
 
-
 export default function getParseTreeRight(input) {
   const chars = new antlr4.InputStream(input);
 

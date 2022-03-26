@@ -2,7 +2,7 @@ import { createI18n } from "vue3-i18n";
 import estonian from "@/assets/translations/ee.json";
 
 const messages = {
-  ee: estonian
+  ee: estonian,
 };
 
 const i18n = createI18n({

@@ -51,7 +51,7 @@
     <div class="intro help-intro">
       <div>{{ $t("resultSaveGuide") }}</div>
     </div>
-    
+
     <ol>
       <li>{{ $t("downloadGuide") }}</li>
       <li>{{ $t("itermediateDownloadGuide") }}</li>
@@ -70,25 +70,23 @@
       <button @click="hideHelp()" class="yellow">{{ $t("hideHelp") }}</button>
     </div>
   </div>
-  
 </template>
 
 <script>
 export default {
   name: "Help",
   data() {
-    return {}
+    return {};
   },
   methods: {
     hideHelp() {
       this.$store.commit("toggleHelp");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 ol {
   font-size: 1em;
   margin: 0 2em 1em 2em;
@@ -143,7 +141,7 @@ li {
 }
 
 .yellow div {
-  color: rgb(247,248,249);
+  color: rgb(247, 248, 249);
 }
 
 .help-intro {
@@ -160,5 +158,4 @@ button {
   display: flex;
   justify-content: right;
 }
-
 </style>

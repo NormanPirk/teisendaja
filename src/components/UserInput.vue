@@ -2,7 +2,7 @@
   <div class="intro">
     <div>{{ $t("input") }}</div>
   </div>
-    <div id="buttons" v-if="showStartButton()">
+  <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
     <ErrorMessages></ErrorMessages>
     <button @click="start" v-show="showStartButton()" class="yellow">
@@ -12,19 +12,18 @@
   <DeleteButtons v-else></DeleteButtons>
   <div v-if="showStartButton()">
     <textarea
-    id="input-field"
-    v-model="formula"
-    :placeholder="$t('inputDescription')"
-    :class="{ faulty: !isFaulty(), error: errorExists() }"
-    @input="
-      renderMathSymbols();
-      clearErrors();
-    "
-    @keyup.shift="addSymbolsFromKeyboard"
-    @click="clearErrors()"
-  ></textarea>
+      id="input-field"
+      v-model="formula"
+      :placeholder="$t('inputDescription')"
+      :class="{ faulty: !isFaulty(), error: errorExists() }"
+      @input="
+        renderMathSymbols();
+        clearErrors();
+      "
+      @click="clearErrors()"
+    ></textarea>
   </div>
-  
+
   <div
     v-else
     id="selectable"
@@ -51,8 +50,7 @@ import ErrorMessages from "./ErrorMessages.vue";
 import DeleteButtons from "./DeleteButtons.vue";
 import validateInput from "../js/InputValidator.js";
 import getNewPosition from "../js/CursorPosition.js";
-import insertSymbolsFromKeyboard from "@/js/SymbolsFromKeyboard.js";
-import texToMathSymbols from "../js/MathSymbolConverter.js";
+import texAndDigitsToMathSymbols from "../js/MathSymbolConverter.js";
 import Formula from "../js/Formula.js";
 
 export default {
@@ -152,13 +150,10 @@ export default {
       let position = el.selectionStart;
       let formulaBeginning = el.value.substring(0, position);
       let newPosition = getNewPosition(formulaBeginning, position);
-      this.formula = texToMathSymbols(this.formula);
+      this.formula = texAndDigitsToMathSymbols(this.formula);
       this.$nextTick(() => {
         el.selectionEnd = newPosition;
       });
-    },
-    addSymbolsFromKeyboard(event) {
-      insertSymbolsFromKeyboard(event, "input-field");
     },
     clearErrors() {
       this.$store.commit("clearErrors");
@@ -192,11 +187,11 @@ textarea {
 }
 
 #selectable::selection {
-  background-color: #E39E21;
+  background-color: #e39e21;
 }
 
 #selectable.error {
-  color: #2C3E50;
+  color: #2c3e50;
 }
 
 #selectable.error::selection {
@@ -231,7 +226,7 @@ textarea {
   height: 2em;
   padding: 0 0.5em;
   font-size: 0.8em;
-  background: rgb(247,248,249);
+  background: rgb(247, 248, 249);
 }
 
 #file-uploader label:hover {

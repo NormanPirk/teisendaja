@@ -53,34 +53,34 @@ import L27_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L27_2V
 import L28_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_1Visitor.js";
 import L28_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_2Visitor.js";
 
-import P1_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P1_1Visitor.js';
-import P1_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P1_2Visitor.js';
-import P2_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P2_1Visitor.js';
-import P2_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P2_2Visitor.js';
-import P3_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P3_1Visitor.js';
-import P3_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P3_2Visitor.js';
-import P4_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P4_1Visitor.js';
-import P4_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P4_2Visitor.js';
-import P5_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P5_1Visitor.js';
-import P5_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P5_2Visitor.js';
-import P6_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P6_1Visitor.js';
-import P6_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P6_2Visitor.js';
-import P7_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P7_1Visitor.js';
-import P7_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P7_2Visitor.js';
-import P8_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P8_1Visitor.js';
-import P8_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P8_2Visitor.js';
-import P9_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P9_1Visitor.js';
-import P9_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P9_2Visitor.js';
-import P10_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P10_1Visitor.js';
-import P10_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P10_2Visitor.js';
-import P11_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P11_1Visitor.js';
-import P11_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P11_2Visitor.js';
-import P12_1Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P12_1Visitor.js';
-import P12_2Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P12_2Visitor.js';
-import P13Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P13Visitor.js';
-import P14Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P14Visitor.js';
-import P15Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P15Visitor.js';
-import P16Visitor from '@/ANTLR/leftAssocGrammar/visitors/predicate/P16Visitor.js';
+import P1_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_1Visitor.js";
+import P1_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_2Visitor.js";
+import P2_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P2_1Visitor.js";
+import P2_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P2_2Visitor.js";
+import P3_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P3_1Visitor.js";
+import P3_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P3_2Visitor.js";
+import P4_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P4_1Visitor.js";
+import P4_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P4_2Visitor.js";
+import P5_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P5_1Visitor.js";
+import P5_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P5_2Visitor.js";
+import P6_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P6_1Visitor.js";
+import P6_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P6_2Visitor.js";
+import P7_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P7_1Visitor.js";
+import P7_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P7_2Visitor.js";
+import P8_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P8_1Visitor.js";
+import P8_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P8_2Visitor.js";
+import P9_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P9_1Visitor.js";
+import P9_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P9_2Visitor.js";
+import P10_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P10_1Visitor.js";
+import P10_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P10_2Visitor.js";
+import P11_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P11_1Visitor.js";
+import P11_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P11_2Visitor.js";
+import P12_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P12_1Visitor.js";
+import P12_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P12_2Visitor.js";
+import P13Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P13Visitor.js";
+import P14Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P14Visitor.js";
+import P15Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P15Visitor.js";
+import P16Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P16Visitor.js";
 
 export default function convert(subFormula, conversionType) {
   const tree = getParseTree(subFormula);
@@ -198,10 +198,8 @@ function getVisitor(conversionType) {
       return new L27_1Visitor();
     case "L27_2":
       return new L27_2Visitor();
-    
-    
-    
-      case "P1_1":
+
+    case "P1_1":
       return new P1_1Visitor();
     case "P1_2":
       return new P1_2Visitor();

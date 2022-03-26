@@ -7,10 +7,10 @@
   font-family: "Noto Sans Math", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2C3E50;
+  color: #2c3e50;
 }
 body {
-  background: rgb(247,248,249);
+  background: rgb(247, 248, 249);
 }
 
 #nav a {
@@ -40,12 +40,12 @@ hr {
   justify-content: space-between;
   align-items: center;
   height: 1.5em;
-  background: #2C3E50;
+  background: #2c3e50;
   margin: 0 0 1em 0;
   padding: 0.5em 1em 0.5em 1em;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-  border-bottom: solid 0.2em #E39E21;
+  border-bottom: solid 0.2em #e39e21;
 }
 
 .intro * {
@@ -59,7 +59,7 @@ hr {
 button {
   margin: 0.3em;
   font-size: 0.8em;
-  background: rgb(247,248,249);
+  background: rgb(247, 248, 249);
   border: none;
   border-radius: 5px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
@@ -82,8 +82,8 @@ h3 {
 }
 
 .yellow {
-  background: #E39E21;
-  color: rgb(247,248,249);
+  background: #e39e21;
+  color: rgb(247, 248, 249);
   padding: 0 1em;
 }
 
@@ -116,12 +116,8 @@ h3 {
   justify-content: left;
 }
 
-.error, .faulty {
+.error,
+.faulty {
   color: rgb(252, 74, 74);
 }
-
-/* .faulty {
-  color: rgb(252, 74, 74);
-} */
-
 </style>
