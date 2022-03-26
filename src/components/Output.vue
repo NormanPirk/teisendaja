@@ -4,15 +4,30 @@
       <div>{{ $t("conversions") }}</div>
     </div>
     <div id="action-buttons">
-      <button @click="download('JSON')" v-tooltip="$t('downloadJSON')" data-cy="downloadJSON">
+      <button
+        @click="download('JSON')"
+        v-tooltip="$t('downloadJSON')"
+        data-cy="downloadJSON"
+        v-bind:disabled="disableBtn"
+      >
         <i class="fa-solid fa-download"></i>
         <div>JSON</div>
       </button>
-      <button @click="download('TEX')" v-tooltip="$t('downloadTEX')" data-cy="downloadTEX">
+      <button
+        @click="download('TEX')"
+        v-tooltip="$t('downloadTEX')"
+        data-cy="downloadTEX"
+        v-bind:disabled="disableBtn"
+      >
         <i class="fa-solid fa-download"></i>
         <div>TeX</div>
       </button>
-      <button @click="download('PDF')" v-tooltip="$t('downloadPDF')" data-cy="downloadPDF">
+      <button
+        @click="download('PDF')"
+        v-tooltip="$t('downloadPDF')"
+        data-cy="downloadPDF"
+        v-bind:disabled="disableBtn"
+      >
         <i class="fa-solid fa-download"></i>
         <div>PDF</div>
       </button>
@@ -52,6 +67,9 @@ export default {
         return this.$store.getters.formulas;
       },
     },
+    disableBtn() {
+      return this.formulas.length === 0;
+    }
   },
   methods: {
     async download(type) {
@@ -174,5 +192,14 @@ sup {
 
 ::-webkit-scrollbar-thumb {
   background: rgb(204, 204, 204);
+}
+
+button:disabled:hover {
+  transform: scale(1);
+}
+
+button:disabled {
+  box-shadow: none;
+  background: rgb(227, 228, 229);
 }
 </style>
