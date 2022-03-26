@@ -3,11 +3,12 @@
     <button
       @click="removeLast"
       v-tooltip="{ text: $t('deleteLast'), theme: { placement: 'right' } }"
+      data-cy="deleteLast"
     >
       <i class="fa-solid fa-delete-left"></i>
     </button>
     <ErrorMessages></ErrorMessages>
-    <button @click="removeAll" v-tooltip="$t('deleteAll')">
+    <button @click="removeAll" v-tooltip="$t('deleteAll')" data-cy="deleteAll">
       <i class="fa-solid fa-trash-can red"></i>
     </button>
   </div>

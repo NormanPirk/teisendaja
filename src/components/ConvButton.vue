@@ -8,6 +8,7 @@
       class="item2"
       @click="startConversion(this.conversionTypeL)"
       :disabled="isDisabled"
+      :data-cy="dataCy1"
     >
       {{ this.left }}
     </button>
@@ -16,6 +17,7 @@
       class="item4"
       @click="startConversion(this.conversionTypeR)"
       :disabled="isDisabled"
+      :data-cy="dataCy2"
     >
       {{ this.right }}
     </button>
@@ -44,6 +46,12 @@ export default {
     isDisabled() {
       return this.$store.getters.formulas.length === 0;
     },
+    dataCy1() {
+      return this.conversionTypeL.split("_")[0] + "_1";
+    },
+    dataCy2() {
+      return this.conversionTypeL.split("_")[0] + "_2";
+    }
   },
   methods: {
     switchButtonText() {

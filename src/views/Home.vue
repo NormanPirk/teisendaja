@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div id="nav">
-      <h3>{{ $t("title") }}</h3>
+      <h3 data-cy="title">{{ $t("title") }}</h3>
       <!-- <router-link to="/">Home</router-link> -->
-      <button @click="toggleHelp()" class="yellow">
+      <button @click="toggleHelp()" class="yellow" data-cy="showHelpBtn">
         <div v-show="this.showHelp">{{ $t("hideHelp") }}</div>
         <div v-show="!this.showHelp">{{ $t("showHelp") }}</div>
       </button>

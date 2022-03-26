@@ -3,7 +3,7 @@
     <div class="intro">
       <div>{{ $t("enteringFormulas") }}</div>
     </div>
-    <ol>
+    <ol data-cy="insertFormulaGuide">
       <li>
         {{ $t("insertFormulaGuide") }}
       </li>
@@ -52,14 +52,14 @@
       <div>{{ $t("resultSaveGuide") }}</div>
     </div>
 
-    <ol>
+    <ol data-cy="downloadResultGuide">
       <li>{{ $t("downloadGuide") }}</li>
       <li>{{ $t("itermediateDownloadGuide") }}</li>
     </ol>
     <div class="intro help-intro">
       <div>{{ $t("symbols") }}</div>
     </div>
-    <ol>
+    <ol data-cy="allowedSymbols">
       <li>{{ $t("pred") }}: A, B, ..., Y, Z.</li>
       <li>{{ $t("ind") }}: p, q, r, s, t, u, v, w, x, y, z.</li>
       <li>{{ $t("const") }}: a, b, c, d, e.</li>

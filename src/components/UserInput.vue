@@ -5,7 +5,7 @@
   <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
     <ErrorMessages></ErrorMessages>
-    <button @click="start" v-show="showStartButton()" class="yellow">
+    <button @click="start" v-show="showStartButton()" class="yellow" data-cy="startConversions">
       {{ $t("startConversions") }}
     </button>
   </div>
@@ -21,6 +21,7 @@
         clearErrors();
       "
       @click="clearErrors()"
+      data-cy="insertFormula"
     ></textarea>
   </div>
 
@@ -39,6 +40,7 @@
       accept=".json"
       :placeholder="$t('inputDescription')"
       id="file"
+      data-cy="uploadJSON"
     />
     <label for="file">{{ $t("fileInputDescription") }}</label>
   </div>

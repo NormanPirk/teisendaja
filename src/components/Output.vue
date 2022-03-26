@@ -4,15 +4,15 @@
       <div>{{ $t("conversions") }}</div>
     </div>
     <div id="action-buttons">
-      <button @click="download('JSON')" v-tooltip="$t('downloadJSON')">
+      <button @click="download('JSON')" v-tooltip="$t('downloadJSON')" data-cy="downloadJSON">
         <i class="fa-solid fa-download"></i>
         <div>JSON</div>
       </button>
-      <button @click="download('TEX')" v-tooltip="$t('downloadTEX')">
+      <button @click="download('TEX')" v-tooltip="$t('downloadTEX')" data-cy="downloadTEX">
         <i class="fa-solid fa-download"></i>
         <div>TeX</div>
       </button>
-      <button @click="download('PDF')" v-tooltip="$t('downloadPDF')">
+      <button @click="download('PDF')" v-tooltip="$t('downloadPDF')" data-cy="downloadPDF">
         <i class="fa-solid fa-download"></i>
         <div>PDF</div>
       </button>

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <button @click="addSymbol('\\neg')" v-tooltip="'2'">¬</button>
-    <button @click="addSymbol('\\land')" v-tooltip="'3'">∧</button>
-    <button @click="addSymbol('\\lor')" v-tooltip="'4'">∨</button>
-    <button @click="addSymbol('\\Rightarrow')" v-tooltip="'5'">⇒</button>
-    <button @click="addSymbol('\\Leftrightarrow')" v-tooltip="'6'">⇔</button>
-    <button @click="addSymbol('\\forall')" v-tooltip="'7'">∀</button>
-    <button @click="addSymbol('\\exists')" v-tooltip="'8'">∃</button>
+    <button @click="addSymbol('\\neg')" v-tooltip="'2'" data-cy="not">¬</button>
+    <button @click="addSymbol('\\land')" v-tooltip="'3'" data-cy="and">∧</button>
+    <button @click="addSymbol('\\lor')" v-tooltip="'4'" data-cy="or">∨</button>
+    <button @click="addSymbol('\\Rightarrow')" v-tooltip="'5'" data-cy="impl">⇒</button>
+    <button @click="addSymbol('\\Leftrightarrow')" v-tooltip="'6'" data-cy="equiv">⇔</button>
+    <button @click="addSymbol('\\forall')" v-tooltip="'7'" data-cy="forall">∀</button>
+    <button @click="addSymbol('\\exists')" v-tooltip="'8'" data-cy="exists">∃</button>
   </div>
 </template>
 
