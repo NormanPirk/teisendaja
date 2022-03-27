@@ -38,4 +38,10 @@ export default class Formula {
     result += ct ? "^{\\;\\;\\;" + ct + "}" : "";
     return result;
   }
+
+  removeMetaInfo() {
+    this.selStart = this.formula.length;
+    this.selEnd = 0;
+    this.ct = "";
+  }
 }

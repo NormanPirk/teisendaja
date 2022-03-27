@@ -1,6 +1,6 @@
 export default function conversionAllowed(matchingChild, conversionType) {
-  if (conversionType === "L0_2") {
-    return allowL0_2(matchingChild);
+  if (conversionType === "L28_2") {
+    return allowL28_2(matchingChild);
   }
   if (conversionType === "L22_2") {
     return allowL22_2(matchingChild);
@@ -11,7 +11,7 @@ export default function conversionAllowed(matchingChild, conversionType) {
   return true;
 }
 
-function allowL0_2(matchingChild) {
+function allowL28_2(matchingChild) {
   if (matchingChild.constructor.name === "ParenContext") {
     // the matching child itself is ParenContext
     if (matchingChild.parentCtx) {

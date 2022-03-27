@@ -5,11 +5,11 @@
     $t("notSubformula")
   }}</strong>
   <strong v-show="faultyConversion" class="error">{{
-    $t("faultyConversion")
+    $t("faultyConversion", { conversion: this.selectedConversion })
   }}</strong>
   <strong v-show="noSubformula" class="error">{{ $t("noSubformula") }}</strong>
   <strong v-show="conversionNotAllowed" class="error">{{
-    $t("conversionNotAllowed")
+    $t("conversionNotAllowed", { conversion: this.selectedConversion })
   }}</strong>
   <strong v-show="inputFileError" class="error">{{
     $t("inputFileError")
@@ -58,6 +58,11 @@ export default {
         return this.$store.getters.inputFileError;
       },
     },
+    selectedConversion: {
+      get() {
+        return this.$store.getters.selectedConversion;
+      }
+    }
   },
 };
 </script>

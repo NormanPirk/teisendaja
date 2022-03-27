@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import validateInput from "../js/InputValidator.js";
-import matchInput from "../js/InputMatcher.js";
-import conversionAllowed from "../js/ConversionValidator.js";
+import validateInput from "@/js/InputValidator.js";
+import matchInput from "@/js/InputMatcher.js";
+import conversionAllowed from "@/js/ConversionValidator.js";
 import ConvTypeMarker from "./ConvTypeMarker.vue";
 
 export default {
@@ -60,6 +60,7 @@ export default {
       }
     },
     async startConversion(conversionType) {
+      this.$store.commit("setSelectedConversion", conversionType.split("_")[0]);
       const selection = document.getSelection();
       if (
         selection.anchorNode.parentElement.id === "selectable" &&

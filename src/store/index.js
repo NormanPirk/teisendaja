@@ -25,6 +25,7 @@ export default createStore({
     inputFileError: false,
     showHelp: false,
     invalidFilename: false,
+    selectedConversion: ""
   },
   getters: {
     formula: (state) => {
@@ -86,6 +87,9 @@ export default createStore({
     invalidFilename: (state) => {
       return state.invalidFilename;
     },
+    selectedConversion: (state) => {
+      return state.selectedConversion;
+    }
   },
   mutations: {
     finishConversion: (state) => {
@@ -131,6 +135,9 @@ export default createStore({
         state.formulas.push(new Formula(state.formula));
       }
     },
+    setSelectedConversion: (state, value) => {
+      state.selectedConversion = value;
+    },
     showNoInputError: (state) => {
       state.noInput = true;
     },
@@ -173,6 +180,7 @@ export default createStore({
       state.noSubformula = false;
       state.conversionNotAllowed = false;
       state.inputFileError = false;
+      state.selectedConversion = "";
     },
     clearNewFormulaError: (state) => {
       state.incorrectNewFormula = false;
@@ -180,6 +188,9 @@ export default createStore({
     removeLast: (state) => {
       if (state.formulas.length > 0) {
         state.formulas.pop();
+        if (state.formulas.length > 0) {
+          state.formulas[state.formulas.length - 1].removeMetaInfo();
+        }
       }
       if (state.formulas.length > 0) {
         state.formula = state.formulas[state.formulas.length - 1].formula;
