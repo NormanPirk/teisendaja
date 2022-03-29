@@ -16,7 +16,7 @@ function allowL28_2(matchingChild) {
     // the matching child itself is ParenContext
     if (matchingChild.parentCtx) {
       const parentContext = matchingChild.parentCtx.constructor.name;
-      const childContext = matchingChild.children[1].constructor.name;
+      const childContext = matchingChild.formula().constructor.name;
       if (parentContext === "NegContext") {
         if (!["NegContext", "PredContext"].includes(childContext)) {
           return false;
@@ -31,6 +31,10 @@ function allowL28_2(matchingChild) {
         }
       } else if (parentContext === "ImplContext") {
         if (["EqContext"].includes(childContext)) {
+          return false;
+        }
+      } else if (parentContext === "ForallContext" || parentContext === "ExistsContext") {
+        if (["AndContext", "OrContext", "ImplContext", "EqContext"].includes(childContext)) {
           return false;
         }
       }

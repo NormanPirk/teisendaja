@@ -183,7 +183,7 @@ button * {
 }
 
 sup {
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 
 ::-webkit-scrollbar {

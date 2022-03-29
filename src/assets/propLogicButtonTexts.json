@@ -166,5 +166,17 @@
         "right": "(F)",
         "conversionTypeL": "L28_1",
         "conversionTypeR": "L28_2"
+    },
+    {
+        "left": "F",
+        "right": "F∧(G∨¬G)",
+        "conversionTypeL": "L29_1",
+        "conversionTypeR": "L29_2"
+    },
+    {
+        "left": "F",
+        "right": "F∨G∧¬G",
+        "conversionTypeL": "L30_1",
+        "conversionTypeR": "L30_2"
     }
 ]

@@ -55,6 +55,10 @@ import L27_1Visitor from './visitors/propositional/L27_1Visitor.js';
 import L27_2Visitor from './visitors/propositional/L27_2Visitor.js';
 import L28_1Visitor from './visitors/propositional/L28_1Visitor.js';
 import L28_2Visitor from './visitors/propositional/L28_2Visitor.js';
+import L29_1Visitor from './visitors/propositional/L29_1Visitor.js';
+import L29_2Visitor from './visitors/propositional/L29_2Visitor.js';
+import L30_1Visitor from './visitors/propositional/L30_1Visitor.js';
+import L30_2Visitor from './visitors/propositional/L30_2Visitor.js';
 import P1_1Visitor from './visitors/predicate/P1_1Visitor.js';
 import P1_2Visitor from './visitors/predicate/P1_2Visitor.js';
 import P2_1Visitor from './visitors/predicate/P2_1Visitor.js';
@@ -94,7 +98,8 @@ function isValidVisitor(visitor) {
 		L18_1Visitor, L18_2Visitor, L19Visitor, L20_1Visitor, L20_2Visitor,
 		L21_1Visitor, L21_2Visitor, L22_1Visitor, L22_2Visitor, L23_1Visitor, L23_2Visitor,
 		L24_1Visitor, L24_2Visitor, L25_1Visitor, L25_2Visitor, L25_1Visitor, L25_2Visitor, L26_1Visitor, L26_2Visitor,
-		L27_1Visitor, L27_2Visitor, L28_1Visitor, L28_2Visitor,	P1_1Visitor, P1_2Visitor, 
+		L27_1Visitor, L27_2Visitor, L28_1Visitor, L28_2Visitor,	L29_1Visitor, L29_2Visitor,
+		L30_1Visitor, L30_2Visitor, P1_1Visitor, P1_2Visitor, 
 		P2_1Visitor, P2_2Visitor, P3_1Visitor, P3_2Visitor,P4_1Visitor, P4_2Visitor,
 		P5_1Visitor, P5_2Visitor, P6_1Visitor, P6_2Visitor,P7_1Visitor, P7_2Visitor,
 		P8_1Visitor, P8_2Visitor, P9_1Visitor, P9_2Visitor, P10_1Visitor, P10_2Visitor,

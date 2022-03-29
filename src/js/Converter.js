@@ -52,6 +52,10 @@ import L27_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L27_1V
 import L27_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L27_2Visitor.js";
 import L28_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_1Visitor.js";
 import L28_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_2Visitor.js";
+import L29_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L29_1Visitor.js";
+import L29_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L29_2Visitor.js";
+import L30_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L30_1Visitor.js";
+import L30_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L30_2Visitor.js";
 
 import P1_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_1Visitor.js";
 import P1_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_2Visitor.js";
@@ -92,10 +96,6 @@ export default function convert(subFormula, conversionType) {
 
 function getVisitor(conversionType) {
   switch (conversionType) {
-    case "L28_1":
-      return new L28_1Visitor();
-    case "L28_2":
-      return new L28_2Visitor();
     case "L1_1":
       return new L1_1Visitor();
     case "L1_2":
@@ -198,7 +198,18 @@ function getVisitor(conversionType) {
       return new L27_1Visitor();
     case "L27_2":
       return new L27_2Visitor();
-
+    case "L28_1":
+      return new L28_1Visitor();
+    case "L28_2":
+      return new L28_2Visitor();
+    case "L29_1":
+      return new L29_1Visitor();
+    case "L29_2":
+      return new L29_2Visitor();
+    case "L30_1":
+      return new L30_1Visitor();
+    case "L30_2":
+      return new L30_2Visitor();
     case "P1_1":
       return new P1_1Visitor();
     case "P1_2":

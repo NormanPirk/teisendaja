@@ -82,7 +82,7 @@ export default {
           );
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
-              if (["L7_2", "L8_2", "L22_2", "L23_2"].includes(conversionType)) {
+              if (["L7_2", "L8_2", "L22_2", "L23_2", "L29_1", "L30_1"].includes(conversionType)) {
                 this.$store.commit("setAskNewFormulaTrue");
                 await new Promise((resolve) => {
                   document.getElementById("add-new-formula").onclick = () => {
