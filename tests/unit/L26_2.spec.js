@@ -6,8 +6,8 @@ describe("L26_2 tests", () => {
     expect(convert(input, "L26_2")).toBe("¬0");
   });
 
-  test("Returns null if input is A", () => {
-    const input = "A";
+  test("Returns null if input is not 1", () => {
+    const input = "¬0";
     expect(convert(input, "L26_2")).toBe(null);
   });
 });

@@ -47,10 +47,3 @@ describe("L27_1 tests", () => {
   });
 
 });
-/* const NEG = '¬';
-    const AND = '∧';
-    const OR = '∨';
-    const IMPL =  '⇒';
-    const EQ = '⇔';
-    const FORALL = '∀';
-    const EXISTS = '∃'; */

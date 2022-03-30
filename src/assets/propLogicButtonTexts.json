@@ -85,7 +85,7 @@
     },
     {
         "left": "F∧G",
-        "right": "¬(F⇒G)",
+        "right": "¬(F⇒¬G)",
         "conversionTypeL": "L15_1",
         "conversionTypeR": "L15_2"
     },
