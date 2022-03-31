@@ -10,7 +10,7 @@
   color: #2c3e50;
 }
 body {
-  background: rgb(247, 248, 249);
+  background-color: rgb(247, 248, 249);
 }
 
 #nav a {
@@ -28,7 +28,7 @@ p {
   border-radius: 8px;
   margin-bottom: 2em;
   padding-bottom: 1em;
-  background: #ffffff;
+  background-color: #ffffff;
 }
 
 hr {
@@ -40,7 +40,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   height: 1.5em;
-  background: #2c3e50;
+  background-color: #2c3e50;
   margin: 0 0 1em 0;
   padding: 0.5em 1em 0.5em 1em;
   border-top-right-radius: 8px;
@@ -59,7 +59,7 @@ hr {
 button {
   margin: 0.3em;
   font-size: 0.8em;
-  background: rgb(247, 248, 249);
+  background-color: rgb(247, 248, 249);
   border: none;
   border-radius: 5px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
@@ -82,7 +82,7 @@ h3 {
 }
 
 .yellow {
-  background: #e39e21;
+  background-color: #e39e21;
   color: rgb(247, 248, 249);
   padding: 0 1em;
 }

@@ -174,12 +174,22 @@ export default {
 button {
   min-width: fit-content;
   font-size: 0.9em;
-  background: #5b6d81;
+  background-color: #5b6d81;
   color: rgb(247, 248, 249);
   padding: 0.2em;
 }
 
 button:hover {
-  transform: scale(1.01);
+  transform: scale(1.05);
 }
+
+button:disabled:hover {
+  transform: scale(1);
+}
+
+button:disabled {
+  box-shadow: none;
+  opacity: 0.7;
+}
+
 </style>

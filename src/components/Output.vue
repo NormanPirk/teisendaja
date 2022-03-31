@@ -187,11 +187,11 @@ sup {
 }
 
 ::-webkit-scrollbar {
-  background: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(204, 204, 204);
+  background-color: rgb(204, 204, 204);
 }
 
 button:disabled:hover {
@@ -200,6 +200,6 @@ button:disabled:hover {
 
 button:disabled {
   box-shadow: none;
-  background: rgb(227, 228, 229);
+  background-color: rgb(227, 228, 229);
 }
 </style>

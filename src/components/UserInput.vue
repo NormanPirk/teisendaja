@@ -228,10 +228,11 @@ textarea {
   height: 2em;
   padding: 0 0.5em;
   font-size: 0.8em;
-  background: rgb(247, 248, 249);
+  background-color: rgb(247, 248, 249);
 }
 
 #file-uploader label:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
+
 </style>

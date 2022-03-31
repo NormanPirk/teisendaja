@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style scoped>
+
 div {
   display: flex;
   justify-content: left;
@@ -40,7 +41,13 @@ div {
   height: 2em;
   flex-wrap: wrap;
 }
+
 button {
   width: 2em;
 }
+
+button:hover {
+  transform: scale(1.12);
+}
+
 </style>
