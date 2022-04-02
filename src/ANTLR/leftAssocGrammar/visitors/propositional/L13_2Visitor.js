@@ -19,9 +19,9 @@ export default class L13_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitNeg(ctx) {
 		if (ctx.constructor.name === "NegContext") {
-			if (ctx.children && ctx.children[1] && ctx.children[1].constructor.name === "ParenContext") {
+			if (ctx.formula().constructor.name === "ParenContext") {
                 const paren = ctx.children[1];
-                if (paren.children && paren.children[1] && paren.children[1].constructor.name === "AndContext") {
+                if (paren.formula().constructor.name === "AndContext") {
                     const and = paren.children[1];
                     const rightChild = and.right;
                     if (rightChild.constructor.name === "NegContext") {

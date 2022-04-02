@@ -3,57 +3,60 @@ import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L22_2 tests", () => {
 
-    test("turns 1 into disjunction with a new formula F", () => {
-        const input = "1";
-        const newFormula = "F";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("F∨1");
-    });
-
-    test("turns 1 into disjunction with a new formula F∧G", () => {
-        const input = "1";
-        const newFormula = "F∧G";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("F∧G∨1");
-    });
-
-    test("turns 1 into disjunction with a new formula A(x)∨B(y)", () => {
-        const input = "1";
-        const newFormula = "A(x)∨B(y)";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("A(x)∨B(y)∨1");
-    });
-
-    test("turns 1 into disjunction with a new formula ∀xA(x)⇒B(y)", () => {
-        const input = "1";
-        const newFormula = "∀xA(x)⇒B(y)";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("(∀xA(x)⇒B(y))∨1");
-    });
-
-    test("turns 1 into disjunction with a new formula A(x)⇔∃xB(y)", () => {
-        const input = "1";
-        const newFormula = "A(x)⇔∃xB(y)";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("(A(x)⇔∃xB(y))∨1");
-    });
-
-    test("turns 1 into disjunction with a new formula ¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))", () => {
-        const input = "1";
-        const newFormula = "¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))";
-        let result = convert(input, "L22_2");
-        result = handleNewFormula("L22_2", newFormula, result);
-        expect(result).toBe("¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))∨1");
-    });
-
-    test("returns null if input is not 1", () => {
+    test("creates disjunction with tautology of F and G", () => {
         const input = "F";
-        expect(convert(input, "L22_2")).toBe(null);
+        const newFormula = "G";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨G∧¬G");
+    });
+
+    test("creates disjunction with tautology of F and ¬G", () => {
+        const input = "F";
+        const newFormula = "¬G";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨¬G∧¬¬G");
+    });
+
+    test("creates disjunction with tautology of F and G∧H", () => {
+        const input = "F";
+        const newFormula = "G∧H";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨G∧H∧¬(G∧H)");
+    });
+
+    test("creates disjunction with tautology of F and G∨H", () => {
+        const input = "F";
+        const newFormula = "G∨H";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨(G∨H)∧¬(G∨H)");
+    });
+
+    test("creates disjunction with tautology of F and ∀xF(x)⇒H", () => {
+        const input = "F";
+        const newFormula = "∀xF(x)⇒H";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨(∀xF(x)⇒H)∧¬(∀xF(x)⇒H)");
+    });
+
+    test("creates disjunction with tautology of F and ∃xF(x)⇔H", () => {
+        const input = "F";
+        const newFormula = "∃xF(x)⇔H";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨(∃xF(x)⇔H)∧¬(∃xF(x)⇔H)");
+    });
+
+    test("creates disjunction with tautology of F and ∃xF(x)⇔∀yG(y)∧H(x,f(z))", () => {
+        const input = "F";
+        const newFormula = "∃xF(x)⇔∀yG(y)∧H(x,f(z))";
+        let result = convert(input, "L22_2");
+        result = handleNewFormula("L22_2", newFormula, result);
+        expect(result).toBe("F∨(∃xF(x)⇔∀yG(y)∧H(x,f(z)))∧¬(∃xF(x)⇔∀yG(y)∧H(x,f(z)))");
     });
 
 });

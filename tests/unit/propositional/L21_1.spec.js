@@ -1,55 +1,46 @@
 import convert from "@/js/Converter.js";
+import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L21_1 tests", () => {
-  
-  test("simplifies F∧1", () => {
-    const input = "F∧1";
-    expect(convert(input, "L21_1")).toBe("F");
-  });
 
-  test("simplifies ¬F(x)∧1", () => {
-    const input = "¬F(x)∧1";
-    expect(convert(input, "L21_1")).toBe("¬F(x)");
-  });
+    test("removes tautology from conjunction F∧(G∨¬G)", () => {
+        const input = "F∧(G∨¬G)";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies ¬F(x)∧G(y)∧1", () => {
-    const input = "¬F(x)∧G(y)∧1";
-    expect(convert(input, "L21_1")).toBe("¬F(x)∧G(y)");
-  });
+    test("removes tautology from conjunction F∧(¬G∨¬¬G)", () => {
+        const input = "F∧(¬G∨¬¬G)";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies (F(x)∨G(y))∧1", () => {
-    const input = "(F(x)∨G(y))∧1";
-    expect(convert(input, "L21_1")).toBe("(F(x)∨G(y))");
-  });
+    test("removes tautology from conjunction F∧(G∧H∨¬(G∧H))", () => {
+        const input = "F∧(G∧H∨¬(G∧H))";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies (F(x)⇒G(y))∧1", () => {
-    const input = "(F(x)⇒G(y))∧1";
-    expect(convert(input, "L21_1")).toBe("(F(x)⇒G(y))");
-  });
+    test("removes tautology from conjunction F∧(G∨H∨¬(G∨H))", () => {
+        const input = "F∧(G∨H∨¬(G∨H))";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies (F(x)⇔G(y))∧1", () => {
-    const input = "(F(x)⇔G(y))∧1";
-    expect(convert(input, "L21_1")).toBe("(F(x)⇔G(y))");
-  });
+    test("removes tautology from conjunction F∧((∀xF(x)⇒H)∨¬(∀xF(x)⇒H))", () => {
+        const input = "F∧((∀xF(x)⇒H)∨¬(∀xF(x)⇒H))";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies ∀xF(x)∧1", () => {
-    const input = "∀xF(x)∧1";
-    expect(convert(input, "L21_1")).toBe("∀xF(x)");
-  });
+    test("removes tautology from conjunction F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔H))", () => {
+        const input = "F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔H))";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies ∃xF(x)∧1", () => {
-    const input = "∃xF(x)∧1";
-    expect(convert(input, "L21_1")).toBe("∃xF(x)");
-  });
+    test("removes tautology from conjunction F∧((∃xF(x)⇔∀yG(y)∧H(x,f(z)))∨¬(∃xF(x)⇔∀yG(y)∧H(x,f(z))))", () => {
+        const input = "F∧((∃xF(x)⇔∀yG(y)∧H(x,f(z)))∨¬(∃xF(x)⇔∀yG(y)∧H(x,f(z))))";
+        expect(convert(input, "L21_1")).toBe("F");
+    });
 
-  test("simplifies ∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∧1", () => {
-    const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∧1";
-    expect(convert(input, "L21_1")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))");
-  });
-
-  test("returns null if input is not in the form of F∧1", () => {
-    const input = "1∧F";
-    expect(convert(input, "L21_1")).toBe(null);
-  });
+    test("returns null if there is no tautology F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔G))", () => {
+        const input = "F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔G))";
+        expect(convert(input, "L21_1")).toBe(null);
+    });
 
 });

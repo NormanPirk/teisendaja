@@ -120,62 +120,62 @@
         "conversionTypeR": "L20_2"
     },
     {
-        "left": "F∧1",
+        "left": "F∧(G∨¬G)",
         "right": "F",
         "conversionTypeL": "L21_1",
         "conversionTypeR": "L21_2"
     },
     {
-        "left": "F∨1",
-        "right": "1",
+        "left": "F∨G∧¬G",
+        "right": "F",
         "conversionTypeL": "L22_1",
         "conversionTypeR": "L22_2"
     },
     {
-        "left": "F∧0",
-        "right": "0",
+        "left": "F∧1",
+        "right": "F",
         "conversionTypeL": "L23_1",
         "conversionTypeR": "L23_2"
     },
     {
-        "left": "F∨0",
-        "right": "F",
+        "left": "F∨1",
+        "right": "1",
         "conversionTypeL": "L24_1",
         "conversionTypeR": "L24_2"
     },
     {
-        "left": "¬1",
+        "left": "F∧0",
         "right": "0",
         "conversionTypeL": "L25_1",
         "conversionTypeR": "L25_2"
     },
     {
-        "left": "¬0",
-        "right": "1",
+        "left": "F∨0",
+        "right": "F",
         "conversionTypeL": "L26_1",
         "conversionTypeR": "L26_2"
     },
     {
-        "left": "¬¬F",
-        "right": "F",
+        "left": "¬1",
+        "right": "0",
         "conversionTypeL": "L27_1",
         "conversionTypeR": "L27_2"
     },
     {
-        "left": "F",
-        "right": "(F)",
+        "left": "¬0",
+        "right": "1",
         "conversionTypeL": "L28_1",
         "conversionTypeR": "L28_2"
     },
     {
-        "left": "F",
-        "right": "F∧(G∨¬G)",
+        "left": "¬¬F",
+        "right": "F",
         "conversionTypeL": "L29_1",
         "conversionTypeR": "L29_2"
     },
     {
         "left": "F",
-        "right": "F∨G∧¬G",
+        "right": "(F)",
         "conversionTypeL": "L30_1",
         "conversionTypeR": "L30_2"
     }

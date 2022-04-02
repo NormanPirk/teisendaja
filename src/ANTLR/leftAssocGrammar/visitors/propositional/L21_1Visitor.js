@@ -19,13 +19,23 @@ export default class L21_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitAnd(ctx) {
 		if (ctx.constructor.name === "AndContext") {
-			const left = ctx.left.getText();
-			const right = ctx.right.getText();
-            if (right === '1') {
-                return left;
+			if (ctx.right.constructor.name === "ParenContext") {
+                const or = ctx.right.formula();
+                if (or.constructor.name === "OrContext") {
+                    const left = or.left;
+                    const right = or.right;
+                    if (right.constructor.name === "NegContext") {
+                        if (left.getText() === right.formula().getText()) {
+                            return ctx.left.getText();
+                        } else if (["AndContext", "OrContext"].includes(left.constructor.name) && right.formula().constructor.name === "ParenContext") {
+                            if (left.getText() === right.formula().formula().getText()) {
+                                return ctx.left.getText();
+                            }
+                        }
+                    }
+                }
             }
 		}
         throw "Incompatible input!";
-		
 	}
 }

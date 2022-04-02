@@ -100,7 +100,7 @@ export default {
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
               if (
-                ["L7_2", "L8_2", "L22_2", "L23_2", "L29_1", "L30_1"].includes(
+                ["L7_2", "L8_2", "L21_2", "L22_2", "L24_2", "L25_2"].includes(
                   conversionType
                 )
               ) {

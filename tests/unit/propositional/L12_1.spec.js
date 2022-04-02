@@ -22,6 +22,11 @@ describe("L12_1 tests", () => {
         expect(convert(input, "L12_1")).toBe("¬(A(x)∧C(t))∧¬B(y,f(z))");
     });
 
+    test("applies DeMorgan to ¬(F∨G∧¬(C∨1))", () => {
+        const input = "¬(F∨G∧¬(C∨1))";
+        expect(convert(input, "L12_1")).toBe("¬F∧¬(G∧¬(C∨1))");
+    });
+
     test("applies DeMorgan to ¬(A(x)∨B(y)∨C(z))", () => {
         const input = "¬(A(x)∨B(y)∨C(z))";
         expect(convert(input, "L12_1")).toBe("¬(A(x)∨B(y))∧¬C(z)");

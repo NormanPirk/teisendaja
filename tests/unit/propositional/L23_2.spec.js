@@ -1,59 +1,50 @@
 import convert from "@/js/Converter.js";
-import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L23_2 tests", () => {
+  
+  test("turns into conjunction with 1 F", () => {
+    const input = "F";
+    expect(convert(input, "L23_2")).toBe("F∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula F", () => {
-        const input = "0";
-        const newFormula = "F";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("F∧0");
-    });
+  test("turns into conjunction with 1 ¬F(x)", () => {
+    const input = "¬F(x)";
+    expect(convert(input, "L23_2")).toBe("¬F(x)∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula F∧G", () => {
-        const input = "0";
-        const newFormula = "F∧G";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("F∧G∧0");
-    });
+  test("turns into conjunction with 1 ¬F(x)∧G(y)", () => {
+    const input = "¬F(x)∧G(y)";
+    expect(convert(input, "L23_2")).toBe("¬F(x)∧G(y)∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula A(x)∨B(y)", () => {
-        const input = "0";
-        const newFormula = "A(x)∨B(y)";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("(A(x)∨B(y))∧0");
-    });
+  test("turns into conjunction with 1 F(x)∨G(y)", () => {
+    const input = "F(x)∨G(y)";
+    expect(convert(input, "L23_2")).toBe("(F(x)∨G(y))∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula ∀xA(x)⇒B(y)", () => {
-        const input = "0";
-        const newFormula = "∀xA(x)⇒B(y)";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("(∀xA(x)⇒B(y))∧0");
-    });
+  test("turns into conjunction with 1 F(x)⇒G(y)", () => {
+    const input = "F(x)⇒G(y)";
+    expect(convert(input, "L23_2")).toBe("(F(x)⇒G(y))∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula A(x)⇔∃xB(y)", () => {
-        const input = "0";
-        const newFormula = "A(x)⇔∃xB(y)";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("(A(x)⇔∃xB(y))∧0");
-    });
+  test("turns into conjunction with 1 F(x)⇔G(y)", () => {
+    const input = "F(x)⇔G(y)";
+    expect(convert(input, "L23_2")).toBe("(F(x)⇔G(y))∧1");
+  });
 
-    test("turns 0 into conjunction with a new formula ¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))", () => {
-        const input = "0";
-        const newFormula = "¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))";
-        let result = convert(input, "L23_2");
-        result = handleNewFormula("L23_2", newFormula, result);
-        expect(result).toBe("¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))∧0");
-    });
+  test("turns into conjunction with 1 ∀xF(x)", () => {
+    const input = "∀xF(x)";
+    expect(convert(input, "L23_2")).toBe("∀xF(x)∧1");
+  });
 
-    test("returns null if input is not 0", () => {
-        const input = "F";
-        expect(convert(input, "L23_2")).toBe(null);
-    });
+  test("turns into conjunction with 1 ∃xF(x)", () => {
+    const input = "∃xF(x)";
+    expect(convert(input, "L23_2")).toBe("∃xF(x)∧1");
+  });
+
+  test("turns into conjunction with 1 ∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))", () => {
+    const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))";
+    expect(convert(input, "L23_2")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∧1");
+  });
 
 });

@@ -23,11 +23,11 @@ export default class L12_1Visitor extends antlr4.tree.ParseTreeVisitor {
 			if (ctx.formula().constructor.name === "ParenContext") {
                 const paren = ctx.formula();
                 if (paren.formula().constructor.name === "OrContext") {
-                    const and = paren.formula();
-                    let left = and.left.getText();
-					let right = and.right.getText();
-					left = addParensNeg(and.left.constructor.name, left);
-					right = addParensNeg(and.right.constructorname, right);
+                    const or = paren.formula();
+                    let left = or.left.getText();
+					let right = or.right.getText();
+					left = addParensNeg(or.left.constructor.name, left);
+					right = addParensNeg(or.right.constructor.name, right);
                     return "¬" + left + "∧¬" + right;
                 }
             }

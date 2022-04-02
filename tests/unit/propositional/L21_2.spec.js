@@ -1,50 +1,62 @@
 import convert from "@/js/Converter.js";
+import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L21_2 tests", () => {
-  
-  test("turns into conjunction with 1 F", () => {
-    const input = "F";
-    expect(convert(input, "L21_2")).toBe("F∧1");
-  });
 
-  test("turns into conjunction with 1 ¬F(x)", () => {
-    const input = "¬F(x)";
-    expect(convert(input, "L21_2")).toBe("¬F(x)∧1");
-  });
+    test("creates conjunction with tautology of F and G", () => {
+        const input = "F";
+        const newFormula = "G";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧(G∨¬G)");
+    });
 
-  test("turns into conjunction with 1 ¬F(x)∧G(y)", () => {
-    const input = "¬F(x)∧G(y)";
-    expect(convert(input, "L21_2")).toBe("¬F(x)∧G(y)∧1");
-  });
+    test("creates conjunction with tautology of F and ¬G", () => {
+        const input = "F";
+        const newFormula = "¬G";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧(¬G∨¬¬G)");
+    });
 
-  test("turns into conjunction with 1 F(x)∨G(y)", () => {
-    const input = "F(x)∨G(y)";
-    expect(convert(input, "L21_2")).toBe("(F(x)∨G(y))∧1");
-  });
+    test("creates conjunction with tautology of F and G∧H", () => {
+        const input = "F";
+        const newFormula = "G∧H";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧(G∧H∨¬(G∧H))");
+    });
 
-  test("turns into conjunction with 1 F(x)⇒G(y)", () => {
-    const input = "F(x)⇒G(y)";
-    expect(convert(input, "L21_2")).toBe("(F(x)⇒G(y))∧1");
-  });
+    test("creates conjunction with tautology of F and G∨H", () => {
+        const input = "F";
+        const newFormula = "G∨H";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧(G∨H∨¬(G∨H))");
+    });
 
-  test("turns into conjunction with 1 F(x)⇔G(y)", () => {
-    const input = "F(x)⇔G(y)";
-    expect(convert(input, "L21_2")).toBe("(F(x)⇔G(y))∧1");
-  });
+    test("creates conjunction with tautology of F and ∀xF(x)⇒H", () => {
+        const input = "F";
+        const newFormula = "∀xF(x)⇒H";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧((∀xF(x)⇒H)∨¬(∀xF(x)⇒H))");
+    });
 
-  test("turns into conjunction with 1 ∀xF(x)", () => {
-    const input = "∀xF(x)";
-    expect(convert(input, "L21_2")).toBe("∀xF(x)∧1");
-  });
+    test("creates conjunction with tautology of F and ∃xF(x)⇔H", () => {
+        const input = "F";
+        const newFormula = "∃xF(x)⇔H";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔H))");
+    });
 
-  test("turns into conjunction with 1 ∃xF(x)", () => {
-    const input = "∃xF(x)";
-    expect(convert(input, "L21_2")).toBe("∃xF(x)∧1");
-  });
-
-  test("turns into conjunction with 1 ∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))", () => {
-    const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))";
-    expect(convert(input, "L21_2")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∧1");
-  });
+    test("creates conjunction with tautology of F and ∃xF(x)⇔∀yG(y)∧H(x,f(z))", () => {
+        const input = "F";
+        const newFormula = "∃xF(x)⇔∀yG(y)∧H(x,f(z))";
+        let result = convert(input, "L21_2");
+        result = handleNewFormula("L21_2", newFormula, result);
+        expect(result).toBe("F∧((∃xF(x)⇔∀yG(y)∧H(x,f(z)))∨¬(∃xF(x)⇔∀yG(y)∧H(x,f(z))))");
+    });
 
 });

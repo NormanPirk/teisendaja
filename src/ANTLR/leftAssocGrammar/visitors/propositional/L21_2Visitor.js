@@ -9,8 +9,8 @@ export default class L21_2Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
-        let value = ctx.formula().getText();
-		value = addParensAnd(ctx.formula().constructor.name, value);
-        return value + "∧1";
+        let left = ctx.formula().getText();
+        left = addParensAnd(ctx.formula().constructor.name, left);
+        return left + "∧(";
 	}
 }

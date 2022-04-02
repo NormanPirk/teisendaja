@@ -19,11 +19,13 @@ export default class L23_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitAnd(ctx) {
 		if (ctx.constructor.name === "AndContext") {
+			const left = ctx.left.getText();
 			const right = ctx.right.getText();
-            if (right === "0") {
-                return "0";
+            if (right === '1') {
+                return left;
             }
 		}
         throw "Incompatible input!";
+		
 	}
 }

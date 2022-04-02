@@ -21,9 +21,9 @@ export default class L5_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		if (ctx.constructor.name === "AndContext") {
 			const left = ctx.left;
             if (left.constructor.name === "ParenContext") {
-                if (left.children && left.children[1] && left.children[1].constructor.name === "AndContext") {
-                    const leftLeft = left.children[1].left.getText();
-                    const leftRight = left.children[1].right.getText();
+                if (left.formula().constructor.name === "AndContext") {
+                    const leftLeft = left.formula().left.getText();
+                    const leftRight = left.formula().right.getText();
                     const right = ctx.right.getText();
                     return leftLeft + "∧(" + leftRight + "∧" + right + ")";
                 }

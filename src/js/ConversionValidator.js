@@ -1,17 +1,17 @@
 export default function conversionAllowed(matchingChild, conversionType) {
-  if (conversionType === "L28_2") {
-    return allowL28_2(matchingChild);
+  if (conversionType === "L30_2") {
+    return allowL30_2(matchingChild);
   }
-  if (conversionType === "L22_2") {
-    return allowL22_2(matchingChild);
+  if (conversionType === "L24_2") {
+    return allowL24_2(matchingChild);
   }
-  if (conversionType === "L23_2") {
-    return allowL23_2(matchingChild);
+  if (conversionType === "L25_2") {
+    return allowL25_2(matchingChild);
   }
   return true;
 }
 
-function allowL28_2(matchingChild) {
+function allowL30_2(matchingChild) {
   if (matchingChild.constructor.name === "ParenContext") {
     // the matching child itself is ParenContext
     if (matchingChild.parentCtx) {
@@ -43,14 +43,14 @@ function allowL28_2(matchingChild) {
   return true;
 }
 
-function allowL22_2(matchingChild) {
+function allowL24_2(matchingChild) {
   if (matchingChild.constructor.name === "StartContext") {
     return matchingChild.formula().constructor.name === "TrueContext";
   }
   return matchingChild.constructor.name === "TrueContext";
 }
 
-function allowL23_2(matchingChild) {
+function allowL25_2(matchingChild) {
   if (matchingChild.constructor.name === "StartContext") {
     return matchingChild.formula().constructor.name === "FalseContext";
   }

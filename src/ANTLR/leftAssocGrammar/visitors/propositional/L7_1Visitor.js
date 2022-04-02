@@ -21,8 +21,8 @@ export default class L7_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		if (ctx.constructor.name === "AndContext") {
 			const right = ctx.right;
             if (right.constructor.name === "ParenContext") {
-                if (right.children && right.children[1] && right.children[1].constructor.name === "OrContext") {
-                    const rightLeft = right.children[1].left.getText();
+                if (right.formula().constructor.name === "OrContext") {
+                    const rightLeft = right.formula().left.getText();
                     const left = ctx.left.getText();
 
                     if (left === rightLeft) {

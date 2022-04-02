@@ -19,7 +19,7 @@ export default class L25_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitFalse(ctx) {
 		if (ctx.constructor.name === "FalseContext") {
-            return "¬1";
+            return "∧0"
 		}
         throw "Incompatible input!";
 		

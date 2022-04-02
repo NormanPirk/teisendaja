@@ -23,9 +23,9 @@ export default class L10_2Visitor extends antlr4.tree.ParseTreeVisitor {
 			const left = ctx.left;
             const right = ctx.right;
             if (left.constructor.name === "ParenContext" && right.constructor.name === "ParenContext") {
-                const leftChild = (left.children && left.children[1])? left.children[1] : null;
-                const rightChild = (right.children && right.children[1])? right.children[1] : null;
-                if (leftChild && rightChild && leftChild.constructor.name === "OrContext" && rightChild.constructor.name === "OrContext") {
+                const leftChild = left.formula();
+                const rightChild = right.formula();
+                if (leftChild.constructor.name === "OrContext" && rightChild.constructor.name === "OrContext") {
                     const leftLeft = leftChild.left.getText();
                     let leftRight = leftChild.right.getText();
                     const rightLeft = rightChild.left.getText();

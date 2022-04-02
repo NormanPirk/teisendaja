@@ -9,7 +9,7 @@ export default class L25_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitNeg(ctx.formula());
+			return this.visitAnd(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,13 +17,13 @@ export default class L25_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitNeg(ctx) {
-		if (ctx.constructor.name === "NegContext") {
-            if (ctx.formula().constructor.name === "TrueContext") {
+	visitAnd(ctx) {
+		if (ctx.constructor.name === "AndContext") {
+			const right = ctx.right.getText();
+            if (right === "0") {
                 return "0";
             }
 		}
         throw "Incompatible input!";
-		
 	}
 }

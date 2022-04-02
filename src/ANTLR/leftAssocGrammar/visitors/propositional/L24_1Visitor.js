@@ -19,10 +19,9 @@ export default class L24_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitOr(ctx) {
 		if (ctx.constructor.name === "OrContext") {
-			const left = ctx.left.getText();
 			const right = ctx.right.getText();
-            if (right === '0') {
-                return left;
+            if (right === '1') {
+                return '1';
             }
 		}
         throw "Incompatible input!";

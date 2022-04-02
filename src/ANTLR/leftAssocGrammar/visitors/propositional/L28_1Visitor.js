@@ -1,5 +1,4 @@
 /* eslint-disable */
-// Generated from PredGrammar.g4 by ANTLR 4.9.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
@@ -9,6 +8,22 @@ export default class L28_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
-		return "(" + ctx.formula().getText() + ")";
+		try {
+			return this.visitNeg(ctx.formula());
+		} catch (err) {
+			console.log(err);
+			return null;
+		}
+	}
+
+	// Visit a parse tree produced by PredGrammarParser#and.
+	visitNeg(ctx) {
+		if (ctx.constructor.name === "NegContext") {
+            if (ctx.formula().constructor.name === "FalseContext") {
+                return "1";
+            }
+		}
+        throw "Incompatible input!";
+		
 	}
 }
