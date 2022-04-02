@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        <textarea
+        <input
           id="selectable-new"
           v-model="newFormula"
           :class="{ faulty: !isFaulty() }"
@@ -22,7 +22,8 @@
           "
           @click="clearNewFormulaError()"
           :placeholder="$t('newInputDescription')"
-        ></textarea>
+          @keydown.enter="pressReady"
+        />
       </div>
       <div class="confirm-btns">
         <button @click="cancelConversion">{{ $t("cancel") }}</button>
@@ -85,19 +86,22 @@ export default {
         el.selectionEnd = newPosition;
       });
     },
+    pressReady() {
+      document.getElementById("add-new-formula").click();
+    }
   },
 };
 </script>
 
 <style scoped>
-textarea {
+input {
   width: 100%;
   border: none;
   outline: none;
   resize: none;
   text-align: left !important;
   vertical-align: middle !important;
-  margin-top: 1em;
+  margin: 2em 0 1em 0;
   font-size: 1em;
 }
 

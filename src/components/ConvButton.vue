@@ -51,13 +51,30 @@ export default {
     },
     dataCy2() {
       return this.conversionTypeL.split("_")[0] + "_2";
-    }
+    },
   },
   methods: {
     switchButtonText() {
       if (this.f2) {
         this.buttonText = this.buttonText === this.f1 ? this.f2 : this.f1;
       }
+    },
+    focusInput() {
+      this.$nextTick(() => {
+        document.getElementById("selectable-new").focus();
+      });
+    },
+    newFormulaValidation() {
+      return new Promise((resolve) => {
+        document.getElementById("add-new-formula").onclick = () => {
+          let f = this.$store.getters.newFormula;
+          if (validateInput(f)) {
+            resolve(f);
+          } else {
+            this.$store.commit("showNewFormulaError");
+          }
+        };
+      });
     },
     async startConversion(conversionType) {
       this.$store.commit("setSelectedConversion", conversionType.split("_")[0]);
@@ -82,18 +99,14 @@ export default {
           );
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
-              if (["L7_2", "L8_2", "L22_2", "L23_2", "L29_1", "L30_1"].includes(conversionType)) {
+              if (
+                ["L7_2", "L8_2", "L22_2", "L23_2", "L29_1", "L30_1"].includes(
+                  conversionType
+                )
+              ) {
                 this.$store.commit("setAskNewFormulaTrue");
-                await new Promise((resolve) => {
-                  document.getElementById("add-new-formula").onclick = () => {
-                    let f = this.$store.getters.newFormula;
-                    if (validateInput(f)) {
-                      resolve(f);
-                    } else {
-                      this.$store.commit("showNewFormulaError");
-                    }
-                  };
-                });
+                this.focusInput();
+                await this.newFormulaValidation();
                 this.$store.commit("newFormulaAdded");
                 this.convert(
                   subFormula,
@@ -191,5 +204,4 @@ button:disabled {
   box-shadow: none;
   opacity: 0.7;
 }
-
 </style>

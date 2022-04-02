@@ -72,10 +72,8 @@ export default {
     }
   },
   methods: {
-    async download(type) {
-      try {
-        this.$store.commit("setAskFilenameTrue");
-        const fn = await new Promise((resolve) => {
+    getFilenameFromUser() {
+      return new Promise((resolve) => {
           document.getElementById("add-filename").onclick = () => {
             let filename = this.$store.getters.filename;
             console.log(filename);
@@ -85,7 +83,15 @@ export default {
               this.$store.commit("showInvalidFilenameError");
             }
           };
+        })
+    },
+    async download(type) {
+      try {
+        this.$store.commit("setAskFilenameTrue");
+        this.$nextTick(() => {
+          document.getElementById("new-filename").focus();
         });
+        const fn = await this.getFilenameFromUser();
         switch (type) {
           case "JSON":
             this.downloadJSON(fn);

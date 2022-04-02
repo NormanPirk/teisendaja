@@ -18,6 +18,7 @@
           v-model="filename"
           id="new-filename"
           :placeholder="$t('fileNamePlaceholder')"
+          @keyup.enter="pressReady"
         />
         <strong v-show="invalidFilename" class="error">{{
           $t("invalidFilename")
@@ -65,6 +66,9 @@ export default {
     clearFilenameError() {
       this.$store.commit("clearInvalidFilenameError");
     },
+    pressReady() {
+      document.getElementById("add-filename").click();
+    }
   },
 };
 </script>
