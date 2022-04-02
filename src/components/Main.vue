@@ -82,17 +82,4 @@ export default {
   margin-left: 0.5em;
 }
 
-.v-enter-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 </style>

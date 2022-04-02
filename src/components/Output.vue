@@ -34,7 +34,7 @@
     </div>
     <div>
       <div id="last">
-        {{ formulas[formulas.length - 1]?.formula }}
+        {{ formulas[formulas.length - 2]?.formula }}
       </div>
       <hr />
       <div id="pdf">
