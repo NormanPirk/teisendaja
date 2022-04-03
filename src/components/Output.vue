@@ -56,9 +56,9 @@
 <script>
 import { saveAs } from "file-saver";
 import isValidFilename from "@/js/FilenameValidator.js";
+import vfs_fonts from "@/assets/fonts/vfs_fonts.json";
 import pdfMake from "pdfmake/build/pdfmake.js";
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs = vfs_fonts.vfs;
 
 export default {
   name: "Output",
