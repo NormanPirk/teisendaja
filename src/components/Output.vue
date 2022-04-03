@@ -144,8 +144,11 @@ export default {
     downloadPDF(filename) {
       pdfMake.fonts = {
         NotoSansMath: {
-          normal: "https://drive.google.com/file/d/13khYH_UeDYhZdgowMZb33q80-xfnEMls/view?usp=sharing",
-        }
+          normal: "NotoSansMath-Regular.ttf",
+          bold: "NotoSansMath-Regular.ttf",
+          italics: "NotoSansMath-Regular.ttf",
+          bolditalics: "NotoSansMath-Regular.ttf",
+        },
       };
       let dd = {
         content: this.getContentForPDF(),
@@ -155,9 +158,9 @@ export default {
         },
         styles: {
           small: {
-            fontSize: 8
-          }
-        }
+            fontSize: 8,
+          },
+        },
       };
       pdfMake.createPdf(dd).download(filename + ".pdf");
     },
