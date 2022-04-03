@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("L29_2 tests", () => {
-  
   test("adds two negations in front of the formula  F", () => {
     const input = "F";
     expect(convert(input, "L29_2")).toBe("¬¬F");
@@ -46,5 +45,4 @@ describe("L29_2 tests", () => {
     const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))";
     expect(convert(input, "L29_2")).toBe("¬¬∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))");
   });
-
 });

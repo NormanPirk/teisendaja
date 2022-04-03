@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("L23_2 tests", () => {
-  
   test("turns into conjunction with 1 F", () => {
     const input = "F";
     expect(convert(input, "L23_2")).toBe("F∧1");
@@ -46,5 +45,4 @@ describe("L23_2 tests", () => {
     const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))";
     expect(convert(input, "L23_2")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∧1");
   });
-
 });

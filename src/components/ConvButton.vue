@@ -29,6 +29,7 @@ import validateInput from "@/js/InputValidator.js";
 import matchInput from "@/js/InputMatcher.js";
 import conversionAllowed from "@/js/ConversionValidator.js";
 import ConvTypeMarker from "./ConvTypeMarker.vue";
+import specialConversions from "@/assets/specialConversionCodes.json";
 
 export default {
   name: "ConvButton",
@@ -64,6 +65,15 @@ export default {
         document.getElementById("selectable-new").focus();
       });
     },
+    isCorrectSelection(selection) {
+      return (
+        selection.anchorNode.parentElement.id === "selectable" &&
+        selection.focusNode.parentElement.id === "selectable"
+      );
+    },
+    userInputNeeded(conversionType) {
+      return specialConversions.withUserInput.includes(conversionType);
+    },
     newFormulaValidation() {
       return new Promise((resolve) => {
         document.getElementById("add-new-formula").onclick = () => {
@@ -79,10 +89,7 @@ export default {
     async startConversion(conversionType) {
       this.$store.commit("setSelectedConversion", conversionType.split("_")[0]);
       const selection = document.getSelection();
-      if (
-        selection.anchorNode.parentElement.id === "selectable" &&
-        selection.focusNode.parentElement.id === "selectable"
-      ) {
+      if (this.isCorrectSelection(selection)) {
         const el = document.getElementById("selectable");
         const formula = el.innerHTML.toString();
         const selection = document.getSelection();
@@ -99,11 +106,7 @@ export default {
           );
           if (matchingChild) {
             if (conversionAllowed(matchingChild, conversionType)) {
-              if (
-                ["L7_2", "L8_2", "L21_2", "L22_2", "L24_2", "L25_2"].includes(
-                  conversionType
-                )
-              ) {
+              if (this.userInputNeeded(conversionType)) {
                 this.$store.commit("setAskNewFormulaTrue");
                 this.focusInput();
                 await this.newFormulaValidation();
@@ -125,7 +128,7 @@ export default {
                 );
               }
             } else {
-              if (["L22_2", "L23_2"].includes(conversionType)) {
+              if (["L24_2", "L25_2"].includes(conversionType)) {
                 this.$store.commit("showFaultyConversionError");
               } else {
                 this.$store.commit("showConversionNotAllowedError");

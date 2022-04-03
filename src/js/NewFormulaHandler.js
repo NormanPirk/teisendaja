@@ -8,22 +8,22 @@ export default function handleNewFormula(conversionType, newFormula, result) {
       newFormula = addParensOr(mainOp, newFormula);
       result += newFormula + ")";
       break;
-    } 
+    }
     case "L8_2": {
       newFormula = addParensAnd(mainOp, newFormula);
       result += newFormula;
       break;
-    } 
+    }
     case "L24_2": {
       newFormula = addParensOr(mainOp, newFormula);
       result = newFormula + result;
       break;
-    } 
+    }
     case "L25_2": {
       newFormula = addParensAnd(mainOp, newFormula);
       result = newFormula + result;
       break;
-    } 
+    }
     case "L21_2": {
       const left = addParensOr(mainOp, newFormula);
       const right = addParensNeg(mainOp, newFormula);

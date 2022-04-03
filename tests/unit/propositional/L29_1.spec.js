@@ -45,5 +45,4 @@ describe("L29_1 tests", () => {
     const input = "¬¬A⇒¬B";
     expect(convert(input, "L29_1")).toBe(null);
   });
-
 });

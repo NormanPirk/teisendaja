@@ -88,7 +88,7 @@ export default {
     },
     pressReady() {
       document.getElementById("add-new-formula").click();
-    }
+    },
   },
 };
 </script>

@@ -5,7 +5,12 @@
   <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
     <ErrorMessages></ErrorMessages>
-    <button @click="start" v-show="showStartButton()" class="yellow" data-cy="startConversions">
+    <button
+      @click="start"
+      v-show="showStartButton()"
+      class="yellow"
+      data-cy="startConversions"
+    >
       {{ $t("startConversions") }}
     </button>
   </div>
@@ -15,7 +20,7 @@
       id="input-field"
       v-model="formula"
       :placeholder="$t('inputDescription')"
-      :class="{ faulty: !isFaulty(), error: errorExists() }"
+      :class="{ faulty: !isFaulty(), error: errorWithConversion }"
       @input="
         renderMathSymbols();
         clearErrors();
@@ -24,11 +29,10 @@
       data-cy="insertFormula"
     ></textarea>
   </div>
-
   <div
     v-else
     id="selectable"
-    :class="{ error: errorExists() }"
+    :class="{ error: errorWithConversion }"
     @click="clearErrors()"
   >
     {{ formula }}
@@ -47,6 +51,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import SymbolButtons from "./SymbolButtons.vue";
 import ErrorMessages from "./ErrorMessages.vue";
 import DeleteButtons from "./DeleteButtons.vue";
@@ -91,6 +96,18 @@ export default {
     },
   },
   methods: {
+    showFileUploader() {
+      this.uploadFile = true;
+    },
+    showStartButton() {
+      return this.formulas.length === 0;
+    },
+    isFaulty() {
+      return this.formula.length === 0 ? true : validateInput(this.formula);
+    },
+    clearErrors() {
+      this.$store.commit("clearErrors");
+    },
     start() {
       if (this.formula.length !== 0) {
         if (this.formulas.length === 0) {
@@ -104,27 +121,21 @@ export default {
         this.$store.commit("showNoInputError");
       }
     },
-    showFileUploader() {
-      this.uploadFile = true;
-    },
-    showStartButton() {
-      return this.formulas.length === 0;
-    },
-    isFaulty() {
-      return this.formula.length === 0 ? true : validateInput(this.formula);
-    },
-    errorExists() {
-      if (this.errorWithConversion) {
-        return true;
-      }
-      return false;
+    renderMathSymbols() {
+      let el = document.getElementById("input-field");
+      let position = el.selectionStart;
+      let formulaBeginning = el.value.substring(0, position);
+      let newPosition = getNewPosition(formulaBeginning, position);
+      this.formula = texAndDigitsToMathSymbols(this.formula);
+      this.$nextTick(() => {
+        el.selectionEnd = newPosition;
+      });
     },
     loadDataFromJson(event) {
       try {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.addEventListener("load", (event) => {
-          console.log(event);
           try {
             const res = JSON.parse(reader.result);
             const formulas = res.map((f) => {
@@ -146,19 +157,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    renderMathSymbols() {
-      let el = document.getElementById("input-field");
-      let position = el.selectionStart;
-      let formulaBeginning = el.value.substring(0, position);
-      let newPosition = getNewPosition(formulaBeginning, position);
-      this.formula = texAndDigitsToMathSymbols(this.formula);
-      this.$nextTick(() => {
-        el.selectionEnd = newPosition;
-      });
-    },
-    clearErrors() {
-      this.$store.commit("clearErrors");
     },
   },
 };
@@ -234,5 +232,4 @@ textarea {
 #file-uploader label:hover {
   transform: scale(1.02);
 }
-
 </style>

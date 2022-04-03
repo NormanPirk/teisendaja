@@ -68,7 +68,7 @@ export default {
     },
     pressReady() {
       document.getElementById("add-filename").click();
-    }
+    },
   },
 };
 </script>

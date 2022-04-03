@@ -25,7 +25,7 @@ export default createStore({
     inputFileError: false,
     showHelp: false,
     invalidFilename: false,
-    selectedConversion: ""
+    selectedConversion: "",
   },
   getters: {
     formula: (state) => {
@@ -89,7 +89,7 @@ export default createStore({
     },
     selectedConversion: (state) => {
       return state.selectedConversion;
-    }
+    },
   },
   mutations: {
     finishConversion: (state) => {
@@ -210,7 +210,11 @@ export default createStore({
       try {
         let result = convert(subFormula, conversionType);
         if (result) {
-          if (["L7_2", "L8_2", "L21_2", "L22_2", "L24_2", "L25_2"].includes(conversionType)) {
+          if (
+            ["L7_2", "L8_2", "L21_2", "L22_2", "L24_2", "L25_2"].includes(
+              conversionType
+            )
+          ) {
             result = handleNewFormula(conversionType, state.newFormula, result);
             state.newFormula = "";
           }

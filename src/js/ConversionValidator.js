@@ -33,8 +33,15 @@ function allowL30_2(matchingChild) {
         if (["EqContext"].includes(childContext)) {
           return false;
         }
-      } else if (parentContext === "ForallContext" || parentContext === "ExistsContext") {
-        if (["AndContext", "OrContext", "ImplContext", "EqContext"].includes(childContext)) {
+      } else if (
+        parentContext === "ForallContext" ||
+        parentContext === "ExistsContext"
+      ) {
+        if (
+          ["AndContext", "OrContext", "ImplContext", "EqContext"].includes(
+            childContext
+          )
+        ) {
           return false;
         }
       }

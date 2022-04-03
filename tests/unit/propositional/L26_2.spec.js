@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("L26_2 tests", () => {
-  
   test("turns into disjunction with 0 F", () => {
     const input = "F";
     expect(convert(input, "L26_2")).toBe("F∨0");
@@ -46,5 +45,4 @@ describe("L26_2 tests", () => {
     const input = "∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))";
     expect(convert(input, "L26_2")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))∨0");
   });
-
 });

@@ -39,7 +39,10 @@
       <hr />
       <div id="pdf">
         <p v-for="(formula, index) in formulas" :key="formula">
-          {{ index === 0 ? formula.getStart() : "≡  " + formula.getStart()
+          {{
+            index === 0
+              ? formula.getStart()
+              : "≡" + "&nbsp;&nbsp;" + formula.getStart()
           }}<u>{{ formula.getUnderlined() }}</u
           >{{ formula.getEnding()
           }}<sup v-if="formula.ct">&nbsp;&nbsp;&nbsp;{{ formula.ct }}</sup>
@@ -51,10 +54,11 @@
 </template>
 
 <script>
-import * as html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { saveAs } from "file-saver";
 import isValidFilename from "@/js/FilenameValidator.js";
+import pdfMake from "pdfmake/build/pdfmake.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default {
   name: "Output",
@@ -69,21 +73,20 @@ export default {
     },
     disableBtn() {
       return this.formulas.length === 0;
-    }
+    },
   },
   methods: {
     getFilenameFromUser() {
       return new Promise((resolve) => {
-          document.getElementById("add-filename").onclick = () => {
-            let filename = this.$store.getters.filename;
-            console.log(filename);
-            if (isValidFilename(filename)) {
-              resolve(filename);
-            } else {
-              this.$store.commit("showInvalidFilenameError");
-            }
-          };
-        })
+        document.getElementById("add-filename").onclick = () => {
+          let filename = this.$store.getters.filename;
+          if (isValidFilename(filename)) {
+            resolve(filename);
+          } else {
+            this.$store.commit("showInvalidFilenameError");
+          }
+        };
+      });
     },
     async download(type) {
       try {
@@ -110,10 +113,15 @@ export default {
         this.$store.commit("showInvalidFilenameError");
       }
     },
-
+    getContentForPDF() {
+      const content = [];
+      for (let [i, f] of this.formulas.entries()) {
+        content.push(f.getPDFContent(i !== 0));
+      }
+      return content;
+    },
     downloadJSON(filename) {
       const content = JSON.stringify(this.formulas);
-      console.log(content);
       let blob = new Blob([content], {
         type: "application/json;charset=utf-8",
       });
@@ -134,13 +142,24 @@ export default {
       saveAs(blob, filename + ".tex");
     },
     downloadPDF(filename) {
-      const el = document.getElementById("pdf");
-      html2canvas(el).then((canvas) => {
-        let img = canvas.toDataURL();
-        let doc = new jsPDF();
-        doc.addImage(img, "PNG", 10, 10);
-        doc.save(filename + ".pdf");
-      });
+      pdfMake.fonts = {
+        NotoSansMath: {
+          normal: "NotoSansMath-Regular.ttf",
+        }
+      };
+      let dd = {
+        content: this.getContentForPDF(),
+        defaultStyle: {
+          font: "NotoSansMath",
+          fontSize: 14,
+        },
+        styles: {
+          small: {
+            fontSize: 8
+          }
+        }
+      };
+      pdfMake.createPdf(dd).download(filename + ".pdf");
     },
   },
 };
@@ -149,7 +168,7 @@ export default {
 <style scoped>
 #pdf {
   min-height: 4em;
-  overflow: scroll;
+  overflow-wrap: break-word;
   max-height: 30em;
   font-size: 1em;
 }

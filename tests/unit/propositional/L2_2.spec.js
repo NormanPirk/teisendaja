@@ -1,8 +1,7 @@
 import convert from "@/js/Converter.js";
 
 describe("L2_2 tests", () => {
-  
-    test("Creates disjunction of A", () => {
+  test("Creates disjunction of A", () => {
     const input = "A";
     expect(convert(input, "L2_2")).toBe("A∨A");
   });

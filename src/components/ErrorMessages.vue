@@ -61,8 +61,8 @@ export default {
     selectedConversion: {
       get() {
         return this.$store.getters.selectedConversion;
-      }
-    }
+      },
+    },
   },
 };
 </script>

@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("P1_2 tests", () => {
-  
   test("moves negation in front of the quantifier and changes the quantifier ∃x¬F(x)", () => {
     const input = "∃x¬F(x)";
     expect(convert(input, "P1_2")).toBe("¬∀xF(x)");
@@ -31,5 +30,4 @@ describe("P1_2 tests", () => {
     const input = "¬∀xF(x)";
     expect(convert(input, "P1_2")).toBe(null);
   });
-
 });

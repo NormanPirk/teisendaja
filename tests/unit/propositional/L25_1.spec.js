@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("L25_1 tests", () => {
-  
   test("simplifies F∧0", () => {
     const input = "F∧0";
     expect(convert(input, "L25_1")).toBe("0");
@@ -51,5 +50,4 @@ describe("L25_1 tests", () => {
     const input = "0∧F";
     expect(convert(input, "L25_1")).toBe(null);
   });
-
 });

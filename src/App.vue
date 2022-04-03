@@ -26,7 +26,6 @@ p {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   min-height: 4em;
   border-radius: 8px;
-  margin-bottom: 2em;
   padding-bottom: 1em;
   background-color: #ffffff;
 }
