@@ -144,7 +144,7 @@ export default {
     downloadPDF(filename) {
       pdfMake.fonts = {
         NotoSansMath: {
-          normal: "NotoSansMath-Regular.ttf",
+          normal: "https://drive.google.com/file/d/13khYH_UeDYhZdgowMZb33q80-xfnEMls/view?usp=sharing",
         }
       };
       let dd = {
