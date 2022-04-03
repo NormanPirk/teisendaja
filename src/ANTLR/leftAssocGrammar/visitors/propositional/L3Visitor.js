@@ -18,7 +18,7 @@ export default class L3Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitAnd(ctx) {
-		console.log(ctx);
+		console.log(ctx.constructor.name);
 		if (ctx.constructor.name === "AndContext") {
 			const left = ctx.left.getText();
 			const right = ctx.right.getText();
