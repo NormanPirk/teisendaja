@@ -51,9 +51,8 @@ export default class Formula {
         { text: addEquals ? "≡\t" + this.getStart() : this.getStart() },
         { text: this.getUnderlined(), decoration: "underline" },
         this.getEnding(),
-        { text: "\t" + this.getAppliedConversion() + "\n", style: "small"}
-      ]
-    }
+        { text: "\t" + this.getAppliedConversion() + "\n", style: "small" },
+      ],
+    };
   }
-
 }

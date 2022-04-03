@@ -1,5 +1,4 @@
 import convert from "@/js/Converter.js";
-import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L22_1 tests", () => {
   test("removes tautology from disjunction F∨G∧¬G", () => {

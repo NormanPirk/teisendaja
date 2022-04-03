@@ -98,10 +98,6 @@ export default {
         const endIndex = sel.endOffset;
         const subFormula = selection.toString();
 
-        console.log("Teisenduse kood: " + conversionType);
-        console.log("Terve valem: " + formula);
-        console.log("Valitud osavalem: " + subFormula);
-
         if (subFormula) {
           let matchingChild = matchInput(
             formula,

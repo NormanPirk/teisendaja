@@ -172,6 +172,7 @@ export default {
 #pdf {
   min-height: 4em;
   overflow-wrap: break-word;
+  overflow-y: scroll;
   max-height: 30em;
   font-size: 1em;
 }
@@ -183,7 +184,7 @@ export default {
 
 #last {
   min-height: 3em;
-  overflow-x: scroll;
+  overflow-wrap: break-word;
   text-align: left;
   font-size: 1.2em;
   padding: 0.5em 0;
