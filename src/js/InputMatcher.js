@@ -96,9 +96,7 @@ function isInTheMiddle(startIndex, endIndex, formula) {
 }
 
 function isSurroundedBySameOp(startIndex, endIndex, formula, subtree) {
-  console.log(subtree.formula().constructor.name);
   if (subtree.formula().constructor.name === "AndContext") {
-    console.log(formula[startIndex - 1], formula[endIndex]);
     return formula[startIndex - 1] === "∧" && formula[endIndex] === "∧";
   } if (subtree.formula().constructor.name === "OrContext") {
     return formula[startIndex - 1] === "∨" && formula[endIndex] === "∨";
