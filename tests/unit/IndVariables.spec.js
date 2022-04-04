@@ -1,33 +1,6 @@
 import getNewVariable, { getFreeIndVars } from "@/js/IndVariables";
 import getParseTree from "@/ANTLR/leftAssocGrammar/ParseTree.js";
 
-describe("New variables tests", () => {
-  test("Gets new variable for a formula with the quantifier ∀", () => {
-    const input = "∀xF(x)";
-    expect(getNewVariable(input)).toBe("y");
-  });
-
-  test("Gets new variable for a formula with the quantifier ∃", () => {
-    const input = "∃xF(x)";
-    expect(getNewVariable(input)).toBe("y");
-  });
-
-  test("Gets new variable for a formula with both quantifiers with ∀ first", () => {
-    const input = "∀x∃yF(x,y)";
-    expect(getNewVariable(input)).toBe("z");
-  });
-
-  test("Gets new variable for a formula with both quantifiers with ∃ first", () => {
-    const input = "∃x∀yF(x,y)";
-    expect(getNewVariable(input)).toBe("z");
-  });
-
-  test("Gets new variable for a formula with both quantifiers and an existing free variable", () => {
-    const input = "∀x∃yF(x,y,z)";
-    expect(getNewVariable(input)).toBe("u");
-  });
-});
-
 describe("Free variables tests", () => {
   test("Recognises a single free variable in a formula with the quantifier ∀", () => {
     const input = getParseTree("∀xF(x,y)");
