@@ -20,7 +20,7 @@ export default class P13Visitor extends antlr4.tree.ParseTreeVisitor {
         const ind = ctx.IND().getText();
         const formula = ctx.formula().getText();
         if (formula.includes(ind)) {
-            const newInd = getNewVariable(formula);
+            const newInd = getNewVariable();
             if (newInd) {
                 const newFormula = formula.replaceAll(ind, newInd);
                 return "∀" + newInd + newFormula;
