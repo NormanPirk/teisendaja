@@ -30,6 +30,9 @@ export default function matchInput(formula, subFormula, startIndex, endIndex) {
       if (matchingChildRight) {
         return matchingChildRight;
       }
+      if (isInTheMiddle(startIndex, endIndex, formula)) {
+        return isSurroundedBySameOp(startIndex, endIndex, formula, getParseTree(subFormula));
+      }
     }
     return false;
   } catch (err) {
@@ -86,4 +89,21 @@ function getMatchingChild(
     }
   }
   return null;
+}
+
+function isInTheMiddle(startIndex, endIndex, formula) {
+  return startIndex > 0 && endIndex < formula.length - 1;
+}
+
+function isSurroundedBySameOp(startIndex, endIndex, formula, subtree) {
+  console.log(subtree.formula().constructor.name);
+  if (subtree.formula().constructor.name === "AndContext") {
+    console.log(formula[startIndex - 1], formula[endIndex]);
+    return formula[startIndex - 1] === "∧" && formula[endIndex] === "∧";
+  } if (subtree.formula().constructor.name === "OrContext") {
+    return formula[startIndex - 1] === "∨" && formula[endIndex] === "∨";
+  } if (subtree.formula().constructor.name === "EqContext") {
+    return formula[startIndex - 1] === "⇔" && formula[endIndex] === "⇔";
+  }
+  return false;
 }
