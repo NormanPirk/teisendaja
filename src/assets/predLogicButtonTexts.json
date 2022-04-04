@@ -19,7 +19,7 @@
     },
     {
         "left": "∃x(F(x)∨G(x))",
-        "right": "∃xF(x)∨∀xG(x)",
+        "right": "∃xF(x)∨∃xG(x)",
         "conversionTypeL": "P4_1",
         "conversionTypeR": "P4_2"
     },
