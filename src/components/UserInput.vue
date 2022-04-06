@@ -153,6 +153,7 @@ export default {
             this.$store.commit("showInputFileError");
           }
         });
+        document.getElementById("file").value = "";
         reader.readAsText(file);
       } catch (error) {
         console.log(error);
