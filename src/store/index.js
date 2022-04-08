@@ -25,6 +25,7 @@ export default createStore({
     inputFileError: false,
     showHelp: false,
     invalidFilename: false,
+    selectionNotFromCorrectField: false,
     selectedConversion: "",
   },
   getters: {
@@ -80,6 +81,9 @@ export default createStore({
     },
     inputFileError: (state) => {
       return state.inputFileError;
+    },
+    selectionNotFromCorrectField: (state) => {
+      return state.selectionNotFromCorrectField;
     },
     showHelp: (state) => {
       return state.showHelp;
@@ -138,32 +142,8 @@ export default createStore({
     setSelectedConversion: (state, value) => {
       state.selectedConversion = value;
     },
-    showNoInputError: (state) => {
-      state.noInput = true;
-    },
-    showFaultyInputError: (state) => {
-      state.faultyInput = true;
-    },
-    showNotSubformulaError: (state) => {
-      state.notSubformula = true;
-    },
-    showFaultyConversionError: (state) => {
-      state.faultyConversion = true;
-    },
-    showNoSubformulaError: (state) => {
-      state.noSubformula = true;
-    },
-    showConversionNotAllowedError: (state) => {
-      state.conversionNotAllowed = true;
-    },
-    showNewFormulaError: (state) => {
-      state.incorrectNewFormula = true;
-    },
-    showInputFileError: (state) => {
-      state.inputFileError = true;
-    },
-    showInvalidFilenameError: (state) => {
-      state.invalidFilename = true;
+    setError: (state, errorName) => {
+      state[errorName] = true;
     },
     clearInvalidFilenameError: (state) => {
       state.invalidFilename = false;
@@ -180,7 +160,10 @@ export default createStore({
       state.noSubformula = false;
       state.conversionNotAllowed = false;
       state.inputFileError = false;
-      state.selectedConversion = "";
+      state.selectionNotFromCorrectField = false;
+    },
+    clearSelectedConversion: (state) => {
+      state.state.selectedConversion = "";
     },
     clearNewFormulaError: (state) => {
       state.incorrectNewFormula = false;
@@ -235,6 +218,11 @@ export default createStore({
       }
     },
   },
-  actions: {},
+  actions: {
+    setError(context, errorName) {
+      context.commit("clearErrors")
+      context.commit("setError", errorName);
+    }
+  },
   modules: {},
 });

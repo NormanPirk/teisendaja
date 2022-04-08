@@ -9,7 +9,7 @@
       @click="start"
       v-show="showStartButton()"
       class="yellow"
-      data-cy="startConversions"
+      data-cy="start-conversions"
     >
       {{ $t("startConversions") }}
     </button>
@@ -34,6 +34,7 @@
     id="selectable"
     :class="{ error: errorWithConversion }"
     @click="clearErrors()"
+    data-cy="selectable"
   >
     {{ formula }}
   </div>
@@ -107,6 +108,7 @@ export default {
     },
     clearErrors() {
       this.$store.commit("clearErrors");
+      this.$store.commit("clearSelectedConversion");
     },
     start() {
       if (this.formula.length !== 0) {
@@ -114,11 +116,11 @@ export default {
           if (validateInput(this.formula)) {
             this.$store.commit("addFormula");
           } else {
-            this.$store.commit("showFaultyInputError");
+            this.$store.dispatch("setError", "faultyInput");
           }
         }
       } else {
-        this.$store.commit("showNoInputError");
+        this.$store.dispatch("setError", "noInput");
       }
     },
     renderMathSymbols() {
@@ -150,7 +152,7 @@ export default {
             this.uploadFile = false;
           } catch (error) {
             console.log(error);
-            this.$store.commit("showInputFileError");
+            this.$store.dispatch("setError", "inputFileError")
           }
         });
         document.getElementById("file").value = "";

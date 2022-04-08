@@ -12,6 +12,8 @@ export default function addParentheses(matchingChild, result) {
       result = addParensOr(childContext, result);
     } else if (parentContext === "ImplContext") {
       result = addParensImpl(childContext, result);
+    } else if (parentContext === "ExistsContext" || parentContext === "ForallContext") {
+      result = addParensQuantifier(childContext, result);
     }
   }
   return result;
@@ -44,6 +46,17 @@ export function addParensOr(childContext, result) {
 
 export function addParensImpl(childContext, result) {
   if (childContext === "EqContext") {
+    result = addParens(result);
+  }
+  return result;
+}
+
+export function addParensQuantifier(childContext, result) {
+  if (
+    ["AndContext", "OrContext", "ImplContext", "EqContext"].includes(
+      childContext
+    )
+  ) {
     result = addParens(result);
   }
   return result;

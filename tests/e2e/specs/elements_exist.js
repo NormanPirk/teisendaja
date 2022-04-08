@@ -120,7 +120,7 @@ describe("All necessary elements exist on the page", () => {
   });
 
   it("Button for starting conversions exists", () => {
-    cy.get("[data-cy=startConversions]").should("exist");
+    cy.get("[data-cy=start-conversions]").should("exist");
   });
 
   it("Button showing help exists", () => {
@@ -140,7 +140,7 @@ describe("All necessary elements exist on the page", () => {
 
   it("buttons for deleting last and all conversion steps exist after inserting a formula", () => {
     cy.get("[data-cy=insertFormula]").type("A");
-    cy.get("[data-cy=startConversions]").click();
+    cy.get("[data-cy=start-conversions]").click();
     cy.get("[data-cy=deleteLast]").should("exist");
     cy.get("[data-cy=deleteAll]").should("exist");
   });

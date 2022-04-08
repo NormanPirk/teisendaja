@@ -81,7 +81,7 @@ export default {
           if (validateInput(f)) {
             resolve(f);
           } else {
-            this.$store.commit("showNewFormulaError");
+            this.$store.dispatch("setError", "incorrectNewFormula");
           }
         };
       });
@@ -130,17 +130,19 @@ export default {
               }
             } else {
               if (["L24_2", "L25_2"].includes(conversionType)) {
-                this.$store.commit("showFaultyConversionError");
+                this.$store.dispatch("setError", "faultyConversion");
               } else {
-                this.$store.commit("showConversionNotAllowedError");
+                this.$store.dispatch("setError", "conversionNotAllowed");
               }
             }
           } else {
-            this.$store.commit("showNotSubformulaError");
+            this.$store.dispatch("setError", "notSubformula");
           }
         } else {
-          this.$store.commit("showNoSubformulaError");
+          this.$store.dispatch("setError", "noSubformula");
         }
+      } else {
+        this.$store.dispatch("setError", "selectionNotFromCorrectField");
       }
     },
     convert(subFormula, matchingChild, conversionType, origStart, origEnd) {

@@ -31,6 +31,7 @@
     "conversionNotAllowed": "Valitud teisendus {conversion} ei ole lubatud!",
     "inputFileError": "Viga failis!",
     "enteringFormulas": "Valemite sisestamine ja teisenduste tegemine",
+    "selectionNotFromCorrectField": "Osavalem teisendamiseks tuleb valida töödeldava valemi alt!",
     "symbols": "Sümbolid",
     "ind": "Indiviidmuutujad",
     "const": "Konstantsümbolid",

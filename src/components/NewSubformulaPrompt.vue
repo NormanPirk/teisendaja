@@ -23,11 +23,12 @@
           @click="clearNewFormulaError()"
           :placeholder="$t('newInputDescription')"
           @keydown.enter="pressReady"
+          data-cy="selectable-new"
         />
       </div>
       <div class="confirm-btns">
         <button @click="cancelConversion">{{ $t("cancel") }}</button>
-        <button id="add-new-formula">{{ $t("ready") }}</button>
+        <button id="add-new-formula" data-cy="add-new-formula">{{ $t("ready") }}</button>
       </div>
     </div>
   </div>

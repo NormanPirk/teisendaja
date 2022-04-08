@@ -38,7 +38,7 @@
       </div>
       <hr />
       <div id="pdf">
-        <p v-for="(formula, index) in formulas" :key="formula">
+        <p v-for="(formula, index) in formulas" :key="formula" :data-cy="'line-'+index">
           {{
             index === 0
               ? formula.getStart()
@@ -83,7 +83,7 @@ export default {
           if (isValidFilename(filename)) {
             resolve(filename);
           } else {
-            this.$store.commit("showInvalidFilenameError");
+            this.$store.dispatch("setError", "invalidFilename");
           }
         };
       });
@@ -110,7 +110,7 @@ export default {
         this.$store.commit("hideFilenamePrompt");
       } catch (error) {
         console.log(error);
-        this.$store.commit("showInvalidFilenameError");
+        this.$store.dispatch("setError", "invalidFilename");
       }
     },
     getContentForPDF() {

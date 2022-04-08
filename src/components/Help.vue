@@ -18,7 +18,7 @@
             <span>∧</span>
           </div>
           <div class="row">
-            <span>\or</span>
+            <span>\lor</span>
             <span>∨</span>
           </div>
         </div>

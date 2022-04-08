@@ -29,10 +29,12 @@ export default {
     removeLast() {
       this.$store.commit("removeLast");
       this.$store.commit("clearErrors");
+      this.$store.commit("clearSelectedConversion");
     },
     removeAll() {
       this.$store.commit("removeAll");
       this.$store.commit("clearErrors");
+      this.$store.commit("clearSelectedConversion");
     },
   },
 };
@@ -42,6 +44,7 @@ export default {
 div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .red {
