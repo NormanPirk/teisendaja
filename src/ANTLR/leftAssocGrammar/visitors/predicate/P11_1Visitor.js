@@ -12,8 +12,8 @@ export default class P11_1Visitor extends antlr4.tree.ParseTreeVisitor {
             }
         } catch (err) {
             console.log(err);
-            return null;
         }
+        return null;
     }
 
     visitForall(ctx) {

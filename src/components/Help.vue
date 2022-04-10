@@ -14,21 +14,21 @@
             <span>¬</span>
           </div>
           <div class="row">
-            <span>\land</span>
+            <span>\land, \wedge, \&</span>
             <span>∧</span>
           </div>
           <div class="row">
-            <span>\lor</span>
+            <span>\lor, \vee</span>
             <span>∨</span>
           </div>
         </div>
         <div class="column">
           <div class="row">
-            <span>\Rightarrow</span>
+            <span>\Rightarrow, \implies</span>
             <span>⇒</span>
           </div>
           <div class="row">
-            <span>\Leftrightarrow</span>
+            <span>\Leftrightarrow, \iff</span>
             <span>⇔</span>
           </div>
         </div>
@@ -128,6 +128,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: left;
+  border-left: 1px solid #2c3e50;
 }
 
 .row {
@@ -136,7 +137,7 @@ li {
 }
 
 .row span {
-  margin: 0 0.5em;
+  margin: 0 1em;
   font-size: 0.9em;
 }
 

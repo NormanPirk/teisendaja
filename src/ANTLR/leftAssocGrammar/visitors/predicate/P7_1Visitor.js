@@ -12,17 +12,18 @@ export default class P7_1Visitor extends antlr4.tree.ParseTreeVisitor {
             }
         } catch (err) {
             console.log(err);
-            return null;
         }
+        return null;
     }
 
     visitExists(ctx) {
         if (ctx.formula().constructor.name === "ParenContext") {
             const and = ctx.formula().formula();
             if (and.constructor.name === "AndContext") {
+                const freeVarsLeft = getFreeIndVars(and.left);
                 const freeVarsRight = getFreeIndVars(and.right);
                 const ind = ctx.IND().getText();
-                if (!freeVarsRight.has(ind)) {
+                if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
                     const left = and.left.getText();
                     const right = and.right.getText();
                     return "∃" + ind + left + "∧" + right;

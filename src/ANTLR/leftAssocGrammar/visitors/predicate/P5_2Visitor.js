@@ -12,15 +12,16 @@ export default class P5_2Visitor extends antlr4.tree.ParseTreeVisitor {
             }
         } catch (err) {
             console.log(err);
-            return null;
         }
+        return null;
     }
 
     visitAnd(ctx) {
         if (ctx.left.constructor.name === "ForallContext") {
+            const freeVarsLeft = getFreeIndVars(ctx.left.formula());
             const freeVarsRight = getFreeIndVars(ctx.right);
             const ind = ctx.left.IND().getText();
-            if (!freeVarsRight.has(ind)) {
+            if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
                 const left = ctx.left.formula().getText();
                 const right = ctx.right.getText();
                 return "∀" + ind + "(" + left + "∧" + right + ")";

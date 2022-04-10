@@ -11,8 +11,8 @@ export default class P2_1Visitor extends antlr4.tree.ParseTreeVisitor {
             }
 		} catch (err) {
 			console.log(err);
-			return null;
 		}
+		return null;
 	}
 
 	visitNeg(ctx) {
