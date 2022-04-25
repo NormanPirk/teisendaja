@@ -78,12 +78,6 @@ describe("All necessary elements exist on the page", () => {
     cy.get("[data-cy=L26_2]").should("exist");
     cy.get("[data-cy=L27_1]").should("exist");
     cy.get("[data-cy=L27_2]").should("exist");
-    cy.get("[data-cy=L28_1]").should("exist");
-    cy.get("[data-cy=L28_2]").should("exist");
-    cy.get("[data-cy=L29_1]").should("exist");
-    cy.get("[data-cy=L29_2]").should("exist");
-    cy.get("[data-cy=L20_1]").should("exist");
-    cy.get("[data-cy=L20_2]").should("exist");
   });
 
   it("Buttons for converting formulas according to the main equivalences of predicate logic exist", () => {
@@ -113,10 +107,6 @@ describe("All necessary elements exist on the page", () => {
     cy.get("[data-cy=P13_2]").should("exist");
     cy.get("[data-cy=P14_1]").should("exist");
     cy.get("[data-cy=P14_2]").should("exist");
-    cy.get("[data-cy=P15_1]").should("exist");
-    cy.get("[data-cy=P15_2]").should("exist");
-    cy.get("[data-cy=P16_1]").should("exist");
-    cy.get("[data-cy=P16_2]").should("exist");
   });
 
   it("Button for starting conversions exists", () => {
@@ -128,6 +118,8 @@ describe("All necessary elements exist on the page", () => {
   });
 
   it("Buttons for downloading JSON, TeX and PDF exist", () => {
+    cy.get("[data-cy=insertFormula]").type("A");
+    cy.get("[data-cy=start-conversions]").click();
     cy.get("[data-cy=downloadJSON]").should("exist");
     cy.get("[data-cy=downloadTEX]").should("exist");
     cy.get("[data-cy=downloadPDF]").should("exist");

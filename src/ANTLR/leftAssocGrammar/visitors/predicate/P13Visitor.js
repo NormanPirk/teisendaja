@@ -1,7 +1,6 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import getNewVariable from '@/js/IndVariables';
 
 export default class P13Visitor extends antlr4.tree.ParseTreeVisitor {
 
@@ -13,18 +12,15 @@ export default class P13Visitor extends antlr4.tree.ParseTreeVisitor {
 		} catch (err) {
 			console.log(err);
 		}
-        return null;
+		return null;
 	}
 
 	visitForall(ctx) {
-        const ind = ctx.IND().getText();
-        const formula = ctx.formula().getText();
-        if (formula.includes(ind)) {
-            const newInd = getNewVariable();
-            if (newInd) {
-                const newFormula = formula.replaceAll(ind, newInd);
-                return "∀" + newInd + newFormula;
-            }
+        if (ctx.formula().constructor.name === "ForallContext") {
+            const indOuter = ctx.IND().getText();
+            const indInner = ctx.formula().IND().getText();
+            const value = ctx.formula().formula().getText();
+            return "∀" + indInner + "∀" + indOuter + value;
         }
 		throw "Incompatible input!";		
 	}

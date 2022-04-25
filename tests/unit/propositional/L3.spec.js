@@ -46,8 +46,19 @@ describe("L3 tests", () => {
     expect(convert(input, "L3")).toBe("H(x,f(z))∧∃xF(x)∧∀yG(y)");
   });
 
-  test("returns null when input is not conjuction", () => {
+  test("switches sides of disjunction", () => {
     const input = "(A∧B)∨¬(C⇒D)";
+    expect(convert(input, "L3")).toBe("¬(C⇒D)∨(A∧B)");
+  });
+
+  test("switches sides of equivalence", () => {
+    const input = "(A∧B)⇔¬(C⇒D)";
+    expect(convert(input, "L3")).toBe("¬(C⇒D)⇔(A∧B)");
+  });
+
+  test("returns null if input is not commutative", () => {
+    const input = "¬(A∧B)";
     expect(convert(input, "L3")).toBe(null);
   });
+
 });

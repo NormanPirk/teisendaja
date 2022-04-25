@@ -1,3 +1,4 @@
+// Adapted from https://medium.com/@Taha_Shashtari/the-easy-way-to-change-page-title-in-vue-6caf05006863
 function getTitle(vm) {
   const { title } = vm.$options;
   if (title) {

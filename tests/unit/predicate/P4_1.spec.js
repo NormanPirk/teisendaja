@@ -1,8 +1,7 @@
 import convert from "@/js/Converter.js";
 
 describe("P4_1 tests", () => {
-  
-    test("moves quantifier out from the parentheses ∃x(F(x)∨G(x))", () => {
+  test("moves quantifier out from the parentheses ∃x(F(x)∨G(x))", () => {
     const input = "∃x(F(x)∨G(x))";
     expect(convert(input, "P4_1")).toBe("∃xF(x)∨∃xG(x)");
   });
@@ -32,4 +31,13 @@ describe("P4_1 tests", () => {
     expect(convert(input, "P4_1")).toBe(null);
   });
 
+  test("returns null if the input is not in the form of ∃x(F(x)∨G(x))", () => {
+    const input = "∃xF(x,y,z)";
+    expect(convert(input, "P4_1")).toBe(null);
+  });
+
+  test("returns null if the input is not in the form of ∃x(F(x)∨G(x))", () => {
+    const input = "∃x(F(x)⇒G(x))";
+    expect(convert(input, "P4_1")).toBe(null);
+  });
 });

@@ -7,8 +7,8 @@ export default class P8_2Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitStart(ctx) {
         try {
-            if (ctx.formula().constructor.name === "OrContext") {
-                return this.visitOr(ctx.formula());
+            if (ctx.formula().constructor.name === "ImplContext") {
+                return this.visitImpl(ctx.formula());
             }
         } catch (err) {
             console.log(err);
@@ -16,15 +16,15 @@ export default class P8_2Visitor extends antlr4.tree.ParseTreeVisitor {
         return null;
     }
 
-    visitOr(ctx) {
-        if (ctx.left.constructor.name === "ExistsContext") {
+    visitImpl(ctx) {
+        if (ctx.left.constructor.name === "ForallContext") {
             const freeVarsLeft = getFreeIndVars(ctx.left.formula());
             const freeVarsRight = getFreeIndVars(ctx.right);
             const ind = ctx.left.IND().getText();
-            if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
+            if (!freeVarsRight.has(ind) && freeVarsLeft.has(ind)) {
                 const left = ctx.left.formula().getText();
                 const right = ctx.right.getText();
-                return "∃" + ind + "(" + left + "∨" + right + ")";
+                return "∃" + ind + "(" + left + "⇒" + right + ")"
             }
         }
         throw "Incompatible input!";

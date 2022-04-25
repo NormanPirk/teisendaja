@@ -2,11 +2,12 @@
   <div class="home">
     <div id="nav">
       <h3 data-cy="title">{{ $t("title") }}</h3>
-      <!-- <router-link to="/">Home</router-link> -->
-      <button @click="toggleHelp()" class="yellow" data-cy="showHelpBtn">
+      <a href="#help" id="main">
+        <button @click="toggleHelp()" class="yellow" data-cy="showHelpBtn">
         <div v-show="this.showHelp">{{ $t("hideHelp") }}</div>
         <div v-show="!this.showHelp">{{ $t("showHelp") }}</div>
       </button>
+      </a>
     </div>
     <Main></Main>
   </div>
@@ -44,8 +45,8 @@ export default {
 #nav {
   display: flex;
   justify-content: space-between;
-  padding-right: 2.5em;
   align-items: center;
+  margin: 0 0.5em 0 1em;
 }
 
 button div {
@@ -55,4 +56,5 @@ button div {
 button {
   height: 2em;
 }
+
 </style>

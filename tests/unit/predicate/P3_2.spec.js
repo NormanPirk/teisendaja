@@ -1,8 +1,7 @@
 import convert from "@/js/Converter.js";
 
 describe("P3_2 tests", () => {
-  
-    test("moves quantifier out from the parentheses ∀xF(x)∧∀xG(x)", () => {
+  test("moves quantifier out from the parentheses ∀xF(x)∧∀xG(x)", () => {
     const input = "∀xF(x)∧∀xG(x)";
     expect(convert(input, "P3_2")).toBe("∀x(F(x)∧G(x))");
   });
@@ -31,5 +30,4 @@ describe("P3_2 tests", () => {
     const input = "∀x(F(x)∧G(x))";
     expect(convert(input, "P3_2")).toBe(null);
   });
-
 });

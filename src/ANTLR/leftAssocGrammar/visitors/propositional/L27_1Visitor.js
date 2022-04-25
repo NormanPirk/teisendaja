@@ -19,8 +19,10 @@ export default class L27_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitNeg(ctx) {
 		if (ctx.constructor.name === "NegContext") {
-            if (ctx.formula().constructor.name === "TrueContext") {
-                return "0";
+			const neg = ctx.formula();
+            if (neg.constructor.name === "NegContext") {
+                const value = neg.formula().getText();
+                return value;
             }
 		}
         throw "Incompatible input!";

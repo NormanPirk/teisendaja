@@ -1,53 +1,60 @@
 import convert from "@/js/Converter.js";
+import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L5_2 tests", () => {
-  test("moves the parentheses to the left in A∧(B∧C)", () => {
-    const input = "A∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("(A∧B)∧C");
+  test("creates conjunction of F and G", () => {
+    const input = "F";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("F∧(F∨G)");
   });
 
-  test("moves the parentheses to the left in ¬A∧(B∧C)", () => {
-    const input = "¬A∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("(¬A∧B)∧C");
+  test("creates conjunction of ¬F and G", () => {
+    const input = "¬F";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("¬F∧(¬F∨G)");
   });
 
-  test("moves the parentheses to the left in (A∧D)∧(B∧C)", () => {
-    const input = "(A∧D)∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("((A∧D)∧B)∧C");
+  test("creates conjunction of F∧H and G", () => {
+    const input = "F∧H";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("F∧H∧(F∧H∨G)");
   });
 
-  test("moves the parentheses to the left in (A⇒D)∧(B∧C)", () => {
-    const input = "(A⇒D)∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("((A⇒D)∧B)∧C");
+  test("creates conjunction of F∨H and G", () => {
+    const input = "F∨H";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("(F∨H)∧(F∨H∨G)");
   });
 
-  test("moves the parentheses to the left in (A⇔D)∧(B∧C)", () => {
-    const input = "(A⇔D)∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("((A⇔D)∧B)∧C");
+  test("creates conjunction of ∀xF(x)⇒H and G", () => {
+    const input = "∀xF(x)⇒H";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("(∀xF(x)⇒H)∧((∀xF(x)⇒H)∨G)");
   });
 
-  test("moves the parentheses to the left in ∀xF(x)∧(B∧C)", () => {
-    const input = "∀xF(x)∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("(∀xF(x)∧B)∧C");
+  test("creates conjunction of ∃xF(x)⇔H and G", () => {
+    const input = "∃xF(x)⇔H";
+    const newFormula = "G";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("(∃xF(x)⇔H)∧((∃xF(x)⇔H)∨G)");
   });
 
-  test("moves the parentheses to the left in ∃xF(x)∧(B∧C)", () => {
-    const input = "∃xF(x)∧(B∧C)";
-    expect(convert(input, "L5_2")).toBe("(∃xF(x)∧B)∧C");
-  });
-
-  test("moves the parentheses to the left in ∃xF(x)∧((∃xF(x)∧∀yG(y)∧H(x,f(z)))∧C)", () => {
-    const input = "∃xF(x)∧((∃xF(x)∧∀yG(y)∧H(x,f(z)))∧C)";
-    expect(convert(input, "L5_2")).toBe("(∃xF(x)∧(∃xF(x)∧∀yG(y)∧H(x,f(z))))∧C");
-  });
-
-  test("Returns null if the input is not in the form of F∧(G∧H)", () => {
-    const input = "F∧(G⇔H)";
-    expect(convert(input, "L5_2")).toBe(null);
-  });
-
-  test("Returns null if the input is not in the form of F∧(G∧H)", () => {
-    const input = "F⇔(G∧H)";
-    expect(convert(input, "L5_2")).toBe(null);
+  test("creates conjunction of G and ∃xF(x)⇔H", () => {
+    const input = "G";
+    const newFormula = "∃xF(x)⇔H";
+    let result = convert(input, "L5_2");
+    result = handleNewFormula("L5_2", newFormula, result);
+    expect(result).toBe("G∧(G∨(∃xF(x)⇔H))");
   });
 });

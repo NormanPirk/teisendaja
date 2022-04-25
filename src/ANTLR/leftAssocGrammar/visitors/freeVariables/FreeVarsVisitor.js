@@ -67,13 +67,13 @@ export default class FreeVarsVisitor extends antlr4.tree.ParseTreeVisitor {
 
         // Visit a parse tree produced by PredGrammarParser#true.
         visitTrue(ctx) {
-                return newSet();
+                return new Set();
         }
 
 
         // Visit a parse tree produced by PredGrammarParser#false.
         visitFalse(ctx) {
-                return newSet();
+                return new Set();
         }
 
 

@@ -1,24 +1,24 @@
 export default function conversionAllowed(matchingChild, conversionType) {
-  if (conversionType === "L30_2") {
-    return allowL30_2(matchingChild);
+  if (conversionType === "L18_2") {
+    return allowL18_2(matchingChild);
   }
-  if (conversionType === "L24_2") {
-    return allowL24_2(matchingChild);
+  if (["L9_2","L21_2","L24_2"].includes(conversionType)) {
+    return allowTrue(matchingChild);
   }
-  if (conversionType === "L25_2") {
-    return allowL25_2(matchingChild);
+  if (["L9_2","L22_2", "L25_2"].includes(conversionType)) {
+    return allowFalse(matchingChild);
   }
   return true;
 }
 
-function allowL30_2(matchingChild) {
+function allowL18_2(matchingChild) {
   if (matchingChild.constructor.name === "ParenContext") {
     // the matching child itself is ParenContext
     if (matchingChild.parentCtx) {
       const parentContext = matchingChild.parentCtx.constructor.name;
       const childContext = matchingChild.formula().constructor.name;
       if (parentContext === "NegContext") {
-        if (!["NegContext", "PredContext"].includes(childContext)) {
+        if (!["NegContext", "PredContext", "ForallContext", "ExistsContext"].includes(childContext)) {
           return false;
         }
       } else if (parentContext === "AndContext") {
@@ -50,14 +50,14 @@ function allowL30_2(matchingChild) {
   return true;
 }
 
-function allowL24_2(matchingChild) {
+function allowTrue(matchingChild) {
   if (matchingChild.constructor.name === "StartContext") {
     return matchingChild.formula().constructor.name === "TrueContext";
   }
   return matchingChild.constructor.name === "TrueContext";
 }
 
-function allowL25_2(matchingChild) {
+function allowFalse(matchingChild) {
   if (matchingChild.constructor.name === "StartContext") {
     return matchingChild.formula().constructor.name === "FalseContext";
   }

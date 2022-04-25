@@ -16,15 +16,14 @@ export default class L24_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by PredGrammarParser#and.
 	visitOr(ctx) {
 		if (ctx.constructor.name === "OrContext") {
 			const right = ctx.right.getText();
-            if (right === '1') {
-                return '1';
+			const left = ctx.left.getText();
+            if (right === "1" || left === "1") {
+                return "1";
             }
 		}
-        throw "Incompatible input!";
-		
+        throw "Incompatible input!";	
 	}
 }

@@ -1,63 +1,68 @@
 import convert from "@/js/Converter.js";
 
 describe("L18_1 tests", () => {
-  test("turns equivalence to disjunction of implications F⇔G", () => {
-    const input = "F⇔G";
-    expect(convert(input, "L18_1")).toBe("(F⇒G)∧(G⇒F)");
+  test("adds parentheses to A", () => {
+    const input = "A";
+    expect(convert(input, "L18_1")).toBe("(A)");
   });
 
-  test("turns equivalence to disjunction of implications A(x)⇔B(y,f(z))", () => {
-    const input = "A(x)⇔B(y,f(z))";
-    expect(convert(input, "L18_1")).toBe("(A(x)⇒B(y,f(z)))∧(B(y,f(z))⇒A(x))");
+  test("adds parentheses to conjunction", () => {
+    const input = "A∧B";
+    expect(convert(input, "L18_1")).toBe("(A∧B)");
   });
 
-  test("turns equivalence to disjunction of implications ¬A(x)⇔¬B(y,f(z))", () => {
-    const input = "¬A(x)⇔¬B(y,f(z))";
-    expect(convert(input, "L18_1")).toBe(
-      "(¬A(x)⇒¬B(y,f(z)))∧(¬B(y,f(z))⇒¬A(x))"
-    );
+  test("adds parentheses to disjunction", () => {
+    const input = "A∨B";
+    expect(convert(input, "L18_1")).toBe("(A∨B)");
   });
 
-  test("turns equivalence to disjunction of implications A(x)∧C(t)⇔B(y,f(z))", () => {
-    const input = "A(x)∧C(t)⇔B(y,f(z))";
-    expect(convert(input, "L18_1")).toBe(
-      "(A(x)∧C(t)⇒B(y,f(z)))∧(B(y,f(z))⇒A(x)∧C(t))"
-    );
+  test("adds parentheses to implication", () => {
+    const input = "A⇒B";
+    expect(convert(input, "L18_1")).toBe("(A⇒B)");
   });
 
-  test("turns equivalence to disjunction of implications A(x)∨B(y)⇔C(z)", () => {
-    const input = "A(x)∨B(y)⇔C(z)";
-    expect(convert(input, "L18_1")).toBe("(A(x)∨B(y)⇒C(z))∧(C(z)⇒A(x)∨B(y))");
+  test("adds parentheses to equivalence", () => {
+    const input = "A⇔B";
+    expect(convert(input, "L18_1")).toBe("(A⇔B)");
   });
 
-  test("turns equivalence to disjunction of implications ∀xA(x)⇒B(y)⇔¬C(z)", () => {
-    const input = "∀xA(x)⇒B(y)⇔¬C(z)";
-    expect(convert(input, "L18_1")).toBe(
-      "(∀xA(x)⇒B(y)⇒¬C(z))∧(¬C(z)⇒∀xA(x)⇒B(y))"
-    );
+  test("adds parentheses to negation", () => {
+    const input = "¬A";
+    expect(convert(input, "L18_1")).toBe("(¬A)");
   });
 
-  test("turns equivalence to disjunction of implications ∀xA(x)⇔(∃xB(x)⇔C(y))", () => {
-    const input = "∀xA(x)⇔(∃xB(x)⇔C(y))";
-    expect(convert(input, "L18_1")).toBe(
-      "(∀xA(x)⇒(∃xB(x)⇔C(y)))∧((∃xB(x)⇔C(y))⇒∀xA(x))"
-    );
+  test("adds parentheses to formula starting with ∀", () => {
+    const input = "∀xF(x)";
+    expect(convert(input, "L18_1")).toBe("(∀xF(x))");
   });
 
-  test("turns equivalence to disjunction of implications ¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))⇔∃zA(x,z)", () => {
-    const input = "¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))⇔∃zA(x,z)";
-    expect(convert(input, "L18_1")).toBe(
-      "(¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))⇒∃zA(x,z))∧(∃zA(x,z)⇒¬∃x∀y(F(x)⇒G(y)∧H(z,g(t))))"
-    );
+  test("adds parentheses to formula starting with ∃", () => {
+    const input = "∃xF(x)";
+    expect(convert(input, "L18_1")).toBe("(∃xF(x))");
   });
 
-  test("returns null if input is not in the form of F⇔G", () => {
-    const input = "F";
-    expect(convert(input, "L18_1")).toBe(null);
+  test("adds second set of parentheses to (A⇒B)", () => {
+    const input = "(A⇒B)";
+    expect(convert(input, "L18_1")).toBe("((A⇒B))");
   });
 
-  test("returns null if input is not in the form of F⇔G", () => {
-    const input = "(F⇒G)∧(G⇒F)";
-    expect(convert(input, "L18_1")).toBe(null);
+  test("adds parentheses to complex expression", () => {
+    const input = "(∀x∃yA(x)∧B(y))⇔C(z)∧D(f(x),g(z))";
+    expect(convert(input, "L18_1")).toBe("((∀x∃yA(x)∧B(y))⇔C(z)∧D(f(x),g(z)))");
+  });
+
+  test("throws error on extra parentheses in the end", () => {
+    const input = "A)";
+    expect(() => convert(input, "L18_1")).toThrow();
+  });
+
+  test("throws error on extra parentheses in the beginning", () => {
+    const input = "(A";
+    expect(() => convert(input, "L18_1")).toThrow();
+  });
+
+  test("throws error on expression with faulty token", () => {
+    const input = "A \\vee B";
+    expect(() => convert(input, "L18_1")).toThrow();
   });
 });

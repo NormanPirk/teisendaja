@@ -18,15 +18,15 @@ export default class P8_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitExists(ctx) {
         if (ctx.formula().constructor.name === "ParenContext") {
-            const and = ctx.formula().formula();
-            if (and.constructor.name === "OrContext") {
-                const freeVarsLeft = getFreeIndVars(and.left);
-                const freeVarsRight = getFreeIndVars(and.right);
+            const impl = ctx.formula().formula();
+            if (impl.constructor.name === "ImplContext") {
+                const freeVarsLeft = getFreeIndVars(impl.left);
+                const freeVarsRight = getFreeIndVars(impl.right);
                 const ind = ctx.IND().getText();
-                if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
-                    const left = and.left.getText();
-                    const right = and.right.getText();
-                    return "∃" + ind + left + "∨" + right;
+                if (!freeVarsRight.has(ind) && freeVarsLeft.has(ind)) {
+                    const left = impl.left.getText();
+                    const right = impl.right.getText();
+                    return "∀" + ind + left + "⇒" + right;
                 }
             }
         }

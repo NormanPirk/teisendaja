@@ -12,9 +12,23 @@ export default function addParentheses(matchingChild, result) {
       result = addParensOr(childContext, result);
     } else if (parentContext === "ImplContext") {
       result = addParensImpl(childContext, result);
-    } else if (parentContext === "ExistsContext" || parentContext === "ForallContext") {
+    } else if (
+      parentContext === "ExistsContext" ||
+      parentContext === "ForallContext"
+    ) {
       result = addParensQuantifier(childContext, result);
     }
+  }
+  return result;
+}
+
+export function addParensMiddle(parentOp, result) {
+  const childContext = getParseTree(result).formula().constructor.name;
+  if (parentOp.includes("And")) {
+    result = addParensAnd(childContext, result);
+  }
+  if (parentOp.includes("Or")) {
+    result = addParensOr(childContext, result);
   }
   return result;
 }

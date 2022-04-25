@@ -1,53 +1,62 @@
 import convert from "@/js/Converter.js";
 
 describe("L5_1 tests", () => {
-  test("moves the parentheses to the right in (A∧B)∧C", () => {
-    const input = "(A∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("A∧(B∧C)");
+
+  test("simplifies (G∨F)∧F", () => {
+    const input = "(G∨F)∧F";
+    expect(convert(input, "L5_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in (¬A∧B)∧C", () => {
-    const input = "(¬A∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("¬A∧(B∧C)");
+  test("simplifies (G∨F)∧G", () => {
+    const input = "(G∨F)∧G";
+    expect(convert(input, "L5_1")).toBe("G");
   });
 
-  test("moves the parentheses to the right in ((A∨D)∧B)∧C", () => {
-    const input = "((A∨D)∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("(A∨D)∧(B∧C)");
+  test("simplifies A(x)∧(A(x)∨B(y))", () => {
+    const input = "A(x)∧(A(x)∨B(y))";
+    expect(convert(input, "L5_1")).toBe("A(x)");
   });
 
-  test("moves the parentheses to the right in ((A⇒D)∧B)∧C", () => {
-    const input = "((A⇒D)∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("(A⇒D)∧(B∧C)");
+  test("simplifies ¬A(x)∧(¬A(x)∨B(y))", () => {
+    const input = "¬A(x)∧(¬A(x)∨B(y))";
+    expect(convert(input, "L5_1")).toBe("¬A(x)");
   });
 
-  test("moves the parentheses to the right in ((A⇔D)∧B)∧C", () => {
-    const input = "((A⇔D)∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("(A⇔D)∧(B∧C)");
+  test("simplifies (A∨B)∧((A∨B)∨D)", () => {
+    const input = "(A∨B)∧((A∨B)∨D)";
+    expect(convert(input, "L5_1")).toBe("(A∨B)");
   });
 
-  test("moves the parentheses to the right in (∀xF(x)∧B)∧C", () => {
-    const input = "(∀xF(x)∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("∀xF(x)∧(B∧C)");
+  test("simplifies (A∨B)∧((A∨B)∨D)", () => {
+    const input = "(A∨B)∧((A∨B)∨D)";
+    expect(convert(input, "L5_1")).toBe("(A∨B)");
   });
 
-  test("moves the parentheses to the right in (∃xF(x)∧B)∧C", () => {
-    const input = "(∃xF(x)∧B)∧C";
-    expect(convert(input, "L5_1")).toBe("∃xF(x)∧(B∧C)");
+  test("simplifies (∀xA(x)⇒D(y))∧((∀xA(x)⇒D(y))∨B(y))", () => {
+    const input = "(∀xA(x)⇒D(y))∧((∀xA(x)⇒D(y))∨B(y))";
+    expect(convert(input, "L5_1")).toBe("(∀xA(x)⇒D(y))");
   });
 
-  test("moves the parentheses to the right in (∃xF(x)∧B)∧∀xH(x,f(z))", () => {
-    const input = "(∃xF(x)∧B)∧∀xH(x,f(z))";
-    expect(convert(input, "L5_1")).toBe("∃xF(x)∧(B∧∀xH(x,f(z)))");
+  test("simplifies (A⇔B)∧((A⇔B)∨D)", () => {
+    const input = "(A⇔B)∧((A⇔B)∨D)";
+    expect(convert(input, "L5_1")).toBe("(A⇔B)");
   });
 
-  test("Returns null if the input is not in the form of (F∧G)∧H", () => {
-    const input = "(F∧G)⇔H";
+  test("simplifies (∃xF(x)∨((∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C))∧((∃xF(x)∨((∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C))∨D)", () => {
+    const input =
+      "(∃xF(x)∨((∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C))∧((∃xF(x)∨((∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C))∨D)";
+    expect(convert(input, "L5_1")).toBe(
+      "(∃xF(x)∨((∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C))"
+    );
+  });
+
+  test("returns null if input is not in the form of F∧(F∨G)", () => {
+    const input = "(A⇔B)∨((A⇔B)∨D)";
     expect(convert(input, "L5_1")).toBe(null);
   });
 
-  test("Returns null if the input is not in the form of (F∧G)∧H", () => {
-    const input = "(F⇔G)∧H";
+  test("returns null if input is not in the form of F∧(F∨G)", () => {
+    const input = "F∧(F∧G)";
     expect(convert(input, "L5_1")).toBe(null);
   });
 });

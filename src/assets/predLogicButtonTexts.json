@@ -24,75 +24,63 @@
         "conversionTypeR": "P4_2"
     },
     {
-        "left": "∀x(F(x)∧G)",
-        "right": "∀xF(x)∧G",
+        "left": "∀x(F(x)∗G)",
+        "right": "∀xF(x)∗G",
         "conversionTypeL": "P5_1",
         "conversionTypeR": "P5_2"
     },
     {
-        "left": "∀x(F(x)∨G)",
-        "right": "∀xF(x)∨G",
+        "left": "∃x(F(x)∗G)",
+        "right": "∃xF(x)∗G",
         "conversionTypeL": "P6_1",
         "conversionTypeR": "P6_2"
     },
     {
-        "left": "∃x(F(x)∧G)",
-        "right": "∃xF(x)∧G",
+        "left": "∀x(F(x)⇒G)",
+        "right": "∃xF(x)⇒G",
         "conversionTypeL": "P7_1",
         "conversionTypeR": "P7_2"
     },
     {
-        "left": "∃x(F(x)∨G)",
-        "right": "∃xF(x)∨G",
+        "left": "∃x(F(x)⇒G)",
+        "right": "∀xF(x)⇒G",
         "conversionTypeL": "P8_1",
         "conversionTypeR": "P8_2"
     },
     {
-        "left": "∀x(F(x)⇒G)",
-        "right": "∃xF(x)⇒G",
+        "left": "∀x(F⇒G(x))",
+        "right": "F⇒∀xG(x)",
         "conversionTypeL": "P9_1",
         "conversionTypeR": "P9_2"
     },
     {
-        "left": "∃x(F(x)⇒G)",
-        "right": "∀xF(x)⇒G",
+        "left": "∃x(F⇒G(x))",
+        "right": "F⇒∃xG(x)",
         "conversionTypeL": "P10_1",
         "conversionTypeR": "P10_2"
     },
     {
-        "left": "∀x(F⇒G(x))",
-        "right": "F⇒∀xG(x)",
-        "conversionTypeL": "P11_1",
-        "conversionTypeR": "P11_2"
-    },
-    {
-        "left": "∃x(F⇒G(x))",
-        "right": "F⇒∃xG(x)",
-        "conversionTypeL": "P12_1",
-        "conversionTypeR": "P12_2"
-    },
-    {
         "left": "∀xF(x)",
         "right": "∀yF(y)",
-        "conversionTypeL": "P13",
-        "conversionTypeR": "P13"
+        "conversionTypeL": "P11",
+        "conversionTypeR": "P11"
     },
     {
         "left": "∃xF(x)",
         "right": "∃yF(y)",
-        "conversionTypeL": "P14",
-        "conversionTypeR": "P14"
+        "conversionTypeL": "P12",
+        "conversionTypeR": "P12"
     },
     {
         "left": "∀x∀yF(x,y)",
         "right": "∀y∀xF(x,y)",
-        "conversionTypeL": "P15",
-        "conversionTypeR": "P15"
+        "conversionTypeL": "P13",
+        "conversionTypeR": "P13"
     },
     {
         "left": "∃x∃yF(x,y)",
         "right": "∃y∃xF(x,y)",
-        "conversionTypeL": "P16",
-        "conversionTypeR": "P16"
+        "conversionTypeL": "P14",
+        "conversionTypeR": "P14"
     }
 ]

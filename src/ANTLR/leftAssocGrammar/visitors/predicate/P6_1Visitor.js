@@ -2,13 +2,14 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import { getFreeIndVars } from '@/js/IndVariables';
+import { getOperationConjDisj } from '@/js/OperationGetter';
 
 export default class P6_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitStart(ctx) {
         try {
-            if (ctx.formula().constructor.name === "ForallContext") {
-                return this.visitForall(ctx.formula());
+            if (ctx.formula().constructor.name === "ExistsContext") {
+                return this.visitExists(ctx.formula());
             }
         } catch (err) {
             console.log(err);
@@ -16,17 +17,21 @@ export default class P6_1Visitor extends antlr4.tree.ParseTreeVisitor {
         return null;
     }
 
-    visitForall(ctx) {
+    visitExists(ctx) {
         if (ctx.formula().constructor.name === "ParenContext") {
-            const and = ctx.formula().formula();
-            if (and.constructor.name === "OrContext") {
-                const freeVarsLeft = getFreeIndVars(and.left);
-                const freeVarsRight = getFreeIndVars(and.right);
+            const operation = ctx.formula().formula();
+            const op = getOperationConjDisj(operation.constructor.name);
+            if (op === "∧" || op === "∨") {
+                const freeVarsLeft = getFreeIndVars(operation.left);
+                const freeVarsRight = getFreeIndVars(operation.right);
                 const ind = ctx.IND().getText();
+                const left = operation.left.getText();
+                const right = operation.right.getText();
                 if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
-                    const left = and.left.getText();
-                    const right = and.right.getText();
-                    return "∀" + ind + left + "∨" + right;
+                    return "∃" + ind + left + op + right;
+                }
+                if (!freeVarsLeft.has(ind) && freeVarsRight.has(ind)) {
+                    return left + op + "∃" + ind + right;
                 }
             }
         }

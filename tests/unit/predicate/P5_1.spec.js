@@ -1,8 +1,7 @@
 import convert from "@/js/Converter.js";
 
 describe("P5_1 tests", () => {
-  
-    test("moves quantifier into the parentheses ∀x(F(x)∧G)", () => {
+  test("moves quantifier into the parentheses ∀x(F(x)∧G)", () => {
     const input = "∀x(F(x)∧G)";
     expect(convert(input, "P5_1")).toBe("∀xF(x)∧G");
   });
@@ -19,7 +18,7 @@ describe("P5_1 tests", () => {
 
   test("returns null if individual variable is on the wrong side of the conjunction ∀x((A(y)⇔B(z))∧G(x))", () => {
     const input = "∀x((A(y)⇔B(z))∧G(x))";
-    expect(convert(input, "P5_1")).toBe(null);
+    expect(convert(input, "P5_1")).toBe("(A(y)⇔B(z))∧∀xG(x)");
   });
 
   test("returns null if the input is not in the form of ∀x(F(x)∧G)", () => {
@@ -32,4 +31,13 @@ describe("P5_1 tests", () => {
     expect(convert(input, "P5_1")).toBe(null);
   });
 
+  test("returns null if the input is not in the form of ∀x(F(x)∧G)", () => {
+    const input = "∀xF(x)";
+    expect(convert(input, "P5_1")).toBe(null);
+  });
+
+  test("returns null if the input is not in the form of ∀x(F(x)∧G)", () => {
+    const input = "∀x(F(x)∨G)";
+    expect(convert(input, "P5_1")).toBe("∀xF(x)∨G");
+  });
 });

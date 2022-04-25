@@ -4,7 +4,8 @@ import L1_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L1_2Vis
 import L2_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L2_1Visitor.js";
 import L2_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L2_2Visitor.js";
 import L3Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L3Visitor.js";
-import L4Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L4Visitor.js";
+import L4_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L4_1Visitor.js";
+import L4_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L4_2Visitor.js";
 import L5_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L5_1Visitor.js";
 import L5_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L5_2Visitor.js";
 import L6_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L6_1Visitor.js";
@@ -33,7 +34,8 @@ import L17_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L17_1V
 import L17_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L17_2Visitor.js";
 import L18_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L18_1Visitor.js";
 import L18_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L18_2Visitor.js";
-import L19Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L19Visitor.js";
+import L19_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L19_1Visitor.js";
+import L19_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L19_2Visitor.js";
 import L20_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L20_1Visitor.js";
 import L20_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L20_2Visitor.js";
 import L21_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L21_1Visitor.js";
@@ -50,12 +52,6 @@ import L26_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L26_1V
 import L26_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L26_2Visitor.js";
 import L27_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L27_1Visitor.js";
 import L27_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L27_2Visitor.js";
-import L28_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_1Visitor.js";
-import L28_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L28_2Visitor.js";
-import L29_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L29_1Visitor.js";
-import L29_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L29_2Visitor.js";
-import L30_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L30_1Visitor.js";
-import L30_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/propositional/L30_2Visitor.js";
 
 import P1_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_1Visitor.js";
 import P1_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P1_2Visitor.js";
@@ -77,20 +73,15 @@ import P9_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P9_1Visitor
 import P9_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P9_2Visitor.js";
 import P10_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P10_1Visitor.js";
 import P10_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P10_2Visitor.js";
-import P11_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P11_1Visitor.js";
-import P11_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P11_2Visitor.js";
-import P12_1Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P12_1Visitor.js";
-import P12_2Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P12_2Visitor.js";
+import P11Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P11Visitor.js";
+import P12Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P12Visitor.js";
 import P13Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P13Visitor.js";
 import P14Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P14Visitor.js";
-import P15Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P15Visitor.js";
-import P16Visitor from "@/ANTLR/leftAssocGrammar/visitors/predicate/P16Visitor.js";
 
 export default function convert(subFormula, conversionType) {
   const tree = getParseTree(subFormula);
   const visitor = getVisitor(conversionType);
   const result = visitor.visit(tree);
-
   return result;
 }
 
@@ -106,8 +97,10 @@ function getVisitor(conversionType) {
       return new L2_2Visitor();
     case "L3":
       return new L3Visitor();
-    case "L4":
-      return new L4Visitor();
+    case "L4_1":
+      return new L4_1Visitor();
+    case "L4_2":
+      return new L4_2Visitor();
     case "L5_1":
       return new L5_1Visitor();
     case "L5_2":
@@ -164,8 +157,10 @@ function getVisitor(conversionType) {
       return new L18_1Visitor();
     case "L18_2":
       return new L18_2Visitor();
-    case "L19":
-      return new L19Visitor();
+    case "L19_1":
+      return new L19_1Visitor();
+    case "L19_2":
+      return new L19_2Visitor();
     case "L20_1":
       return new L20_1Visitor();
     case "L20_2":
@@ -198,18 +193,6 @@ function getVisitor(conversionType) {
       return new L27_1Visitor();
     case "L27_2":
       return new L27_2Visitor();
-    case "L28_1":
-      return new L28_1Visitor();
-    case "L28_2":
-      return new L28_2Visitor();
-    case "L29_1":
-      return new L29_1Visitor();
-    case "L29_2":
-      return new L29_2Visitor();
-    case "L30_1":
-      return new L30_1Visitor();
-    case "L30_2":
-      return new L30_2Visitor();
     case "P1_1":
       return new P1_1Visitor();
     case "P1_2":
@@ -250,21 +233,13 @@ function getVisitor(conversionType) {
       return new P10_1Visitor();
     case "P10_2":
       return new P10_2Visitor();
-    case "P11_1":
-      return new P11_1Visitor();
-    case "P11_2":
-      return new P11_2Visitor();
-    case "P12_1":
-      return new P12_1Visitor();
-    case "P12_2":
-      return new P12_2Visitor();
+    case "P11":
+      return new P11Visitor();
+    case "P12":
+      return new P12Visitor();
     case "P13":
       return new P13Visitor();
     case "P14":
       return new P14Visitor();
-    case "P15":
-      return new P15Visitor();
-    case "P16":
-      return new P16Visitor();
   }
 }

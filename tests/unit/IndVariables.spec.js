@@ -61,4 +61,39 @@ describe("Free variables tests", () => {
     expect(result.has("t")).toBeTruthy();
     expect(result.has("x")).toBeFalsy();
   });
+
+  test("Recognises a free variable after a negation", () => {
+    const input = getParseTree("¬F(x)");
+    expect(getFreeIndVars(input)).toEqual(new Set("x"));
+  });
+
+  test("Recognises free variables from an implication", () => {
+    const input = getParseTree("¬F(x)⇒H(y)");
+    const result = getFreeIndVars(input);
+    expect(result.has("x")).toBeTruthy();
+    expect(result.has("y")).toBeTruthy();
+  });
+
+  test("Recognises free variables from a disjunction", () => {
+    const input = getParseTree("R(t)∨U(u)");
+    const result = getFreeIndVars(input);
+    expect(result.has("t")).toBeTruthy();
+    expect(result.has("u")).toBeTruthy();
+  });
+
+  test("Recognises no free variables from a truth value 1", () => {
+    const input = getParseTree("1");
+    expect(getFreeIndVars(input)).toEqual(new Set());
+  });
+
+  test("Recognises no free variables from a truth value 0", () => {
+    const input = getParseTree("0");
+    expect(getFreeIndVars(input)).toEqual(new Set());
+  });
+
+  test("Recognises no free variables a predicate with constants as arguments", () => {
+    const input = getParseTree("P(a,b,c)");
+    expect(getFreeIndVars(input)).toEqual(new Set());
+  });
+
 });

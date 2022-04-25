@@ -46,8 +46,14 @@ describe("L24_1 tests", () => {
     expect(convert(input, "L24_1")).toBe("1");
   });
 
-  test("returns null if input is not in the form of F∨1", () => {
+  test("simplifies F∨1", () => {
     const input = "1∨F";
+    expect(convert(input, "L24_1")).toBe("1");
+  });
+
+  test("returns null if input is not in the form of F∨1", () => {
+    const input = "1∧F";
     expect(convert(input, "L24_1")).toBe(null);
   });
+
 });

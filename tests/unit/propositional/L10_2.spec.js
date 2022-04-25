@@ -1,51 +1,55 @@
 import convert from "@/js/Converter.js";
 
 describe("L10_2 tests", () => {
-  test("applies the distributive property to (A(x)∨B(x))∧(A(x)∨C(y))", () => {
-    const input = "(A(x)∨B(x))∧(A(x)∨C(y))";
-    expect(convert(input, "L10_2")).toBe("A(x)∨B(x)∧C(y)");
+  test("applies DeMorgan to ¬F∨¬G", () => {
+    const input = "¬F∨¬G";
+    expect(convert(input, "L10_2")).toBe("¬(F∧G)");
   });
 
-  test("applies the distributive property to (¬A(x)∨B(x))∧(¬A(x)∨C(y))", () => {
-    const input = "(¬A(x)∨B(x))∧(¬A(x)∨C(y))";
-    expect(convert(input, "L10_2")).toBe("¬A(x)∨B(x)∧C(y)");
+  test("applies DeMorgan to ¬A(x)∨¬B(y,f(z))", () => {
+    const input = "¬A(x)∨¬B(y,f(z))";
+    expect(convert(input, "L10_2")).toBe("¬(A(x)∧B(y,f(z)))");
   });
 
-  test("applies the distributive property to (A∧B∨∀xC(x,g(x)))∧(A∧B∨∃yD(y))", () => {
-    const input = "(A∧B∨∀xC(x,g(x)))∧(A∧B∨∃yD(y))";
-    expect(convert(input, "L10_2")).toBe("A∧B∨∀xC(x,g(x))∧∃yD(y)");
+  test("applies DeMorgan to ¬¬A(x)∨¬B(y,f(z))", () => {
+    const input = "¬¬A(x)∨¬B(y,f(z))";
+    expect(convert(input, "L10_2")).toBe("¬(¬A(x)∧B(y,f(z)))");
   });
 
-  test("applies the distributive property to ((A∨B)∨(A∨B))∧((A∨B)∨D)", () => {
-    const input = "((A∨B)∨(A∨B))∧((A∨B)∨D)";
-    expect(convert(input, "L10_2")).toBe("(A∨B)∨(A∨B)∧D");
+  test("applies DeMorgan to ¬(A(x)∧C(t))∨¬B(y,f(z))", () => {
+    const input = "¬(A(x)∧C(t))∨¬B(y,f(z))";
+    expect(convert(input, "L10_2")).toBe("¬((A(x)∧C(t))∧B(y,f(z)))");
   });
 
-  test("applies the distributive property to ((∀xA(x)⇒D(y))∨C(x))∧((∀xA(x)⇒D(y))∨B(y))", () => {
-    const input = "((∀xA(x)⇒D(y))∨C(x))∧((∀xA(x)⇒D(y))∨B(y))";
-    expect(convert(input, "L10_2")).toBe("(∀xA(x)⇒D(y))∨C(x)∧B(y)");
+  test("applies DeMorgan to ¬(A(x)∨B(y))∨¬C(z)", () => {
+    const input = "¬(A(x)∨B(y))∨¬C(z)";
+    expect(convert(input, "L10_2")).toBe("¬((A(x)∨B(y))∧C(z))");
   });
 
-  test("applies the distributive property to ((A⇔B)∨C)∧((A⇔B)∨D)", () => {
-    const input = "((A⇔B)∨C)∧((A⇔B)∨D)";
-    expect(convert(input, "L10_2")).toBe("(A⇔B)∨C∧D");
+  test("applies DeMorgan to ¬(A(x)⇒B(y))∨¬C(z)", () => {
+    const input = "¬(A(x)⇒B(y))∨¬C(z)";
+    expect(convert(input, "L10_2")).toBe("¬((A(x)⇒B(y))∧C(z))");
   });
 
-  test("applies the distributive property to (∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)", () => {
-    const input =
-      "(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)";
+  test("applies DeMorgan to ¬∀xA(x)∨¬(∃xB(x)⇔C(y))", () => {
+    const input = "¬∀xA(x)∨¬(∃xB(x)⇔C(y))";
+    expect(convert(input, "L10_2")).toBe("¬(∀xA(x)∧(∃xB(x)⇔C(y)))");
+  });
+
+  test("applies DeMorgan to ¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))∨¬∃zA(x,z)", () => {
+    const input = "¬∃x∀y(F(x)⇒G(y)∧H(z,g(t)))∨¬∃zA(x,z)";
     expect(convert(input, "L10_2")).toBe(
-      "∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C∧D"
+      "¬(∃x∀y(F(x)⇒G(y)∧H(z,g(t)))∧∃zA(x,z))"
     );
   });
 
-  test("returns null if input is not in the form of (F∨G)∧(F∨H)", () => {
-    const input = "(F(x)∨B(x))∧(F(x)∧H(y))";
+  test("returns null if input is not in the form of ¬F∨¬G", () => {
+    const input = "F∨¬G";
     expect(convert(input, "L10_2")).toBe(null);
   });
 
-  test("returns null if input is not in the form of (F∨G)∧(F∨H)", () => {
-    const input = "F∧(A⇔B)∧G";
+  test("returns null if input is not in the form of ¬F∨¬G", () => {
+    const input = "¬F∨G";
     expect(convert(input, "L10_2")).toBe(null);
   });
 });

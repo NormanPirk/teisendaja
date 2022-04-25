@@ -21,9 +21,12 @@ export default class L26_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		if (ctx.constructor.name === "OrContext") {
 			const left = ctx.left.getText();
 			const right = ctx.right.getText();
-            if (right === '0') {
+            if (right === "0") {
                 return left;
             }
+			if (left === "0") {
+				return right;
+			}
 		}
         throw "Incompatible input!";
 		

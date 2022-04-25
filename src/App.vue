@@ -11,6 +11,14 @@
 }
 body {
   background-color: rgb(247, 248, 249);
+  font-size: 20px;
+  width: auto;
+  padding: 0 2em;
+  margin: 0;
+}
+
+a {
+  cursor: default;
 }
 
 #nav a {
@@ -24,7 +32,6 @@ p {
 
 .shadow {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  min-height: 4em;
   border-radius: 8px;
   padding-bottom: 1em;
   background-color: #ffffff;
@@ -63,6 +70,7 @@ button {
   border-radius: 5px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   height: 2em;
+  transition-duration: 0.2s;
 }
 
 button:hover {
@@ -74,10 +82,6 @@ button:hover {
   justify-content: left;
   align-items: center;
   height: 3em;
-}
-
-h3 {
-  padding: 0 3em;
 }
 
 .yellow {
@@ -104,7 +108,7 @@ h3 {
   text-align: left;
   height: 15em;
   width: 40%;
-  margin-top: 10%;
+  margin-top: 15%;
   background-color: #ffffff;
   border-radius: 8px;
 }
@@ -116,7 +120,46 @@ h3 {
 }
 
 .error,
-.faulty {
+.faulty,
+.error::selection,
+.error span::selection {
   color: rgb(252, 74, 74);
 }
+
+@media screen and (max-width: 2880px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 2400px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 1540px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1368px) {
+  body {
+    font-size: 13px;
+  }
+}
+
 </style>

@@ -2,13 +2,15 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import { getFreeIndVars } from '@/js/IndVariables';
+import { getOperationConjDisj } from '@/js/OperationGetter';
 
 export default class P5_2Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitStart(ctx) {
         try {
-            if (ctx.formula().constructor.name === "AndContext") {
-                return this.visitAnd(ctx.formula());
+            const op = getOperationConjDisj(ctx.formula().constructor.name);
+            if (op === "∧" || op === "∨") {
+                return this.visitOperation(ctx.formula(), op);
             }
         } catch (err) {
             console.log(err);
@@ -16,7 +18,7 @@ export default class P5_2Visitor extends antlr4.tree.ParseTreeVisitor {
         return null;
     }
 
-    visitAnd(ctx) {
+    visitOperation(ctx, op) {
         if (ctx.left.constructor.name === "ForallContext") {
             const freeVarsLeft = getFreeIndVars(ctx.left.formula());
             const freeVarsRight = getFreeIndVars(ctx.right);
@@ -24,7 +26,17 @@ export default class P5_2Visitor extends antlr4.tree.ParseTreeVisitor {
             if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {
                 const left = ctx.left.formula().getText();
                 const right = ctx.right.getText();
-                return "∀" + ind + "(" + left + "∧" + right + ")";
+                return "∀" + ind + "(" + left + op + right + ")";
+            }
+        }
+        if (ctx.right.constructor.name === "ForallContext") {
+            const freeVarsLeft = getFreeIndVars(ctx.left);
+            const freeVarsRight = getFreeIndVars(ctx.right.formula());
+            const ind = ctx.right.IND().getText();
+            if (!freeVarsLeft.has(ind) && freeVarsRight.has(ind)) {
+                const left = ctx.left.getText();
+                const right = ctx.right.formula().getText();
+                return "∀" + ind + "(" + left + op + right + ")";
             }
         }
         throw "Incompatible input!";

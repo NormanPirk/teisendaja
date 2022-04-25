@@ -20,7 +20,8 @@ export default class L25_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	visitAnd(ctx) {
 		if (ctx.constructor.name === "AndContext") {
 			const right = ctx.right.getText();
-            if (right === "0") {
+			const left = ctx.left.getText();
+            if (right === "0" || left === "0") {
                 return "0";
             }
 		}
