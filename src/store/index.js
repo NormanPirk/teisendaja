@@ -1,9 +1,10 @@
 import { createStore } from "vuex";
 import insertTextAtCursor from "insert-text-at-cursor";
 import convert from "../js/Converter.js";
-import addParentheses from "../js/Parentheses.js";
+import addParentheses, { addParensMiddle } from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
 import Formula from "../js/Formula.js";
+import specialConversions from "@/assets/specialConversionCodes.json";
 
 export default createStore({
   state: {
@@ -25,7 +26,9 @@ export default createStore({
     inputFileError: false,
     showHelp: false,
     invalidFilename: false,
+    selectionNotFromCorrectField: false,
     selectedConversion: "",
+    faultyInputClarification: ""
   },
   getters: {
     formula: (state) => {
@@ -81,6 +84,9 @@ export default createStore({
     inputFileError: (state) => {
       return state.inputFileError;
     },
+    selectionNotFromCorrectField: (state) => {
+      return state.selectionNotFromCorrectField;
+    },
     showHelp: (state) => {
       return state.showHelp;
     },
@@ -90,6 +96,9 @@ export default createStore({
     selectedConversion: (state) => {
       return state.selectedConversion;
     },
+    faultyInputClarification: (state) => {
+      return state.faultyInputClarification;
+    }
   },
   mutations: {
     finishConversion: (state) => {
@@ -138,32 +147,8 @@ export default createStore({
     setSelectedConversion: (state, value) => {
       state.selectedConversion = value;
     },
-    showNoInputError: (state) => {
-      state.noInput = true;
-    },
-    showFaultyInputError: (state) => {
-      state.faultyInput = true;
-    },
-    showNotSubformulaError: (state) => {
-      state.notSubformula = true;
-    },
-    showFaultyConversionError: (state) => {
-      state.faultyConversion = true;
-    },
-    showNoSubformulaError: (state) => {
-      state.noSubformula = true;
-    },
-    showConversionNotAllowedError: (state) => {
-      state.conversionNotAllowed = true;
-    },
-    showNewFormulaError: (state) => {
-      state.incorrectNewFormula = true;
-    },
-    showInputFileError: (state) => {
-      state.inputFileError = true;
-    },
-    showInvalidFilenameError: (state) => {
-      state.invalidFilename = true;
+    setError: (state, errorName) => {
+      state[errorName] = true;
     },
     clearInvalidFilenameError: (state) => {
       state.invalidFilename = false;
@@ -180,52 +165,58 @@ export default createStore({
       state.noSubformula = false;
       state.conversionNotAllowed = false;
       state.inputFileError = false;
+      state.selectionNotFromCorrectField = false;
+    },
+    clearSelectedConversion: (state) => {
       state.selectedConversion = "";
+    },
+    clearFaultyInputClarification: (state) => {
+      state.faultyInputClarification = "";
     },
     clearNewFormulaError: (state) => {
       state.incorrectNewFormula = false;
     },
+    setFaultyInputClarification: (state, value) => {
+      state.faultyInputClarification = value;
+    },
     removeLast: (state) => {
       if (state.formulas.length > 0) {
-        state.formulas.pop();
+        const last = state.formulas.pop();
         if (state.formulas.length > 0) {
           state.formulas[state.formulas.length - 1].removeMetaInfo();
+          state.formula = state.formulas[state.formulas.length - 1].formula;
+        } else {
+          state.formula = last.formula;
         }
-      }
-      if (state.formulas.length > 0) {
-        state.formula = state.formulas[state.formulas.length - 1].formula;
-      } else {
-        state.formula = "";
       }
     },
     removeAll: (state) => {
-      state.formula = "";
-      state.formulas = [];
-      state.converted = false;
+      if (state.formulas.length > 0) {
+        state.formula = state.formulas[0].formula;
+        state.formulas = [];
+        state.converted = false;
+      }
     },
-    convert(
-      state,
-      { subFormula, matchingChild, conversionType, origStart, origEnd }
-    ) {
+    convert( state, object) {
       try {
-        let result = convert(subFormula, conversionType);
-        if (result) {
-          if (
-            ["L7_2", "L8_2", "L21_2", "L22_2", "L24_2", "L25_2"].includes(
-              conversionType
-            )
-          ) {
-            result = handleNewFormula(conversionType, state.newFormula, result);
+        let result = convert(object.subFormula, object.conversionType);
+        if (result || result === "") {
+          if (specialConversions.withUserInput.includes(object.conversionType)) {
+            result = handleNewFormula(object.conversionType, state.newFormula, result);
             state.newFormula = "";
           }
-          result = addParentheses(matchingChild, result);
-          const beginning = state.formula.substring(0, origStart);
-          const ending = state.formula.substring(origEnd, state.formula.length);
+          if ((typeof object.matchingChild) === "string" && object.matchingChild.includes("middle")) {
+            result = addParensMiddle(object.matchingChild, result);
+          } else {
+            result = addParentheses(object.matchingChild, result);
+          }
+          const beginning = state.formula.substring(0, object.origStart);
+          const ending = state.formula.substring(object.origEnd, state.formula.length);
           state.formula = beginning + result + ending;
-          state.formulas[state.formulas.length - 1].selStart = origStart;
-          state.formulas[state.formulas.length - 1].selEnd = origEnd;
+          state.formulas[state.formulas.length - 1].selStart = object.origStart;
+          state.formulas[state.formulas.length - 1].selEnd = object.origEnd;
           state.formulas[state.formulas.length - 1].ct =
-            conversionType.split("_")[0];
+            object.conversionType.split("_")[0];
           state.converted = true;
         } else {
           state.faultyConversion = true;
@@ -235,6 +226,11 @@ export default createStore({
       }
     },
   },
-  actions: {},
+  actions: {
+    setError(context, errorName) {
+      context.commit("clearErrors");
+      context.commit("setError", errorName);
+    },
+  },
   modules: {},
 });

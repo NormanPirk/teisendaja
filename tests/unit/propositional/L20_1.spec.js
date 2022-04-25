@@ -1,53 +1,43 @@
 import convert from "@/js/Converter.js";
 
 describe("L20_1 tests", () => {
-  test("moves the parentheses to the right in (A⇔B)⇔C", () => {
-    const input = "(A⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("A⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨G∧¬G", () => {
+    const input = "F∨G∧¬G";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in (¬A⇔B)⇔C", () => {
-    const input = "(¬A⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("¬A⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨¬G∧¬¬G", () => {
+    const input = "F∨¬G∧¬¬G";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in ((A∨D)⇔B)⇔C", () => {
-    const input = "((A∨D)⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("(A∨D)⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨(G∧H)∧¬(G∧H)", () => {
+    const input = "F∨(G∧H)∧¬(G∧H)";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in ((A⇒D)⇔B)⇔C", () => {
-    const input = "((A⇒D)⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("(A⇒D)⇔(B⇔C)");
+  test("removes contradiction from disjunction (G∨H)∧¬(G∨H)∨F", () => {
+    const input = "(G∨H)∧¬(G∨H)∨F";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in ((A⇔D)⇔B)⇔C", () => {
-    const input = "((A⇔D)⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("(A⇔D)⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨(∀xF(x)⇒H)∧¬(∀xF(x)⇒H)", () => {
+    const input = "F∨(∀xF(x)⇒H)∧¬(∀xF(x)⇒H)";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in (∀xF(x)⇔B)⇔C", () => {
-    const input = "(∀xF(x)⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("∀xF(x)⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨(∃xF(x)⇔H)∧¬(∃xF(x)⇔H)", () => {
+    const input = "F∨(∃xF(x)⇔H)∧¬(∃xF(x)⇔H)";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in (∃xF(x)⇔B)⇔C", () => {
-    const input = "(∃xF(x)⇔B)⇔C";
-    expect(convert(input, "L20_1")).toBe("∃xF(x)⇔(B⇔C)");
+  test("removes contradiction from disjunction F∨(∃xF(x)⇔∀yG(y)∧H(x,f(z)))∧¬(∃xF(x)⇔∀yG(y)∧H(x,f(z)))", () => {
+    const input = "F∨(∃xF(x)⇔∀yG(y)∧H(x,f(z)))∧¬(∃xF(x)⇔∀yG(y)∧H(x,f(z)))";
+    expect(convert(input, "L20_1")).toBe("F");
   });
 
-  test("moves the parentheses to the right in (∃xF(x)⇔B)⇔∀xH(x,f(z))", () => {
-    const input = "(∃xF(x)⇔B)⇔∀xH(x,f(z))";
-    expect(convert(input, "L20_1")).toBe("∃xF(x)⇔(B⇔∀xH(x,f(z)))");
-  });
-
-  test("Returns null if the input is not in the form of (F⇔G)⇔H", () => {
-    const input = "(F∨G)⇔H";
-    expect(convert(input, "L20_1")).toBe(null);
-  });
-
-  test("Returns null if the input is not in the form of (F⇔G)⇔H", () => {
-    const input = "(F⇔G)∨H";
+  test("returns null if there is no contradiction F∨G∧¬H", () => {
+    const input = "F∨G∧¬H";
     expect(convert(input, "L20_1")).toBe(null);
   });
 });

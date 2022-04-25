@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="conversion-btns" v-show="showPredicateLogic">
+  <div class="conversion-btns pred" v-show="showPredicateLogic">
     <ConvButton
       v-for="btnText in predBtnTexts"
       :key="btnText.conversionTypeL"
@@ -91,11 +91,15 @@ export default {
 }
 
 .conversion-btns div {
-  flex: 0 0 47%;
+  flex: 0 0 31%;
+}
+
+.pred div {
+  flex: 0 0 45%
 }
 
 .conv-intro {
-  margin: 1em 0;
+  margin: 0;
   justify-content: space-between;
   padding-top: 0.5em;
   padding-bottom: 0.5em;

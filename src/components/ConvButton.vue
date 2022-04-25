@@ -6,20 +6,29 @@
     ></ConvTypeMarker>
     <button
       class="item2"
-      @click="startConversion(this.conversionTypeL)"
+      @click="clearErrors(); startConversion(this.conversionTypeL);"
       :disabled="isDisabled"
       :data-cy="dataCy1"
     >
-      {{ this.left }}
+      <div class="button-item2">
+        {{ this.left }}
+        <sub v-if="this.left === '¬T'">1</sub>
+      </div>
+      
+      <i class="fa-solid fa-angle-right button-item3"></i>
     </button>
     <div class="item3">≡</div>
     <button
       class="item4"
-      @click="startConversion(this.conversionTypeR)"
+      @click="clearErrors(); startConversion(this.conversionTypeR);"
       :disabled="isDisabled"
       :data-cy="dataCy2"
     >
-      {{ this.right }}
+      <i class="fa-solid fa-angle-left button-item1"></i>
+      <div class="button-item2">
+        {{ this.right }}
+        <sub v-if="this.right === 'T'">2</sub>
+      </div>
     </button>
   </div>
 </template>
@@ -30,6 +39,7 @@ import matchInput from "@/js/InputMatcher.js";
 import conversionAllowed from "@/js/ConversionValidator.js";
 import ConvTypeMarker from "./ConvTypeMarker.vue";
 import specialConversions from "@/assets/specialConversionCodes.json";
+import getRangeIndices from "@/js/RangeIndices.js";
 
 export default {
   name: "ConvButton",
@@ -44,6 +54,11 @@ export default {
     ConvTypeMarker,
   },
   computed: {
+    formula: {
+      get() {
+        return this.$store.getters.formula;
+      },
+    },
     isDisabled() {
       return this.$store.getters.formulas.length === 0;
     },
@@ -55,10 +70,8 @@ export default {
     },
   },
   methods: {
-    switchButtonText() {
-      if (this.f2) {
-        this.buttonText = this.buttonText === this.f1 ? this.f2 : this.f1;
-      }
+    clearErrors() {
+      this.$store.commit("clearErrors");
     },
     focusInput() {
       this.$nextTick(() => {
@@ -66,10 +79,14 @@ export default {
       });
     },
     isCorrectSelection(selection) {
-      return (
-        selection.anchorNode.parentElement.id === "selectable" &&
-        selection.focusNode.parentElement.id === "selectable"
-      );
+      if (selection) {
+        const div = document.getElementById("selectable");
+        return (
+          div.contains(selection.getRangeAt(0).startContainer) &&
+          div.contains(selection.getRangeAt(0).endContainer)
+        );
+      }
+      return false;
     },
     userInputNeeded(conversionType) {
       return specialConversions.withUserInput.includes(conversionType);
@@ -78,10 +95,11 @@ export default {
       return new Promise((resolve) => {
         document.getElementById("add-new-formula").onclick = () => {
           let f = this.$store.getters.newFormula;
-          if (validateInput(f)) {
+          try {
+            validateInput(f);
             resolve(f);
-          } else {
-            this.$store.commit("showNewFormulaError");
+          } catch (error) {
+            this.$store.dispatch("setError", "incorrectNewFormula");
           }
         };
       });
@@ -89,58 +107,69 @@ export default {
     async startConversion(conversionType) {
       this.$store.commit("setSelectedConversion", conversionType.split("_")[0]);
       const selection = document.getSelection();
-      if (this.isCorrectSelection(selection)) {
-        const el = document.getElementById("selectable");
-        const formula = el.innerHTML.toString();
-        const selection = document.getSelection();
-        const sel = selection.getRangeAt(0);
-        const startIndex = sel.startOffset;
-        const endIndex = sel.endOffset;
-        const subFormula = selection.toString();
+      if (selection && selection.toString().length > 0) {
+        if (this.isCorrectSelection(selection)) {
+          const indices = getRangeIndices(selection.getRangeAt(0));
+          if (indices.start < indices.end) {
+            const formula = this.formula;
+            const selection = document.getSelection();
+            const origStart = indices.start;
+            const origEnd = indices.end;
+            const subFormula = selection.toString();
 
-        if (subFormula) {
-          let matchingChild = matchInput(
-            formula,
-            subFormula,
-            startIndex,
-            endIndex
-          );
-          if (matchingChild) {
-            if (conversionAllowed(matchingChild, conversionType)) {
-              if (this.userInputNeeded(conversionType)) {
-                this.$store.commit("setAskNewFormulaTrue");
-                this.focusInput();
-                await this.newFormulaValidation();
-                this.$store.commit("newFormulaAdded");
-                this.convert(
-                  subFormula,
-                  matchingChild,
-                  conversionType,
-                  startIndex,
-                  endIndex
-                );
+            if (subFormula) {
+              let matchingChild = matchInput(
+                formula,
+                subFormula,
+                origStart,
+                origEnd
+              );
+              if (matchingChild) {
+                if (conversionAllowed(matchingChild, conversionType)) {
+                  if (this.userInputNeeded(conversionType)) {
+                    this.$store.commit("setAskNewFormulaTrue");
+                    this.focusInput();
+                    await this.newFormulaValidation();
+                    this.$store.commit("newFormulaAdded");
+                    this.convert(
+                      subFormula,
+                      matchingChild,
+                      conversionType,
+                      origStart,
+                      origEnd
+                    );
+                  } else {
+                    this.convert(
+                      subFormula,
+                      matchingChild,
+                      conversionType,
+                      origStart,
+                      origEnd
+                    );
+                  }
+                } else {
+                  if (
+                    specialConversions.withZeroOrOne.includes(conversionType)
+                  ) {
+                    this.$store.dispatch("setError", "faultyConversion");
+                  } else {
+                    this.$store.dispatch("setError", "conversionNotAllowed");
+                  }
+                }
               } else {
-                this.convert(
-                  subFormula,
-                  matchingChild,
-                  conversionType,
-                  startIndex,
-                  endIndex
-                );
+                this.$store.dispatch("setError", "notSubformula");
               }
             } else {
-              if (["L24_2", "L25_2"].includes(conversionType)) {
-                this.$store.commit("showFaultyConversionError");
-              } else {
-                this.$store.commit("showConversionNotAllowedError");
-              }
+              this.$store.dispatch("setError", "noSubformula");
             }
           } else {
-            this.$store.commit("showNotSubformulaError");
+            this.$store.dispatch("setError", "noSubformula");
           }
         } else {
-          this.$store.commit("showNoSubformulaError");
+          this.$store.dispatch("setError", "selectionNotFromCorrectField");
         }
+      } else {
+        this.$store.dispatch("setError", "noSubformula");
       }
     },
     convert(subFormula, matchingChild, conversionType, origStart, origEnd) {
@@ -188,12 +217,44 @@ export default {
   grid-column: 4;
 }
 
-button {
-  min-width: fit-content;
-  font-size: 0.9em;
-  background-color: #5b6d81;
+.button-content {
+  display: flex;
+}
+
+.button-text {
+  width: 100%;
   color: rgb(247, 248, 249);
-  padding: 0.2em;
+}
+
+sub {
+  color: rgb(247, 248, 249);
+}
+
+i {
+  height: 1em;
+  opacity: 0.6;
+}
+
+button {
+  display: inline-grid;
+  grid-template-columns: 10% 80% 10%;
+  min-width: fit-content;
+  align-items: center;
+  font-size: 0.8em;
+  background-color: #5b6d81;
+}
+
+.button-item1 {
+  grid-column: 1;
+}
+
+.button-item2 {
+  grid-column: 2;
+  color: rgb(247, 248, 249);
+}
+
+.button-item3 {
+  grid-column: 3;
 }
 
 button:hover {

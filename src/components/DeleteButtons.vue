@@ -2,20 +2,26 @@
   <div>
     <button
       @click="removeLast"
-      v-tooltip="{ text: $t('deleteLast'), theme: { placement: 'right' } }"
+      v-tooltip="{ text: $t('deleteLast') + ' (Ctrl+Z)', theme: { placement: 'right' } }"
       data-cy="deleteLast"
     >
       <i class="fa-solid fa-delete-left"></i>
     </button>
-    <ErrorMessages></ErrorMessages>
-    <button @click="removeAll" v-tooltip="$t('deleteAll')" data-cy="deleteAll">
-      <i class="fa-solid fa-trash-can red"></i>
-    </button>
+    <div>
+      <button
+        @click="removeAll"
+        v-tooltip="$t('deleteAll')"
+        data-cy="deleteAll"
+      >
+        <i class="fa-solid fa-trash-can red"></i>
+      </button>
+      <Downloaders></Downloaders>
+    </div>
   </div>
 </template>
 
 <script>
-import ErrorMessages from "./ErrorMessages.vue";
+import Downloaders from "./Downloaders.vue";
 
 export default {
   name: "DeleteButtons",
@@ -23,16 +29,31 @@ export default {
     return {};
   },
   components: {
-    ErrorMessages,
+    Downloaders,
+  },
+  mounted() {
+    document.addEventListener("keydown", this.deleteLast);
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.deleteLast);
   },
   methods: {
     removeLast() {
       this.$store.commit("removeLast");
       this.$store.commit("clearErrors");
+      this.$store.commit("clearSelectedConversion");
     },
     removeAll() {
       this.$store.commit("removeAll");
       this.$store.commit("clearErrors");
+      this.$store.commit("clearSelectedConversion");
+    },
+    deleteLast(e) {
+      if (!(e.keyCode === 90 && (e.ctrlKey || e.metaKey))) {
+        return;
+      }
+      e.preventDefault();
+      this.removeLast();
     },
   },
 };
@@ -42,6 +63,7 @@ export default {
 div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .red {

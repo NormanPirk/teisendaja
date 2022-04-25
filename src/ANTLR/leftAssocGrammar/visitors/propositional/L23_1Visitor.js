@@ -21,9 +21,12 @@ export default class L23_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		if (ctx.constructor.name === "AndContext") {
 			const left = ctx.left.getText();
 			const right = ctx.right.getText();
-            if (right === '1') {
+            if (right === "1") {
                 return left;
             }
+			if (left === "1") {
+				return right;
+			}
 		}
         throw "Incompatible input!";
 		

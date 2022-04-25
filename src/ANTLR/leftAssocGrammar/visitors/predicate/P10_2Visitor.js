@@ -12,18 +12,18 @@ export default class P10_2Visitor extends antlr4.tree.ParseTreeVisitor {
             }
         } catch (err) {
             console.log(err);
-            return null;
         }
+        return null;
     }
 
     visitImpl(ctx) {
-        if (ctx.left.constructor.name === "ForallContext") {
-            const freeVarsLeft = getFreeIndVars(ctx.left.formula());
-            const freeVarsRight = getFreeIndVars(ctx.right);
-            const ind = ctx.left.IND().getText();
-            if (!freeVarsRight.has(ind) && freeVarsLeft.has(ind)) {
-                const left = ctx.left.formula().getText();
-                const right = ctx.right.getText();
+        if (ctx.right.constructor.name === "ExistsContext") {
+            const freeVarsLeft = getFreeIndVars(ctx.left);
+            const freeVarsRight = getFreeIndVars(ctx.right.formula());
+            const ind = ctx.right.IND().getText();
+            if (freeVarsRight.has(ind) && !freeVarsLeft.has(ind)) {
+                const left = ctx.left.getText();
+                const right = ctx.right.formula().getText();
                 return "∃" + ind + "(" + left + "⇒" + right + ")"
             }
         }

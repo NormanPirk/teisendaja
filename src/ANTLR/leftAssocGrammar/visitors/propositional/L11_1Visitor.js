@@ -22,16 +22,16 @@ export default class L11_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		if (ctx.constructor.name === "NegContext") {
 			if (ctx.formula().constructor.name === "ParenContext") {
                 const paren = ctx.formula();
-                if (paren.formula().constructor.name === "AndContext") {
-                    const and = paren.formula();
-                    let left = and.left.getText();
-					const right = and.right.getText();
-					left = addParensNeg(and.left.constructor.name, left);
-                    return "¬" + left + "∨¬" + right;
+                if (paren.formula().constructor.name === "OrContext") {
+                    const or = paren.formula();
+                    let left = or.left.getText();
+					let right = or.right.getText();
+					left = addParensNeg(or.left.constructor.name, left);
+					right = addParensNeg(or.right.constructor.name, right);
+                    return "¬" + left + "∧¬" + right;
                 }
             }
 		}
         throw "Incompatible input"; 
-		
 	}
 }

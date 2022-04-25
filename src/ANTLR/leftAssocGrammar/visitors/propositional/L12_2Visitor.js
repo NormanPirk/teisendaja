@@ -9,7 +9,7 @@ export default class L12_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitAnd(ctx.formula());
+			return this.visitNeg(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,14 +17,25 @@ export default class L12_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitAnd(ctx) {
-		if (ctx.constructor.name === "AndContext") {
-            const left = ctx.left;
-            const right = ctx.right;
-			if (left.constructor.name === "NegContext" && right.constructor.name === "NegContext") {
-                const leftValue = ctx.left.formula().getText();
-                const rightValue = ctx.right.formula().getText();
-                return "¬(" + leftValue + "∨" + rightValue + ")"
+	visitNeg(ctx) {
+		if (ctx.constructor.name === "NegContext") {
+			if (ctx.formula().constructor.name === "ParenContext") {
+                const paren = ctx.formula();
+                if (paren.formula().constructor.name === "AndContext") {
+                    const and = paren.formula();
+                    const rightChild = and.right;
+					const leftChild = and.left;
+                    if (rightChild.constructor.name === "NegContext") {
+                        const left = leftChild.getText();
+                        const right = rightChild.formula().getText();
+                        return left + "⇒" + right;
+                    }
+					if (leftChild.constructor.name === "NegContext") {
+						const left = leftChild.formula().getText();
+						const right = rightChild.getText();
+						return right + "⇒" + left;
+					}
+                }
             }
 		}
         throw "Incompatible input"; 

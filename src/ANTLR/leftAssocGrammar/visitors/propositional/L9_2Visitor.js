@@ -9,7 +9,10 @@ export default class L9_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitOr(ctx.formula());
+			if (ctx.formula().constructor.name === "TrueContext") {
+				return this.visitTrue(ctx.formula());
+			}
+			return this.visitFalse(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,22 +20,17 @@ export default class L9_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitOr(ctx) {
-		if (ctx.constructor.name === "OrContext") {
-			const left = ctx.left;
-            const right = ctx.right;
-            if (left.constructor.name === "AndContext" && right.constructor.name === "AndContext") {
-                const leftLeft = left.left.getText();
-                const leftRight = left.right.getText();
-                const rightLeft = right.left.getText();
-                const rightRight = right.right.getText();
-                
-                if (leftLeft === rightLeft) {
-                    return leftLeft + "∧(" + leftRight + "∨" + rightRight + ")"; 
-                }
-            }
+	visitFalse(ctx) {
+		if (ctx.constructor.name === "FalseContext") {
+            return "¬1";
 		}
-        throw "Incompatible input"; 
-		
+        throw "Incompatible input!";
+	}
+
+	visitTrue(ctx) {
+		if (ctx.constructor.name === "TrueContext") {
+            return "¬0";
+		}
+        throw "Incompatible input!";
 	}
 }

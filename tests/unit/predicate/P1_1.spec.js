@@ -30,4 +30,9 @@ describe("P1_1 tests", () => {
     const input = "∃x¬F(x)";
     expect(convert(input, "P1_1")).toBe(null);
   });
+
+  test("returns null if the input is not in the form of ¬∀xF(x)", () => {
+    const input = "¬(F(x)⇒D(a))";
+    expect(convert(input, "P1_1")).toBe(null);
+  });
 });

@@ -10,7 +10,7 @@ export default class L15_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitNeg(ctx.formula());
+			return this.visitImpl(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -18,19 +18,13 @@ export default class L15_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitNeg(ctx) {
-		if (ctx.constructor.name === "NegContext") {
-			if (ctx.formula().constructor.name === "ParenContext") {
-                const paren = ctx.formula();
-                if (paren.formula().constructor.name === "ImplContext") {
-                    const impl = paren.formula();
-                    if (impl.right.constructor.name === "NegContext") {
-                        let left = impl.left.getText();
-                        const right = impl.right.formula().getText();
-						left = addParensAnd(impl.left.constructor.name, left);
-                        return left + "∧" + right;
-                    }
-                }
+	visitImpl(ctx) {
+		if (ctx.constructor.name === "ImplContext") {
+            if (ctx.left.constructor.name === "NegContext") {
+                const left = ctx.left.formula().getText();
+                let right = ctx.right.getText();
+				right = addParensAnd(ctx.right.constructor.name, right);
+                return left + "∨" + right;
             }
 		}
         throw "Incompatible input"; 

@@ -1,6 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
+import { isContradiction } from '@/js/ContradictionAndTautology';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 
@@ -9,7 +10,7 @@ export default class L20_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitEq(ctx.formula());
+			return this.visitOr(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,20 +18,23 @@ export default class L20_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitEq(ctx) {
-		if (ctx.constructor.name === "EqContext") {
+	visitOr(ctx) {
+		if (ctx.constructor.name === "OrContext") {
 			const left = ctx.left;
-            if (left.constructor.name === "ParenContext") {
-                if (left.formula().constructor.name === "EqContext") {
-                    const leftLeft = left.formula().left.getText();
-                    const leftRight = left.formula().right.getText();
-                    const right = ctx.right.getText();
-                    return leftLeft + "⇔(" + leftRight + "⇔" + right + ")";
-                }
-            }
-			
+			const right = ctx.right;
+			if (right.constructor.name === "AndContext") {
+				const and = right;
+				if (isContradiction(and)) {
+					return left.getText();
+				}
+			}
+			if (left.constructor.name === "AndContext") {
+				const and = left;
+				if (isContradiction(and)) {
+					return right.getText();
+				}
+			}
 		}
-        throw "Incompatible input"; 
-		
+        throw "Incompatible input!";
 	}
 }

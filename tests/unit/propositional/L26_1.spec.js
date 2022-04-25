@@ -46,8 +46,13 @@ describe("L26_1 tests", () => {
     expect(convert(input, "L26_1")).toBe("∃x(F(x)⇒∀yG(y)⇔∃zH(z,f(y)))");
   });
 
-  test("returns null if input is not in the form of F∨0", () => {
+  test("simplifies F∨0", () => {
     const input = "0∨F";
+    expect(convert(input, "L26_1")).toBe("F");
+  });
+
+  test("returns null if input is not in the form of F∨0", () => {
+    const input = "0⇒F";
     expect(convert(input, "L26_1")).toBe(null);
   });
 });

@@ -1,7 +1,6 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import getNewVariable from '@/js/IndVariables';
 
 export default class P14Visitor extends antlr4.tree.ParseTreeVisitor {
 
@@ -12,21 +11,18 @@ export default class P14Visitor extends antlr4.tree.ParseTreeVisitor {
             }
 		} catch (err) {
 			console.log(err);
-			return null;
 		}
+        return null;
 	}
 
-	visitExists(ctx) {
-        const ind = ctx.IND().getText();
-        const formula = ctx.formula().getText();
-        if (formula.includes(ind)) {
-            const newInd = getNewVariable();
-            if (newInd) {
-                const newFormula = formula.replaceAll(ind, newInd);
-                return "∃" + newInd + newFormula;
-            }
+    visitExists(ctx) {
+        if (ctx.formula().constructor.name === "ExistsContext") {
+            const indOuter = ctx.IND().getText();
+            const indInner = ctx.formula().IND().getText();
+            const value = ctx.formula().formula().getText();
+            return "∃" + indInner + "∃" + indOuter + value;
         }
-		throw "Incompatible input!";		
+		throw "Incompatible input!";
+		
 	}
-
 }

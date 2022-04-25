@@ -1,182 +1,170 @@
 [
-    {
-        "left": "F∧F",
-        "right": "F",
-        "conversionTypeL": "L1_1",
-        "conversionTypeR": "L1_2"
-    },
-    {
-        "left": "F∨F",
-        "right": "F",
-        "conversionTypeL": "L2_1",
-        "conversionTypeR": "L2_2"
-    },
-    {
-        "left": "F∧G",
-        "right": "G∧F",
-        "conversionTypeL": "L3",
-        "conversionTypeR": "L3"
-    },
-    {
-        "left": "F∨G",
-        "right": "G∨F",
-        "conversionTypeL": "L4",
-        "conversionTypeR": "L4"
-    },
-    {
-        "left": "(F∧G)∧H",
-        "right": "F∧(G∧H)",
-        "conversionTypeL": "L5_1",
-        "conversionTypeR": "L5_2"
-    },
-    {
-        "left": "(F∨G)∨H",
-        "right": "F∨(G∨H)",
-        "conversionTypeL": "L6_1",
-        "conversionTypeR": "L6_2"
-    },
-    {
-        "left": "F∧(F∨G)",
-        "right": "F",
-        "conversionTypeL": "L7_1",
-        "conversionTypeR": "L7_2"
-    },
-    {
-        "left": "F∨F∧G",
-        "right": "F",
-        "conversionTypeL": "L8_1",
-        "conversionTypeR": "L8_2"
-    },
-    {
-        "left": "F∧(G∨H)",
-        "right": "F∧G∨F∧H",
-        "conversionTypeL": "L9_1",
-        "conversionTypeR": "L9_2"
-    },
-    {
-        "left": "F∨G∧H",
-        "right": "(F∨G)∧(F∨H)",
-        "conversionTypeL": "L10_1",
-        "conversionTypeR": "L10_2"
-    },
-    {
-        "left": "¬(F∧G)",
-        "right": "¬F∨¬G",
-        "conversionTypeL": "L11_1",
-        "conversionTypeR": "L11_2"
-    },
-    {
-        "left": "¬(F∨G)",
-        "right": "¬F∧¬G",
-        "conversionTypeL": "L12_1",
-        "conversionTypeR": "L12_2"
-    },
-    {
-        "left": "F⇒G",
-        "right": "¬(F∧¬G)",
-        "conversionTypeL": "L13_1",
-        "conversionTypeR": "L13_2"
-    },
-    {
-        "left": "F⇒G",
-        "right": "¬F∨G",
-        "conversionTypeL": "L14_1",
-        "conversionTypeR": "L14_2"
-    },
-    {
-        "left": "F∧G",
-        "right": "¬(F⇒¬G)",
-        "conversionTypeL": "L15_1",
-        "conversionTypeR": "L15_2"
-    },
-    {
-        "left": "F∨G",
-        "right": "¬F⇒G",
-        "conversionTypeL": "L16_1",
-        "conversionTypeR": "L16_2"
-    },
-    {
-        "left": "F⇔G",
-        "right": "F∧G∨¬F∧¬G",
-        "conversionTypeL": "L17_1",
-        "conversionTypeR": "L17_2"
-    },
-    {
-        "left": "F⇔G",
-        "right": "(F⇒G)∧(G⇒F)",
-        "conversionTypeL": "L18_1",
-        "conversionTypeR": "L18_2"
-    },
-    {
-        "left": "F⇔G",
-        "right": "G⇔F",
-        "conversionTypeL": "L19",
-        "conversionTypeR": "L19"
-    },
-    {
-        "left": "(F⇔G)⇔H",
-        "right": "F⇔(G⇔H)",
-        "conversionTypeL": "L20_1",
-        "conversionTypeR": "L20_2"
-    },
-    {
-        "left": "F∧(G∨¬G)",
-        "right": "F",
-        "conversionTypeL": "L21_1",
-        "conversionTypeR": "L21_2"
-    },
-    {
-        "left": "F∨G∧¬G",
-        "right": "F",
-        "conversionTypeL": "L22_1",
-        "conversionTypeR": "L22_2"
-    },
-    {
-        "left": "F∧1",
-        "right": "F",
-        "conversionTypeL": "L23_1",
-        "conversionTypeR": "L23_2"
-    },
-    {
-        "left": "F∨1",
-        "right": "1",
-        "conversionTypeL": "L24_1",
-        "conversionTypeR": "L24_2"
-    },
-    {
-        "left": "F∧0",
-        "right": "0",
-        "conversionTypeL": "L25_1",
-        "conversionTypeR": "L25_2"
-    },
-    {
-        "left": "F∨0",
-        "right": "F",
-        "conversionTypeL": "L26_1",
-        "conversionTypeR": "L26_2"
-    },
-    {
-        "left": "¬1",
-        "right": "0",
-        "conversionTypeL": "L27_1",
-        "conversionTypeR": "L27_2"
-    },
-    {
-        "left": "¬0",
-        "right": "1",
-        "conversionTypeL": "L28_1",
-        "conversionTypeR": "L28_2"
-    },
-    {
-        "left": "¬¬F",
-        "right": "F",
-        "conversionTypeL": "L29_1",
-        "conversionTypeR": "L29_2"
-    },
-    {
-        "left": "F",
-        "right": "(F)",
-        "conversionTypeL": "L30_1",
-        "conversionTypeR": "L30_2"
-    }
+    [
+        {
+            "left": "F∧F",
+            "right": "F",
+            "conversionTypeL": "L1_1",
+            "conversionTypeR": "L1_2"
+        },
+        {
+            "left": "F∨F",
+            "right": "F",
+            "conversionTypeL": "L2_1",
+            "conversionTypeR": "L2_2"
+        },
+        {
+            "left": "F∗G",
+            "right": "G∗F",
+            "conversionTypeL": "L3",
+            "conversionTypeR": "L3"
+        },
+        {
+            "left": "(F∗G)∗H",
+            "right": "F∗(G∗H)",
+            "conversionTypeL": "L4_1",
+            "conversionTypeR": "L4_2"
+        },
+        {
+            "left": "F∧(F∨G)",
+            "right": "F",
+            "conversionTypeL": "L5_1",
+            "conversionTypeR": "L5_2"
+        },
+        {
+            "left": "F∨F∧G",
+            "right": "F",
+            "conversionTypeL": "L6_1",
+            "conversionTypeR": "L6_2"
+        },
+        {
+            "left": "F∧(G∨H)",
+            "right": "F∧G∨F∧H",
+            "conversionTypeL": "L7_1",
+            "conversionTypeR": "L7_2"
+        },
+        {
+            "left": "F∨G∧H",
+            "right": "(F∨G)∧(F∨H)",
+            "conversionTypeL": "L8_1",
+            "conversionTypeR": "L8_2"
+        },
+        {
+            "left": "¬T",
+            "right": "T",
+            "conversionTypeL": "L9_1",
+            "conversionTypeR": "L9_2"
+        }
+    ],
+    [
+        {
+            "left": "¬(F∧G)",
+            "right": "¬F∨¬G",
+            "conversionTypeL": "L10_1",
+            "conversionTypeR": "L10_2"
+        },
+        {
+            "left": "¬(F∨G)",
+            "right": "¬F∧¬G",
+            "conversionTypeL": "L11_1",
+            "conversionTypeR": "L11_2"
+        },
+        {
+            "left": "F⇒G",
+            "right": "¬(F∧¬G)",
+            "conversionTypeL": "L12_1",
+            "conversionTypeR": "L12_2"
+        },
+        {
+            "left": "F⇒G",
+            "right": "¬F∨G",
+            "conversionTypeL": "L13_1",
+            "conversionTypeR": "L13_2"
+        },
+        {
+            "left": "F∧G",
+            "right": "¬(F⇒¬G)",
+            "conversionTypeL": "L14_1",
+            "conversionTypeR": "L14_2"
+        },
+        {
+            "left": "F∨G",
+            "right": "¬F⇒G",
+            "conversionTypeL": "L15_1",
+            "conversionTypeR": "L15_2"
+        },
+        {
+            "left": "F⇔G",
+            "right": "F∧G∨¬F∧¬G",
+            "conversionTypeL": "L16_1",
+            "conversionTypeR": "L16_2"
+        },
+        {
+            "left": "F⇔G",
+            "right": "(F⇒G)∧(G⇒F)",
+            "conversionTypeL": "L17_1",
+            "conversionTypeR": "L17_2"
+        },
+        {
+            "left": "F",
+            "right": "(F)",
+            "conversionTypeL": "L18_1",
+            "conversionTypeR": "L18_2"
+        }
+    ],
+    [   
+        {
+            "left": "F∧(G∨¬G)",
+            "right": "F",
+            "conversionTypeL": "L19_1",
+            "conversionTypeR": "L19_2"
+        },
+        {
+            "left": "F∨G∧¬G",
+            "right": "F",
+            "conversionTypeL": "L20_1",
+            "conversionTypeR": "L20_2"
+        },
+        {
+            "left": "F∨¬F",
+            "right": "1",
+            "conversionTypeL": "L21_1",
+            "conversionTypeR": "L21_2"
+        },
+        {
+            "left": "F∧¬F",
+            "right": "0",
+            "conversionTypeL": "L22_1",
+            "conversionTypeR": "L22_2"
+        },
+        {
+            "left": "F∧1",
+            "right": "F",
+            "conversionTypeL": "L23_1",
+            "conversionTypeR": "L23_2"
+        },
+        {
+            "left": "F∨1",
+            "right": "1",
+            "conversionTypeL": "L24_1",
+            "conversionTypeR": "L24_2"
+        },
+        {
+            "left": "F∧0",
+            "right": "0",
+            "conversionTypeL": "L25_1",
+            "conversionTypeR": "L25_2"
+        },
+        {
+            "left": "F∨0",
+            "right": "F",
+            "conversionTypeL": "L26_1",
+            "conversionTypeR": "L26_2"
+        },
+        {
+            "left": "¬¬F",
+            "right": "F",
+            "conversionTypeL": "L27_1",
+            "conversionTypeR": "L27_2"
+        }
+    ]
 ]

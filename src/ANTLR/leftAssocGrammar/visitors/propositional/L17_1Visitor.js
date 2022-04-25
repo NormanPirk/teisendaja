@@ -1,7 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import { addParensAnd, addParensNeg } from '@/js/Parentheses';
+import { addParensImpl } from '@/js/Parentheses';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 
@@ -20,16 +20,13 @@ export default class L17_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitEq(ctx) {
 		if (ctx.constructor.name === "EqContext") {
-			let leftLeft = ctx.left.getText();
-			let leftRight = ctx.right.getText();
-			let rightLeft = ctx.left.getText();
-			let rightRight = ctx.right.getText();
-			leftLeft = addParensAnd(ctx.left.constructor.name, leftLeft);
-			leftRight = addParensAnd(ctx.right.constructor.name, leftRight);
-			rightLeft = addParensNeg(ctx.left.constructor.name, rightLeft);
-			rightRight = addParensNeg(ctx.right.constructor.name, rightRight);
-			return leftLeft + "∧" + leftRight + "∨¬" + rightLeft + "∧¬" + rightRight;
+			let left = ctx.left.getText();
+			let right = ctx.right.getText();
+			left = addParensImpl(ctx.left.constructor.name, left);
+			right = addParensImpl(ctx.right.constructor.name, right);
+			return "(" + left + "⇒" + right + ")∧(" + right + "⇒" + left + ")";
 		}
         throw "Incompatible input!";
+		
 	}
 }

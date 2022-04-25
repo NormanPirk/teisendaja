@@ -6,7 +6,7 @@
       </div>
       <div class="btns-err">
         <SymbolButtons target="newFormula"></SymbolButtons>
-        <strong v-show="incorrectNewFormula" class="error">{{
+        <strong v-show="incorrectNewFormula" class="error" data-cy="new-formula-error">{{
           $t("newIsIncorrect")
         }}</strong>
       </div>
@@ -23,11 +23,14 @@
           @click="clearNewFormulaError()"
           :placeholder="$t('newInputDescription')"
           @keydown.enter="pressReady"
+          data-cy="selectable-new"
         />
       </div>
       <div class="confirm-btns">
-        <button @click="cancelConversion">{{ $t("cancel") }}</button>
-        <button id="add-new-formula">{{ $t("ready") }}</button>
+        <button @click="cancelConversion" data-cy="cancel-add-new-formula">{{ $t("cancel") }}</button>
+        <button id="add-new-formula" data-cy="add-new-formula">
+          {{ $t("ready") }}
+        </button>
       </div>
     </div>
   </div>
@@ -69,9 +72,15 @@ export default {
       this.$store.commit("newFormulaAdded");
     },
     isFaulty() {
-      return this.newFormula.length === 0
-        ? true
-        : validateInput(this.newFormula);
+      if (this.newFormula.length > 0) {
+        try {
+          validateInput(this.newFormula);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+      return true;
     },
     clearNewFormulaError() {
       this.$store.commit("clearNewFormulaError");

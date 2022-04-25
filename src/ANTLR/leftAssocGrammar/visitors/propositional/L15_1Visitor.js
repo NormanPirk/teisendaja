@@ -1,6 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
+import { addParensNeg } from '@/js/Parentheses';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 
@@ -9,7 +10,7 @@ export default class L15_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitAnd(ctx.formula());
+			return this.visitOr(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,11 +18,12 @@ export default class L15_1Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitAnd(ctx) {
-		if (ctx.constructor.name === "AndContext") {
-			const left = ctx.left.getText();
+	visitOr(ctx) {
+		if (ctx.constructor.name === "OrContext") {
+			let left = ctx.left.getText();
 			const right = ctx.right.getText();
-			return "¬(" + left + "⇒¬" + right + ")";
+			left = addParensNeg(ctx.left.constructor.name, left);
+			return "¬" + left + "⇒" + right;
 		}
         throw "Incompatible input!";
 		

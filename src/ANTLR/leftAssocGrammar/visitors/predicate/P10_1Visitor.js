@@ -12,8 +12,8 @@ export default class P10_1Visitor extends antlr4.tree.ParseTreeVisitor {
             }
         } catch (err) {
             console.log(err);
-            return null;
         }
+        return null;
     }
 
     visitExists(ctx) {
@@ -23,10 +23,10 @@ export default class P10_1Visitor extends antlr4.tree.ParseTreeVisitor {
                 const freeVarsLeft = getFreeIndVars(impl.left);
                 const freeVarsRight = getFreeIndVars(impl.right);
                 const ind = ctx.IND().getText();
-                if (!freeVarsRight.has(ind) && freeVarsLeft.has(ind)) {
+                if (freeVarsRight.has(ind) && !freeVarsLeft.has(ind)) {
                     const left = impl.left.getText();
                     const right = impl.right.getText();
-                    return "∀" + ind + left + "⇒" + right;
+                    return left + "⇒∃" + ind + right;
                 }
             }
         }

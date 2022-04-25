@@ -9,7 +9,7 @@ export default class L17_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			return this.visitOr(ctx.formula());
+			return this.visitAnd(ctx.formula());
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -17,21 +17,22 @@ export default class L17_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	// Visit a parse tree produced by PredGrammarParser#and.
-	visitOr(ctx) {
-		if (ctx.constructor.name === "OrContext") {
-            if (ctx.left.constructor.name === "AndContext" && ctx.right.constructor.name === "AndContext") {
-                if (ctx.right.left.constructor.name === "NegContext" && ctx.right.right.constructor.name === "NegContext") {
-                    const leftLeft = ctx.left.left.getText();
-                    const leftRight = ctx.left.right.getText();
-                    const rightLeft = ctx.right.left.formula().getText();
-                    const rightRight = ctx.right.right.formula().getText();
-                    if (leftLeft === rightLeft && leftRight === rightRight) {
+	visitAnd(ctx) {
+		if (ctx.constructor.name === "AndContext") {
+            if (ctx.left.constructor.name === "ParenContext" && ctx.right.constructor.name === "ParenContext") {
+                const left = ctx.left.formula();
+                const right = ctx.right.formula();
+                if (left.constructor.name === "ImplContext" && right.constructor.name === "ImplContext") {
+                    const leftLeft = left.left.getText();
+                    const leftRight = left.right.getText();
+                    const rightLeft = right.left.getText();
+                    const rightRight = right.right.getText();
+                    if (leftLeft === rightRight && leftRight === rightLeft) {
                         return leftLeft + "⇔" + leftRight;
                     }
                 }
             }
 		}
-        throw "Incompatible input!";
-		
+		throw "Incompatible input!";
 	}
 }

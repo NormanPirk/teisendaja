@@ -1,60 +1,51 @@
 import convert from "@/js/Converter.js";
-import handleNewFormula from "@/js/NewFormulaHandler.js";
 
 describe("L8_2 tests", () => {
-  test("creates disjunction of F and G", () => {
-    const input = "F";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("F∨F∧G");
+  test("applies the distributive property to (A(x)∨B(x))∧(A(x)∨C(y))", () => {
+    const input = "(A(x)∨B(x))∧(A(x)∨C(y))";
+    expect(convert(input, "L8_2")).toBe("A(x)∨B(x)∧C(y)");
   });
 
-  test("creates disjunction of ¬F and G", () => {
-    const input = "¬F";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("¬F∨¬F∧G");
+  test("applies the distributive property to (¬A(x)∨B(x))∧(¬A(x)∨C(y))", () => {
+    const input = "(¬A(x)∨B(x))∧(¬A(x)∨C(y))";
+    expect(convert(input, "L8_2")).toBe("¬A(x)∨B(x)∧C(y)");
   });
 
-  test("creates disjunction of F∧H and G", () => {
-    const input = "F∧H";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("F∧H∨F∧H∧G");
+  test("applies the distributive property to (A∧B∨∀xC(x,g(x)))∧(A∧B∨∃yD(y))", () => {
+    const input = "(A∧B∨∀xC(x,g(x)))∧(A∧B∨∃yD(y))";
+    expect(convert(input, "L8_2")).toBe("A∧B∨∀xC(x,g(x))∧∃yD(y)");
   });
 
-  test("creates disjunction of F∨H and G", () => {
-    const input = "F∨H";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("F∨H∨(F∨H)∧G");
+  test("applies the distributive property to ((A∨B)∨(A∨B))∧((A∨B)∨D)", () => {
+    const input = "((A∨B)∨(A∨B))∧((A∨B)∨D)";
+    expect(convert(input, "L8_2")).toBe("(A∨B)∨(A∨B)∧D");
   });
 
-  test("creates disjunction of ∀xF(x)⇒H and G", () => {
-    const input = "∀xF(x)⇒H";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("(∀xF(x)⇒H)∨(∀xF(x)⇒H)∧G");
+  test("applies the distributive property to ((∀xA(x)⇒D(y))∨C(x))∧((∀xA(x)⇒D(y))∨B(y))", () => {
+    const input = "((∀xA(x)⇒D(y))∨C(x))∧((∀xA(x)⇒D(y))∨B(y))";
+    expect(convert(input, "L8_2")).toBe("(∀xA(x)⇒D(y))∨C(x)∧B(y)");
   });
 
-  test("creates disjunction of ∃xF(x)⇔H and G", () => {
-    const input = "∃xF(x)⇔H";
-    const newFormula = "G";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("(∃xF(x)⇔H)∨(∃xF(x)⇔H)∧G");
+  test("applies the distributive property to ((A⇔B)∨C)∧((A⇔B)∨D)", () => {
+    const input = "((A⇔B)∨C)∧((A⇔B)∨D)";
+    expect(convert(input, "L8_2")).toBe("(A⇔B)∨C∧D");
   });
 
-  test("creates disjunction of G and H⇔∃xF(x)", () => {
-    const input = "G";
-    const newFormula = "H⇔∃xF(x)";
-    let result = convert(input, "L8_2");
-    result = handleNewFormula("L8_2", newFormula, result);
-    expect(result).toBe("G∨G∧(H⇔∃xF(x))");
+  test("applies the distributive property to (∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)", () => {
+    const input =
+      "(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)";
+    expect(convert(input, "L8_2")).toBe(
+      "∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C∧D"
+    );
+  });
+
+  test("returns null if input is not in the form of (F∨G)∧(F∨H)", () => {
+    const input = "(F(x)∨B(x))∧(F(x)∧H(y))";
+    expect(convert(input, "L8_2")).toBe(null);
+  });
+
+  test("returns null if input is not in the form of (F∨G)∧(F∨H)", () => {
+    const input = "F∧(A⇔B)∧G";
+    expect(convert(input, "L8_2")).toBe(null);
   });
 });

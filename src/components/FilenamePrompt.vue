@@ -17,6 +17,7 @@
           type="text"
           v-model="filename"
           id="new-filename"
+          data-cy="new-filename"
           :placeholder="$t('fileNamePlaceholder')"
           @keyup.enter="pressReady"
         />
@@ -25,8 +26,8 @@
         }}</strong>
       </div>
       <div class="confirm-btns">
-        <button @click="cancelDownload">{{ $t("cancel") }}</button>
-        <button id="add-filename">{{ $t("ready") }}</button>
+        <button @click="cancelDownload" data-cy="cancel-download">{{ $t("cancel") }}</button>
+        <button id="add-filename" data-cy="confirm-download">{{ $t("ready") }}</button>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ describe("Input validation tests", () => {
 
   test("does not recognise A x", () => {
     const input = "A x";
-    expect(validateInput(input)).toBeFalsy();
+    expect(() => validateInput(input)).toThrow();
   });
 
   test("recognises conjuction", () => {
@@ -103,17 +103,17 @@ describe("Input validation tests", () => {
 
   test("does not recognise formula with missing closing parentheses", () => {
     const input = "F(x)∨(G(x)⇒C(x)";
-    expect(validateInput(input)).toBeFalsy();
+    expect(() => validateInput(input)).toThrow();
   });
 
   test("does not recognise formula with missing opening parentheses", () => {
     const input = "F(x)∨G(x)⇒C(x))";
-    expect(validateInput(input)).toBeFalsy();
+    expect(() => validateInput(input)).toThrow();
   });
 
   test("does not recognise negation symbol before binary operation symbol", () => {
     const input = "¬F¬∧G";
-    expect(validateInput(input)).toBeFalsy();
+    expect(() => validateInput(input)).toThrow();
   });
 
   test("recognises negation symbol after binary operation symbol", () => {
