@@ -36,11 +36,31 @@ describe("L6_1 tests", () => {
 
   test("returns null if input is not in the form of F∨F∧G", () => {
     const input = "F∨F∧G∧C";
-    expect(convert(input, "L7_1")).toBe(null);
+    expect(convert(input, "L6_1")).toBe(null);
   });
 
   test("returns null if input is not in the form of F∨F∧G", () => {
     const input = "F∧F∧G";
-    expect(convert(input, "L7_1")).toBe(null);
+    expect(convert(input, "L6_1")).toBe(null);
+  });
+
+  test("considers commutation rule in F∨G∧F", () => {
+    const input = "F∨G∧F";
+    expect(convert(input, "L6_1")).toBe("F");
+  });
+
+  test("considers commutation rule in G∧F∨F", () => {
+    const input = "G∧F∨F";
+    expect(convert(input, "L6_1")).toBe("F");
+  });
+
+  test("considers commutation rule in G∧F∨G", () => {
+    const input = "G∧F∨G";
+    expect(convert(input, "L6_1")).toBe("G");
+  });
+
+  test("returns null with F∧H∨G", () => {
+    const input = "F∧H∨G";
+    expect(convert(input, "L6_1")).toBe(null);
   });
 });

@@ -57,4 +57,15 @@ describe("L11_1 tests", () => {
     const input = "(¬(F∨G))";
     expect(convert(input, "L11_1")).toBe(null);
   });
+
+  test("returns null if input is not in the form of ¬(F∨G)", () => {
+    const input = "¬F(u)";
+    expect(convert(input, "L11_1")).toBe(null);
+  });
+
+  test("returns null if input is not in the form of ¬(F∨G)", () => {
+    const input = "¬(¬(F∨G))";
+    expect(convert(input, "L11_1")).toBe(null);
+  });
+
 });

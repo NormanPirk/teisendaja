@@ -19,6 +19,7 @@ module.exports = {
     "!<rootDir>/src/router/**",
     "!<rootDir>/src/components/**",
     "!<rootDir>/src/views/**",
+    "!<rootDir>/src/js/RangeIndices.js",
   ],
   coverageReporters: ["lcov", "text-summary"],
 };

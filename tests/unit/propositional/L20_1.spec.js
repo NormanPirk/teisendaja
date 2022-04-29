@@ -40,4 +40,14 @@ describe("L20_1 tests", () => {
     const input = "F∨G∧¬H";
     expect(convert(input, "L20_1")).toBe(null);
   });
+
+  test("returns null if there is no contradiction G∧¬H∨F", () => {
+    const input = "G∧¬H∨F";
+    expect(convert(input, "L20_1")).toBe(null);
+  });
+
+  test("returns null with F⇒G∧¬G", () => {
+    const input = "F⇒G∧¬G";
+    expect(convert(input, "L20_1")).toBe(null);
+  });
 });

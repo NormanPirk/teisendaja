@@ -29,4 +29,13 @@ describe("Tests regarding input matching", () => {
     expect(matchingChild).toBeTruthy();
   });
 
+  test("does not match input from the middle of consecutive associative operations if the operations themselves do not match", () => {
+    const formula = "A∧B∨C⇔D"
+    const subFormula = "B∨C";
+    const origStart = 2;
+    const origEnd = 5;
+    const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
+    expect(matchingChild).toBeFalsy();
+  });
+
 });

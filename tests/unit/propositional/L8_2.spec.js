@@ -48,4 +48,29 @@ describe("L8_2 tests", () => {
     const input = "F∧(A⇔B)∧G";
     expect(convert(input, "L8_2")).toBe(null);
   });
+
+  test("returns null if input is not in the form of (F∨G)⇔(F∨H)", () => {
+    const input = "(F∨G)⇔(F∨H)";
+    expect(convert(input, "L8_2")).toBe(null);
+  });
+
+  test("considers with commutation in (F∨G)∧(H∨F)", () => {
+    const input = "(F∨G)∧(H∨F)";
+    expect(convert(input, "L8_2")).toBe("F∨G∧H");
+  });
+
+  test("considers with commutation in (F∨G)∧(H∨G)", () => {
+    const input = "(F∨G)∧(H∨G)";
+    expect(convert(input, "L8_2")).toBe("G∨F∧H");
+  });
+
+  test("considers with commutation in (F∨G)∧(G∨H)", () => {
+    const input = "(F∨G)∧(G∨H)";
+    expect(convert(input, "L8_2")).toBe("G∨F∧H");
+  });
+
+  test("returns null with (F∨G)∧(C∨H)", () => {
+    const input = "(F∨G)∧(C∨H)";
+    expect(convert(input, "L8_2")).toBe(null);
+  });
 });

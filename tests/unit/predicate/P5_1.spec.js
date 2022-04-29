@@ -40,4 +40,9 @@ describe("P5_1 tests", () => {
     const input = "∀x(F(x)∨G)";
     expect(convert(input, "P5_1")).toBe("∀xF(x)∨G");
   });
+
+  test("returns null if the input is not in the form of ∀x(F(x)∧G)", () => {
+    const input = "∀x(F(x)⇒G)";
+    expect(convert(input, "P5_1")).toBe(null);
+  });
 });

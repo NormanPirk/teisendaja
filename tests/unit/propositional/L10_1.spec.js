@@ -52,4 +52,15 @@ describe("L10_1 tests", () => {
     const input = "F∧(A⇔B)∧G";
     expect(convert(input, "L10_1")).toBe(null);
   });
+  
+  test("returns null if input is not in the form of ¬(F∧G)", () => {
+    const input = "¬A(x,f(y),a,z)";
+    expect(convert(input, "L10_1")).toBe(null);
+  });
+
+  test("returns null if input is not in the form of ¬(F∧G)", () => {
+    const input = "¬(F⇔G)";
+    expect(convert(input, "L10_1")).toBe(null);
+  });
+
 });

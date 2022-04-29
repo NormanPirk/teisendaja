@@ -13,8 +13,6 @@ export default function conversionAllowed(matchingChild, conversionType) {
 
 function allowL18_2(matchingChild) {
   if (matchingChild.constructor.name === "ParenContext") {
-    // the matching child itself is ParenContext
-    if (matchingChild.parentCtx) {
       const parentContext = matchingChild.parentCtx.constructor.name;
       const childContext = matchingChild.formula().constructor.name;
       if (parentContext === "NegContext") {
@@ -46,7 +44,6 @@ function allowL18_2(matchingChild) {
         }
       }
     }
-  }
   return true;
 }
 

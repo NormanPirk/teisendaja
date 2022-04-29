@@ -9,13 +9,14 @@ export default class L9_2Visitor extends antlr4.tree.ParseTreeVisitor {
 	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
-			if (ctx.formula().constructor.name === "TrueContext") {
-				return this.visitTrue(ctx.formula());
-			}
-			return this.visitFalse(ctx.formula());
+			return this.visitTrue(ctx.formula());
 		} catch (err) {
-			console.log(err);
-			return null;
+			try {
+				return this.visitFalse(ctx.formula());
+			} catch (err) {
+				console.log(err);
+				return null;
+			}
 		}
 	}
 

@@ -59,4 +59,25 @@ describe("L5_1 tests", () => {
     const input = "F∧(F∧G)";
     expect(convert(input, "L5_1")).toBe(null);
   });
+
+  test("considers with commutation rule with F∧(G∨F)", () => {
+    const input = "F∧(G∨F)";
+    expect(convert(input, "L5_1")).toBe("F");
+  });
+
+  test("returns null with F∧(G∨H)", () => {
+    const input = "F∧(G∨H)";
+    expect(convert(input, "L5_1")).toBe(null);
+  });
+
+  test("return null with (G∧F)∧F", () => {
+    const input = "(G∧F)∧F";
+    expect(convert(input, "L5_1")).toBe(null);
+  });
+
+  test("return null with (G∨H)∧F", () => {
+    const input = "(G∨H)∧F";
+    expect(convert(input, "L5_1")).toBe(null);
+  });
+
 });

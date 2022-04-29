@@ -48,4 +48,29 @@ describe("L7_2 tests", () => {
     const input = "F∨G∨H";
     expect(convert(input, "L7_2")).toBe(null);
   });
+
+  test("returns null with F∧G⇒F∧H", () => {
+    const input = "F∧G⇒F∧H";
+    expect(convert(input, "L7_2")).toBe(null);
+  });
+
+  test("considers with commutation rule in F∧G∨H∧F", () => {
+    const input = "F∧G∨H∧F";
+    expect(convert(input, "L7_2")).toBe("F∧(G∨H)");
+  });
+
+  test("considers with commutation rule in G∧F∨H∧F", () => {
+    const input = "G∧F∨H∧F";
+    expect(convert(input, "L7_2")).toBe("F∧(G∨H)");
+  });
+
+  test("considers with commutation rule in G∧F∨F∧H", () => {
+    const input = "G∧F∨F∧H";
+    expect(convert(input, "L7_2")).toBe("F∧(G∨H)");
+  });
+
+  test("returns null with G∧F∨A∧H", () => {
+    const input = "G∧F∨A∧H";
+    expect(convert(input, "L7_2")).toBe(null);
+  });
 });

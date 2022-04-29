@@ -20,3 +20,7 @@ export function getOperationConjDisj(operation) {
 	}
 	throw "Incompatible input!";
 }
+
+export function isCommutativeOperation(operation) {
+	return ["AndContext", "OrContext", "EqContext"].includes(operation);
+}

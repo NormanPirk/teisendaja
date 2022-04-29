@@ -120,6 +120,15 @@ describe("Tests regarding allowing conversions", () => {
     expect(conversionAllowed(matchingChild, "L18_2")).toBeTruthy();
   });
 
+  test("allows conversion L18_2", () => {
+    const formula = "((A∨B))"
+    const subFormula = "(A∨B)";
+    const origStart = 1;
+    const origEnd = 6;
+    const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
+    expect(conversionAllowed(matchingChild, "L18_2")).toBeTruthy();
+  });
+
   test("allows conversion L24_2", () => {
     const formula = "A∧1"
     const subFormula = "1";

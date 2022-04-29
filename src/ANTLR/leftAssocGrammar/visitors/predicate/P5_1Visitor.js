@@ -20,8 +20,8 @@ export default class P5_1Visitor extends antlr4.tree.ParseTreeVisitor {
     visitForall(ctx) {
         if (ctx.formula().constructor.name === "ParenContext") {
             const operation = ctx.formula().formula();
-            const op = getOperationConjDisj(operation.constructor.name);
-            if (op === "∧" || op === "∨") {
+            try {
+                const op = getOperationConjDisj(operation.constructor.name);
                 const freeVarsLeft = getFreeIndVars(operation.left);
                 const freeVarsRight = getFreeIndVars(operation.right);
                 const ind = ctx.IND().getText();
@@ -33,9 +33,10 @@ export default class P5_1Visitor extends antlr4.tree.ParseTreeVisitor {
                 if (!freeVarsLeft.has(ind) && freeVarsRight.has(ind)) {
                     return left + op + "∀" + ind + right;
                 }
+            } catch (err) {
+                throw err;
             }
         }
-
         throw "Incompatible input!";
     }
 

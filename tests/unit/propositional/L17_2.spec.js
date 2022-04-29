@@ -51,4 +51,19 @@ describe("L17_2 tests", () => {
     const input = "F⇔G";
     expect(convert(input, "L17_2")).toBe(null);
   });
+
+  test("returns null with G∧(G⇒F)", () => {
+    const input = "G∧(G⇒F)";
+    expect(convert(input, "L17_2")).toBe(null);
+  });
+
+  test("returns null with (F⇒G)∧(G∨F)", () => {
+    const input = "(F⇒G)∧(G∨F)";
+    expect(convert(input, "L17_2")).toBe(null);
+  });
+
+  test("returns null with (F⇒G)∧(G⇒H)", () => {
+    const input = "(F⇒G)∧(G⇒H)";
+    expect(convert(input, "L17_2")).toBe(null);
+  });
 });

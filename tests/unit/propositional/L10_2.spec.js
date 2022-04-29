@@ -52,4 +52,9 @@ describe("L10_2 tests", () => {
     const input = "¬F∨G";
     expect(convert(input, "L10_2")).toBe(null);
   });
+
+  test("returns null if input is not in the form of ¬F∨¬G", () => {
+    const input = "¬F∧G";
+    expect(convert(input, "L10_2")).toBe(null);
+  });
 });

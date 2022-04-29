@@ -6,8 +6,18 @@ describe("L9_1 tests", () => {
     expect(convert(input, "L9_1")).toBe("1");
   });
 
-  test("Returns null if input is not ¬0", () => {
+  test("Converts ¬1 to 0", () => {
+    const input = "¬1";
+    expect(convert(input, "L9_1")).toBe("0");
+  });
+
+  test("Returns null with 1", () => {
     const input = "1";
+    expect(convert(input, "L9_1")).toBe(null);
+  });
+
+  test("Returns null with ¬F", () => {
+    const input = "¬F";
     expect(convert(input, "L9_1")).toBe(null);
   });
 });

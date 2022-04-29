@@ -2,7 +2,7 @@
   <div>
     <button
       @click="removeLast"
-      v-tooltip="{ text: $t('deleteLast') + ' (Ctrl+Z)', theme: { placement: 'right' } }"
+      v-tooltip="$t('deleteLast') + ' (Ctrl+Z)'"
       data-cy="deleteLast"
     >
       <i class="fa-solid fa-delete-left"></i>
@@ -10,7 +10,7 @@
     <div>
       <button
         @click="removeAll"
-        v-tooltip="$t('deleteAll')"
+        v-tooltip="$t('deleteAll') + ' (Ctrl+D)'"
         data-cy="deleteAll"
       >
         <i class="fa-solid fa-trash-can red"></i>
@@ -32,29 +32,54 @@ export default {
     Downloaders,
   },
   mounted() {
-    document.addEventListener("keydown", this.deleteLast);
+    document.addEventListener("keydown", this.deleteShortcuts);
   },
   beforeUnmount() {
-    document.removeEventListener("keydown", this.deleteLast);
+    document.removeEventListener("keydown", this.deleteShortcuts);
   },
   methods: {
+    getDeletAllConfirmation() {
+      return new Promise((resolve) => {
+        const button = document.getElementById("delete-all-confirm");
+        button.onclick = () => {
+          resolve(true);
+        };
+      });
+    },
     removeLast() {
       this.$store.commit("removeLast");
       this.$store.commit("clearErrors");
       this.$store.commit("clearSelectedConversion");
     },
-    removeAll() {
-      this.$store.commit("removeAll");
-      this.$store.commit("clearErrors");
-      this.$store.commit("clearSelectedConversion");
-    },
-    deleteLast(e) {
-      if (!(e.keyCode === 90 && (e.ctrlKey || e.metaKey))) {
-        return;
+    async removeAll() {
+      this.$store.commit("setAskDeleteAllConfirmation");
+      this.$nextTick(() => {
+        document.getElementById("delete-all-confirm").focus();
+      });
+      const del = await this.getDeletAllConfirmation();
+      if (del) {
+        this.$store.commit("removeAll");
+        this.$store.commit("clearErrors");
+        this.$store.commit("clearSelectedConversion");
+        this.$store.commit("hideDeleteAllConfirmation");
       }
-      e.preventDefault();
-      this.removeLast();
     },
+    deleteShortcuts(e) {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.keyCode) {
+          case 90:
+            e.preventDefault();
+            this.removeLast();
+            break;
+          case 68:
+            e.preventDefault();
+            this.removeAll();
+            break;
+          default:
+            return;
+        }
+      }
+    }
   },
 };
 </script>

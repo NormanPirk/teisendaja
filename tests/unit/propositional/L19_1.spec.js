@@ -40,4 +40,29 @@ describe("L19_1 tests", () => {
     const input = "F∧((∃xF(x)⇔H)∨¬(∃xF(x)⇔G))";
     expect(convert(input, "L19_1")).toBe(null);
   });
+
+  test("returns null if input is not conjunction F∨(G∨¬G)", () => {
+    const input = "F∨(G∨¬G)";
+    expect(convert(input, "L19_1")).toBe(null);
+  });
+
+  test("returns null with F∧(G∧¬G)", () => {
+    const input = "F∧(G∧¬G)";
+    expect(convert(input, "L19_1")).toBe(null);
+  });
+
+  test("considers commutation rule with (G∨¬G)∧F", () => {
+    const input = "(G∨¬G)∧F";
+    expect(convert(input, "L19_1")).toBe("F");
+  });
+
+  test("returns null with (G∧¬G)∧F", () => {
+    const input = "(G∧¬G)∧F";
+    expect(convert(input, "L19_1")).toBe(null);
+  });
+
+  test("returns null with (G∨¬H)∧F", () => {
+    const input = "(G∨¬H)∧F";
+    expect(convert(input, "L19_1")).toBe(null);
+  });
 });

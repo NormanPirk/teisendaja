@@ -9,13 +9,14 @@
     "conversions": "Teisendussammud",
     "deleteLast": "Kustuta viimane teisendussamm",
     "deleteAll": "Kustuta kõik teisendussammud",
+    "deleteAllConfirmation": "Kustutada kõik teisendussammud?",
     "downloadTEX": "Laadi alla TeX",
     "downloadPDF": "Laadi alla PDF",
     "downloadJSON": "Laadi alla JSON",
     "insertFormulaGuide": "Sisesta valem. Loogikasümboleid saab sisestada nii sisendlahtri kohal olevate nuppude abil, klaviatuurilt numbritega kui ka käsitsi TeX kujul. Sümboli sisestamise numbrit näeb, kui hiirt hoida vastava sümbolinupu peal. TeX kujul sisestatu asendatakse automaatselt vastavate sümbolitega:",
     "pressStartButtonGuide": "Vajuta nupule 'Alusta teisendamist'.",
     "conversionGuide": "Vali hiirega sisendlahtris teisendatav osavalem ja vajuta vastavale nupule. Kui tehte suund on vasakult paremale, vajuta samaväärsusmärgist vasakul olevale nupule, kui paremalt vasakule, siis paremal asuvale nupule.",
-    "metaCharsGuide": "(Sümbol ∗ tähistab reeglite L3 ja L4 puhul nii konjunktsiooni, disjunktsiooni kui ka ekvivalentsi, reeglite P5 ja P6 puhul aga ainult konjunktsiooni ja disjunktsiooni. Reegli L9 puhul tähistab T tõeväärtust.)",
+    "metaCharsGuide": "Sümbol ∗ tähistab reeglite L3 ja L4 puhul nii konjunktsiooni, disjunktsiooni kui ka ekvivalentsi, reeglite P5 ja P6 puhul aga ainult konjunktsiooni ja disjunktsiooni. Reegli L9 puhul tähistab T tõeväärtust.",
     "resultGuide": "Teisendussammud kuvatakse paremal. Eelviimane teisendussamm kuvatakse lisaks ka kõige ülemisena.",
     "resultSaveGuide": "Tulemuse allalaadimine",
     "downloadGuide": "Lõpptulemuse saab alla laadida nii TeX kui ka PDF formaadis.",
@@ -55,5 +56,8 @@
     "fileNamePlaceholder": "Sisesta failinimi siia",
     "invalidFilename": "Sisestatud failinimi pole lubatud!",
     "forbiddenChars": "Väldi failinimes tühikuid, reavahetust ning järgmisi sümboleid: {symbols}",
-    "clarification": "Vigane sümbol {symbol} kohal {pos}. Oodatakse ühte järgnevatest: {needed}."
+    "clarification": "Vigane sümbol {symbol} kohal {pos}. Oodatakse ühte järgnevatest: {needed}.",
+    "defaultFileName": "teisendused",
+    "yes": "Jah",
+    "no": "Ei"
 }

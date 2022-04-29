@@ -50,4 +50,9 @@ describe("L13_2 tests", () => {
     const input = "F⇒G";
     expect(convert(input, "L13_2")).toBe(null);
   });
+
+  test("considers commitation rule with G∨¬F", () => {
+    const input = "G∨¬F";
+    expect(convert(input, "L13_2")).toBe("F⇒G");
+  });
 });

@@ -2,7 +2,7 @@
   <div id="help">
     <div id="hider">
       <a href="#main">
-        <button @click="hideHelp()" class="yellow" data-cy="help-hider">
+        <button @click="hideHelp()" class="yellow" data-cy="help-hider" v-tooltip="'Ctrl+H'">
           {{ $t("hideHelp") }}
         </button>
       </a>

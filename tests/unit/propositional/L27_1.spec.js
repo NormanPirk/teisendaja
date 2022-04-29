@@ -45,4 +45,10 @@ describe("L27_1 tests", () => {
     const input = "¬¬A⇒¬B";
     expect(convert(input, "L27_1")).toBe(null);
   });
+
+  test("returns null with ¬A", () => {
+    const input = "¬A";
+    expect(convert(input, "L27_1")).toBe(null);
+  });
+  
 });
