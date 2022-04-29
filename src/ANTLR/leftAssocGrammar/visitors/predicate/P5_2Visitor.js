@@ -9,9 +9,7 @@ export default class P5_2Visitor extends antlr4.tree.ParseTreeVisitor {
     visitStart(ctx) {
         try {
             const op = getOperationConjDisj(ctx.formula().constructor.name);
-            if (op === "∧" || op === "∨") {
-                return this.visitOperation(ctx.formula(), op);
-            }
+            return this.visitOperation(ctx.formula(), op);
         } catch (err) {
             console.log(err);
         }

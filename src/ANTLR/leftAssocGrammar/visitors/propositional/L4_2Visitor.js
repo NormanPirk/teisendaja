@@ -2,6 +2,7 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import getOperation from '@/js/OperationGetter';
+import { isCommutativeOperation } from '@/js/OperationGetter';
 
 // This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
 
@@ -20,7 +21,7 @@ export default class L4_2Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by PredGrammarParser#and.
 	visitOperation(ctx, opName) {
-		if (ctx.constructor.name === opName) {
+		if (isCommutativeOperation(opName)) {
 			const right = ctx.right;
             if (right.constructor.name === "ParenContext") {
                 if (right.formula().constructor.name === opName) {

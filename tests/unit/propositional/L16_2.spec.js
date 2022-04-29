@@ -51,4 +51,34 @@ describe("L16_2 tests", () => {
     const input = "F⇔G";
     expect(convert(input, "L16_2")).toBe(null);
   });
+
+  test("returns null if the input is not in the form of F∧G∨¬F∧¬G", () => {
+    const input = "F∧G∨(¬F∧¬G)";
+    expect(convert(input, "L16_2")).toBe(null);
+  });
+
+  test("considers commutation rule with F∧G∨¬G∧¬F", () => {
+    const input = "F∧G∨¬G∧¬F";
+    expect(convert(input, "L16_2")).toBe("F⇔G");
+  });
+
+  test("returns null with F∧G∨¬G∧¬H", () => {
+    const input = "F∧G∨¬G∧¬H";
+    expect(convert(input, "L16_2")).toBe(null);
+  });
+
+  test("turns disjunction of conjunctions to equivalence ¬F∧¬G∨F∧G", () => {
+    const input = "¬F∧¬G∨F∧G";
+    expect(convert(input, "L16_2")).toBe("F⇔G");
+  });
+
+  test("turns disjunction of conjunctions to equivalence ¬G∧¬F∨F∧G", () => {
+    const input = "¬G∧¬F∨F∧G";
+    expect(convert(input, "L16_2")).toBe("G⇔F");
+  });
+
+  test("returns null with ¬G∧¬F∨F∧H", () => {
+    const input = "¬G∧¬F∨F∧H";
+    expect(convert(input, "L16_2")).toBe(null);
+  });
 });

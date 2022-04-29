@@ -1,55 +1,56 @@
 <template>
-    <div class="intro">
-      <div>{{ $t("input") }}</div>
-    </div>
-    <div id="buttons" v-if="showStartButton()">
-      <SymbolButtons target="formula"></SymbolButtons>
-      <button
-        @click="start"
-        v-show="showStartButton()"
-        class="yellow"
-        data-cy="start-conversions"
-      >
-        {{ $t("startConversions") }}
-      </button>
-    </div>
-    <DeleteButtons v-else></DeleteButtons>
-    <div v-if="showStartButton()">
-      <textarea
-        id="input-field"
-        v-model="formula"
-        :placeholder="$t('inputDescription')"
-        :class="{ faulty: !isFaulty(), error: errorWithConversion }"
-        @input="
-          renderMathSymbols();
-          clearErrors();
-        "
-        @mousedown="clearErrors()"
-        data-cy="insertFormula"
-      ></textarea>
-    </div>
-    <div
-      v-else
+  <div class="intro">
+    <div>{{ $t("input") }}</div>
+  </div>
+  <div id="buttons" v-if="showStartButton()">
+    <SymbolButtons target="formula"></SymbolButtons>
+    <button
+      @click="start"
+      v-show="showStartButton()"
+      class="yellow"
+      data-cy="start-conversions"
+      v-tooltip="'(Ctrl+Enter)'"
+    >
+      {{ $t("startConversions") }}
+    </button>
+  </div>
+  <DeleteButtons v-else></DeleteButtons>
+  <div v-if="showStartButton()">
+    <textarea
+      id="input-field"
+      v-model="formula"
+      :placeholder="$t('inputDescription')"
+      :class="{ faulty: !isFaulty(), error: errorWithConversion }"
+      @input="
+        renderMathSymbols();
+        clearErrors();
+      "
       @mousedown="clearErrors()"
-      id="selectable"
-      data-cy="selectable"
-      v-html="paintParens(formula)"
-      :class="{ error: errorWithConversion }"
-    ></div>
-    <div v-show="showStartButton()" id="file-uploader" @click="clearErrors()">
-      <input
-        type="file"
-        @change="loadDataFromJson"
-        accept=".json"
-        :placeholder="$t('inputDescription')"
-        id="file"
-        data-cy="uploadJSON"
-      />
-      <label for="file">{{ $t("fileInputDescription") }}</label>
-    </div>
-    <div class="error-message-div">
-      <ErrorMessages></ErrorMessages>
-    </div>
+      data-cy="insertFormula"
+    ></textarea>
+  </div>
+  <div
+    v-else
+    @mousedown="clearErrors()"
+    id="selectable"
+    data-cy="selectable"
+    v-html="paintParens(formula)"
+    :class="{ error: errorWithConversion }"
+  ></div>
+  <div v-show="showStartButton()" id="file-uploader" @click="clearErrors()">
+    <input
+      type="file"
+      @change="loadDataFromJson"
+      accept=".json"
+      :placeholder="$t('inputDescription')"
+      id="file"
+      data-cy="uploadJSON"
+    />
+    <label for="file" v-tooltip="'(Ctrl+U)'">{{ $t("fileInputDescription") }} </label>
+  </div>
+  <div class="error-message-div">
+    <ErrorMessages></ErrorMessages>
+  </div>
 </template>
 
 <script>
@@ -68,13 +69,19 @@ export default {
   name: "UserInput",
   data() {
     return {
-      uploadFile: false
+      uploadFile: false,
     };
   },
   components: {
     ErrorMessages,
     SymbolButtons,
     DeleteButtons,
+  },
+  mounted() {
+    document.addEventListener("keydown", this.inputShortcuts);
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.inputShortcuts);
   },
   computed: {
     formula: {
@@ -107,20 +114,30 @@ export default {
       return this.formulas.length === 0;
     },
     setFaultyInputClarification(clarification) {
-        this.$store.commit("setFaultyInputClarification", clarification);
+      this.$store.commit("setFaultyInputClarification", clarification);
     },
     getClarification(error) {
-        const position = error.column;
-        const symbol = this.formula[position]? this.formula[position]: "";
-        const needed = this.getNeeded(error.msg);
-        return this.$i18n.t("clarification", { pos: position, symbol: symbol, needed: needed });
+      const position = error.column;
+      const symbol = this.formula[position] ? this.formula[position] : "";
+      const needed = this.getNeeded(error.msg);
+      return this.$i18n.t("clarification", {
+        pos: position,
+        symbol: symbol,
+        needed: needed,
+      });
     },
     getNeeded(msg) {
       let needed = null;
       if (msg.includes("expecting")) {
-        needed = msg.split("expecting")[1].replace("IND", "indiviidmuutuja").replace("PRED", "predikaatsümbol");
+        needed = msg
+          .split("expecting")[1]
+          .replace("IND", "indiviidmuutuja")
+          .replace("PRED", "predikaatsümbol");
       } else if (msg.includes("missing")) {
-        needed = msg.split("missing")[0].replace("'<EOF>'", "").replace("at", "");
+        needed = msg
+          .split("missing")[0]
+          .replace("'<EOF>'", "")
+          .replace("at", "");
       }
       return needed;
     },
@@ -200,6 +217,22 @@ export default {
       const visitor = new ColorParensVisitor();
       const result = visitor.visit(tree);
       return result;
+    },
+    inputShortcuts(e) {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.keyCode) {
+          case 13:
+            e.preventDefault();
+            this.start();
+            break;
+          case 85:
+            e.preventDefault();
+            document.getElementById("file").click();
+            break;
+          default:
+            return;
+        }
+      }
     },
   },
 };
@@ -286,5 +319,4 @@ textarea {
 ::placeholder {
   letter-spacing: normal;
 }
-
 </style>

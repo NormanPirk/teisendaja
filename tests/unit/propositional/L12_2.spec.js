@@ -50,4 +50,21 @@ describe("L12_2 tests", () => {
     const input = "F∧¬G";
     expect(convert(input, "L12_2")).toBe(null);
   });
+
+  test("returns null if input is not in the form of ¬(F∧¬G)", () => {
+    const input = "¬F(x)";
+    expect(convert(input, "L12_2")).toBe(null);
+  });
+
+  test("returns null if input is not in the form of ¬(F∧¬G)", () => {
+    const input = "¬(F⇒¬G)";
+    expect(convert(input, "L12_2")).toBe(null);
+  });
+
+  test("considers commitation rule with ¬(¬F∧G)", () => {
+    const input = "¬(¬F∧G)";
+    expect(convert(input, "L12_2")).toBe("G⇒F");
+  });
+
+
 });

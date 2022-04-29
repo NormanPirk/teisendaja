@@ -1,33 +1,33 @@
 <template>
   <div id="action-buttons">
-      <button
-        @click="download('JSON')"
-        v-tooltip="$t('downloadJSON')"
-        data-cy="downloadJSON"
-        v-bind:disabled="disableBtn"
-      >
-        <i class="fa-solid fa-download"></i>
-        <div>JSON</div>
-      </button>
-      <button
-        @click="download('TEX')"
-        v-tooltip="$t('downloadTEX')"
-        data-cy="downloadTEX"
-        v-bind:disabled="disableBtn"
-      >
-        <i class="fa-solid fa-download"></i>
-        <div>TeX</div>
-      </button>
-      <button
-        @click="download('PDF')"
-        v-tooltip="$t('downloadPDF')"
-        data-cy="downloadPDF"
-        v-bind:disabled="disableBtn"
-      >
-        <i class="fa-solid fa-download"></i>
-        <div>PDF</div>
-      </button>
-    </div>
+    <button
+      @click="download('JSON')"
+      v-tooltip="$t('downloadJSON') + ' (Ctrl+J)'"
+      data-cy="downloadJSON"
+      v-bind:disabled="disableBtn"
+    >
+      <i class="fa-solid fa-download"></i>
+      <div>JSON</div>
+    </button>
+    <button
+      @click="download('TEX')"
+      v-tooltip="$t('downloadTEX') + ' (Ctrl+X)'"
+      data-cy="downloadTEX"
+      v-bind:disabled="disableBtn"
+    >
+      <i class="fa-solid fa-download"></i>
+      <div>TeX</div>
+    </button>
+    <button
+      @click="download('PDF')"
+      v-tooltip="$t('downloadPDF') + ' (Ctrl+P)'"
+      data-cy="downloadPDF"
+      v-bind:disabled="disableBtn"
+    >
+      <i class="fa-solid fa-download"></i>
+      <div>PDF</div>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -41,6 +41,12 @@ export default {
   name: "Downloaders",
   data() {
     return {};
+  },
+  mounted() {
+    document.addEventListener("keydown", this.downloadShorcuts);
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.downloadShorcuts);
   },
   computed: {
     formulas: {
@@ -140,6 +146,26 @@ export default {
         },
       };
       pdfMake.createPdf(dd).download(filename + ".pdf");
+    },
+    downloadShorcuts(e) {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.keyCode) {
+          case 74:
+            e.preventDefault();
+            this.download("JSON");
+            break;
+          case 88:
+            e.preventDefault();
+            this.download("TEX");
+            break;
+          case 80:
+            e.preventDefault();
+            this.download("PDF");
+            break;
+          default:
+            return;
+        }
+      }
     },
   },
 };

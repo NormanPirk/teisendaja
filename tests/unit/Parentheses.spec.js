@@ -93,4 +93,14 @@ describe("Tests regarding adding parentheses", () => {
     expect(addParentheses(matchingChild, result)).toBe("G(x)∨F(x)");
   });
 
+  test("does not add parentheses to entire formula", () => {
+    const formula = "(A)";
+    const subFormula = "(A)";
+    const origStart = 0;
+    const origEnd = 3;
+    const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
+    const result = "(A)"
+    expect(addParentheses(matchingChild, result)).toBe("(A)");
+  });
+
 });

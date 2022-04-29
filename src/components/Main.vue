@@ -15,6 +15,7 @@
     </div>
     <NewSubformulaPrompt v-show="askNewFormula"></NewSubformulaPrompt>
     <FilenamePrompt v-show="askFilename"></FilenamePrompt>
+    <DeleteAllConfirmationPrompt v-show="askDeleteAllConfirmation"></DeleteAllConfirmationPrompt>
   </div>
   <Help v-show="this.showHelp"></Help>
 </template>
@@ -29,6 +30,7 @@ import NewSubformulaPrompt from "./NewSubformulaPrompt.vue";
 import FilenamePrompt from "./FilenamePrompt.vue";
 import PropButtons from "./PropButtons.vue";
 import PredButtons from "./PredButtons.vue";
+import DeleteAllConfirmationPrompt from "./DeleteAllConfirmationPrompt.vue";
 
 export default {
   name: "Main",
@@ -43,7 +45,8 @@ export default {
     NewSubformulaPrompt,
     FilenamePrompt,
     PropButtons,
-    PredButtons
+    PredButtons,
+    DeleteAllConfirmationPrompt
   },
   computed: {
     askNewFormula: {
@@ -54,6 +57,11 @@ export default {
     askFilename: {
       get() {
         return this.$store.getters.askFilename;
+      }
+    },
+    askDeleteAllConfirmation: {
+      get() {
+        return this.$store.getters.askDeleteAllConfirmation;
       }
     },
     showHelp: {

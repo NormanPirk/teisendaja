@@ -49,4 +49,10 @@ describe("L8_1 tests", () => {
     const input = "F∧(A⇔B)∧G";
     expect(convert(input, "L8_1")).toBe(null);
   });
+
+  test("considers with commutation rule in G∧H∨F", () => {
+    const input = "G∧H∨F";
+    expect(convert(input, "L8_1")).toBe("(F∨G)∧(F∨H)");
+  });
+
 });

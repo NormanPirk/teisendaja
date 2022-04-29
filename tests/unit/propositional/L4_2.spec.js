@@ -50,4 +50,14 @@ describe("L4_2 tests", () => {
     const input = "F⇔(G∧H)";
     expect(convert(input, "L4_2")).toBe(null);
   });
+
+  test("Returns null with F⇒(G∧H)", () => {
+    const input = "F⇒(G∧H)";
+    expect(convert(input, "L4_2")).toBe(null);
+  });
+
+  test("Returns null with F∨G∧H", () => {
+    const input = "F∨G∧H";
+    expect(convert(input, "L4_2")).toBe(null);
+  });
 });

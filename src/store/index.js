@@ -5,15 +5,17 @@ import addParentheses, { addParensMiddle } from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
 import Formula from "../js/Formula.js";
 import specialConversions from "@/assets/specialConversionCodes.json";
+import i18n from "@/i18n.js";
 
 export default createStore({
   state: {
     formula: "",
     formulas: [],
     newFormula: "",
-    filename: "",
+    filename: i18n.t("defaultFileName"),
     askNewFormula: false,
     askFilename: false,
+    askDeleteAllConfirmation: false,
     incorrectNewFormula: false,
     converted: false,
     noInput: false,
@@ -48,6 +50,9 @@ export default createStore({
     },
     askFilename: (state) => {
       return state.askFilename;
+    },
+    askDeleteAllConfirmation: (state) => {
+      return state.askDeleteAllConfirmation;
     },
     incorrectNewFormula: (state) => {
       return state.incorrectNewFormula;
@@ -122,6 +127,9 @@ export default createStore({
     setAskFilenameTrue: (state) => {
       state.askFilename = true;
     },
+    setAskDeleteAllConfirmation: (state) => {
+      state.askDeleteAllConfirmation = true;
+    },
     setFilename: (state, value) => {
       state.filename = value;
     },
@@ -130,6 +138,9 @@ export default createStore({
     },
     hideFilenamePrompt: (state) => {
       state.askFilename = false;
+    },
+    hideDeleteAllConfirmation: (state) => {
+      state.askDeleteAllConfirmation = false;
     },
     addSymbol: (state, value) => {
       const el = document.getElementById("input-field");

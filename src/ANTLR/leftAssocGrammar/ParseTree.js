@@ -2,8 +2,6 @@ import antlr4 from "antlr4";
 import PredGrammarLexer from "./PredGrammarLexer.js";
 import PredGrammarParser from "./PredGrammarParser.js";
 import CustomErrorListener from "./CustomErrorListener.js";
-//import ParserErrorStrategy from "./ParserErrorStrategy.js";
-//import LexerErrorListener from "./LexerErrorListener.js";
 
 export default function getParseTree(input) {
   const chars = new antlr4.InputStream(input);

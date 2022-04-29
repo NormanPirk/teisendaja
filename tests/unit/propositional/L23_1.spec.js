@@ -55,4 +55,9 @@ describe("L23_1 tests", () => {
     const input = "F";
     expect(convert(input, "L23_1")).toBe(null);
   });
+
+  test("returns null with F∧F", () => {
+    const input = "F∧F";
+    expect(convert(input, "L23_1")).toBe(null);
+  });
 });
