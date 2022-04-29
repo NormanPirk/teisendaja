@@ -57,5 +57,7 @@
     "invalidFilename": "Sisestatud failinimi pole lubatud!",
     "forbiddenChars": "Väldi failinimes tühikuid, reavahetust ning järgmisi sümboleid: {symbols}",
     "clarification": "Vigane sümbol {symbol} kohal {pos}. Oodatakse ühte järgnevatest: {needed}.",
-    "defaultFileName": "teisendused"
+    "defaultFileName": "teisendused",
+    "yes": "Jah",
+    "no": "Ei"
 }

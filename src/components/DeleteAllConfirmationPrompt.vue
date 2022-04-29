@@ -5,8 +5,8 @@
         <div>{{ $t('deleteAllConfirmation') }}</div>
       </div>
       <div id="confirm-btns">
-        <button id="delete-all-confirm">Jah</button>
-        <button @click="cancelDeletion">Ei</button>
+        <button id="delete-all-confirm" data-cy="confirm-delete-all">{{ $t('yes') }}</button>
+        <button @click="cancelDeletion" data-cy="cancel-delete-all">{{ $t('no') }}</button>
       </div>
     </div>
   </div>
