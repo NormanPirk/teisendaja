@@ -199,6 +199,7 @@ u {
   justify-content: right;
   flex-wrap: wrap;
   align-items: center;
+  margin: 0 1em;
 }
 
 button {
