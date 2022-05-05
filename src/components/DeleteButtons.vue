@@ -1,6 +1,13 @@
 <template>
   <div>
-    <button @click="removeLast" v-tooltip="$t('deleteLast') + ' (Ctrl+Z)'" data-cy="deleteLast">
+    <button
+      @click="removeLast"
+      v-tooltip="{
+        text: $t('deleteLast') + ' (Ctrl+Z)',
+        theme: { placement: 'right' },
+      }"
+      data-cy="deleteLast"
+    >
       <i class="fa-solid fa-delete-left"></i>
     </button>
     <div>
