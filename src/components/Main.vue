@@ -22,7 +22,6 @@
 
 <script>
 /* eslint-disable */
-//import ConversionButtons from "./ConversionButtons.vue";
 import Output from "./Output.vue";
 import UserInput from "./UserInput.vue";
 import Help from "./Help.vue";
@@ -35,10 +34,9 @@ import DeleteAllConfirmationPrompt from "./DeleteAllConfirmationPrompt.vue";
 export default {
   name: "Main",
   data() {
-    return {}
+    return {};
   },
   components: {
-    //ConversionButtons,
     Output,
     Help,
     UserInput,
@@ -46,36 +44,34 @@ export default {
     FilenamePrompt,
     PropButtons,
     PredButtons,
-    DeleteAllConfirmationPrompt
+    DeleteAllConfirmationPrompt,
   },
   computed: {
     askNewFormula: {
       get() {
         return this.$store.getters.askNewFormula;
-      }
+      },
     },
     askFilename: {
       get() {
         return this.$store.getters.askFilename;
-      }
+      },
     },
     askDeleteAllConfirmation: {
       get() {
         return this.$store.getters.askDeleteAllConfirmation;
-      }
+      },
     },
     showHelp: {
       get() {
         return this.$store.getters.showHelp;
-      }
-    }
+      },
+    },
   },
 };
 </script>
 
 <style scoped>
-
-
 #editor {
   display: flex;
   flex-direction: row;
@@ -98,8 +94,18 @@ export default {
   min-width: 300px;
 }
 
+#editor-right .eq-height {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .eq-height {
   height: 100%;
 }
-
 </style>

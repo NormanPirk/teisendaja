@@ -60,5 +60,4 @@ describe("L3 tests", () => {
     const input = "¬(A∧B)";
     expect(convert(input, "L3")).toBe(null);
   });
-
 });

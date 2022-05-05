@@ -35,5 +35,4 @@ describe("P7_2 tests", () => {
     const input = "∀xF(x)⇒G";
     expect(convert(input, "P7_2")).toBe(null);
   });
-
 });

@@ -17,16 +17,16 @@ export default class P12Visitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 	visitExists(ctx) {
-        const ind = ctx.IND().getText();
-        const formula = ctx.formula().getText();
-        if (formula.includes(ind)) {
-            const newInd = getNewVariable();
-            if (newInd) {
-                const newFormula = formula.replaceAll(ind, newInd);
-                return "∃" + newInd + newFormula;
-            }
+        const ind = ctx.SYMBOL().getText();
+        let formula = ctx.formula().getText();
+        const newInd = getNewVariable();
+        if (!newInd) {
+            throw "Incompatible input!";
         }
-		throw "Incompatible input!";		
+        if (formula.includes(ind)) {
+            formula = formula.replaceAll(ind, newInd);
+        }
+        return "∃" + newInd + formula;	
 	}
 
 }

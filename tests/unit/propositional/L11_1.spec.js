@@ -67,5 +67,4 @@ describe("L11_1 tests", () => {
     const input = "¬(¬(F∨G))";
     expect(convert(input, "L11_1")).toBe(null);
   });
-
 });

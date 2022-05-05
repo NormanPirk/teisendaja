@@ -17,7 +17,7 @@ export default class P2_2Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitForall(ctx) {
         if (ctx.formula().constructor.name === "NegContext") {
-            const ind = ctx.IND().getText();
+            const ind = ctx.SYMBOL().getText();
             const value = ind + ctx.formula().formula().getText();
             return "¬∃" + value;
         }

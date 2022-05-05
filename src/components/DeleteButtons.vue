@@ -1,18 +1,10 @@
 <template>
   <div>
-    <button
-      @click="removeLast"
-      v-tooltip="$t('deleteLast') + ' (Ctrl+Z)'"
-      data-cy="deleteLast"
-    >
+    <button @click="removeLast" v-tooltip="$t('deleteLast') + ' (Ctrl+Z)'" data-cy="deleteLast">
       <i class="fa-solid fa-delete-left"></i>
     </button>
     <div>
-      <button
-        @click="removeAll"
-        v-tooltip="$t('deleteAll') + ' (Ctrl+D)'"
-        data-cy="deleteAll"
-      >
+      <button @click="removeAll" v-tooltip="$t('deleteAll') + ' (Ctrl+D)'" data-cy="deleteAll">
         <i class="fa-solid fa-trash-can red"></i>
       </button>
       <Downloaders></Downloaders>
@@ -49,7 +41,6 @@ export default {
     removeLast() {
       this.$store.commit("removeLast");
       this.$store.commit("clearErrors");
-      this.$store.commit("clearSelectedConversion");
     },
     async removeAll() {
       this.$store.commit("setAskDeleteAllConfirmation");
@@ -60,7 +51,6 @@ export default {
       if (del) {
         this.$store.commit("removeAll");
         this.$store.commit("clearErrors");
-        this.$store.commit("clearSelectedConversion");
         this.$store.commit("hideDeleteAllConfirmation");
       }
     },
@@ -79,7 +69,7 @@ export default {
             return;
         }
       }
-    }
+    },
   },
 };
 </script>

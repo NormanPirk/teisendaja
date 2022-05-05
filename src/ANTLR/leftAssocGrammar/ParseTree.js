@@ -20,5 +20,4 @@ export default function getParseTree(input) {
 
   const tree = parser.start();
   return tree;
-  
 }

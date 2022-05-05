@@ -4,11 +4,8 @@ import antlr4 from 'antlr4';
 import getOperation from '@/js/OperationGetter';
 import { isCommutativeOperation } from '@/js/OperationGetter';
 
-// This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
-
 export default class L4_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
 			const operation = ctx.formula().constructor.name;
@@ -19,7 +16,6 @@ export default class L4_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by PredGrammarParser#and.
 	visitOperation(ctx, opName) {
 		if (isCommutativeOperation(opName)) {
 			const left = ctx.left;

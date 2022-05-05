@@ -2,9 +2,11 @@
 // Generated from PredGrammarRight.g4 by ANTLR 4.9.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
+//import PredGrammarRightVisitor from './PredGrammarRightVisitor.js';
+
 
 const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
-    "\u5964\u0003\u0013R\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\u5964\u0003\u0011Q\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0003\u0002\u0003\u0002",
     "\u0003\u0002\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
     "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
@@ -14,46 +16,46 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0003\u0003\u0007\u0003.\n\u0003\f\u0003\u000e\u00031\u000b\u0003\u0003",
     "\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0007\u00048",
     "\n\u0004\f\u0004\u000e\u0004;\u000b\u0004\u0003\u0004\u0003\u0004\u0005",
-    "\u0004?\n\u0004\u0003\u0005\u0003\u0005\u0003\u0005\u0005\u0005D\n\u0005",
-    "\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u0006",
-    "K\n\u0006\f\u0006\u000e\u0006N\u000b\u0006\u0003\u0006\u0003\u0006\u0003",
-    "\u0006\u0002\u0003\u0004\u0007\u0002\u0004\u0006\b\n\u0002\u0002\u0002",
-    "[\u0002\f\u0003\u0002\u0002\u0002\u0004\u001f\u0003\u0002\u0002\u0002",
-    "\u00062\u0003\u0002\u0002\u0002\bC\u0003\u0002\u0002\u0002\nE\u0003",
-    "\u0002\u0002\u0002\f\r\u0005\u0004\u0003\u0002\r\u000e\u0007\u0002\u0002",
-    "\u0003\u000e\u0003\u0003\u0002\u0002\u0002\u000f\u0010\b\u0003\u0001",
-    "\u0002\u0010 \u0005\u0006\u0004\u0002\u0011\u0012\u0007\u000f\u0002",
-    "\u0002\u0012\u0013\u0007\u0003\u0002\u0002\u0013 \u0005\u0004\u0003",
-    "\f\u0014\u0015\u0007\u0010\u0002\u0002\u0015\u0016\u0007\u0003\u0002",
-    "\u0002\u0016 \u0005\u0004\u0003\u000b\u0017\u0018\u0007\n\u0002\u0002",
-    "\u0018 \u0005\u0004\u0003\n\u0019\u001a\u0007\b\u0002\u0002\u001a\u001b",
-    "\u0005\u0004\u0003\u0002\u001b\u001c\u0007\t\u0002\u0002\u001c \u0003",
-    "\u0002\u0002\u0002\u001d \u0007\u0011\u0002\u0002\u001e \u0007\u0012",
+    "\u0004?\n\u0004\u0003\u0005\u0003\u0005\u0005\u0005C\n\u0005\u0003\u0006",
+    "\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u0006J\n\u0006",
+    "\f\u0006\u000e\u0006M\u000b\u0006\u0003\u0006\u0003\u0006\u0003\u0006",
+    "\u0002\u0003\u0004\u0007\u0002\u0004\u0006\b\n\u0002\u0002\u0002Y\u0002",
+    "\f\u0003\u0002\u0002\u0002\u0004\u001f\u0003\u0002\u0002\u0002\u0006",
+    "2\u0003\u0002\u0002\u0002\bB\u0003\u0002\u0002\u0002\nD\u0003\u0002",
+    "\u0002\u0002\f\r\u0005\u0004\u0003\u0002\r\u000e\u0007\u0002\u0002\u0003",
+    "\u000e\u0003\u0003\u0002\u0002\u0002\u000f\u0010\b\u0003\u0001\u0002",
+    "\u0010 \u0005\u0006\u0004\u0002\u0011\u0012\u0007\r\u0002\u0002\u0012",
+    "\u0013\u0007\u0003\u0002\u0002\u0013 \u0005\u0004\u0003\f\u0014\u0015",
+    "\u0007\u000e\u0002\u0002\u0015\u0016\u0007\u0003\u0002\u0002\u0016 ",
+    "\u0005\u0004\u0003\u000b\u0017\u0018\u0007\b\u0002\u0002\u0018 \u0005",
+    "\u0004\u0003\n\u0019\u001a\u0007\u0006\u0002\u0002\u001a\u001b\u0005",
+    "\u0004\u0003\u0002\u001b\u001c\u0007\u0007\u0002\u0002\u001c \u0003",
+    "\u0002\u0002\u0002\u001d \u0007\u000f\u0002\u0002\u001e \u0007\u0010",
     "\u0002\u0002\u001f\u000f\u0003\u0002\u0002\u0002\u001f\u0011\u0003\u0002",
     "\u0002\u0002\u001f\u0014\u0003\u0002\u0002\u0002\u001f\u0017\u0003\u0002",
     "\u0002\u0002\u001f\u0019\u0003\u0002\u0002\u0002\u001f\u001d\u0003\u0002",
     "\u0002\u0002\u001f\u001e\u0003\u0002\u0002\u0002 /\u0003\u0002\u0002",
-    "\u0002!\"\f\t\u0002\u0002\"#\u0007\u000b\u0002\u0002#.\u0005\u0004\u0003",
-    "\t$%\f\b\u0002\u0002%&\u0007\f\u0002\u0002&.\u0005\u0004\u0003\b\'(",
-    "\f\u0007\u0002\u0002()\u0007\r\u0002\u0002).\u0005\u0004\u0003\b*+\f",
-    "\u0006\u0002\u0002+,\u0007\u000e\u0002\u0002,.\u0005\u0004\u0003\u0006",
+    "\u0002!\"\f\t\u0002\u0002\"#\u0007\t\u0002\u0002#.\u0005\u0004\u0003",
+    "\t$%\f\b\u0002\u0002%&\u0007\n\u0002\u0002&.\u0005\u0004\u0003\b\'(",
+    "\f\u0007\u0002\u0002()\u0007\u000b\u0002\u0002).\u0005\u0004\u0003\b",
+    "*+\f\u0006\u0002\u0002+,\u0007\f\u0002\u0002,.\u0005\u0004\u0003\u0006",
     "-!\u0003\u0002\u0002\u0002-$\u0003\u0002\u0002\u0002-\'\u0003\u0002",
     "\u0002\u0002-*\u0003\u0002\u0002\u0002.1\u0003\u0002\u0002\u0002/-\u0003",
     "\u0002\u0002\u0002/0\u0003\u0002\u0002\u00020\u0005\u0003\u0002\u0002",
-    "\u00021/\u0003\u0002\u0002\u00022>\u0007\u0004\u0002\u000234\u0007\b",
-    "\u0002\u000249\u0005\b\u0005\u000256\u0007\u0007\u0002\u000268\u0005",
+    "\u00021/\u0003\u0002\u0002\u00022>\u0007\u0004\u0002\u000234\u0007\u0006",
+    "\u0002\u000249\u0005\b\u0005\u000256\u0007\u0005\u0002\u000268\u0005",
     "\b\u0005\u000275\u0003\u0002\u0002\u00028;\u0003\u0002\u0002\u00029",
     "7\u0003\u0002\u0002\u00029:\u0003\u0002\u0002\u0002:<\u0003\u0002\u0002",
-    "\u0002;9\u0003\u0002\u0002\u0002<=\u0007\t\u0002\u0002=?\u0003\u0002",
+    "\u0002;9\u0003\u0002\u0002\u0002<=\u0007\u0007\u0002\u0002=?\u0003\u0002",
     "\u0002\u0002>3\u0003\u0002\u0002\u0002>?\u0003\u0002\u0002\u0002?\u0007",
-    "\u0003\u0002\u0002\u0002@D\u0007\u0003\u0002\u0002AD\u0007\u0005\u0002",
-    "\u0002BD\u0005\n\u0006\u0002C@\u0003\u0002\u0002\u0002CA\u0003\u0002",
-    "\u0002\u0002CB\u0003\u0002\u0002\u0002D\t\u0003\u0002\u0002\u0002EF",
-    "\u0007\u0006\u0002\u0002FG\u0007\b\u0002\u0002GL\u0005\b\u0005\u0002",
-    "HI\u0007\u0007\u0002\u0002IK\u0005\b\u0005\u0002JH\u0003\u0002\u0002",
-    "\u0002KN\u0003\u0002\u0002\u0002LJ\u0003\u0002\u0002\u0002LM\u0003\u0002",
-    "\u0002\u0002MO\u0003\u0002\u0002\u0002NL\u0003\u0002\u0002\u0002OP\u0007",
-    "\t\u0002\u0002P\u000b\u0003\u0002\u0002\u0002\t\u001f-/9>CL"].join("");
+    "\u0003\u0002\u0002\u0002@C\u0007\u0003\u0002\u0002AC\u0005\n\u0006\u0002",
+    "B@\u0003\u0002\u0002\u0002BA\u0003\u0002\u0002\u0002C\t\u0003\u0002",
+    "\u0002\u0002DE\u0007\u0003\u0002\u0002EF\u0007\u0006\u0002\u0002FK\u0005",
+    "\b\u0005\u0002GH\u0007\u0005\u0002\u0002HJ\u0005\b\u0005\u0002IG\u0003",
+    "\u0002\u0002\u0002JM\u0003\u0002\u0002\u0002KI\u0003\u0002\u0002\u0002",
+    "KL\u0003\u0002\u0002\u0002LN\u0003\u0002\u0002\u0002MK\u0003\u0002\u0002",
+    "\u0002NO\u0007\u0007\u0002\u0002O\u000b\u0003\u0002\u0002\u0002\t\u001f",
+    "-/9>BK"].join("");
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -65,12 +67,12 @@ const sharedContextCache = new antlr4.PredictionContextCache();
 export default class PredGrammarRightParser extends antlr4.Parser {
 
     static grammarFileName = "PredGrammarRight.g4";
-    static literalNames = [ null, null, null, null, null, "','", "'('", 
-                            "')'", "'\u00AC'", "'\u2227'", "'\u2228'", "'\u21D2'", 
-                            "'\u21D4'", "'\u2200'", "'\u2203'", "'1'", "'0'" ];
-    static symbolicNames = [ null, "IND", "PRED", "CONST", "FUNCT", "SEP", 
-                             "LPAREN", "RPAREN", "NEG", "AND", "OR", "IMPL", 
-                             "EQ", "FORALL", "EXISTS", "T", "F", "WS" ];
+    static literalNames = [ null, null, null, "','", "'('", "')'", "'\u00AC'", 
+                            "'\u2227'", "'\u2228'", "'\u21D2'", "'\u21D4'", 
+                            "'\u2200'", "'\u2203'", "'1'", "'0'" ];
+    static symbolicNames = [ null, "SYMBOL", "PRED", "SEP", "LPAREN", "RPAREN", 
+                             "NEG", "AND", "OR", "IMPL", "EQ", "FORALL", 
+                             "EXISTS", "T", "F", "WS" ];
     static ruleNames = [ "start", "formula", "predicate", "term", "funct" ];
 
     constructor(input) {
@@ -166,7 +168,7 @@ export default class PredGrammarRightParser extends antlr4.Parser {
 	            this.state = 15;
 	            this.match(PredGrammarRightParser.FORALL);
 	            this.state = 16;
-	            this.match(PredGrammarRightParser.IND);
+	            this.match(PredGrammarRightParser.SYMBOL);
 	            this.state = 17;
 	            this.formula(10);
 	            break;
@@ -177,7 +179,7 @@ export default class PredGrammarRightParser extends antlr4.Parser {
 	            this.state = 18;
 	            this.match(PredGrammarRightParser.EXISTS);
 	            this.state = 19;
-	            this.match(PredGrammarRightParser.IND);
+	            this.match(PredGrammarRightParser.SYMBOL);
 	            this.state = 20;
 	            this.formula(9);
 	            break;
@@ -363,26 +365,22 @@ export default class PredGrammarRightParser extends antlr4.Parser {
 	    let localctx = new TermContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 6, PredGrammarRightParser.RULE_term);
 	    try {
-	        this.state = 65;
+	        this.state = 64;
 	        this._errHandler.sync(this);
-	        switch(this._input.LA(1)) {
-	        case PredGrammarRightParser.IND:
+	        var la_ = this._interp.adaptivePredict(this._input,5,this._ctx);
+	        switch(la_) {
+	        case 1:
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 62;
-	            this.match(PredGrammarRightParser.IND);
+	            this.match(PredGrammarRightParser.SYMBOL);
 	            break;
-	        case PredGrammarRightParser.CONST:
+
+	        case 2:
 	            this.enterOuterAlt(localctx, 2);
 	            this.state = 63;
-	            this.match(PredGrammarRightParser.CONST);
-	            break;
-	        case PredGrammarRightParser.FUNCT:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 64;
 	            this.funct();
 	            break;
-	        default:
-	            throw new antlr4.error.NoViableAltException(this);
+
 	        }
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -406,25 +404,25 @@ export default class PredGrammarRightParser extends antlr4.Parser {
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
+	        this.state = 66;
+	        this.match(PredGrammarRightParser.SYMBOL);
 	        this.state = 67;
-	        this.match(PredGrammarRightParser.FUNCT);
-	        this.state = 68;
 	        this.match(PredGrammarRightParser.LPAREN);
-	        this.state = 69;
+	        this.state = 68;
 	        this.term();
-	        this.state = 74;
+	        this.state = 73;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===PredGrammarRightParser.SEP) {
-	            this.state = 70;
+	            this.state = 69;
 	            this.match(PredGrammarRightParser.SEP);
-	            this.state = 71;
+	            this.state = 70;
 	            this.term();
-	            this.state = 76;
+	            this.state = 75;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 77;
+	        this.state = 76;
 	        this.match(PredGrammarRightParser.RPAREN);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -444,23 +442,21 @@ export default class PredGrammarRightParser extends antlr4.Parser {
 }
 
 PredGrammarRightParser.EOF = antlr4.Token.EOF;
-PredGrammarRightParser.IND = 1;
+PredGrammarRightParser.SYMBOL = 1;
 PredGrammarRightParser.PRED = 2;
-PredGrammarRightParser.CONST = 3;
-PredGrammarRightParser.FUNCT = 4;
-PredGrammarRightParser.SEP = 5;
-PredGrammarRightParser.LPAREN = 6;
-PredGrammarRightParser.RPAREN = 7;
-PredGrammarRightParser.NEG = 8;
-PredGrammarRightParser.AND = 9;
-PredGrammarRightParser.OR = 10;
-PredGrammarRightParser.IMPL = 11;
-PredGrammarRightParser.EQ = 12;
-PredGrammarRightParser.FORALL = 13;
-PredGrammarRightParser.EXISTS = 14;
-PredGrammarRightParser.T = 15;
-PredGrammarRightParser.F = 16;
-PredGrammarRightParser.WS = 17;
+PredGrammarRightParser.SEP = 3;
+PredGrammarRightParser.LPAREN = 4;
+PredGrammarRightParser.RPAREN = 5;
+PredGrammarRightParser.NEG = 6;
+PredGrammarRightParser.AND = 7;
+PredGrammarRightParser.OR = 8;
+PredGrammarRightParser.IMPL = 9;
+PredGrammarRightParser.EQ = 10;
+PredGrammarRightParser.FORALL = 11;
+PredGrammarRightParser.EXISTS = 12;
+PredGrammarRightParser.T = 13;
+PredGrammarRightParser.F = 14;
+PredGrammarRightParser.WS = 15;
 
 PredGrammarRightParser.RULE_start = 0;
 PredGrammarRightParser.RULE_formula = 1;
@@ -489,6 +485,14 @@ class StartContext extends antlr4.ParserRuleContext {
 	EOF() {
 	    return this.getToken(PredGrammarRightParser.EOF, 0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitStart(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -533,6 +537,14 @@ class NegContext extends FormulaContext {
 	    return this.getTypedRuleContext(FormulaContext,0);
 	};
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitNeg(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -563,6 +575,14 @@ class ImplContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.IMPL, 0);
 	};
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitImpl(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -586,6 +606,14 @@ class ParenContext extends FormulaContext {
 	RPAREN() {
 	    return this.getToken(PredGrammarRightParser.RPAREN, 0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitParen(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -617,6 +645,14 @@ class OrContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.OR, 0);
 	};
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitOr(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -632,6 +668,14 @@ class PredContext extends FormulaContext {
 	predicate() {
 	    return this.getTypedRuleContext(PredicateContext,0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitPred(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -663,6 +707,14 @@ class AndContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.AND, 0);
 	};
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitAnd(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -679,13 +731,21 @@ class ForallContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.FORALL, 0);
 	};
 
-	IND() {
-	    return this.getToken(PredGrammarRightParser.IND, 0);
+	SYMBOL() {
+	    return this.getToken(PredGrammarRightParser.SYMBOL, 0);
 	};
 
 	formula() {
 	    return this.getTypedRuleContext(FormulaContext,0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitForall(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -703,6 +763,14 @@ class TrueContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.T, 0);
 	};
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitTrue(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -718,6 +786,14 @@ class FalseContext extends FormulaContext {
 	F() {
 	    return this.getToken(PredGrammarRightParser.F, 0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitFalse(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -735,13 +811,21 @@ class ExistsContext extends FormulaContext {
 	    return this.getToken(PredGrammarRightParser.EXISTS, 0);
 	};
 
-	IND() {
-	    return this.getToken(PredGrammarRightParser.IND, 0);
+	SYMBOL() {
+	    return this.getToken(PredGrammarRightParser.SYMBOL, 0);
 	};
 
 	formula() {
 	    return this.getTypedRuleContext(FormulaContext,0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitExists(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -772,6 +856,14 @@ class EqContext extends FormulaContext {
 	EQ() {
 	    return this.getToken(PredGrammarRightParser.EQ, 0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitEq(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -827,6 +919,14 @@ class PredicateContext extends antlr4.ParserRuleContext {
 	};
 
 
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitPredicate(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -846,17 +946,21 @@ class TermContext extends antlr4.ParserRuleContext {
         this.ruleIndex = PredGrammarRightParser.RULE_term;
     }
 
-	IND() {
-	    return this.getToken(PredGrammarRightParser.IND, 0);
-	};
-
-	CONST() {
-	    return this.getToken(PredGrammarRightParser.CONST, 0);
+	SYMBOL() {
+	    return this.getToken(PredGrammarRightParser.SYMBOL, 0);
 	};
 
 	funct() {
 	    return this.getTypedRuleContext(FunctContext,0);
 	};
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitTerm(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }
@@ -877,8 +981,8 @@ class FunctContext extends antlr4.ParserRuleContext {
         this.ruleIndex = PredGrammarRightParser.RULE_funct;
     }
 
-	FUNCT() {
-	    return this.getToken(PredGrammarRightParser.FUNCT, 0);
+	SYMBOL() {
+	    return this.getToken(PredGrammarRightParser.SYMBOL, 0);
 	};
 
 	LPAREN() {
@@ -911,6 +1015,14 @@ class FunctContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
+
+	accept(visitor) {
+	    if ( visitor instanceof PredGrammarRightVisitor ) {
+	        return visitor.visitFunct(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
 
 
 }

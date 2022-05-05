@@ -1,7 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import { getFreeIndVars } from '@/js/IndVariables';
+import { getFreeVars } from '@/js/IndVariables';
 
 export default class P7_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
@@ -20,9 +20,9 @@ export default class P7_1Visitor extends antlr4.tree.ParseTreeVisitor {
         if (ctx.formula().constructor.name === "ParenContext") {
             const impl = ctx.formula().formula();
             if (impl.constructor.name === "ImplContext") {
-                const freeVarsLeft = getFreeIndVars(impl.left);
-                const freeVarsRight = getFreeIndVars(impl.right);
-                const ind = ctx.IND().getText();
+                const freeVarsLeft = getFreeVars(impl.left);
+                const freeVarsRight = getFreeVars(impl.right);
+                const ind = ctx.SYMBOL().getText();
                 if (!freeVarsRight.has(ind) && freeVarsLeft.has(ind)) {
                     const left = impl.left.getText();
                     const right = impl.right.getText();

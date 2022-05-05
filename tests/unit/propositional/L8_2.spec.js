@@ -34,9 +34,7 @@ describe("L8_2 tests", () => {
   test("applies the distributive property to (∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)", () => {
     const input =
       "(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C)∧(∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨D)";
-    expect(convert(input, "L8_2")).toBe(
-      "∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C∧D"
-    );
+    expect(convert(input, "L8_2")).toBe("∃x(F(x)∨∃xF(x)∨∀yG(y)∨H(x,f(z)))∨C∧D");
   });
 
   test("returns null if input is not in the form of (F∨G)∧(F∨H)", () => {

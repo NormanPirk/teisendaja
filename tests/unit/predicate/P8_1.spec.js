@@ -40,6 +40,4 @@ describe("P8_1 tests", () => {
     const input = "∃x(F(x)∧T)";
     expect(convert(input, "P8_1")).toBe(null);
   });
-
 });
-

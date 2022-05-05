@@ -65,6 +65,4 @@ describe("L12_2 tests", () => {
     const input = "¬(¬F∧G)";
     expect(convert(input, "L12_2")).toBe("G⇒F");
   });
-
-
 });

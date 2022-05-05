@@ -3,11 +3,8 @@
 import antlr4 from 'antlr4';
 import getOperation from '@/js/OperationGetter';
 
-// This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
-
 export default class L3Visitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
 			const operation = getOperation(ctx.formula().constructor.name);

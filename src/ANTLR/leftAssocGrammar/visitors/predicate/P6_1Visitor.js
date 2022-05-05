@@ -1,7 +1,7 @@
 /* eslint-disable */
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import { getFreeIndVars } from '@/js/IndVariables';
+import { getFreeVars } from '@/js/IndVariables';
 import { getOperationConjDisj } from '@/js/OperationGetter';
 
 export default class P6_1Visitor extends antlr4.tree.ParseTreeVisitor {
@@ -22,9 +22,9 @@ export default class P6_1Visitor extends antlr4.tree.ParseTreeVisitor {
             const operation = ctx.formula().formula();
             try {
                 const op = getOperationConjDisj(operation.constructor.name);
-                const freeVarsLeft = getFreeIndVars(operation.left);
-                const freeVarsRight = getFreeIndVars(operation.right);
-                const ind = ctx.IND().getText();
+                const freeVarsLeft = getFreeVars(operation.left);
+                const freeVarsRight = getFreeVars(operation.right);
+                const ind = ctx.SYMBOL().getText();
                 const left = operation.left.getText();
                 const right = operation.right.getText();
                 if (freeVarsLeft.has(ind) && !freeVarsRight.has(ind)) {

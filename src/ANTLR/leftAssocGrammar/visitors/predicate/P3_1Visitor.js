@@ -19,7 +19,7 @@ export default class P3_1Visitor extends antlr4.tree.ParseTreeVisitor {
         if (ctx.formula().constructor.name === "ParenContext") {
             const and = ctx.formula().formula();
             if (and.constructor.name === "AndContext") {
-                const ind = ctx.IND().getText();
+                const ind = ctx.SYMBOL().getText();
                 const left = and.left.getText();
                 const right = and.right.getText();
                 if (left.includes(ind) && right.includes(ind)) {

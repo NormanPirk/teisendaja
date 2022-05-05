@@ -1,32 +1,24 @@
 <template>
-  <div class="fit">
-    <div class="intro">
-      <div>{{ $t("conversions") }}</div>
-    </div>
-      <div id="pdf" data-cy="completed-convs">
-        <p
-          v-for="(formula, index) in formulas"
-          :key="formula"
-          :data-cy="'line-' + index"
-        >
-          {{
-            index === 0
-              ? formula.getStart()
-              : "≡" + "&nbsp;&nbsp;" + formula.getStart()
-          }}<u>{{ formula.getUnderlined() }}</u
-          >{{ formula.getEnding()
-          }}<sup v-if="formula.ct">&nbsp;&nbsp;&nbsp;{{ formula.ct }}</sup>
-        </p>
-      </div>
+  <div class="intro output-intro">
+    <div>{{ $t("conversions") }}</div>
+  </div>
+  <div id="pdf" data-cy="completed-convs">
+    <p v-for="(formula, index) in formulas" :key="formula" :data-cy="'line-' + index">
+      {{ index === 0 ? formula.getStart() : "≡" + "&nbsp;&nbsp;" + formula.getStart() }}<u>{{ formula.getUnderlined() }}</u
+      >{{ formula.getEnding() }}<sup v-if="formula.ct">&nbsp;&nbsp;&nbsp;{{ formula.ct }}</sup>
+    </p>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Output",
   data() {
     return {};
+  },
+  updated() {
+    const el = document.getElementById("pdf");
+    el.scrollTop = el.scrollHeight;
   },
   computed: {
     formulas: {
@@ -39,17 +31,21 @@ export default {
 </script>
 
 <style scoped>
+.output-intro {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 #pdf {
-  min-height: 4em;
   overflow-wrap: break-word;
   font-size: 1em;
+  flex-grow: 1;
   overflow-y: scroll;
-  height: 24em;
   scrollbar-width: none;
 }
 
-::-webkit-scrollbar { 
-  display: none; 
+::-webkit-scrollbar {
+  display: none;
 }
 
 #last {
@@ -59,12 +55,6 @@ export default {
   font-size: 1.2em;
   padding: 0.5em 0;
   margin: 0.5em 0;
-}
-
-.fit {
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 u {

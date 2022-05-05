@@ -4,8 +4,8 @@ start: formula EOF;
 
 formula
     : predicate                             #pred
-    | FORALL IND formula                    #forall
-    | EXISTS IND formula                    #exists 
+    | FORALL SYMBOL formula                 #forall
+    | EXISTS SYMBOL formula                 #exists 
     | NEG formula                           #neg
     | left=formula op=AND right=formula     #and
 	| left=formula op=OR right=formula      #or
@@ -18,17 +18,13 @@ formula
 
 predicate: PRED (LPAREN term (SEP term)* RPAREN)?;
 
-term: IND | CONST | funct;
+term: SYMBOL | funct;
 
-funct: FUNCT LPAREN term (SEP term)* RPAREN;
+funct: SYMBOL LPAREN term (SEP term)* RPAREN;
 
-IND: [p-z];
+SYMBOL: [a-z];
 
 PRED: [A-Z];
-
-CONST: [a-e];
-
-FUNCT: [f-o];
 
 SEP: ',';
 

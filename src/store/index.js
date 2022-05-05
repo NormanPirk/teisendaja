@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import insertTextAtCursor from "insert-text-at-cursor";
 import convert from "../js/Converter.js";
 import addParentheses, { addParensMiddle } from "../js/Parentheses.js";
 import handleNewFormula from "../js/NewFormulaHandler.js";
@@ -13,26 +12,17 @@ export default createStore({
     formulas: [],
     newFormula: "",
     filename: i18n.t("defaultFileName"),
+    error: { message: "", type: 0 },
     askNewFormula: false,
     askFilename: false,
     askDeleteAllConfirmation: false,
-    incorrectNewFormula: false,
-    converted: false,
-    noInput: false,
-    faultyInput: false,
-    notSubformula: false,
-    faultyConversion: false,
-    noSubformula: false,
-    conversionNotAllowed: false,
-    errorWithConversion: false,
-    inputFileError: false,
     showHelp: false,
-    invalidFilename: false,
-    selectionNotFromCorrectField: false,
-    selectedConversion: "",
-    faultyInputClarification: ""
+    conversionType: "",
   },
   getters: {
+    error: (state) => {
+      return state.error;
+    },
     formula: (state) => {
       return state.formula;
     },
@@ -54,60 +44,20 @@ export default createStore({
     askDeleteAllConfirmation: (state) => {
       return state.askDeleteAllConfirmation;
     },
-    incorrectNewFormula: (state) => {
-      return state.incorrectNewFormula;
-    },
-    converted: (state) => {
-      return state.converted;
-    },
-    noInput: (state) => {
-      return state.noInput;
-    },
-    faultyInput: (state) => {
-      return state.faultyInput;
-    },
-    notSubformula: (state) => {
-      return state.notSubformula;
-    },
-    faultyConversion: (state) => {
-      return state.faultyConversion;
-    },
-    noSubformula: (state) => {
-      return state.noSubformula;
-    },
-    conversionNotAllowed: (state) => {
-      return state.conversionNotAllowed;
-    },
-    errorWithConversion: (state) => {
-      return (
-        state.notSubformula ||
-        state.faultyConversion ||
-        state.noSubformula ||
-        state.conversionNotAllowed
-      );
-    },
-    inputFileError: (state) => {
-      return state.inputFileError;
-    },
-    selectionNotFromCorrectField: (state) => {
-      return state.selectionNotFromCorrectField;
-    },
     showHelp: (state) => {
       return state.showHelp;
     },
-    invalidFilename: (state) => {
-      return state.invalidFilename;
+    conversionType: (state) => {
+      return state.conversionType;
     },
-    selectedConversion: (state) => {
-      return state.selectedConversion;
-    },
-    faultyInputClarification: (state) => {
-      return state.faultyInputClarification;
-    }
   },
   mutations: {
-    finishConversion: (state) => {
-      state.converted = false;
+    setError: (state, value) => {
+      state.error.message = value.message;
+      state.error.type = value.type;
+    },
+    restoreDefaultFilename: (state) => {
+      state.filename = i18n.t("defaultFileName");
     },
     updateFormula: (state, value) => {
       state.formula = value;
@@ -133,62 +83,23 @@ export default createStore({
     setFilename: (state, value) => {
       state.filename = value;
     },
-    clearFilename: (state) => {
-      state.filename = "";
-    },
     hideFilenamePrompt: (state) => {
       state.askFilename = false;
     },
     hideDeleteAllConfirmation: (state) => {
       state.askDeleteAllConfirmation = false;
     },
-    addSymbol: (state, value) => {
-      const el = document.getElementById("input-field");
-      insertTextAtCursor(el, value);
-    },
-    addSymbolToNew: (state, value) => {
-      const el = document.getElementById("selectable-new");
-      insertTextAtCursor(el, value);
-    },
     addFormula: (state) => {
       if (state.formula.length > 0) {
         state.formulas.push(new Formula(state.formula));
       }
-    },
-    setSelectedConversion: (state, value) => {
-      state.selectedConversion = value;
-    },
-    setError: (state, errorName) => {
-      state[errorName] = true;
-    },
-    clearInvalidFilenameError: (state) => {
-      state.invalidFilename = false;
     },
     toggleHelp: (state) => {
       const current = state.showHelp;
       state.showHelp = !current;
     },
     clearErrors: (state) => {
-      state.noInput = false;
-      state.faultyInput = false;
-      state.notSubformula = false;
-      state.faultyConversion = false;
-      state.noSubformula = false;
-      state.conversionNotAllowed = false;
-      state.inputFileError = false;
-      state.selectionNotFromCorrectField = false;
-    },
-    clearSelectedConversion: (state) => {
-      state.selectedConversion = "";
-    },
-    clearFaultyInputClarification: (state) => {
-      state.faultyInputClarification = "";
-    },
-    clearNewFormulaError: (state) => {
-      state.incorrectNewFormula = false;
-    },
-    setFaultyInputClarification: (state, value) => {
-      state.faultyInputClarification = value;
+      state.error = {};
     },
     removeLast: (state) => {
       if (state.formulas.length > 0) {
@@ -205,43 +116,43 @@ export default createStore({
       if (state.formulas.length > 0) {
         state.formula = state.formulas[0].formula;
         state.formulas = [];
-        state.converted = false;
-      }
-    },
-    convert( state, object) {
-      try {
-        let result = convert(object.subFormula, object.conversionType);
-        if (result || result === "") {
-          if (specialConversions.withUserInput.includes(object.conversionType)) {
-            result = handleNewFormula(object.conversionType, state.newFormula, result);
-            state.newFormula = "";
-          }
-          if ((typeof object.matchingChild) === "string" && object.matchingChild.includes("middle")) {
-            result = addParensMiddle(object.matchingChild, result);
-          } else {
-            result = addParentheses(object.matchingChild, result);
-          }
-          const beginning = state.formula.substring(0, object.origStart);
-          const ending = state.formula.substring(object.origEnd, state.formula.length);
-          state.formula = beginning + result + ending;
-          state.formulas[state.formulas.length - 1].selStart = object.origStart;
-          state.formulas[state.formulas.length - 1].selEnd = object.origEnd;
-          state.formulas[state.formulas.length - 1].ct =
-            object.conversionType.split("_")[0];
-          state.converted = true;
-        } else {
-          state.faultyConversion = true;
-        }
-      } catch (err) {
-        console.log(err);
       }
     },
   },
   actions: {
-    setError(context, errorName) {
-      context.commit("clearErrors");
-      context.commit("setError", errorName);
+    convert(context, object) {
+      let result = convert(object.subFormula, object.conversionType);
+      if (result || result === "") {
+        if (specialConversions.withUserInput.includes(object.conversionType)) {
+          result = handleNewFormula(object.conversionType, context.state.newFormula, result);
+          context.state.newFormula = "";
+        }
+        if (typeof object.matchingChild === "string" && object.matchingChild.includes("middle")) {
+          result = addParensMiddle(object.matchingChild, result);
+        } else {
+          result = addParentheses(object.matchingChild, result);
+        }
+        addConvInformation(context, object, result);
+      } else {
+        context.state.error = {
+          message: i18n.t("faultyConversion", {
+            conversion: object.conversionType.split("_")[0],
+          }),
+          type: "1",
+        };
+      }
     },
   },
   modules: {},
 });
+
+function addConvInformation(context, object, result) {
+  const beginning = context.state.formula.substring(0, object.origStart);
+  const ending = context.state.formula.substring(object.origEnd, context.state.formula.length);
+  context.state.formula = beginning + result + ending;
+  context.state.formulas[context.state.formulas.length - 1].selStart = object.origStart;
+  context.state.formulas[context.state.formulas.length - 1].selEnd = object.origEnd;
+  context.state.formulas[context.state.formulas.length - 1].ct = object.conversionType.split("_")[0];
+  context.commit("addFormula");
+  context.state.conversionType = "";
+}

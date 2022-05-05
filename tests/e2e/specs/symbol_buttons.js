@@ -19,7 +19,10 @@ describe("Adding symbols by clicking on symbol buttons", () => {
     cy.get("[data-cy=insertFormula]").type("x");
     cy.get("[data-cy=exists]").eq(0).click();
     cy.get("[data-cy=insertFormula]").type("yF(x,y)");
-    cy.get("[data-cy=insertFormula]").should("have.value", "¬A∧B∨C⇒D⇔∀x∃yF(x,y)");
+    cy.get("[data-cy=insertFormula]").should(
+      "have.value",
+      "¬A∧B∨C⇒D⇔∀x∃yF(x,y)"
+    );
   });
 
   it("Can insert all logic symbols to new subformula by using buttons", () => {
@@ -46,5 +49,4 @@ describe("Adding symbols by clicking on symbol buttons", () => {
 
     cy.get("[data-cy=selectable]").contains("H∧(H∨(¬A∧B∨C⇒D⇔∀x∃yF(x,y)))");
   });
-
 });

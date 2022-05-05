@@ -4,13 +4,7 @@
   </div>
   <div id="buttons" v-if="showStartButton()">
     <SymbolButtons target="formula"></SymbolButtons>
-    <button
-      @click="start"
-      v-show="showStartButton()"
-      class="yellow"
-      data-cy="start-conversions"
-      v-tooltip="'(Ctrl+Enter)'"
-    >
+    <button @click="start" v-show="showStartButton()" class="yellow" data-cy="start-conversions" v-tooltip="'Ctrl+Enter'">
       {{ $t("startConversions") }}
     </button>
   </div>
@@ -20,36 +14,22 @@
       id="input-field"
       v-model="formula"
       :placeholder="$t('inputDescription')"
-      :class="{ faulty: !isFaulty(), error: errorWithConversion }"
+      :class="{ faulty: !isCorrect() }"
       @input="
         renderMathSymbols();
-        clearErrors();
+        isCorrect();
       "
-      @mousedown="clearErrors()"
       data-cy="insertFormula"
+      @mousedown="clearErrors()"
     ></textarea>
   </div>
-  <div
-    v-else
-    @mousedown="clearErrors()"
-    id="selectable"
-    data-cy="selectable"
-    v-html="paintParens(formula)"
-    :class="{ error: errorWithConversion }"
-  ></div>
+  <div v-else @mousedown="clearErrors()" id="selectable" data-cy="selectable" v-html="paintParens(formula)"></div>
   <div v-show="showStartButton()" id="file-uploader" @click="clearErrors()">
-    <input
-      type="file"
-      @change="loadDataFromJson"
-      accept=".json"
-      :placeholder="$t('inputDescription')"
-      id="file"
-      data-cy="uploadJSON"
-    />
-    <label for="file" v-tooltip="'(Ctrl+U)'">{{ $t("fileInputDescription") }} </label>
+    <input type="file" @change="loadDataFromJson" accept=".json" :placeholder="$t('inputDescription')" id="file" data-cy="uploadJSON" />
+    <label for="file" v-tooltip="'Ctrl+U'">{{ $t("fileInputDescription") }} </label>
   </div>
   <div class="error-message-div">
-    <ErrorMessages></ErrorMessages>
+    <ErrorMessages type="1"></ErrorMessages>
   </div>
 </template>
 
@@ -64,6 +44,7 @@ import texAndDigitsToMathSymbols from "../js/MathSymbolConverter.js";
 import Formula from "../js/Formula.js";
 import getParseTree from "../ANTLR/leftAssocGrammar/ParseTree.js";
 import ColorParensVisitor from "../ANTLR/leftAssocGrammar/visitors/coloringParens/ColorParensVisitor.js";
+import getErrorMessage from "@/js/ErrorMessageHelper.js";
 
 export default {
   name: "UserInput",
@@ -100,11 +81,6 @@ export default {
         this.$store.commit("updateFormulas", formulas);
       },
     },
-    errorWithConversion: {
-      get() {
-        return this.$store.getters.errorWithConversion;
-      },
-    },
   },
   methods: {
     showFileUploader() {
@@ -113,50 +89,23 @@ export default {
     showStartButton() {
       return this.formulas.length === 0;
     },
-    setFaultyInputClarification(clarification) {
-      this.$store.commit("setFaultyInputClarification", clarification);
-    },
-    getClarification(error) {
-      const position = error.column;
-      const symbol = this.formula[position] ? this.formula[position] : "";
-      const needed = this.getNeeded(error.msg);
-      return this.$i18n.t("clarification", {
-        pos: position,
-        symbol: symbol,
-        needed: needed,
-      });
-    },
-    getNeeded(msg) {
-      let needed = null;
-      if (msg.includes("expecting")) {
-        needed = msg
-          .split("expecting")[1]
-          .replace("IND", "indiviidmuutuja")
-          .replace("PRED", "predikaatsümbol");
-      } else if (msg.includes("missing")) {
-        needed = msg
-          .split("missing")[0]
-          .replace("'<EOF>'", "")
-          .replace("at", "");
-      }
-      return needed;
-    },
-    isFaulty() {
+    isCorrect() {
       if (this.formula.length !== 0) {
         try {
           validateInput(this.formula);
+          this.clearErrors();
           return true;
         } catch (error) {
-          console.log(error);
+          const errorMessage = getErrorMessage(error, this.formula);
+          this.$store.commit("setError", { message: errorMessage, type: "1" });
           return false;
         }
       }
+      this.clearErrors();
       return true;
     },
     clearErrors() {
       this.$store.commit("clearErrors");
-      this.$store.commit("clearSelectedConversion");
-      this.$store.commit("clearFaultyInputClarification");
     },
     start() {
       if (this.formula.length !== 0) {
@@ -166,12 +115,12 @@ export default {
             this.$store.commit("addFormula");
             this.clearErrors();
           } catch (error) {
-            this.setFaultyInputClarification(this.getClarification(error));
-            this.$store.dispatch("setError", "faultyInput");
+            const errorMessage = getErrorMessage(error, this.formula);
+            this.$store.commit("setError", { message: errorMessage, type: "1" });
           }
         }
       } else {
-        this.$store.dispatch("setError", "noInput");
+        this.$store.commit("setError", { message: this.$i18n.t("noInput"), type: "1" });
       }
     },
     renderMathSymbols() {
@@ -203,7 +152,7 @@ export default {
             this.uploadFile = false;
           } catch (error) {
             console.log(error);
-            this.$store.dispatch("setError", "inputFileError");
+            this.$store.commit("setError", { message: this.$i18n.t("inputFileError"), type: "1" });
           }
         });
         document.getElementById("file").value = "";
@@ -277,8 +226,8 @@ textarea {
   font-size: 1.2em;
   overflow-wrap: break-word;
   text-align: left;
-  padding-top: 0.5em;
-  margin: 0.5em 1em 0.5em 0;
+  padding: 0.5em 0;
+  margin: 0.5em 1em 0.5em 1em;
   letter-spacing: 0.04em;
 }
 
@@ -307,13 +256,6 @@ textarea {
 
 #file-uploader label:hover {
   transform: scale(1.02);
-}
-
-.error-message-div {
-  min-height: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 ::placeholder {

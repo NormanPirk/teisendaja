@@ -54,5 +54,4 @@ describe("L8_1 tests", () => {
     const input = "G∧H∨F";
     expect(convert(input, "L8_1")).toBe("(F∨G)∧(F∨H)");
   });
-
 });

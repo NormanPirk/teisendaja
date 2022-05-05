@@ -23,12 +23,5 @@ export default function texAndDigitsToMathSymbols(formula) {
 }
 
 export function mathSymbolsToTex(formula) {
-  return formula
-    .replaceAll("¬", "\\neg ")
-    .replaceAll("∧", "\\land ")
-    .replaceAll("∨", "\\lor ")
-    .replaceAll("⇒", "\\Rightarrow ")
-    .replaceAll("⇔", "\\Leftrightarrow ")
-    .replaceAll("∀", "\\forall ")
-    .replaceAll("∃", "\\exists ");
+  return formula.replaceAll("¬", "\\neg ").replaceAll("∧", "\\land ").replaceAll("∨", "\\lor ").replaceAll("⇒", "\\Rightarrow ").replaceAll("⇔", "\\Leftrightarrow ").replaceAll("∀", "\\forall ").replaceAll("∃", "\\exists ");
 }

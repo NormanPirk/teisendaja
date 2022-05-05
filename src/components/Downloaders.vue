@@ -1,29 +1,14 @@
 <template>
   <div id="action-buttons">
-    <button
-      @click="download('JSON')"
-      v-tooltip="$t('downloadJSON') + ' (Ctrl+J)'"
-      data-cy="downloadJSON"
-      v-bind:disabled="disableBtn"
-    >
+    <button @click="download('JSON')" v-tooltip="$t('downloadJSON') + ' (Ctrl+J)'" data-cy="downloadJSON" v-bind:disabled="disableBtn">
       <i class="fa-solid fa-download"></i>
       <div>JSON</div>
     </button>
-    <button
-      @click="download('TEX')"
-      v-tooltip="$t('downloadTEX') + ' (Ctrl+X)'"
-      data-cy="downloadTEX"
-      v-bind:disabled="disableBtn"
-    >
+    <button @click="download('TEX')" v-tooltip="$t('downloadTEX') + ' (Ctrl+X)'" data-cy="downloadTEX" v-bind:disabled="disableBtn">
       <i class="fa-solid fa-download"></i>
       <div>TeX</div>
     </button>
-    <button
-      @click="download('PDF')"
-      v-tooltip="$t('downloadPDF') + ' (Ctrl+P)'"
-      data-cy="downloadPDF"
-      v-bind:disabled="disableBtn"
-    >
+    <button @click="download('PDF')" v-tooltip="$t('downloadPDF') + ' (Ctrl+P)'" data-cy="downloadPDF" v-bind:disabled="disableBtn">
       <i class="fa-solid fa-download"></i>
       <div>PDF</div>
     </button>
@@ -66,7 +51,10 @@ export default {
           if (isValidFilename(filename)) {
             resolve(filename);
           } else {
-            this.$store.dispatch("setError", "invalidFilename");
+            this.$store.commit("setError", {
+              message: this.$i18n.t("invalidFilename"),
+              type: "2",
+            });
           }
         };
       });
@@ -89,11 +77,14 @@ export default {
             this.downloadPDF(fn);
             break;
         }
-        this.$store.commit("clearFilename");
         this.$store.commit("hideFilenamePrompt");
+        this.$store.commit("restoreDefaultFilename");
       } catch (error) {
         console.log(error);
-        this.$store.dispatch("setError", "invalidFilename");
+        this.$store.commit("setError", {
+          message: this.$i18n.t("invalidFilename"),
+          type: "2",
+        });
       }
     },
     getContentForPDF() {
@@ -111,8 +102,7 @@ export default {
       saveAs(blob, filename + ".json");
     },
     downloadTEX(filename) {
-      let content =
-        "\\documentclass{article}\n\\usepackage{amsmath}\n\\begin{document}\n\\begin{align*}\n";
+      let content = "\\documentclass{article}\n\\usepackage{amsmath}\n\\begin{document}\n\\begin{align*}\n";
       for (let [i, formula] of this.formulas.entries()) {
         if (i === 0) {
           content += "&" + formula.toTex() + "\\\\\n";

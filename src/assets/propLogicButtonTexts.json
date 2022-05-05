@@ -105,8 +105,8 @@
             "conversionTypeR": "L17_2"
         },
         {
-            "left": "F",
-            "right": "(F)",
+            "left": "(F)",
+            "right": "F",
             "conversionTypeL": "L18_1",
             "conversionTypeR": "L18_2"
         }

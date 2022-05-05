@@ -9,23 +9,23 @@ describe("P12 tests", () => {
   test("renames x in ∃xF(x)", () => {
     const input = "∃xF(x)";
     store.state.formula = input;
-    expect(convert(input, "P12")).toBe("∃yF(y)");
+    expect(convert(input, "P12")).toBe("∃aF(a)");
   });
 
-  test("renames x in ∃xF(x,y,z)", () => {
-    const input = "∃xF(x,y,z)";
+  test("renames x in ∃aF(a,b,c)", () => {
+    const input = "∃aF(a,b,c)";
     store.state.formula = input;
-    expect(convert(input, "P12")).toBe("∃uF(u,y,z)");
+    expect(convert(input, "P12")).toBe("∃dF(d,b,c)");
   });
 
   test("renames z in ∃z(F(u,y,z)∨G(z)⇔H(x,z))", () => {
     const input = "∃z(F(u,y,z)∨G(z)⇔H(x,z))";
     store.state.formula = input;
-    expect(convert(input, "P12")).toBe("∃v(F(u,y,v)∨G(v)⇔H(x,v))");
+    expect(convert(input, "P12")).toBe("∃a(F(u,y,a)∨G(a)⇔H(x,a))");
   });
 
-  test("returns null if there are no free variables left ∃xF(x,y,z,u,v,w,p,q,r,s,t)", () => {
-    const input = "∃xF(x,y,z,u,v,w,p,q,r,s,t)";
+  test("returns null if there are no free variables left ∃xF(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z)", () => {
+    const input = "∃xF(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z)";
     store.state.formula = input;
     expect(convert(input, "P12")).toBe(null);
   });
@@ -36,9 +36,9 @@ describe("P12 tests", () => {
     expect(convert(input, "P12")).toBe(null);
   });
 
-  test("returns null if input is not in the form of ∃xF(x)", () => {
+  test("replaces ind variable even if it is not in the predicate", () => {
     const input = "∃xH(s,t,u,y,z)";
     store.state.formula = input;
-    expect(convert(input, "P12")).toBe(null);
+    expect(convert(input, "P12")).toBe("∃aH(s,t,u,y,z)");
   });
 });

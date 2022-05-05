@@ -3,7 +3,11 @@
 // jshint ignore: start
 import antlr4 from "antlr4";
 
-export const colors = ["#e39e21", "#E32137", "#7AB0E0", "#84B900", "#CC35A9", "#FFBEF5", "#00924C", "#004C74"];
+export const colors = [
+                      "#E39E21", "#FF8066", "#7AB0E0", "#84B900", "#CC35A9", 
+                      "#FFBEF5", "#00924C", "#EEE97E", "#B9078D", "#CE5B13",
+                      "#95B1AF", "#EF6CD9", "#FFD37A", "#006494", "#D5CABD"
+                    ];
 export let index = 0;
 
 export function increaseIndex() {
@@ -57,7 +61,7 @@ export default class ColorParensVisitor extends antlr4.tree.ParseTreeVisitor {
 
   visitForall(ctx) {
       const content = this.visit(ctx.formula());
-      return "∀" + ctx.IND() + content;
+      return "∀" + ctx.SYMBOL() + content;
   }
 
   visitTrue(ctx) {
@@ -70,7 +74,7 @@ export default class ColorParensVisitor extends antlr4.tree.ParseTreeVisitor {
 
   visitExists(ctx) {
     const content = this.visit(ctx.formula());
-    return "∃" + ctx.IND() + content;
+    return "∃" + ctx.SYMBOL() + content;
   }
 
   visitEq(ctx) {

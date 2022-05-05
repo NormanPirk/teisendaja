@@ -3,11 +3,8 @@
 import antlr4 from 'antlr4';
 import isTautology from '@/js/ContradictionAndTautology';
 
-// This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
-
 export default class L19_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
 			return this.visitAnd(ctx.formula());
@@ -17,7 +14,6 @@ export default class L19_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by PredGrammarParser#and.
 	visitAnd(ctx) {
 		if (ctx.constructor.name === "AndContext") {
             const left = ctx.left;

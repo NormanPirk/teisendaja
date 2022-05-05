@@ -2,24 +2,23 @@ import addParentheses, { addParensMiddle } from "@/js/Parentheses.js";
 import matchInput from "@/js/InputMatcher.js";
 
 describe("Tests regarding adding parentheses", () => {
-  
   test("adds parentheses to the middle of several consecutive associative operations", () => {
-    const formula = "A∨B∨C∨D"
+    const formula = "A∨B∨C∨D";
     const subFormula = "B∨C";
     const origStart = 2;
     const origEnd = 5;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "¬B⇒C"
+    const result = "¬B⇒C";
     expect(addParensMiddle(matchingChild, result)).toBe("(¬B⇒C)");
   });
 
   test("does not add parentheses to the middle of several consecutive wquivalences", () => {
-    const formula = "A⇔B⇔C⇔D"
+    const formula = "A⇔B⇔C⇔D";
     const subFormula = "B⇔C";
     const origStart = 2;
     const origEnd = 5;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "B∧C∨¬B∧¬C"
+    const result = "B∧C∨¬B∧¬C";
     expect(addParensMiddle(matchingChild, result)).toBe("B∧C∨¬B∧¬C");
   });
 
@@ -29,7 +28,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 1;
     const origEnd = 2;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "A∧A"
+    const result = "A∧A";
     expect(addParentheses(matchingChild, result)).toBe("(A∧A)");
   });
 
@@ -39,7 +38,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 2;
     const origEnd = 8;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "¬B(x)⇒C"
+    const result = "¬B(x)⇒C";
     expect(addParentheses(matchingChild, result)).toBe("(¬B(x)⇒C)");
   });
 
@@ -49,7 +48,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 2;
     const origEnd = 11;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "B⇔C"
+    const result = "B⇔C";
     expect(addParentheses(matchingChild, result)).toBe("(B⇔C)");
   });
 
@@ -59,7 +58,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 2;
     const origEnd = 6;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "F(x)∨F(x)"
+    const result = "F(x)∨F(x)";
     expect(addParentheses(matchingChild, result)).toBe("(F(x)∨F(x))");
   });
 
@@ -69,7 +68,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 2;
     const origEnd = 6;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "F(x)∨F(x)"
+    const result = "F(x)∨F(x)";
     expect(addParentheses(matchingChild, result)).toBe("(F(x)∨F(x))");
   });
 
@@ -79,7 +78,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 2;
     const origEnd = 6;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "¬¬F(x)"
+    const result = "¬¬F(x)";
     expect(addParentheses(matchingChild, result)).toBe("¬¬F(x)");
   });
 
@@ -89,7 +88,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 3;
     const origEnd = 12;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "G(x)∨F(x)"
+    const result = "G(x)∨F(x)";
     expect(addParentheses(matchingChild, result)).toBe("G(x)∨F(x)");
   });
 
@@ -99,8 +98,7 @@ describe("Tests regarding adding parentheses", () => {
     const origStart = 0;
     const origEnd = 3;
     const matchingChild = matchInput(formula, subFormula, origStart, origEnd);
-    const result = "(A)"
+    const result = "(A)";
     expect(addParentheses(matchingChild, result)).toBe("(A)");
   });
-
 });

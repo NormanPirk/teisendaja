@@ -1,7 +1,6 @@
 import getNewPosition from "@/js/CursorPosition.js";
 
 describe("finds correct cursor position", () => {
-  
   test("finds correct cursor position for \\neg", () => {
     const input = "A\\neg";
     expect(getNewPosition(input, 4)).toEqual(1);
@@ -10,6 +9,11 @@ describe("finds correct cursor position", () => {
   test("finds correct cursor position for \\land", () => {
     const input = "A\\land";
     expect(getNewPosition(input, 5)).toEqual(1);
+  });
+
+  test("finds correct cursor position for \\land", () => {
+    const input = "A\\&";
+    expect(getNewPosition(input, 2)).toEqual(1);
   });
 
   test("finds correct cursor position for \\wedge", () => {
@@ -61,5 +65,4 @@ describe("finds correct cursor position", () => {
     const input = "A(x)⇒B∨C";
     expect(getNewPosition(input, 7)).toEqual(7);
   });
-
 });
