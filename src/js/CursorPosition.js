@@ -4,6 +4,8 @@ export default function getNewPosition(subFormula, oldPosition) {
     newPosition = oldPosition - 3;
   } else if (subFormula.endsWith("\\land")) {
     newPosition = oldPosition - 4;
+  } else if (subFormula.endsWith("\\&")) {
+    newPosition = oldPosition - 1;
   } else if (subFormula.endsWith("\\wedge")) {
     newPosition = oldPosition - 5;
   } else if (subFormula.endsWith("\\lor")) {

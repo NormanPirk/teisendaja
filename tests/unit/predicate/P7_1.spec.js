@@ -40,5 +40,4 @@ describe("P7_1 tests", () => {
     const input = "∀x(F(x)∨G)";
     expect(convert(input, "P7_1")).toBe(null);
   });
-
 });

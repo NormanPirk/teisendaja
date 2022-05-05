@@ -6,7 +6,7 @@ export default function createSelection(datacy, start, end) {
       const el = $el[0].childNodes;
       const document = $el[0].firstChild.ownerDocument;
       const range = document.createRange();
-      
+
       let i = 0;
       let j = 0;
       while (i < end) {
@@ -15,7 +15,7 @@ export default function createSelection(datacy, start, end) {
           if (i === start) {
             range.setStart(child, l);
           }
-          if (i === end -1) {
+          if (i === end - 1) {
             range.setEnd(child, l + 1);
           }
           i++;

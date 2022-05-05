@@ -1,7 +1,6 @@
 import convert from "@/js/Converter.js";
 
 describe("L5_1 tests", () => {
-
   test("simplifies (G∨F)∧F", () => {
     const input = "(G∨F)∧F";
     expect(convert(input, "L5_1")).toBe("F");
@@ -79,5 +78,4 @@ describe("L5_1 tests", () => {
     const input = "(G∨H)∧F";
     expect(convert(input, "L5_1")).toBe(null);
   });
-
 });

@@ -1,37 +1,16 @@
 <template>
-    <div class="intro conv-intro">
+  <div class="intro conv-intro">
     <div>{{ $t("propLogic") }}</div>
   </div>
   <div class="conversion-btns">
     <div class="col">
-      <ConvButton
-      v-for="btnText in propBtnTexts[0]"
-      :key="btnText.conversionTypeL"
-      :left="btnText.left"
-      :right="btnText.right"
-      :conversionTypeL="btnText.conversionTypeL"
-      :conversionTypeR="btnText.conversionTypeR"
-    ></ConvButton>
+      <ConvButton v-for="btnText in propBtnTexts[0]" :key="btnText.conversionTypeL" :left="btnText.left" :right="btnText.right" :conversionTypeL="btnText.conversionTypeL" :conversionTypeR="btnText.conversionTypeR"></ConvButton>
     </div>
     <div class="col">
-      <ConvButton
-      v-for="btnText in propBtnTexts[1]"
-      :key="btnText.conversionTypeL"
-      :left="btnText.left"
-      :right="btnText.right"
-      :conversionTypeL="btnText.conversionTypeL"
-      :conversionTypeR="btnText.conversionTypeR"
-    ></ConvButton>
+      <ConvButton v-for="btnText in propBtnTexts[1]" :key="btnText.conversionTypeL" :left="btnText.left" :right="btnText.right" :conversionTypeL="btnText.conversionTypeL" :conversionTypeR="btnText.conversionTypeR"></ConvButton>
     </div>
     <div class="col">
-      <ConvButton
-      v-for="btnText in propBtnTexts[2]"
-      :key="btnText.conversionTypeL"
-      :left="btnText.left"
-      :right="btnText.right"
-      :conversionTypeL="btnText.conversionTypeL"
-      :conversionTypeR="btnText.conversionTypeR"
-    ></ConvButton>
+      <ConvButton v-for="btnText in propBtnTexts[2]" :key="btnText.conversionTypeL" :left="btnText.left" :right="btnText.right" :conversionTypeL="btnText.conversionTypeL" :conversionTypeR="btnText.conversionTypeR"></ConvButton>
     </div>
   </div>
 </template>
@@ -41,7 +20,7 @@ import ConvButton from "./ConvButton.vue";
 import PropBtnTexts from "@/assets/propLogicButtonTexts.json";
 
 export default {
-name: "PropButtons",
+  name: "PropButtons",
   data() {
     return {
       propBtnTexts: PropBtnTexts,
@@ -49,8 +28,8 @@ name: "PropButtons",
   },
   components: {
     ConvButton,
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -1,12 +1,12 @@
 <template>
   <div class="btn-container">
-    <ConvTypeMarker
-      :convType="this.conversionTypeL.split('_')[0]"
-      class="item1"
-    ></ConvTypeMarker>
+    <ConvTypeMarker :convType="this.conversionTypeL.split('_')[0]" class="item1"></ConvTypeMarker>
     <button
       class="item2"
-      @click="clearErrors(); startConversion(this.conversionTypeL);"
+      @click="
+        clearErrors();
+        startConversion(this.conversionTypeL);
+      "
       :disabled="isDisabled"
       :data-cy="dataCy1"
     >
@@ -14,13 +14,16 @@
         {{ this.left }}
         <sub v-if="this.left === '¬T'">1</sub>
       </div>
-      
+
       <i class="fa-solid fa-angle-right button-item3"></i>
     </button>
     <div class="item3">≡</div>
     <button
       class="item4"
-      @click="clearErrors(); startConversion(this.conversionTypeR);"
+      @click="
+        clearErrors();
+        startConversion(this.conversionTypeR);
+      "
       :disabled="isDisabled"
       :data-cy="dataCy2"
     >
@@ -40,6 +43,9 @@ import conversionAllowed from "@/js/ConversionValidator.js";
 import ConvTypeMarker from "./ConvTypeMarker.vue";
 import specialConversions from "@/assets/specialConversionCodes.json";
 import getRangeIndices from "@/js/RangeIndices.js";
+import convert from "@/js/Converter.js";
+import handleNewFormula from "@/js/NewFormulaHandler.js";
+import getErrorMessage from "@/js/ErrorMessageHelper.js";
 
 export default {
   name: "ConvButton",
@@ -78,112 +84,113 @@ export default {
         document.getElementById("selectable-new").focus();
       });
     },
-    isCorrectSelection(selection) {
-      if (selection) {
-        const div = document.getElementById("selectable");
-        return (
-          div.contains(selection.getRangeAt(0).startContainer) &&
-          div.contains(selection.getRangeAt(0).endContainer)
-        );
-      }
-      return false;
+    isCorrectSelection() {
+      const selection = document.getSelection();
+      const div = document.getElementById("selectable");
+      return div.contains(selection.getRangeAt(0).startContainer) && div.contains(selection.getRangeAt(0).endContainer);
     },
     userInputNeeded(conversionType) {
       return specialConversions.withUserInput.includes(conversionType);
     },
-    newFormulaValidation() {
+    getResultForm(subFormula, conversionType, newFormula, startIndex, endIndex) {
+      let result = convert(subFormula, conversionType);
+      result = handleNewFormula(conversionType, newFormula, result);
+      const beginning = this.formula.substring(0, startIndex);
+      const ending = this.formula.substring(endIndex, this.formula.length);
+      result = beginning + result + ending;
+      return result;
+    },
+    newFormulaValidation(subFormula, conversionType, startIndex, endIndex) {
       return new Promise((resolve) => {
         document.getElementById("add-new-formula").onclick = () => {
           let f = this.$store.getters.newFormula;
           try {
+            if (f === "") {
+              throw { message: "New subformula is not entered!" };
+            }
             validateInput(f);
+            const result = this.getResultForm(subFormula, conversionType, f, startIndex, endIndex);
+            validateInput(result);
             resolve(f);
           } catch (error) {
-            this.$store.dispatch("setError", "incorrectNewFormula");
+            const errorMessage = getErrorMessage(error, this.formula);
+            this.$store.commit("setError", {
+              message: errorMessage,
+              type: "3",
+            });
+            document.getElementById("selectable-new").classList.add("faulty");
           }
         };
       });
     },
     async startConversion(conversionType) {
-      this.$store.commit("setSelectedConversion", conversionType.split("_")[0]);
+      this.$store.state.conversionType = conversionType;
       const selection = document.getSelection();
       if (selection && selection.toString().length > 0) {
-        if (this.isCorrectSelection(selection)) {
-          const indices = getRangeIndices(selection.getRangeAt(0));
-          if (indices.start < indices.end) {
-            const formula = this.formula;
-            const selection = document.getSelection();
-            const origStart = indices.start;
-            const origEnd = indices.end;
-            const subFormula = selection.toString();
+        if (this.isCorrectSelection()) {
+          const indices = getRangeIndices(document.getSelection().getRangeAt(0));
+          const formula = this.formula;
+          const selection = document.getSelection();
+          const origStart = indices.start;
+          const origEnd = indices.end;
+          const subFormula = selection.toString();
 
-            if (subFormula) {
-              let matchingChild = matchInput(
-                formula,
-                subFormula,
-                origStart,
-                origEnd
-              );
-              if (matchingChild) {
-                if (conversionAllowed(matchingChild, conversionType)) {
-                  if (this.userInputNeeded(conversionType)) {
-                    this.$store.commit("setAskNewFormulaTrue");
-                    this.focusInput();
-                    await this.newFormulaValidation();
-                    this.$store.commit("newFormulaAdded");
-                    this.convert(
-                      subFormula,
-                      matchingChild,
-                      conversionType,
-                      origStart,
-                      origEnd
-                    );
-                  } else {
-                    this.convert(
-                      subFormula,
-                      matchingChild,
-                      conversionType,
-                      origStart,
-                      origEnd
-                    );
-                  }
-                } else {
-                  if (
-                    specialConversions.withZeroOrOne.includes(conversionType)
-                  ) {
-                    this.$store.dispatch("setError", "faultyConversion");
-                  } else {
-                    this.$store.dispatch("setError", "conversionNotAllowed");
-                  }
-                }
+          let matchingChild = matchInput(formula, subFormula, origStart, origEnd);
+          if (matchingChild) {
+            if (conversionAllowed(matchingChild, conversionType)) {
+              if (this.userInputNeeded(conversionType)) {
+                this.$store.commit("setAskNewFormulaTrue");
+                this.focusInput();
+                await this.newFormulaValidation(subFormula, conversionType, origStart, origEnd);
+                this.$store.commit("newFormulaAdded");
+                this.convert(subFormula, matchingChild, conversionType, origStart, origEnd);
               } else {
-                this.$store.dispatch("setError", "notSubformula");
+                this.convert(subFormula, matchingChild, conversionType, origStart, origEnd);
               }
             } else {
-              this.$store.dispatch("setError", "noSubformula");
+              if (specialConversions.withZeroOrOne.includes(conversionType)) {
+                this.$store.commit("setError", {
+                  message: this.$i18n.t("faultyConversion", {
+                    conversion: conversionType.split("_")[0],
+                  }),
+                  type: "1",
+                });
+              } else {
+                this.$store.commit("setError", {
+                  message: this.$i18n.t("conversionNotAllowed", {
+                    conversion: conversionType.split("_")[0],
+                  }),
+                  type: "1",
+                });
+              }
             }
           } else {
-            this.$store.dispatch("setError", "noSubformula");
+            this.$store.commit("setError", {
+              message: this.$i18n.t("notSubformula"),
+              type: "1",
+            });
           }
         } else {
-          this.$store.dispatch("setError", "selectionNotFromCorrectField");
+          this.$store.commit("setError", {
+            message: this.$i18n.t("selectionNotFromCorrectField"),
+            type: "1",
+          });
         }
       } else {
-        this.$store.dispatch("setError", "noSubformula");
+        this.$store.commit("setError", {
+          message: this.$i18n.t("noSubformula"),
+          type: "1",
+        });
       }
     },
     convert(subFormula, matchingChild, conversionType, origStart, origEnd) {
-      this.$store.commit("convert", {
+      this.$store.dispatch("convert", {
         subFormula,
         matchingChild,
         conversionType,
         origStart,
         origEnd,
       });
-      if (this.$store.getters.converted) {
-        this.$store.commit("addFormula");
-        this.$store.commit("finishConversion");
-      }
     },
   },
 };

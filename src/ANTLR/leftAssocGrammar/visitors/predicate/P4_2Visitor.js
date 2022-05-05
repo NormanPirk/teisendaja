@@ -19,8 +19,8 @@ export default class P4_2Visitor extends antlr4.tree.ParseTreeVisitor {
         const left = ctx.left;
         const right = ctx.right;
         if (left.constructor.name === "ExistsContext" && right.constructor.name === "ExistsContext") {
-            const indLeft = left.IND().getText();
-            const indRight = right.IND().getText();
+            const indLeft = left.SYMBOL().getText();
+            const indRight = right.SYMBOL().getText();
             const leftValue = left.formula().getText();
             const rightValue = right.formula().getText();
             if (indLeft === indRight && leftValue.includes(indLeft) && rightValue.includes(indLeft)) {

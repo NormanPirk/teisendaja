@@ -65,10 +65,9 @@
             </div>
             <ol data-cy="allowedSymbols">
               <li>{{ $t("pred") }}: A, B, ..., Y, Z.</li>
-              <li>{{ $t("ind") }}: p, q, r, s, t, u, v, w, x, y, z.</li>
-              <li>{{ $t("const") }}: a, b, c, d, e.</li>
-              <li>{{ $t("funct") }}: f, g, h, i, j, k, l, m, n, o.</li>
+              <li>{{ $t("indConstFunct") }}: a, b, ..., y, z</li>
               <li>{{ $t("truthValues") }}: 1, 0</li>
+              <li>{{ $t("functNote") }}</li>
             </ol>
           </div>
           <div class="shadow saving">
@@ -141,8 +140,7 @@ li {
 }
 
 #help .shadow {
-  margin: 1em;
-  height: fit-content;
+  margin: 1em 0.5em;
 }
 
 .inserting-formula,
@@ -162,11 +160,6 @@ li {
   transform: scale(1.1);
 }
 
-#symbols {
-  display: flex;
-  justify-content: center;
-}
-
 #symbol-div {
   display: flex;
   justify-content: space-evenly;
@@ -177,6 +170,7 @@ li {
 
 .inserting-formula {
   width: 45%;
+  height: fit-content;
 }
 
 .right {
@@ -187,6 +181,7 @@ li {
 
 .right-upper {
   display: flex;
+  align-items: stretch;
 }
 
 .symbols {
@@ -218,18 +213,15 @@ li {
   color: rgb(247, 248, 249);
 }
 
-.help-intro {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
 button {
   width: fit-content;
   height: 2em;
+  margin: 0;
 }
 
 #hider {
   display: flex;
   justify-content: right;
+  margin: 0 0.5em;
 }
 </style>

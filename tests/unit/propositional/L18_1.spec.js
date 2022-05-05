@@ -1,68 +1,53 @@
 import convert from "@/js/Converter.js";
 
 describe("L18_1 tests", () => {
-  test("adds parentheses to A", () => {
-    const input = "A";
-    expect(convert(input, "L18_1")).toBe("(A)");
+  test("removes parentheses from predicate", () => {
+    const input = "(A(x,y,z))";
+    expect(convert(input, "L18_1")).toBe("A(x,y,z)");
   });
 
-  test("adds parentheses to conjunction", () => {
-    const input = "A∧B";
-    expect(convert(input, "L18_1")).toBe("(A∧B)");
+  test("removes parentheses from negation", () => {
+    const input = "(¬A)";
+    expect(convert(input, "L18_1")).toBe("¬A");
   });
 
-  test("adds parentheses to disjunction", () => {
-    const input = "A∨B";
-    expect(convert(input, "L18_1")).toBe("(A∨B)");
+  test("removes parentheses from conjunction", () => {
+    const input = "(A∧B)";
+    expect(convert(input, "L18_1")).toBe("A∧B");
   });
 
-  test("adds parentheses to implication", () => {
-    const input = "A⇒B";
-    expect(convert(input, "L18_1")).toBe("(A⇒B)");
+  test("removes parentheses from disjunction", () => {
+    const input = "(A∨B)";
+    expect(convert(input, "L18_1")).toBe("A∨B");
   });
 
-  test("adds parentheses to equivalence", () => {
-    const input = "A⇔B";
-    expect(convert(input, "L18_1")).toBe("(A⇔B)");
-  });
-
-  test("adds parentheses to negation", () => {
-    const input = "¬A";
-    expect(convert(input, "L18_1")).toBe("(¬A)");
-  });
-
-  test("adds parentheses to formula starting with ∀", () => {
-    const input = "∀xF(x)";
-    expect(convert(input, "L18_1")).toBe("(∀xF(x))");
-  });
-
-  test("adds parentheses to formula starting with ∃", () => {
-    const input = "∃xF(x)";
-    expect(convert(input, "L18_1")).toBe("(∃xF(x))");
-  });
-
-  test("adds second set of parentheses to (A⇒B)", () => {
+  test("removes parentheses from implication", () => {
     const input = "(A⇒B)";
-    expect(convert(input, "L18_1")).toBe("((A⇒B))");
+    expect(convert(input, "L18_1")).toBe("A⇒B");
   });
 
-  test("adds parentheses to complex expression", () => {
-    const input = "(∀x∃yA(x)∧B(y))⇔C(z)∧D(f(x),g(z))";
-    expect(convert(input, "L18_1")).toBe("((∀x∃yA(x)∧B(y))⇔C(z)∧D(f(x),g(z)))");
+  test("removes parentheses from equivalence", () => {
+    const input = "(A⇔B)";
+    expect(convert(input, "L18_1")).toBe("A⇔B");
   });
 
-  test("throws error on extra parentheses in the end", () => {
-    const input = "A)";
-    expect(() => convert(input, "L18_1")).toThrow();
+  test("removes parentheses from formula starting with ∀", () => {
+    const input = "(∀xF(x))";
+    expect(convert(input, "L18_1")).toBe("∀xF(x)");
   });
 
-  test("throws error on extra parentheses in the beginning", () => {
-    const input = "(A";
-    expect(() => convert(input, "L18_1")).toThrow();
+  test("removes parentheses from formula starting with ∃", () => {
+    const input = "(∃xF(x))";
+    expect(convert(input, "L18_1")).toBe("∃xF(x)");
   });
 
-  test("throws error on expression with faulty token", () => {
-    const input = "A \\vee B";
-    expect(() => convert(input, "L18_1")).toThrow();
+  test("removes parentheses from complex expression", () => {
+    const input = "(∃x∀y(F(x)⇔G(y))∧∀zH(x,y,z))";
+    expect(convert(input, "L18_1")).toBe("∃x∀y(F(x)⇔G(y))∧∀zH(x,y,z)");
+  });
+
+  test("returns null on expression that does not have parentheses surrounding it", () => {
+    const input = "(A∧¬B)∨C";
+    expect(convert(input, "L18_1")).toBe(null);
   });
 });

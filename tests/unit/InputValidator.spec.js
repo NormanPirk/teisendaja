@@ -11,6 +11,11 @@ describe("Input validation tests", () => {
     expect(() => validateInput(input)).toThrow();
   });
 
+  test("does not recognise expression with one symbol as both function and variable A(x,x(y))", () => {
+    const input = "A(x,x(y))";
+    expect(() => validateInput(input)).toThrow();
+  });
+
   test("recognises conjuction", () => {
     const input = "A∧B";
     expect(validateInput(input)).toBeTruthy();
@@ -118,6 +123,26 @@ describe("Input validation tests", () => {
 
   test("recognises negation symbol after binary operation symbol", () => {
     const input = "¬F∧¬G";
+    expect(validateInput(input)).toBeTruthy();
+  });
+
+  test("does not recognize functional symbol with different argument counts", () => {
+    const input = "¬F(f(x))∧¬G(f(x,y))";
+    expect(() => validateInput(input)).toThrow();
+  });
+
+  test("does not recognize predicate with different argument counts", () => {
+    const input = "¬F(x,y)∧¬F(z)";
+    expect(() => validateInput(input)).toThrow();
+  });
+
+  test("recognizes predicate with the same argument count", () => {
+    const input = "¬F(x)∧¬F(z)";
+    expect(validateInput(input)).toBeTruthy();
+  });
+
+  test("recognizes functional symbol with the same argument count", () => {
+    const input = "¬F(f(x,y))∧¬F(f(t,u))";
     expect(validateInput(input)).toBeTruthy();
   });
 });

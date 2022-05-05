@@ -16,8 +16,8 @@ public class PredGrammarRightParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		IND=1, PRED=2, CONST=3, FUNCT=4, SEP=5, LPAREN=6, RPAREN=7, NEG=8, AND=9, 
-		OR=10, IMPL=11, EQ=12, FORALL=13, EXISTS=14, T=15, F=16, WS=17;
+		SYMBOL=1, PRED=2, SEP=3, LPAREN=4, RPAREN=5, NEG=6, AND=7, OR=8, IMPL=9, 
+		EQ=10, FORALL=11, EXISTS=12, T=13, F=14, WS=15;
 	public static final int
 		RULE_start = 0, RULE_formula = 1, RULE_predicate = 2, RULE_term = 3, RULE_funct = 4;
 	private static String[] makeRuleNames() {
@@ -29,15 +29,15 @@ public class PredGrammarRightParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, "','", "'('", "')'", "'\u00AC'", "'\u2227'", 
-			"'\u2228'", "'\u21D2'", "'\u21D4'", "'\u2200'", "'\u2203'", "'1'", "'0'"
+			null, null, null, "','", "'('", "')'", "'\u00AC'", "'\u2227'", "'\u2228'", 
+			"'\u21D2'", "'\u21D4'", "'\u2200'", "'\u2203'", "'1'", "'0'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "IND", "PRED", "CONST", "FUNCT", "SEP", "LPAREN", "RPAREN", "NEG", 
-			"AND", "OR", "IMPL", "EQ", "FORALL", "EXISTS", "T", "F", "WS"
+			null, "SYMBOL", "PRED", "SEP", "LPAREN", "RPAREN", "NEG", "AND", "OR", 
+			"IMPL", "EQ", "FORALL", "EXISTS", "T", "F", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -198,7 +198,7 @@ public class PredGrammarRightParser extends Parser {
 	}
 	public static class ForallContext extends FormulaContext {
 		public TerminalNode FORALL() { return getToken(PredGrammarRightParser.FORALL, 0); }
-		public TerminalNode IND() { return getToken(PredGrammarRightParser.IND, 0); }
+		public TerminalNode SYMBOL() { return getToken(PredGrammarRightParser.SYMBOL, 0); }
 		public FormulaContext formula() {
 			return getRuleContext(FormulaContext.class,0);
 		}
@@ -214,7 +214,7 @@ public class PredGrammarRightParser extends Parser {
 	}
 	public static class ExistsContext extends FormulaContext {
 		public TerminalNode EXISTS() { return getToken(PredGrammarRightParser.EXISTS, 0); }
-		public TerminalNode IND() { return getToken(PredGrammarRightParser.IND, 0); }
+		public TerminalNode SYMBOL() { return getToken(PredGrammarRightParser.SYMBOL, 0); }
 		public FormulaContext formula() {
 			return getRuleContext(FormulaContext.class,0);
 		}
@@ -270,7 +270,7 @@ public class PredGrammarRightParser extends Parser {
 				setState(15);
 				match(FORALL);
 				setState(16);
-				match(IND);
+				match(SYMBOL);
 				setState(17);
 				formula(10);
 				}
@@ -283,7 +283,7 @@ public class PredGrammarRightParser extends Parser {
 				setState(18);
 				match(EXISTS);
 				setState(19);
-				match(IND);
+				match(SYMBOL);
 				setState(20);
 				formula(9);
 				}
@@ -490,8 +490,7 @@ public class PredGrammarRightParser extends Parser {
 	}
 
 	public static class TermContext extends ParserRuleContext {
-		public TerminalNode IND() { return getToken(PredGrammarRightParser.IND, 0); }
-		public TerminalNode CONST() { return getToken(PredGrammarRightParser.CONST, 0); }
+		public TerminalNode SYMBOL() { return getToken(PredGrammarRightParser.SYMBOL, 0); }
 		public FunctContext funct() {
 			return getRuleContext(FunctContext.class,0);
 		}
@@ -505,32 +504,23 @@ public class PredGrammarRightParser extends Parser {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_term);
 		try {
-			setState(65);
+			setState(64);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case IND:
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(62);
-				match(IND);
+				match(SYMBOL);
 				}
 				break;
-			case CONST:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(63);
-				match(CONST);
-				}
-				break;
-			case FUNCT:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(64);
 				funct();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -545,7 +535,7 @@ public class PredGrammarRightParser extends Parser {
 	}
 
 	public static class FunctContext extends ParserRuleContext {
-		public TerminalNode FUNCT() { return getToken(PredGrammarRightParser.FUNCT, 0); }
+		public TerminalNode SYMBOL() { return getToken(PredGrammarRightParser.SYMBOL, 0); }
 		public TerminalNode LPAREN() { return getToken(PredGrammarRightParser.LPAREN, 0); }
 		public List<TermContext> term() {
 			return getRuleContexts(TermContext.class);
@@ -571,29 +561,29 @@ public class PredGrammarRightParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(66);
+			match(SYMBOL);
 			setState(67);
-			match(FUNCT);
-			setState(68);
 			match(LPAREN);
-			setState(69);
+			setState(68);
 			term();
-			setState(74);
+			setState(73);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==SEP) {
 				{
 				{
-				setState(70);
+				setState(69);
 				match(SEP);
-				setState(71);
+				setState(70);
 				term();
 				}
 				}
-				setState(76);
+				setState(75);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(77);
+			setState(76);
 			match(RPAREN);
 			}
 		}
@@ -630,27 +620,27 @@ public class PredGrammarRightParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23R\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21Q\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3 \n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\7\3.\n\3\f\3\16\3\61\13\3\3\4\3\4\3\4\3\4\3\4\7\4"+
-		"8\n\4\f\4\16\4;\13\4\3\4\3\4\5\4?\n\4\3\5\3\5\3\5\5\5D\n\5\3\6\3\6\3\6"+
-		"\3\6\3\6\7\6K\n\6\f\6\16\6N\13\6\3\6\3\6\3\6\2\3\4\7\2\4\6\b\n\2\2\2["+
-		"\2\f\3\2\2\2\4\37\3\2\2\2\6\62\3\2\2\2\bC\3\2\2\2\nE\3\2\2\2\f\r\5\4\3"+
-		"\2\r\16\7\2\2\3\16\3\3\2\2\2\17\20\b\3\1\2\20 \5\6\4\2\21\22\7\17\2\2"+
-		"\22\23\7\3\2\2\23 \5\4\3\f\24\25\7\20\2\2\25\26\7\3\2\2\26 \5\4\3\13\27"+
-		"\30\7\n\2\2\30 \5\4\3\n\31\32\7\b\2\2\32\33\5\4\3\2\33\34\7\t\2\2\34 "+
-		"\3\2\2\2\35 \7\21\2\2\36 \7\22\2\2\37\17\3\2\2\2\37\21\3\2\2\2\37\24\3"+
-		"\2\2\2\37\27\3\2\2\2\37\31\3\2\2\2\37\35\3\2\2\2\37\36\3\2\2\2 /\3\2\2"+
-		"\2!\"\f\t\2\2\"#\7\13\2\2#.\5\4\3\t$%\f\b\2\2%&\7\f\2\2&.\5\4\3\b\'(\f"+
-		"\7\2\2()\7\r\2\2).\5\4\3\b*+\f\6\2\2+,\7\16\2\2,.\5\4\3\6-!\3\2\2\2-$"+
-		"\3\2\2\2-\'\3\2\2\2-*\3\2\2\2.\61\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\5\3"+
-		"\2\2\2\61/\3\2\2\2\62>\7\4\2\2\63\64\7\b\2\2\649\5\b\5\2\65\66\7\7\2\2"+
-		"\668\5\b\5\2\67\65\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3\2\2\2:<\3\2\2\2;"+
-		"9\3\2\2\2<=\7\t\2\2=?\3\2\2\2>\63\3\2\2\2>?\3\2\2\2?\7\3\2\2\2@D\7\3\2"+
-		"\2AD\7\5\2\2BD\5\n\6\2C@\3\2\2\2CA\3\2\2\2CB\3\2\2\2D\t\3\2\2\2EF\7\6"+
-		"\2\2FG\7\b\2\2GL\5\b\5\2HI\7\7\2\2IK\5\b\5\2JH\3\2\2\2KN\3\2\2\2LJ\3\2"+
-		"\2\2LM\3\2\2\2MO\3\2\2\2NL\3\2\2\2OP\7\t\2\2P\13\3\2\2\2\t\37-/9>CL";
+		"8\n\4\f\4\16\4;\13\4\3\4\3\4\5\4?\n\4\3\5\3\5\5\5C\n\5\3\6\3\6\3\6\3\6"+
+		"\3\6\7\6J\n\6\f\6\16\6M\13\6\3\6\3\6\3\6\2\3\4\7\2\4\6\b\n\2\2\2Y\2\f"+
+		"\3\2\2\2\4\37\3\2\2\2\6\62\3\2\2\2\bB\3\2\2\2\nD\3\2\2\2\f\r\5\4\3\2\r"+
+		"\16\7\2\2\3\16\3\3\2\2\2\17\20\b\3\1\2\20 \5\6\4\2\21\22\7\r\2\2\22\23"+
+		"\7\3\2\2\23 \5\4\3\f\24\25\7\16\2\2\25\26\7\3\2\2\26 \5\4\3\13\27\30\7"+
+		"\b\2\2\30 \5\4\3\n\31\32\7\6\2\2\32\33\5\4\3\2\33\34\7\7\2\2\34 \3\2\2"+
+		"\2\35 \7\17\2\2\36 \7\20\2\2\37\17\3\2\2\2\37\21\3\2\2\2\37\24\3\2\2\2"+
+		"\37\27\3\2\2\2\37\31\3\2\2\2\37\35\3\2\2\2\37\36\3\2\2\2 /\3\2\2\2!\""+
+		"\f\t\2\2\"#\7\t\2\2#.\5\4\3\t$%\f\b\2\2%&\7\n\2\2&.\5\4\3\b\'(\f\7\2\2"+
+		"()\7\13\2\2).\5\4\3\b*+\f\6\2\2+,\7\f\2\2,.\5\4\3\6-!\3\2\2\2-$\3\2\2"+
+		"\2-\'\3\2\2\2-*\3\2\2\2.\61\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\5\3\2\2\2"+
+		"\61/\3\2\2\2\62>\7\4\2\2\63\64\7\6\2\2\649\5\b\5\2\65\66\7\5\2\2\668\5"+
+		"\b\5\2\67\65\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3\2\2\2:<\3\2\2\2;9\3\2\2"+
+		"\2<=\7\7\2\2=?\3\2\2\2>\63\3\2\2\2>?\3\2\2\2?\7\3\2\2\2@C\7\3\2\2AC\5"+
+		"\n\6\2B@\3\2\2\2BA\3\2\2\2C\t\3\2\2\2DE\7\3\2\2EF\7\6\2\2FK\5\b\5\2GH"+
+		"\7\5\2\2HJ\5\b\5\2IG\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2LN\3\2\2\2M"+
+		"K\3\2\2\2NO\7\7\2\2O\13\3\2\2\2\t\37-/9>BK";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

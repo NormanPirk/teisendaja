@@ -8,35 +8,16 @@ export default function matchInput(formula, subFormula, startIndex, endIndex) {
     return getParseTree(subFormula);
   }
   try {
-    const matchingChildLeft = getMatchingChild(
-      getParseTree,
-      PredGrammarParser,
-      formula,
-      subFormula,
-      startIndex,
-      endIndex
-    );
+    const matchingChildLeft = getMatchingChild(getParseTree, PredGrammarParser, formula, subFormula, startIndex, endIndex);
     if (matchingChildLeft) {
       return matchingChildLeft;
     } else if (isAssociativeOperation(getParseTree(subFormula))) {
-      const matchingChildRight = getMatchingChild(
-        getParseTreeRight,
-        PredGrammarRightParser,
-        formula,
-        subFormula,
-        startIndex,
-        endIndex
-      );
+      const matchingChildRight = getMatchingChild(getParseTreeRight, PredGrammarRightParser, formula, subFormula, startIndex, endIndex);
       if (matchingChildRight) {
         return matchingChildRight;
       }
       if (isInTheMiddle(startIndex, endIndex, formula)) {
-        return isSurroundedBySameOp(
-          startIndex,
-          endIndex,
-          formula,
-          getParseTree(subFormula)
-        );
+        return isSurroundedBySameOp(startIndex, endIndex, formula, getParseTree(subFormula));
       }
     }
     return false;
@@ -65,30 +46,16 @@ function indicesMatch(child, comparable, startIndex, endIndex) {
 }
 
 function isAssociativeOperation(tree) {
-  return ["AndContext", "OrContext", "EqContext"].includes(
-    tree.formula().constructor.name
-  );
+  return ["AndContext", "OrContext", "EqContext"].includes(tree.formula().constructor.name);
 }
 
-function getMatchingChild(
-  treeCreator,
-  parser,
-  formula,
-  subFormula,
-  startIndex,
-  endIndex
-) {
+function getMatchingChild(treeCreator, parser, formula, subFormula, startIndex, endIndex) {
   const tree = treeCreator(formula);
   const subTree = treeCreator(subFormula);
   const treeStr = tree.toStringTree(parser.ruleNames);
   const subTreeStr = subTree.formula().toStringTree(parser.ruleNames);
   if (treeStr.includes(subTreeStr)) {
-    let matchingChild = indicesMatch(
-      tree,
-      subTree.formula(),
-      startIndex,
-      endIndex
-    );
+    let matchingChild = indicesMatch(tree, subTree.formula(), startIndex, endIndex);
     if (matchingChild) {
       return matchingChild;
     }
@@ -102,13 +69,11 @@ function isInTheMiddle(startIndex, endIndex, formula) {
 
 function isSurroundedBySameOp(startIndex, endIndex, formula, subtree) {
   if (subtree.formula().constructor.name === "AndContext") {
-    return (formula[startIndex - 1] === "∧" && formula[endIndex] === "∧") ? "middleAnd" : false;
+    return formula[startIndex - 1] === "∧" && formula[endIndex] === "∧" ? "middleAnd" : false;
   }
   if (subtree.formula().constructor.name === "OrContext") {
-    return (formula[startIndex - 1] === "∨" && formula[endIndex] === "∨") ? "middleOr" : false;
+    return formula[startIndex - 1] === "∨" && formula[endIndex] === "∨" ? "middleOr" : false;
+  } else {
+    return formula[startIndex - 1] === "⇔" && formula[endIndex] === "⇔" ? "middleEq" : false;
   }
-  if (subtree.formula().constructor.name === "EqContext") {
-    return (formula[startIndex - 1] === "⇔" && formula[endIndex] === "⇔") ? "middleEq" : false;
-  }
-  return false;
 }

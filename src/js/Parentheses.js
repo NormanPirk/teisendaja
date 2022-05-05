@@ -12,10 +12,7 @@ export default function addParentheses(matchingChild, result) {
       result = addParensOr(childContext, result);
     } else if (parentContext === "ImplContext") {
       result = addParensImpl(childContext, result);
-    } else if (
-      parentContext === "ExistsContext" ||
-      parentContext === "ForallContext"
-    ) {
+    } else if (parentContext === "ExistsContext" || parentContext === "ForallContext") {
       result = addParensQuantifier(childContext, result);
     }
   }
@@ -34,11 +31,7 @@ export function addParensMiddle(parentOp, result) {
 }
 
 export function addParensNeg(childContext, result) {
-  if (
-    ["AndContext", "OrContext", "ImplContext", "EqContext"].includes(
-      childContext
-    )
-  ) {
+  if (["AndContext", "OrContext", "ImplContext", "EqContext"].includes(childContext)) {
     result = addParens(result);
   }
   return result;
@@ -66,11 +59,7 @@ export function addParensImpl(childContext, result) {
 }
 
 export function addParensQuantifier(childContext, result) {
-  if (
-    ["AndContext", "OrContext", "ImplContext", "EqContext"].includes(
-      childContext
-    )
-  ) {
+  if (["AndContext", "OrContext", "ImplContext", "EqContext"].includes(childContext)) {
     result = addParens(result);
   }
   return result;

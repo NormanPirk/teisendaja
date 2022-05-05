@@ -3,14 +3,7 @@
     <div>{{ $t("predicateLogic") }}</div>
   </div>
   <div class="conversion-btns pred">
-    <ConvButton
-      v-for="btnText in predBtnTexts"
-      :key="btnText.conversionTypeL"
-      :left="btnText.left"
-      :right="btnText.right"
-      :conversionTypeL="btnText.conversionTypeL"
-      :conversionTypeR="btnText.conversionTypeR"
-    ></ConvButton>
+    <ConvButton v-for="btnText in predBtnTexts" :key="btnText.conversionTypeL" :left="btnText.left" :right="btnText.right" :conversionTypeL="btnText.conversionTypeL" :conversionTypeR="btnText.conversionTypeR"></ConvButton>
   </div>
 </template>
 
@@ -19,7 +12,7 @@ import ConvButton from "./ConvButton.vue";
 import PredBtnTexts from "@/assets/predLogicButtonTexts.json";
 
 export default {
-    name: "PredButtons",
+  name: "PredButtons",
   data() {
     return {
       predBtnTexts: PredBtnTexts,
@@ -27,12 +20,11 @@ export default {
   },
   components: {
     ConvButton,
-  }
-}
+  },
+};
 </script>
 
 <style>
-
 .conversion-btns {
   display: flex;
   justify-content: space-evenly;
@@ -46,7 +38,7 @@ export default {
 }
 
 .pred div {
-  flex: 0 0 42%
+  flex: 0 0 42%;
 }
 
 .conv-intro {
@@ -64,5 +56,4 @@ export default {
 button i {
   color: #2c3e50;
 }
-
 </style>

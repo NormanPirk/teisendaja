@@ -60,6 +60,4 @@ describe("L4_1 tests", () => {
     const input = "F∧G";
     expect(convert(input, "L4_1")).toBe(null);
   });
-
-
 });

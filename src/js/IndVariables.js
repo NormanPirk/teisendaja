@@ -2,7 +2,7 @@ import FreeVarsVisitor from "../ANTLR/leftAssocGrammar/visitors/freeVariables/Fr
 import store from "@/store/index.js";
 
 export default function getNewVariable() {
-  const indVariables = ["x", "y", "z", "u", "v", "w", "p", "q", "r", "s", "t"];
+  const indVariables = "abcdefghijklmnopqrstuvwxyz";
   for (let i = 0; i < indVariables.length; i++) {
     if (!store.getters.formula.includes(indVariables[i])) {
       return indVariables[i];
@@ -11,7 +11,7 @@ export default function getNewVariable() {
   return null;
 }
 
-export function getFreeIndVars(formula) {
+export function getFreeVars(formula) {
   const visitor = new FreeVarsVisitor();
   const result = visitor.visit(formula);
 

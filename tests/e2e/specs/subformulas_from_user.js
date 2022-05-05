@@ -79,7 +79,6 @@ describe("User input when new subformula or filename needs to be inserted", () =
     cy.get("[data-cy=selectable]").contains("A∧0⇔1");
   });
 
-
   it("Can insert new subformula by pressing 'Enter'", () => {
     cy.get("[data-cy=insertFormula]").type("A∧0⇔1");
     cy.get("[data-cy=start-conversions]").click();

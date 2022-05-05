@@ -3,11 +3,8 @@
 import antlr4 from 'antlr4';
 import { addParensAnd, addParensNeg } from '@/js/Parentheses';
 
-// This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
-
 export default class L16_1Visitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by PredGrammarParser#start.
 	visitStart(ctx) {
 		try {
 			return this.visitEq(ctx.formula());
@@ -17,7 +14,6 @@ export default class L16_1Visitor extends antlr4.tree.ParseTreeVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by PredGrammarParser#and.
 	visitEq(ctx) {
 		if (ctx.constructor.name === "EqContext") {
 			let leftLeft = ctx.left.getText();

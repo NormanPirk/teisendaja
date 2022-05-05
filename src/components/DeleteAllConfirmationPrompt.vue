@@ -2,11 +2,15 @@
   <div class="background">
     <div class="foreground">
       <div class="intro">
-        <div>{{ $t('deleteAllConfirmation') }}</div>
+        <div>{{ $t("deleteAllConfirmation") }}</div>
       </div>
       <div id="confirm-btns">
-        <button id="delete-all-confirm" data-cy="confirm-delete-all">{{ $t('yes') }}</button>
-        <button @click="cancelDeletion" data-cy="cancel-delete-all">{{ $t('no') }}</button>
+        <button id="delete-all-confirm" data-cy="confirm-delete-all">
+          {{ $t("yes") }}
+        </button>
+        <button @click="cancelDeletion" data-cy="cancel-delete-all">
+          {{ $t("no") }}
+        </button>
       </div>
     </div>
   </div>
@@ -20,8 +24,8 @@ export default {
   },
   methods: {
     cancelDeletion() {
-        this.$store.commit("hideDeleteAllConfirmation");
-    }
+      this.$store.commit("hideDeleteAllConfirmation");
+    },
   },
 };
 </script>
@@ -36,11 +40,6 @@ export default {
 
 button {
   width: 30%;
-}
-
-button:focus {
-    border: solid 1px rgb(252, 74, 74);
-    outline: none;
 }
 
 .foreground {

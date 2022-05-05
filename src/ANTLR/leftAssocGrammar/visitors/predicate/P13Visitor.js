@@ -17,8 +17,8 @@ export default class P13Visitor extends antlr4.tree.ParseTreeVisitor {
 
 	visitForall(ctx) {
         if (ctx.formula().constructor.name === "ForallContext") {
-            const indOuter = ctx.IND().getText();
-            const indInner = ctx.formula().IND().getText();
+            const indOuter = ctx.SYMBOL().getText();
+            const indInner = ctx.formula().SYMBOL().getText();
             const value = ctx.formula().formula().getText();
             return "∀" + indInner + "∀" + indOuter + value;
         }

@@ -2,17 +2,20 @@
   <div class="home">
     <div id="nav">
       <h3 data-cy="title">{{ $t("title") }}</h3>
-      <a href="#help" id="main">
-        <button 
-          @click="toggleHelp()" 
-          class="yellow" 
-          data-cy="showHelpBtn" v-tooltip="{
+      <a :href="getLink()" id="main">
+        <button
+          @click="toggleHelp()"
+          class="yellow"
+          ref="showHelpBtn"
+          data-cy="showHelpBtn"
+          v-tooltip="{
             text: 'Ctrl+H',
             theme: { placement: 'bottom' },
-        }">
-        <div v-show="this.showHelp">{{ $t("hideHelp") }}</div>
-        <div v-show="!this.showHelp">{{ $t("showHelp") }}</div>
-      </button>
+          }"
+        >
+          <div v-show="this.showHelp">{{ $t("hideHelp") }}</div>
+          <div v-show="!this.showHelp">{{ $t("showHelp") }}</div>
+        </button>
       </a>
     </div>
     <Main></Main>
@@ -20,7 +23,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Main from "@/components/Main.vue";
 
 export default {
@@ -28,6 +30,9 @@ export default {
   title: "Loogikavalemite teisendaja",
   data() {
     return {};
+  },
+  components: {
+    Main,
   },
   mounted() {
     document.addEventListener("keydown", this.helpShortcut);
@@ -42,9 +47,6 @@ export default {
       },
     },
   },
-  components: {
-    Main,
-  },
   methods: {
     toggleHelp() {
       this.$store.commit("toggleHelp");
@@ -54,8 +56,14 @@ export default {
         return;
       }
       e.preventDefault();
-      this.toggleHelp();
-    }
+      this.$refs.showHelpBtn.click();
+    },
+    getLink() {
+      if (this.showHelp) {
+        return "#main";
+      }
+      return "#help";
+    },
   },
 };
 </script>
@@ -65,7 +73,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0.5em 0 1em;
+  margin: 0 0.5em;
 }
 
 button div {
@@ -74,6 +82,6 @@ button div {
 
 button {
   height: 2em;
+  margin: 0;
 }
-
 </style>

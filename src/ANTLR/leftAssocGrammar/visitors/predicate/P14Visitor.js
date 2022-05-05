@@ -17,8 +17,8 @@ export default class P14Visitor extends antlr4.tree.ParseTreeVisitor {
 
     visitExists(ctx) {
         if (ctx.formula().constructor.name === "ExistsContext") {
-            const indOuter = ctx.IND().getText();
-            const indInner = ctx.formula().IND().getText();
+            const indOuter = ctx.SYMBOL().getText();
+            const indInner = ctx.formula().SYMBOL().getText();
             const value = ctx.formula().formula().getText();
             return "∃" + indInner + "∃" + indOuter + value;
         }

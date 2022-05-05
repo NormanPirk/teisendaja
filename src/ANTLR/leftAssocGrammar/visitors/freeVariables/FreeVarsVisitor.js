@@ -3,97 +3,70 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
-// This class defines a complete generic visitor for a parse tree produced by PredGrammarParser.
-
 export default class FreeVarsVisitor extends antlr4.tree.ParseTreeVisitor {
 
-        // Visit a parse tree produced by PredGrammarParser#start.
         visitStart(ctx) {
                 const freeVars = this.visit(ctx.formula());
                 return freeVars;
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#neg.
         visitNeg(ctx) {
                 const freeVars = this.visit(ctx.formula());
                 return freeVars;
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#impl.
         visitImpl(ctx) {
                 const freeVarsLeft = this.visit(ctx.left);
                 const freeVarsRight = this.visit(ctx.right);
                 return union(freeVarsLeft, freeVarsRight);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#paren.
         visitParen(ctx) {
                 return this.visit(ctx.formula());
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#or.
         visitOr(ctx) {
                 const freeVarsLeft = this.visit(ctx.left);
                 const freeVarsRight = this.visit(ctx.right);
                 return union(freeVarsLeft, freeVarsRight);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#pred.
         visitPred(ctx) {
                 return this.visit(ctx.predicate());
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#and.
         visitAnd(ctx) {
                 const freeVarsLeft = this.visit(ctx.left);
                 const freeVarsRight = this.visit(ctx.right);
                 return union(freeVarsLeft, freeVarsRight);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#forall.
         visitForall(ctx) {
-                const ind = new Set(ctx.IND().getText());
+                const ind = new Set(ctx.SYMBOL().getText());
                 const indVars = this.visit(ctx.formula());
                 return difference(indVars, ind);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#true.
         visitTrue(ctx) {
                 return new Set();
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#false.
         visitFalse(ctx) {
                 return new Set();
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#exists.
         visitExists(ctx) {
-                const ind = new Set(ctx.IND().getText());
+                const ind = new Set(ctx.SYMBOL().getText());
                 const indVars = this.visit(ctx.formula());
                 return difference(indVars, ind);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#eq.
         visitEq(ctx) {
                 const freeVarsLeft = this.visit(ctx.left);
                 const freeVarsRight = this.visit(ctx.right);
                 return union(freeVarsLeft, freeVarsRight);
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#predicate.
         visitPredicate(ctx) {
                 let freeVars = new Set();
                 for (let child of ctx.children) {
@@ -104,20 +77,13 @@ export default class FreeVarsVisitor extends antlr4.tree.ParseTreeVisitor {
                 return freeVars;
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#term.
         visitTerm(ctx) {
-                if (ctx.IND()) {
-                        return new Set(ctx.IND().getText());
-                }
                 if (ctx.funct()) {
                         return this.visitFunct(ctx.funct());
                 }
-                return new Set();
+                return new Set(ctx.SYMBOL().getText());
         }
 
-
-        // Visit a parse tree produced by PredGrammarParser#funct.
         visitFunct(ctx) {
                 let freeVars = new Set();
                 for (let child of ctx.children) {

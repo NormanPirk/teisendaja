@@ -47,12 +47,7 @@ export default class Formula {
 
   getPDFContent(addEquals) {
     return {
-      text: [
-        { text: addEquals ? "≡\t" + this.getStart() : this.getStart() },
-        { text: this.getUnderlined(), decoration: "underline" },
-        this.getEnding(),
-        { text: "\t" + this.getAppliedConversion() + "\n", style: "small" },
-      ],
+      text: [{ text: addEquals ? "≡\t" + this.getStart() : this.getStart() }, { text: this.getUnderlined(), decoration: "underline" }, this.getEnding(), { text: "\t" + this.getAppliedConversion() + "\n", style: "small" }],
     };
   }
 }
