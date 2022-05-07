@@ -2,10 +2,15 @@ import { mathSymbolsToTex } from "./MathSymbolConverter.js";
 
 export default class Formula {
   constructor(formula, selStart = formula.length, selEnd = 0, ct = "") {
-    this.formula = formula;
-    this.selStart = selStart;
-    this.selEnd = selEnd;
-    this.ct = ct;
+    console.log(formula.length);
+    if (selStart >= 0 && selEnd >= 0 && selStart <= formula.length && selEnd <= formula.length) {
+      this.formula = formula;
+      this.selStart = selStart;
+      this.selEnd = selEnd;
+      this.ct = ct;
+    } else {
+      throw "Indices do not match for the subformula!";
+    }
   }
   getStart() {
     return this.formula.substring(0, this.selStart);

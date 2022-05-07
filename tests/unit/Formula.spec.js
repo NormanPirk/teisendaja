@@ -11,6 +11,11 @@ describe("Tests regarding formula object", () => {
     expect(formula.getAppliedConversion()).toBe("L3");
   });
 
+  test("throws error when indices are not in the range of the formula", () => {
+    const input = "A∧B⇒C";
+    expect(() => new Formula(input, 0, 10, "L3")).toThrow();
+  });
+
   test("returns correct information about start, underlined, end and applied conversion", () => {
     const input = "A∧B⇒C";
     const formula = new Formula(input);

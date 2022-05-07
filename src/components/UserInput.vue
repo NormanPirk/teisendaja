@@ -141,7 +141,7 @@ export default {
           try {
             const res = JSON.parse(reader.result);
             const formulas = res.map((f) => {
-              if (f.formula && validateInput(f.formula)) {
+              if (f.formula && validateInput(f.formula) && validateInput(f.formula.substring(f.selStart, f.selEnd))) {
                 return new Formula(f.formula, f.selStart, f.selEnd, f.ct);
               } else {
                 throw "Unexpected file content!";
